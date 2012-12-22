@@ -16,3 +16,73 @@
 var COMMENT = "#[^\\r\\n]+(?:\\r?\\n)?";
 var SPACE = new RegExp("^((?:\\s|"+COMMENT+")+).*?");
 
+var RESERVED_WORDS = {
+   "break":true,
+   "case":true,
+   "catch":true,
+   "continue":true,
+   "debugger":true,
+   "default":true,
+   "delete":true,
+   "do":true,
+   "else":true,
+   "finally":true,
+   "for":true,
+   "function":true,
+   "if":true,
+   "in":true,
+   "instanceof":true,
+   "new":true,
+   "return":true,
+   "switch":true,
+   "this":true,
+   "throw":true,
+   "try":true,
+   "typeof":true,
+   "var":true,
+   "void":true,
+   "while":true,
+   "with":true,
+
+   "class":true,
+   "const":true,
+   "enum":true,
+   "export":true,
+   "extends":true,
+   "import":true,
+   "super":true,
+
+   //future reserved words
+   "implements":true,
+   "interface":true,
+   "let":true,
+   "package":true,
+   "private":true,
+   "protected":true,
+   "public":true,
+   "static":true,
+   "yield":true
+};
+
+function validateNamespacesAgainstReservedWords(namespace) {
+   var names = namespace.split(".");
+   var i=0,len=names.length;
+   for(;i<len;i++){
+      if(RESERVED_WORDS[names[i]]){
+         throw "Usage of the following ECMAScript reserved word is not allowed: "+names[i];
+      }
+   }
+}
+
+/**
+ * Escapes escaped output from within a template.  # needs to be escaped in xforjs
+ * template files, so this converts \# to # for the output, etc.
+ *
+ * @param {String} input
+ */
+function escapeOutput(input){
+   return input.
+      replace(/\\{/g, "{").
+      replace(/\\#/g, "#").
+      replace(/\n|\r/g, "\\n");
+}

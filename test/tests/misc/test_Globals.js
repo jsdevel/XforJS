@@ -26,3 +26,63 @@
       assert.equal(SPACE.exec(a)[1], a, spaces[a]);
    }
 }();
+
+!function(){//reserved words
+   var a;
+   var reservedWords = {
+   "break":true,
+   "case":true,
+   "catch":true,
+   "continue":true,
+   "debugger":true,
+   "default":true,
+   "delete":true,
+   "do":true,
+   "else":true,
+   "finally":true,
+   "for":true,
+   "function":true,
+   "if":true,
+   "in":true,
+   "instanceof":true,
+   "new":true,
+   "return":true,
+   "switch":true,
+   "this":true,
+   "throw":true,
+   "try":true,
+   "typeof":true,
+   "var":true,
+   "void":true,
+   "while":true,
+   "with":true,
+
+   "class":true,
+   "const":true,
+   "enum":true,
+   "export":true,
+   "extends":true,
+   "import":true,
+   "super":true,
+
+   //future reserved words
+   "implements":true,
+   "interface":true,
+   "let":true,
+   "package":true,
+   "private":true,
+   "protected":true,
+   "public":true,
+   "static":true,
+   "yield":true
+};
+   for(a in reservedWords){
+      assert['throws'](function(){
+         validateNamespacesAgainstReservedWords(a);
+      }, "Using a reserved word in a namespace throws an error.");
+   }
+}();
+!function(){
+   var a="\\{\\#\\#\\{\r\n\\#\r\r\n";
+   assert.equal("{##{\\n\\n#\\n\\n\\n", escapeOutput(a), "escapeOutput is working.");
+}();
