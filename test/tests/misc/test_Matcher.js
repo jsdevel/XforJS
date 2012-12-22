@@ -28,4 +28,9 @@ assert['throws'](function(){
 assert['throws'](function(){
    new Matcher(null,"");
 }, "regex is required.");
+
+assert['throws'](function(){
+   var match = new Matcher(/g/, "");
+   match.group(2);
+}, "calling group before find throws errors.");
 }();

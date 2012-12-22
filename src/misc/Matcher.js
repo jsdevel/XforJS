@@ -16,7 +16,7 @@
 function Matcher(regex, string){
    var instance = this;
    if(!regex || !regex.exec)throw "Invalid regex object.";
-   if(!string || !string.slice)throw "Invalid string passed.";
+   if(typeof string !== 'string')throw "Invalid string passed.";
    var match=null;
 
    instance.find=function(){
