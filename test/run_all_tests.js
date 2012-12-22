@@ -21,6 +21,7 @@ var filesToTest = [];
 var fileLoader = new common.FileLoader({filesToLoad:filesToLoad});
 var testDirs = [
    'tests/misc/',
+   'tests/output/',
    'tests/parsing/',
    'tests/productions/'
 ];

@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var PARSER = !function(){
-   //INCLUDE misc/Globals
-   //INCLUDE misc/Matcher
-   //
-   //INCLUDE output/Output
+var output1 = new Output;
+var output2 = new Output;
 
-   //INCLUDE parsing/CharWrapper
+output1.add(1).add(2);
+output2.add(output1);
+output2.add(3).add(5);
+output1.add("hello there");
 
-   /*INJECT TESTS HERE*/
-}();
+assert.equal(output2.toString(), "12hello there35", "toString and add are both working.");
 

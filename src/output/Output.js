@@ -13,14 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var PARSER = !function(){
-   //INCLUDE misc/Globals
-   //INCLUDE misc/Matcher
-   //
-   //INCLUDE output/Output
+function Output(){
+   var instance=this;
+   var nodes = [];
 
-   //INCLUDE parsing/CharWrapper
+   instance.add=function(obj){
+      nodes.push(obj);
+      return instance;
+   };
 
-   /*INJECT TESTS HERE*/
-}();
+   instance.toString=function(){
+      return nodes.join('');
+   };
+}
 
