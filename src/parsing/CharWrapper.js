@@ -20,16 +20,16 @@ function CharWrapper(characters){
    var instance=this;
 
 
-   instance.length=function(){
+   this.length=function(){
       return characters.length;
    };
-   instance.charAt=function(index) {
+   this.charAt=function(index) {
       if(index >= characters.length){
          throw "There are no more characters to parse.";
       }
       return characters[index];
    };
-   instance.shift=function(amount){
+   this.shift=function(amount){
       var proposedLen = characters.length - amount;
       var i=0;
       var next;
@@ -56,10 +56,10 @@ function CharWrapper(characters){
       }
       return instance;
    };
-   instance.match=function(regex){
+   this.match=function(regex){
       return new Matcher(regex, characters);
    };
-   instance.removeSpace=function(){
+   this.removeSpace=function(){
       var spaceToRemove;
       if(SPACE.test(characters)){
          spaceToRemove=SPACE.exec(characters);
@@ -69,8 +69,8 @@ function CharWrapper(characters){
       return false;
    };
    //ERROR HANDLING
-   instance.getErrorLocation=function(){
+   this.getErrorLocation=function(){
       return   "Line   : "+line+"\n"+
                "Column : "+column+"\n";
-   }
+   };
 }
