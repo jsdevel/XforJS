@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 function Output(){
-   var instance=this;
    var nodes = [];
 
-   instance.add=function(obj){
+   this.add=function(obj){
       nodes.push(obj);
-      return instance;
+      return this;
    };
 
-   instance.toString=function(){
+   this.toString=function(){
       return nodes.join('');
    };
 }
