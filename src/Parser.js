@@ -22,6 +22,12 @@ var PARSER = !function(){
 
    //INCLUDE parsing/CharWrapper
 
+   return function(string, config){
+
+
+
+   };
+
    /*INJECT TESTS HERE*/
 }();
 
