@@ -13,20 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var COMPILER = !function(){
-   //INCLUDE misc/Globals
-   //INCLUDE misc/Matcher
-   //
-   //INCLUDE output/Output
-   //INCLUDE output/AbstractVariableOutput
+assert['throws'](function(){
+   compile(true);
+},"compiling empty string throws an error.");
 
-   //INCLUDE parsing/CharWrapper
-
-   //INCLUDE compiling/compile
+assert.equal(compile("23"),"", "compile works.");
 
 
-   /*INJECT TESTS HERE*/
-
-   return compile;
-}();
 

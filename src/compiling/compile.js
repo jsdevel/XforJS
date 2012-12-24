@@ -13,20 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var COMPILER = !function(){
-   //INCLUDE misc/Globals
-   //INCLUDE misc/Matcher
-   //
-   //INCLUDE output/Output
-   //INCLUDE output/AbstractVariableOutput
 
-   //INCLUDE parsing/CharWrapper
+/**
+ * @param {String} input contents to compile.
+ * @param {Object} config configuration for compiling.
+ * @return {String} compiled javascript string.
+ */
+function compile(input, config){
+   var output = new Output();
+   if(typeof input !== 'string'){
+      throw "input must be a string.";
+   }
+   var wrapper = new CharWrapper(input);
 
-   //INCLUDE compiling/compile
-
-
-   /*INJECT TESTS HERE*/
-
-   return compile;
-}();
-
+   return output.toString();
+}

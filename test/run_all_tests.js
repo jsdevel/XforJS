@@ -23,7 +23,8 @@ var testDirs = [
    'tests/misc/',
    'tests/output/',
    'tests/parsing/',
-   'tests/productions/'
+   'tests/productions/',
+   'tests/compiling/'
 ];
 
 testDirs.forEach(function(value){
