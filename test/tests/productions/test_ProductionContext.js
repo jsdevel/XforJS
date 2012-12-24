@@ -31,7 +31,6 @@
 }();
 
 !function(){//productions
-   var productionResult="";
    var output=new Output();
    var productionA=new Production();
    var productionB=new Production();
