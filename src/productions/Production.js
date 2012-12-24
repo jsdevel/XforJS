@@ -14,3 +14,23 @@
  * limitations under the License.
  */
 function Production(){}
+/**
+ * @param {Output} output
+ * @param {ProductionContext} context
+ */
+Production.prototype.execute=function(output,context){};
+Production.prototype.close=function(){
+   throw "Unable to close: \""+this.constructor.name+"\"";
+};
+/**
+ * @param {String} msg
+ */
+Production.prototype.exc=function(msg){
+   throw "Invalid "+this.constructor.name+"."+(msg&&"  "+msg||"");
+};
+/**
+ * @return {String}
+ */
+Production.prototype.getName=function(){
+   return this.constructor.name;
+};
