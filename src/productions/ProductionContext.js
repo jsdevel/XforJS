@@ -44,7 +44,6 @@ function ProductionContext(
    var declaredNamespaces=previousContext&&previousContext._declaredNamespaces||{};
 
    this._declaredNamespaces=declaredNamespaces;
-   this._output=output;
 
    if(previousContext){
       //configuration
@@ -113,7 +112,7 @@ function ProductionContext(
     */
    this.getNS=function(){
       return programNamespace;
-   }
+   };
 
    /**
     * @param String path
@@ -155,7 +154,7 @@ function ProductionContext(
    //VARIABLES
    this.getCurrentVariableOutput=function(){
       return currentVariableOutput;
-   }
+   };
    this.addVaribleOutput=function(){
       var newOutput = AbstractVariableOutput.getVariableOutput(currentVariableOutput);
 
@@ -171,7 +170,7 @@ function ProductionContext(
          return instance;
       }
       throw "Illegal attempt to remove VariableOutput.";
-   }
+   };
 
    /**
     * @param {String} name
