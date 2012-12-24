@@ -18,6 +18,7 @@ var PARSER = !function(){
    //INCLUDE misc/Matcher
    //
    //INCLUDE output/Output
+   //INCLUDE output/AbstractVariableOutput
 
    //INCLUDE parsing/CharWrapper
 
