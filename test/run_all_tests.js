@@ -16,7 +16,7 @@
 var fs = require('fs');
 var common = require('./common.js');
 var loaded = 0;
-var filesToLoad = ["../src/Parser.js"];
+var filesToLoad = ["../src/Compiler.js"];
 var filesToTest = [];
 var fileLoader = new common.FileLoader({filesToLoad:filesToLoad});
 var testDirs = [
@@ -35,7 +35,7 @@ filesToTest.forEach(function(value){
 });
 
 fileLoader.loadAll(function(loadedFiles){
-   var framework = common.buildFile(loadedFiles['../src/Parser.js']).withPath('../src/').now();
+   var framework = common.buildFile(loadedFiles['../src/Compiler.js']).withPath('../src/').now();
 
    filesToTest.forEach(function(file){
       var testFile = loadedFiles[file];

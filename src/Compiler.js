@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var PARSER = !function(){
+var COMPILER = !function(){
    //INCLUDE misc/Globals
    //INCLUDE misc/Matcher
    //
