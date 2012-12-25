@@ -13,27 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var COMPILER = !function(){
-   //INCLUDE misc/extend
-   //INCLUDE misc/Globals
-   //INCLUDE misc/Matcher
-   //
-   //INCLUDE output/Output
-   //INCLUDE output/AbstractVariableOutput
 
-   //INCLUDE parsing/CharWrapper
-
-
-   //INCLUDE productions/Production
-
-   //INCLUDE productions/ProductionContext
-
-
-   //INCLUDE compiling/compile
-
-
-   /*INJECT TESTS HERE*/
-
-   return compile;
-}();
+/**
+ * @param {Function} Child
+ * @param {Function} Parent
+ */
+function extend(Child, Parent){
+   Child.prototype=new Parent();
+   Child.prototype.constructor=Child;
+}
 

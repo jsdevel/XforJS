@@ -13,27 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var COMPILER = !function(){
-   //INCLUDE misc/extend
-   //INCLUDE misc/Globals
-   //INCLUDE misc/Matcher
-   //
-   //INCLUDE output/Output
-   //INCLUDE output/AbstractVariableOutput
+function Dog(){}
+function Mamal(){}
+extend(Dog, Mamal);
 
-   //INCLUDE parsing/CharWrapper
-
-
-   //INCLUDE productions/Production
-
-   //INCLUDE productions/ProductionContext
-
-
-   //INCLUDE compiling/compile
-
-
-   /*INJECT TESTS HERE*/
-
-   return compile;
-}();
-
+var a=new Dog();
+assert(a instanceof Dog, "extend maintains original constructor.");
+assert(a instanceof Mamal, "extend allows another object to appear in the prototype chain.");
