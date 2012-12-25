@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 function Sample(){}
-Sample.prototype=new Production();
-Sample.prototype.constructor=Sample;
+extend(Sample, Production);
 
 var sampleProduction=new Sample();
 
