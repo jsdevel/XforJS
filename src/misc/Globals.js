@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+//Save this section for regex.
 var COMMENT = "#[^\\r\\n]+(?:\\r?\\n)?";
 var SPACE = new RegExp("^((?:\\s|"+COMMENT+")+).*?");
 
@@ -86,3 +88,24 @@ function escapeOutput(input){
       replace(/\\#/g, "#").
       replace(/\n|\r/g, "\\n");
 }
+
+//Names of functions and variables etc. used by the output.
+var js_bld="b";
+var js_context="x";
+var js_count="T";
+var js_currentNS="N";
+var js_data="D";
+var js__data="A";
+var js_last="L";
+var js_name="n";
+var js_params="P";
+var js__params="M";
+var js_position="O";
+var js_templateBasket="B";
+
+var js_CountElements="C";
+var js_EscapeXSS="X";
+var js_Foreach="F";
+var js_GetSortArray="G";
+var js_SafeValue="V";
+var js_StringBuffer="S";
