@@ -41,9 +41,18 @@ function ProductionContext(
    var productionStack=[production];
 
    var programNamespace;
-   var declaredNamespaces=previousContext&&previousContext._declaredNamespaces||{};
 
-   this._declaredNamespaces=declaredNamespaces;
+   if(previousContext){
+      this._declaredNamespaces=previousContext._declaredNamespaces;
+      this._JSParameters=previousContext._JSParameters;
+      this._JSParametersWrapper=previousContext._JSParametersWrapper;
+      this._JSArgumentsWrapper=previousContext._JSArgumentsWrapper;
+   } else {//default values
+      this._declaredNamespaces={};
+      this._JSParameters=new JSParameters();
+      this._JSParametersWrapper=new JSParametersWrapper(this._JSParameters);
+      this._JSArgumentsWrapper=new JSArgumentsWrapper(this._JSParameters);
+   }
 
    if(previousContext){
       //configuration
@@ -55,9 +64,6 @@ function ProductionContext(
 
       //instance._importedFiles          =previousContext._importedFiles;
       //instance._callManager            =previousContext._callManager;
-      //instance._params                 =previousContext._params;
-      //instance._paramsWrapper          =previousContext._paramsWrapper;
-      //instance._argsWrapper            =previousContext._argsWrapper;
    } else {//default
       //instance._normalizespace         =arguments.getNormalizespace();
       //instance._minifyHTML             =arguments.getMinifyhtml();
@@ -69,42 +75,42 @@ function ProductionContext(
       _importedFiles = {};
       callManager = new CallManager();
       //parameters
-      _params=new JSParameters();
-      _paramsWrapper=new JSParametersWrapper(params);
-      _argsWrapper=new JSArgumentsWrapper(params);
 
       if(escapexss){
          params.put(Characters.js_EscapeXSS, jsCode.getJSEscapeXSS());
       }*/
    }
 
+   //JSParameters
    /**
     * @return {JSParameters}
     */
-   /*this.getParams=function(){
-      return _params;
-   };*/
+   this.getParams=function(){
+      return this._JSParameters;
+   };
 
    /**
     * @return {JSParametersWrapper}
     */
-   /*this.getJSParametersWrapper=function(){
-      return _paramsWrapper;
-   };*/
+   this.getJSParametersWrapper=function(){
+      return this._JSParametersWrapper;
+   };
 
    /**
     * @return {JSArgumentsWrapper}
     */
-   /*this.getArgumentsWrapper=function(){
-      return _argsWrapper;
-   };*/
+   this.getArgumentsWrapper=function(){
+      return this._JSArgumentsWrapper;
+   };
 
+
+   //NAMESPACE
    /**
     * @param {String} namespace
     */
    this.setNS=function(namespace){
       programNamespace=namespace;
-      declaredNamespaces[namespace]=true;
+      this._declaredNamespaces[namespace]=true;
    };
 
    /**

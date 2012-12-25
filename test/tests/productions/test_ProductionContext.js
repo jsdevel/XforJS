@@ -95,6 +95,31 @@
    }, "validateVariableReference throws error when variable hasn't been declared.");
 }();
 
+!function(){//JSParameters
+   var output = new Output();
+   var production = new Production();
+   var context1=new ProductionContext(output, production);
+   var context2=new ProductionContext(output, production, context1);
+
+   var params=context1.getParams();
+   var paramsWrapper=context1.getJSParametersWrapper();
+   var argsWrapper=context1.getArgumentsWrapper();
+
+   assert(context1.getParams() instanceof JSParameters,
+      "getParams returns JSParameters instance.");
+   assert(context1.getJSParametersWrapper() instanceof JSParametersWrapper,
+      "getJSParametersWrapper returns JSParametersWrapper instance.");
+   assert(context1.getArgumentsWrapper() instanceof JSArgumentsWrapper,
+      "getArgumentsWrapper returns JSArgumentsWrapper instance.");
+
+   assert.equal(context2.getParams(), params,
+      "JSParameters is passed between contexts.");
+   assert.equal(context2.getJSParametersWrapper(), paramsWrapper,
+      "JSParametersWrapper is passed between contexts.");
+   assert.equal(context2.getArgumentsWrapper(), argsWrapper,
+      "JSArgumentsWrapper is passed between contexts.");
+}();
+
 !function(){//closing
    var productionA=new Production();
    var productionB=new Production();

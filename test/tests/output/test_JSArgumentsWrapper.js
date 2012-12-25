@@ -13,30 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var COMPILER = !function(){
-   //INCLUDE misc/extend
-   //INCLUDE misc/Globals
-   //INCLUDE misc/Matcher
-   //
-   //INCLUDE output/Output
-   //INCLUDE output/AbstractVariableOutput
-   //INCLUDE output/JSParameters
-   //INCLUDE output/JSParametersWrapper
-   //INCLUDE output/JSArgumentsWrapper
 
-   //INCLUDE parsing/CharWrapper
+var params = new JSParameters();
+var wrapper = new JSArgumentsWrapper(params);
 
-
-   //INCLUDE productions/Production
-
-   //INCLUDE productions/ProductionContext
-
-
-   //INCLUDE compiling/compile
-
-
-   /*INJECT TESTS HERE*/
-
-   return compile;
-}();
-
+params.put("dog","charlie");
+assert.equal("charlie", wrapper.toString(), "toString is working.");

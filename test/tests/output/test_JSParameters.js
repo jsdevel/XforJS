@@ -13,30 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var COMPILER = !function(){
-   //INCLUDE misc/extend
-   //INCLUDE misc/Globals
-   //INCLUDE misc/Matcher
-   //
-   //INCLUDE output/Output
-   //INCLUDE output/AbstractVariableOutput
-   //INCLUDE output/JSParameters
-   //INCLUDE output/JSParametersWrapper
-   //INCLUDE output/JSArgumentsWrapper
 
-   //INCLUDE parsing/CharWrapper
+var params = new JSParameters();
 
+assert.equal(
+   params.put("toString",{toString:function(){return "hello";}}),
+   params,
+   "put returns instance.");
 
-   //INCLUDE productions/Production
+params.put("dog","charlie");
 
-   //INCLUDE productions/ProductionContext
+assert.equal("toString,dog", params.getParameters(), "getParameters is working.");
+assert.equal("hello,charlie", params.getArguments(), "getArguments is working.");
 
-
-   //INCLUDE compiling/compile
-
-
-   /*INJECT TESTS HERE*/
-
-   return compile;
-}();
-
+params.put("dog","chancey");
+assert.equal("hello,charlie", params.getArguments(), "changing a value isn't accepted.");
