@@ -181,8 +181,6 @@ function ProductionContext(
       }
    };
 
-
-
    //CLOSING
    this.close=function(){
       //callManager.validateCalls();
@@ -192,11 +190,4 @@ function ProductionContext(
          productionStack[i].close(this);
       }
    };
-
-   //ERRORS AND WARNINGS
-   /*public void handleFileError(String msg) throws Exception {
-   }
-   public void handleFileWarning(String msg) throws Exception {
-      LOGGER.warn(msg+currentFile.getCanonicalPath()+"\".");
-   }*/
 }
