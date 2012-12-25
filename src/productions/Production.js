@@ -15,10 +15,10 @@
  */
 function Production(){}
 /**
- * @param {Output} output
+ * @param {CharWrapper} characters
  * @param {ProductionContext} context
  */
-Production.prototype.execute=function(output,context){};
+Production.prototype.execute=function(characters,context){};
 Production.prototype.close=function(){
    throw "Unable to close: \""+this.constructor.name+"\"";
 };
