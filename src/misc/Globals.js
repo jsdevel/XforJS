@@ -16,6 +16,10 @@
  * For more information, visit http://XforJS.com
  */
 
+//This is overridden when the compile method is called on any instance of
+//Compiler.
+var COMPILER;
+
 //Save this section for regex.
 var COMMENT = "#[^\\r\\n]+(?:\\r?\\n)?";
 var SPACE = new RegExp("^((?:\\s|"+COMMENT+")+).*?");

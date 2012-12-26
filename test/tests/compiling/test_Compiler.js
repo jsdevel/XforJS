@@ -15,18 +15,17 @@
  *
  * For more information, visit http://XforJS.com
  */
+var compiler = new Compiler({debug:true, invalidConfigItem:"boo"});
 
-/**
- * @param {String} input contents to compile.
- * @param {Object} config configuration for compiling.
- * @return {String} compiled javascript string.
- */
-function compile(input, config){
-   var output = new Output();
-   if(typeof input !== 'string'){
-      throw "input must be a string.";
-   }
-   var wrapper = new CharWrapper(input);
+assert['throws'](function(){
+   compiler.compile(true);
+},"compiling empty or non-string value throws an error.");
 
-   return output.toString();
-}
+assert.equal(compiler.compile("23"),"", "compile works.");
+assert.equal(COMPILER, compiler, "compile sets the COMPILER variable to it's instance so productions can access the configuration, etc.");
+
+assert.equal(compiler.getConfiguration('debug'), true, "setting configuration works.");
+assert.equal(compiler.getConfiguration('invalidConfigItem'), void 0, "Invalid config items are ignored in the constructor.");
+
+
+

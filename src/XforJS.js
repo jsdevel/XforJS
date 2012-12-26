@@ -15,11 +15,14 @@
  *
  * For more information, visit http://XforJS.com
  */
-var COMPILER = !function(){
+var XforJS = !function(){//change the name XforJS to anything you need.
+
+
    //INCLUDE misc/extend
    //INCLUDE misc/Globals
    //INCLUDE misc/Matcher
-   //
+
+
    //INCLUDE output/Output
    //INCLUDE output/CodeFormatter
    //INCLUDE output/AbstractVariableOutput
@@ -27,19 +30,23 @@ var COMPILER = !function(){
    //INCLUDE output/JSParametersWrapper
    //INCLUDE output/JSArgumentsWrapper
 
+
    //INCLUDE parsing/CharWrapper
 
 
    //INCLUDE productions/Production
-
    //INCLUDE productions/ProductionContext
 
 
-   //INCLUDE compiling/compile
+   //INCLUDE compiling/Compiler
 
 
    /*INJECT TESTS HERE*/
 
-   return compile;
+   return {
+      getCompiler:function(args){
+         return new Compiler(args);
+      }
+   };
 }();
 
