@@ -26,7 +26,8 @@ var testDirs = [
    'tests/output/',
    'tests/parsing/',
    'tests/productions/',
-   'tests/compiling/'
+   'tests/compiling/',
+   'tests/suites/'
 ];
 
 testDirs.forEach(function(value){
