@@ -39,7 +39,7 @@ function ProductionContext(
 
    var programNamespace;
 
-   var configuration={};
+   var configuration=previousContext&&previousContext._configuration||{};
    var configurationStack=[configuration];
 
    if(previousContext){
@@ -47,34 +47,22 @@ function ProductionContext(
       this._JSParameters=previousContext._JSParameters;
       this._JSParametersWrapper=previousContext._JSParametersWrapper;
       this._JSArgumentsWrapper=previousContext._JSArgumentsWrapper;
+      this._configuration=previousContext._configuration;
    } else {//default values
       this._declaredNamespaces={};
       this._JSParameters=new JSParameters();
       this._JSParametersWrapper=new JSParametersWrapper(this._JSParameters);
       this._JSArgumentsWrapper=new JSArgumentsWrapper(this._JSParameters);
+      this._configuration=configuration;
    }
 
    if(previousContext){
-      //configuration
-      //instance.normalizespace          =previousContext.normalizespace;
-      //instance.minifyHTML              =previousContext.minifyHTML;
-      //instance.assignTemplatesGlobally =previousContext.assignTemplatesGlobally;
-      //instance.removeLogs              =previousContext.removeLogs;
-      //instance.escapexss               =previousContext.escapexss;
-
       //instance._importedFiles          =previousContext._importedFiles;
       //instance._callManager            =previousContext._callManager;
    } else {//default
-      //instance._normalizespace         =arguments.getNormalizespace();
-      //instance._minifyHTML             =arguments.getMinifyhtml();
-      //instance._assignTemplatesGlobally=arguments.getGlobal();
-      //instance._removeLogs             =arguments.getRemovelogs();
-      //instance._escapexss              =arguments.getEscapexss();
-
       /*
       _importedFiles = {};
       callManager = new CallManager();
-      //parameters
 
       if(escapexss){
          params.put(Characters.js_EscapeXSS, jsCode.getJSEscapeXSS());
@@ -102,6 +90,7 @@ function ProductionContext(
          }
          configurationStack.push(obj);
          configuration=obj;
+         this._configuration=obj;
       } else {
          throw "obj must be an object.";
       }
@@ -121,6 +110,7 @@ function ProductionContext(
       if(configurationStack.length > 2){
          configurationStack.pop();
          configuration=configurationStack[configurationStack.length-1];
+         this._configuration=configuration;
       } else {
          throw "Can't remove default configuration.";
       }
