@@ -15,7 +15,7 @@
  *
  * For more information, visit http://XforJS.com
  */
-var XforJS = !function(){//change the name XforJS to anything you need.
+var XforJS = (function(){//change the name XforJS to anything you need.
 
 
    //INCLUDE misc/extend
@@ -48,5 +48,5 @@ var XforJS = !function(){//change the name XforJS to anything you need.
          return new Compiler(args);
       }
    };
-}();
+})();
 
