@@ -21,6 +21,7 @@ var COMPILER = !function(){
    //INCLUDE misc/Matcher
    //
    //INCLUDE output/Output
+   //INCLUDE output/CodeFormatter
    //INCLUDE output/AbstractVariableOutput
    //INCLUDE output/JSParameters
    //INCLUDE output/JSParametersWrapper
