@@ -25,6 +25,7 @@ var testDirs = [
    'tests/misc/',
    'tests/output/',
    'tests/parsing/',
+   'tests/javascript/',
    'tests/productions/',
    'tests/compiling/',
    'tests/suites/'
