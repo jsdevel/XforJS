@@ -16,11 +16,24 @@
  * For more information, visit http://XforJS.com
  */
 var XforJS = (function(){//change the name XforJS to anything you need.
+   var XforJS = {
+      //configurable
+      //set to false to disable filesystem calls etc.  Hopefully you precompile
+      //and will never need to do this.
+      server:true,
 
+      getCompiler:function(args){
+         return new Compiler(args);
+      }
+   };
 
    //INCLUDE misc/extend
    //INCLUDE misc/Globals
    //INCLUDE misc/Matcher
+
+   //This needs to be built by buildJavascriptResources in the javascript dir
+   //INCLUDE javascript/JavascriptResources
+   //INCLUDE javascript/JavascriptBuilder
 
 
    //INCLUDE output/Output
@@ -43,10 +56,6 @@ var XforJS = (function(){//change the name XforJS to anything you need.
 
    /*INJECT TESTS HERE*/
 
-   return {
-      getCompiler:function(args){
-         return new Compiler(args);
-      }
-   };
+   return XforJS;
 })();
 

@@ -15,10 +15,7 @@
  *
  * For more information, visit http://SOMESITE
  */
-setTimeout(function(){//to allow XforJS to be assigned.
-
 var compiler = XforJS.getCompiler({debug:true});
 assert(compiler instanceof Compiler, "getCompiler returns an instance of Compiler.");
 assert(compiler.getConfiguration('debug'), "getCompiler passes args successfully.");
-}, 1);
 
