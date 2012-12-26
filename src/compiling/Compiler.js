@@ -30,7 +30,7 @@ function Compiler(config){
       'global':true,
       'minifyhtml':true,
       'normalizespace':true,
-      'outputlibrary':false,
+      'outputlibrary':'',//file location
       'removelogs':true,
       'useexternal':false,
       'warn':false
@@ -42,16 +42,16 @@ function Compiler(config){
       }
    }
 
+   this.javascript = new JavascriptBuilder(configuration);
 
    /**
     * Calling this method will temporarily change the value of COMPILER defined
     * in Globals.
     *
     * @param {String} input contents to compile.
-    * @param {Object} config configuration for compiling.
     * @return {String} compiled javascript string.
     */
-   this.compile=function(input, config){
+   this.compile=function(input){
       COMPILER=this;
 
       var output = new Output();

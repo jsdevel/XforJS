@@ -17,6 +17,9 @@
  */
 var compiler = new Compiler({debug:true, invalidConfigItem:"boo"});
 
+assert(compiler.javascript instanceof JavascriptBuilder,
+   "The javascirpt property is assigned a JavascriptBuilder instance during Compiler construction.");
+
 assert['throws'](function(){
    compiler.compile(true);
 },"compiling empty or non-string value throws an error.");
