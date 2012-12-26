@@ -27,6 +27,7 @@ assert['throws'](function(){
 assert(!fs.existsSync(testFileName), "The test environment isn't setup.");
 JavascriptBuilder.buildOutputLibraray(testFileName);
 assert(fs.existsSync(testFileName), "constructor successfully creates the output libraray.");
+fs.unlinkSync(testFileName);
 
 instance = new JavascriptBuilder({useexternal:true});
 assert.equal(instance.getJSCount(), "xforj."+js_CountElements, "useexternal causes reference to return in get methods.");
