@@ -99,7 +99,52 @@
       context.validateVariableReference("a");
    }, "validateVariableReference throws error when variable hasn't been declared.");
 }();
+!function(){//configuration
+   var output = new Output();
+   var context = new ProductionContext(output);
+   var configuration1;
+   var configuration2;
+   var configuration3;
+   var instance;
 
+   assert(typeof context.getConfiguration() === 'object',
+      "configuration is set to empty object by default.");
+   assert['throws'](function(){
+         context.setConfiguration(true);
+      }, "passing non-object to setConfiguration throws error.");
+   assert['throws'](function(){
+         context.removeConfiguration();
+      }, "Can't remove sole configuration.");
+
+   configuration1 = context.getConfiguration();
+
+   instance=context.setConfiguration({
+      acceptGlobalTemplates:true
+   });
+   assert.equal(context, instance, "setConfiguration returns instance.");
+
+   configuration2 = context.getConfiguration();
+
+   assert['throws'](function(){
+         context.removeConfiguration();
+      }, "Can't remove configuration that's after the initial config.");
+
+   context.setConfiguration({
+      acceptGlobalTemplates:5
+   });
+   configuration3=context.getConfiguration();
+
+   assert.doesNotThrow(function(){
+         instance = context.removeConfiguration();
+      }, "configuration can be removed once two + have been set.");
+   assert.equal(context, instance, "removeConfiguration returns instance.");
+
+   assert(
+      !configuration1.acceptGlobalTemplates
+      && configuration2.acceptGlobalTemplates === true
+      && configuration3.acceptGlobalTemplates === 5,
+      "Setting new configuration doesn't change previous configuration.");
+}();
 !function(){//JSParameters
    var output = new Output();
    var context1=new ProductionContext(output);

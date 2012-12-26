@@ -39,6 +39,9 @@ function ProductionContext(
 
    var programNamespace;
 
+   var configuration={};
+   var configurationStack=[configuration];
+
    if(previousContext){
       this._declaredNamespaces=previousContext._declaredNamespaces;
       this._JSParameters=previousContext._JSParameters;
@@ -77,6 +80,52 @@ function ProductionContext(
          params.put(Characters.js_EscapeXSS, jsCode.getJSEscapeXSS());
       }*/
    }
+
+   //Configuration
+   /* These methods allow for scoped configuration.  So eventually, programs,
+    * and templates would be able to define their own configuration.  Potentially
+    * even foreach loops would be able to do this.
+    */
+
+   /**
+    * @param {Object} obj
+    * @throws Error if obj isn't an object.
+    * @return {ProductionContext}
+    */
+   this.setConfiguration=function(obj){
+      var a;
+      if(obj && typeof obj === 'object'){
+         for(a in configuration){
+            if(!obj.hasOwnProperty(a)){
+               obj[a] = configuration[a];
+            }
+         }
+         configurationStack.push(obj);
+         configuration=obj;
+      } else {
+         throw "obj must be an object.";
+      }
+      return this;
+   };
+   /**
+    * @return {Object}
+    */
+   this.getConfiguration=function(){
+      return configuration;
+   };
+   /**
+    * @return {ProductionContext}
+    * @throws If attempt to remove &lt;2 configuration.
+    */
+   this.removeConfiguration=function(){
+      if(configurationStack.length > 2){
+         configurationStack.pop();
+         configuration=configurationStack[configurationStack.length-1];
+      } else {
+         throw "Can't remove default configuration.";
+      }
+      return this;
+   };
 
    //JSParameters
    /**
