@@ -18,18 +18,15 @@
  * @constructor
  * @this {ProductionContext}
  * @param {Output} output
- * @param {Production} production
  * @param {ProductionContext} previousContext
  * @returns {ProductionContext}
  */
 function ProductionContext(
    output,
-   production,
    previousContext
 ){
    var instance = this;
    if(!(output instanceof Output))throw "output must be of type Output.";
-   if(!(production instanceof Production))throw "output must be of type Output.";
    if(previousContext&&!(previousContext instanceof ProductionContext))throw "previousContext must be of type ProductionContext.";
 
    //Programs aren't allowed to reference scope of importing file,
@@ -37,8 +34,8 @@ function ProductionContext(
    var currentVariableOutput = AbstractVariableOutput.getVariableOutput();
    var variableOutputStack = [currentVariableOutput];
 
-   var currentProduction= production;
-   var productionStack=[production];
+   var currentProduction;
+   var productionStack=[];
 
    var programNamespace;
 
@@ -148,6 +145,7 @@ function ProductionContext(
       return instance;
    };
    this.removeProduction=function(){
+      if(!productionStack.length)throw "There is no production to remove from context.";
       productionStack.pop();
       currentProduction=productionStack[productionStack.length-1];
       return instance;
@@ -192,8 +190,12 @@ function ProductionContext(
       //callManager.validateCalls();
       var size = productionStack.length;
       var i=size-1;
-      for(;i>-1;i--){
-         productionStack[i].close(this);
+      if(size){
+         for(;i>-1;i--){
+            productionStack[i].close(this);
+         }
+      } else {
+         throw "No productions were found.";
       }
    };
 }

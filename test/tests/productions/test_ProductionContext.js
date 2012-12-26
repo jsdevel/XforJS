@@ -15,18 +15,14 @@
  */
 !function(){//constructing
    var output=new Output();
-   var production=new Production();
    assert['throws'](function(){
-         new ProductionContext(null,production);
+         new ProductionContext(null);
       }, "output must be instanceof Output");
    assert['throws'](function(){
-         new ProductionContext(output,null);
-      }, "production must be instanceof Production");
-   assert['throws'](function(){
-         new ProductionContext(output,production,true);
+         new ProductionContext(output,true);
       }, "previousContext must be of type ProductionContext");
    assert.doesNotThrow(function(){
-         new ProductionContext(output,production,new ProductionContext(output,production));
+         new ProductionContext(output,new ProductionContext(output));
       }, "ProductionContext allows previousContext.");
 }();
 
@@ -34,7 +30,7 @@
    var output=new Output();
    var productionA=new Production();
    var productionB=new Production();
-   var context=new ProductionContext(output,productionA);
+   var context=new ProductionContext(output);
    var instance;
 
    productionA.execute=function(output, context){
@@ -43,6 +39,15 @@
    productionB.execute=function(output, context){
       context.addProduction(productionA);
    };
+
+   assert['throws'](function(){
+      context.executeCurrent(output);
+   }, "productions must be added to the context before executing current.");
+   assert['throws'](function(){
+      context.removeProduction();
+   }, "productions must be added before removing productions from context.");
+
+   context.addProduction(productionA);
 
    instance=context.executeCurrent(output);
    assert(instance === context, "executeCurrent returns instance.");
@@ -68,7 +73,7 @@
 !function(){//variables
    var output=new Output();
    var production=new Production();
-   var context = new ProductionContext(output, production);
+   var context = new ProductionContext(output);
    var instance;
 
    var variableOutput = context.getCurrentVariableOutput();
@@ -97,9 +102,8 @@
 
 !function(){//JSParameters
    var output = new Output();
-   var production = new Production();
-   var context1=new ProductionContext(output, production);
-   var context2=new ProductionContext(output, production, context1);
+   var context1=new ProductionContext(output);
+   var context2=new ProductionContext(output, context1);
 
    var params=context1.getParams();
    var paramsWrapper=context1.getJSParametersWrapper();
@@ -124,9 +128,14 @@
    var productionA=new Production();
    var productionB=new Production();
    var productionC=new Production();
-   var context=new ProductionContext(new Output(), productionA);
+   var context=new ProductionContext(new Output());
    var closeArguments=[];
 
+   assert['throws'](function(){
+      context.close();
+   }, "Closing context before productions are added throws an error.");
+
+   context.addProduction(productionA);
    context.addProduction(productionB);
    context.addProduction(productionC);
 
