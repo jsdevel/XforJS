@@ -58,12 +58,11 @@ assert((result=eval(output.toString())) && typeof result === 'object',
 
 //EXECUTE METHOD TESTING
 
-//Program.execute instantiates these.  I don't want my IDE to think these are
-//valid, hence using global to assign.'
-global['ProgramNamespace']=function(){this.execute=function(){programNamespaceCalled=true;}}
-global['ImportStatements']=function(){this.execute=function(){importStatementsCalled=true;}}
-global['GlobalVariableDeclarations']=function(){this.execute=function(){globalVariableDeclarationsCalled=true;}}
-global['GlobalStatements']=function(){this.execute=function(){globalStatementsCalled=true;}}
+//Program.execute instantiates these.
+function ProgramNamespace(){this.execute=function(){programNamespaceCalled=true;}}
+function ImportStatements(){this.execute=function(){importStatementsCalled=true;}}
+function GlobalVariableDeclarations(){this.execute=function(){globalVariableDeclarationsCalled=true;}}
+function GlobalStatements(){this.execute=function(){globalStatementsCalled=true;}}
 
 setEnv();
 characters = new CharWrapper(" ");
