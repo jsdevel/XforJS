@@ -85,7 +85,7 @@ function CharWrapper(characters){
    /**
     * Returns the result of regex.exec(characters).
     * @param {RegExp} regex
-    * @return {?} null or regex match info (Array).
+    * @return {Matcher}
     */
    this.match=function(regex){
       return new Matcher(regex, _characters);
