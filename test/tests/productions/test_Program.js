@@ -35,11 +35,13 @@ eval(JavascriptResources.getXforJLib());
 
 setEnv();
 assert.equal(eval(output.toString()), void 0,
-   "When global is true (default), the return value of a program should be undefined.");
+   "When global is true, the return value of a program should be undefined.");
 assert(output.toString().indexOf(JavascriptResources.getStringBuffer()) > -1,
    "When useexternal is false and not nested, there should be an instance of StringBuffer.");
 assert(output.toString().indexOf(JavascriptResources.getSafeValue()) > -1,
    "When useexternal is false and not nested, there should be an instance of SaveValue.");
+assert(output.toString().indexOf(JavascriptResources.getEscapeXSS()) > -1,
+   "When useexternal is false and not nested, there should be an instance of EscapeXSS.");
 
 //nested
 setEnv(void 0, true);
@@ -47,6 +49,8 @@ assert(output.toString().indexOf(JavascriptResources.getStringBuffer()) === -1,
    "When useexternal is false and nested, there should be no instance of StringBuffer.");
 assert(output.toString().indexOf(JavascriptResources.getSafeValue()) === -1,
    "When useexternal is false and nested, there should be no instance of SaveValue.");
+assert(output.toString().indexOf(JavascriptResources.getEscapeXSS()) === -1,
+   "When useexternal is false and nested, there should be no instance of EscapeXSS.");
 
 setEnv({global:false});
 assert((result=eval(output.toString())) && typeof result === 'object',

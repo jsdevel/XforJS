@@ -64,10 +64,7 @@ function ProductionContext(
       /*
       _importedFiles = {};
       callManager = new CallManager();
-
-      if(escapexss){
-         params.put(Characters.js_EscapeXSS, jsCode.getJSEscapeXSS());
-      }*/
+      */
    }
 
    //Configuration

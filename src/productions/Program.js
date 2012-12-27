@@ -43,7 +43,6 @@ function Program(
    var variableOutput=context.getCurrentVariableOutput();
 
    var hasProgramNamespace=false;
-   var hasImports=false;
    var hasVariables=false;
    var hasGlobals=false;
 
@@ -63,10 +62,15 @@ function Program(
          output.add("return "+js_templateBasket);
       }
 
+      if(compiler.getConfiguration('escapexss')){
+         globalParams.put(js_EscapeXSS, compiler.javascript.getJSEscapeXSS());
+      }
+
       output.
       add("})(").
          add(context.getArgumentsWrapper()).
       add(");");
+
       globalParams.put(js_StringBuffer,
          compiler.javascript.getJSStringBuffer()
       ).put(
@@ -105,7 +109,6 @@ function Program(
                switch(characters.charAt(1)){
                case 'i'://imports
                   if(!hasGlobals && !hasVariables){
-                     hasImports=true;
                      importStatementsOutput = new Output();
                      importOutput.add(importStatementsOutput);
                      context.addProduction(new ImportStatements(importStatementsOutput));
