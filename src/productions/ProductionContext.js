@@ -145,12 +145,8 @@ function ProductionContext(
     * @param {String} namespace
     */
    this.setNS=function(namespace){
-      var _namespace = namespace||"";
-      if(this._declaredNamespaces[_namespace]){
-         throw "Can't declare namespace '"+namespace+"' more than once.";
-      }
-      programNamespace=_namespace;
-      this._declaredNamespaces[_namespace]=true;
+      programNamespace=namespace;
+      this._declaredNamespaces[namespace]=true;
    };
 
    /**
