@@ -15,33 +15,57 @@
  *
  * For more information, visit http://XforJS.com
  */
+
+/**
+ * @constructor
+ * @param {String} characters
+ */
 function CharWrapper(characters){
-   var characters = typeof characters === 'string' && characters || "";
+   var _characters = typeof characters === 'string' && characters || "";
    var line=1;
    var column=1;
-   var instance=this;
 
-
+   /**
+    * Number of characters left to parse;
+    * @return {int}
+    */
    this.length=function(){
-      return characters.length;
+      return _characters.length;
    };
+
+   /**
+    * Return the character at the specified index.  If no index is given, then
+    * the first character is returned.<br><br>
+    * Throws an error if the index is greater than the remaining characters.
+    *
+    * @param {int} index defaults to 0;
+    */
    this.charAt=function(index) {
-      if(index >= characters.length){
+      var _index = index || 0;
+      if(_index >= _characters.length){
          throw "There are no more characters to parse.";
       }
-      return characters[index];
+      return _characters[_index];
    };
+   /**
+    * Removes the amount from the beginning of the characters.  Nothing happens
+    * if amount is 0.<br><br>
+    * Throws an error if the amount to shift is greater than the
+    * characters.length.
+    * @param {int} amount
+    * @return {CharWrapper}
+    */
    this.shift=function(amount){
-      var proposedLen = characters.length - amount;
+      var proposedLen = _characters.length - ~~amount;
       var i=0;
       var next;
       if(proposedLen > -1){
          //set the appropriate line / column values
          for(i=0;i<amount;i++){
-            next = characters[i];
+            next = _characters[i];
             switch(next){
             case '\r':
-               if(characters[i+1] == '\n'){
+               if(_characters[i+1] == '\n'){
                   i++;
                }
             case '\n':
@@ -52,25 +76,38 @@ function CharWrapper(characters){
                column++;
             }
          }
-         characters=characters.slice(amount);
+         _characters=_characters.slice(amount);
       } else {
          throw "Can't shift.  Nothing left to parse.";
       }
-      return instance;
+      return this;
    };
+   /**
+    * Returns the result of regex.exec(characters).
+    * @param {RegExp} regex
+    * @return {?} null or regex match info (Array).
+    */
    this.match=function(regex){
-      return new Matcher(regex, characters);
+      return new Matcher(regex, _characters);
    };
+   /**
+    * Removes space from the beginning of the characters.
+    * @return {boolean}
+    */
    this.removeSpace=function(){
       var spaceToRemove;
-      if(SPACE.test(characters)){
-         spaceToRemove=SPACE.exec(characters);
-         instance.shift(spaceToRemove[1].length);
+      if(SPACE.test(_characters)){
+         spaceToRemove=SPACE.exec(_characters);
+         this.shift(spaceToRemove[1].length);
          return true;
       }
       return false;
    };
-   //ERROR HANDLING
+
+   /**
+    * Returns the error location in the event of an error.
+    * @return {String}
+    */
    this.getErrorLocation=function(){
       return   "Line   : "+line+"\n"+
                "Column : "+column+"\n";
