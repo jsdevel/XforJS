@@ -173,6 +173,7 @@
 !function(){//namespaces
    var context = new ProductionContext(new Output());
    context.setNS("boo");
+   context.setNS("boo.coo");
    assert.equal(context.getNS(), "boo", "getNS and setNS are working.");
 }();
 !function(){//closing

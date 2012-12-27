@@ -140,12 +140,15 @@ function ProductionContext(
 
    //NAMESPACE
    /**
-    * sets the namespace of the current context / program.
-    * @throws if an attempt to set the namespace is made more than once.
+    * Sets the namespace of the current context / program.  Any future attempts
+    * to set the namespace of the program will fail.
+    *
     * @param {String} namespace
     */
    this.setNS=function(namespace){
-      programNamespace=namespace;
+      if(!programNamespace){
+         programNamespace=namespace;
+      }
       this._declaredNamespaces[namespace]=true;
    };
 
