@@ -175,6 +175,7 @@
    context.setNS("boo");
    context.setNS("boo.coo");
    assert.equal(context.getNS(), "boo", "getNS and setNS are working.");
+   assert(context.hasNS("boo.coo"), "hasNS is working.");
 }();
 !function(){//closing
    var productionA=new Production();

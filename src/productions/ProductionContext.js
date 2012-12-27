@@ -158,6 +158,12 @@ function ProductionContext(
    this.getNS=function(){
       return programNamespace||"";
    };
+   /**
+    * @return {boolean} Indicates if the namespace has been declared.
+    */
+   this.hasNS=function(namespace){
+      return this._declaredNamespaces[namespace];
+   };
 
    /**
     * @param String path
