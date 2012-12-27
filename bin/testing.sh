@@ -18,13 +18,9 @@
 #
 #Print real time results from all unit tests.
 
-DIR_PROJECT=$(dirname $(dirname $PWD))
-DIR_SRC=$DIR_PROJECT/src
-
-cd $DIR_SRC
-
-while inotifywait -qr -e MODIFY --exclude .*\\.swp $DIR_SRC>/dev/null
+cd $DIR_TEST;
+while inotifywait -qr -e MODIFY --exclude .*\\.swp $DIR_PROJECT>/dev/null
 do
    clear
-   #node buildJavascriptResources.js
+   node $DIR_TEST/run_all_tests.js
 done
