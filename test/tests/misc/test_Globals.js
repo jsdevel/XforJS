@@ -15,19 +15,34 @@
  *
  * For more information, visit http://XforJS.com
  */
-!function(){//space
-   var spaces = {
-      "  #asdfasdfasdf \n":"Comment with line ending is working.",
-      "  #asdfasdfasdf":"Comment without line ending is working.",
-      "  ":"Space without lines is working.",
-      "  \n":"Space with lines is working.",
-      "  \n#asdfasdf\n#asdf\n":"Space with lines and comments is working."
-   };
-   var a;
-   for(a in spaces){
-      assert.equal(SPACE.exec(a)[1], a, spaces[a]);
-   }
-}();
+
+//REGEX
+   //SEQUENCES
+   !function(){//SPACE
+      var spaces = {
+         "  #asdfasdfasdf \n":"Comment with line ending is working.",
+         "  #asdfasdfasdf":"Comment without line ending is working.",
+         "  ":"Space without lines is working.",
+         "  \n":"Space with lines is working.",
+         "  \n#asdfasdf\n#asdf\n":"Space with lines and comments is working."
+      };
+      var a;
+      for(a in spaces){
+         assert.equal(SPACE.exec(a)[1], a, spaces[a]);
+      }
+   }();
+   !function(){//NS
+      assert(!NS.exec("345"), "Numbers don't start namespaces.");
+      assert.equal(NS.exec("boo")[1], "boo", "Names without refinement work.");
+      assert(NS.exec("boo.too.goo")[1], "boo.too.goo", "Names with refinement work.");
+   }();
+
+   //STATEMENTS
+   !function(){//NAMESPACE
+      var ns = "{namespace";
+      assert(!NAMESPACE.exec(ns),"Space must follow '"+ns+"'.");
+      assert.equal(NAMESPACE.exec(ns+" ")[1], ns, "NAMESPACE is working.");
+   }();
 
 !function(){//reserved words
    var a;

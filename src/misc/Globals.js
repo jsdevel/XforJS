@@ -17,8 +17,16 @@
  */
 
 //Save this section for regex.
-var COMMENT = "#[^\\r\\n]+(?:\\r?\\n)?";
-var SPACE = new RegExp("^((?:\\s|"+COMMENT+")+).*?");
+var __reg_COMMENT = "#[^\\r\\n]+(?:\\r?\\n)?";
+var __reg_notName = "(?![a-zA-Z$_])(?:\\s+)?";
+var __reg_name = "[a-zA-Z$_](?:[a-zA-Z0-9$_]+)?";
+
+//SEQUENCES
+var NS =             new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
+var SPACE =          new RegExp("^((?:\\s|"+__reg_COMMENT+")+)");
+
+//STATEMENT PATTERNS
+var NAMESPACE =      new RegExp("^(\\{namespace"+__reg_notName+")\\s");
 
 var RESERVED_WORDS = {
    "break":true,
