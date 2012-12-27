@@ -45,15 +45,10 @@ function Compiler(config){
    this.javascript = new JavascriptBuilder(configuration);
 
    /**
-    * Calling this method will temporarily change the value of COMPILER defined
-    * in Globals.
-    *
     * @param {String} input contents to compile.
     * @return {String} compiled javascript string.
     */
    this.compile=function(input){
-      COMPILER=this;
-
       var output = new Output();
       if(typeof input !== 'string' || input === ""){
          throw "input must be a string.";

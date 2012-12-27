@@ -25,7 +25,6 @@ assert['throws'](function(){
 },"compiling empty or non-string value throws an error.");
 
 assert.equal(compiler.compile("23"),"", "compile works.");
-assert.equal(COMPILER, compiler, "compile sets the COMPILER variable to it's instance so productions can access the configuration, etc.");
 
 assert.equal(compiler.getConfiguration('debug'), true, "setting configuration works.");
 assert.equal(compiler.getConfiguration('invalidConfigItem'), void 0, "Invalid config items are ignored in the constructor.");
