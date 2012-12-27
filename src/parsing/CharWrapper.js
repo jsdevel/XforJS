@@ -27,7 +27,7 @@ function CharWrapper(characters){
 
    /**
     * Number of characters left to parse;
-    * @return {int}
+    * @return {number}
     */
    this.length=function(){
       return _characters.length;
@@ -38,7 +38,7 @@ function CharWrapper(characters){
     * the first character is returned.<br><br>
     * Throws an error if the index is greater than the remaining characters.
     *
-    * @param {int} index defaults to 0;
+    * @param {number} index defaults to 0;
     */
    this.charAt=function(index) {
       var _index = index || 0;
@@ -52,7 +52,7 @@ function CharWrapper(characters){
     * if amount is 0.<br><br>
     * Throws an error if the amount to shift is greater than the
     * characters.length.
-    * @param {int} amount
+    * @param {number} amount
     * @return {CharWrapper}
     */
    this.shift=function(amount){
