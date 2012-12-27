@@ -22,7 +22,7 @@
  * command line.
  */
 function Compiler(config){
-
+   var _config = config || {};
    var configuration = {//default values.
       //All of these are overridable.
       'debug':false,
@@ -36,9 +36,9 @@ function Compiler(config){
       'warn':false
    };
    var name;
-   for(name in config){
+   for(name in _config){
       if(name in configuration){
-         configuration[name] = config[name];
+         configuration[name] = _config[name];
       }
    }
 
