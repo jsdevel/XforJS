@@ -27,7 +27,6 @@ function ProductionContext(
    output,
    previousContext
 ){
-   var instance = this;
    if(!(output instanceof Output))throw "output must be of type Output.";
    if(previousContext&&!(previousContext instanceof ProductionContext))throw "previousContext must be of type ProductionContext.";
 
@@ -180,44 +179,75 @@ function ProductionContext(
       return XforJ.compileFile(targetFile, new ProductionContext(targetFile, instance));
    };*/
 
+   /**
+    * Adds a production to the current stack.
+    *
+    * @param {Production} add
+    * @return {ProductionContext}
+    */
    this.addProduction=function(add){
       productionStack.push(add);
       currentProduction=add;
-      return instance;
+      return this;
    };
+   /**
+    * Removes the current production from the stack, and pushes the last
+    * production into the current slot.<br><br>
+    * @throws Error if current isn't defined.
+    * @return {ProductionContext}
+    */
    this.removeProduction=function(){
       if(!productionStack.length)throw "There is no production to remove from context.";
       productionStack.pop();
       currentProduction=productionStack[productionStack.length-1];
-      return instance;
+      return this;
    };
-   this.executeCurrent=function(wrap){
-      currentProduction.execute(wrap, instance);
-      return instance;
+   /**
+    * Executes the current production.
+    * @pram {CharWrapper} characters
+    * @return {ProductionContext}
+    */
+   this.executeCurrent=function(characters){
+      currentProduction.execute(characters, this);
+      return this;
    };
 
    //VARIABLES
+   /**
+    * Returns the current variable output.
+    * @return {AbstractVariableOutput}
+    */
    this.getCurrentVariableOutput=function(){
       return currentVariableOutput;
    };
+   /**
+    * Adds a new variable output to the internal stack.
+    * @return {ProductionContext}
+    */
    this.addVaribleOutput=function(){
       var newOutput = AbstractVariableOutput.getVariableOutput(currentVariableOutput);
 
       currentVariableOutput=newOutput;
       variableOutputStack.push(newOutput);
-      return instance;
+      return this;
    };
+   /**
+    * Removes the current variable output from the stack.
+    * @throws If there are fewer than 2 output[s] in the stack.
+    * @return {ProductionContext}
+    */
    this.removeVariableOutput=function(){
       var size = variableOutputStack.length;
       if(size > 1){
          variableOutputStack.pop();
          currentVariableOutput=variableOutputStack[size-2];
-         return instance;
+         return this;
       }
       throw "Illegal attempt to remove VariableOutput.";
    };
 
    /**
+    * @throws If the name hasn't been declared.
     * @param {String} name
     */
    this.validateVariableReference=function(name){
@@ -227,6 +257,10 @@ function ProductionContext(
    };
 
    //CLOSING
+   /**
+    * Calls the close method on all productions in the stack.
+    * @throws If there are no productions in the stack.
+    */
    this.close=function(){
       //callManager.validateCalls();
       var size = productionStack.length;
