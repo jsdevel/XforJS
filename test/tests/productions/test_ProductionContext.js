@@ -170,7 +170,14 @@
    assert.equal(context2.getArgumentsWrapper(), argsWrapper,
       "JSArgumentsWrapper is passed between contexts.");
 }();
-
+!function(){//namespaces
+   var context = new ProductionContext(new Output());
+   context.setNS("boo");
+   assert.equal(context.getNS(), "boo", "getNS and setNS are working.");
+   assert['throws'](function(){
+      context.setNS("boo");
+   }, "Setting the same namespace more than once throws an error.");
+}();
 !function(){//closing
    var productionA=new Production();
    var productionB=new Production();
