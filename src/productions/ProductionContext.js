@@ -197,7 +197,7 @@ function ProductionContext(
     */
    this.importFile=function(filePath) {
       if(!inputFilePath){
-         throw "Can't import '"+filePath+"' because no inputFilePath was given.";
+         throw "Can't import '"+filePath+"' because no inputFilePath was given to the ProductionContext.";
       }
       var path = require('path');
       var fs = require('fs');

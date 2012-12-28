@@ -76,7 +76,7 @@ function Program(
       ).put(
          js_templateBasket,
          (
-            context.assignTemplatesGlobally?
+            context.getConfiguration('global')?
                "(function(){return this})()":
                "{}"
          )

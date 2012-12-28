@@ -43,6 +43,12 @@ assert(output.toString().indexOf(JavascriptResources.getSafeValue()) > -1,
 assert(output.toString().indexOf(JavascriptResources.getEscapeXSS()) > -1,
    "When useexternal is false and not nested, there should be an instance of EscapeXSS.");
 
+assert(output.toString().indexOf('(function(){return this})()') > -1,
+   "By default, Program assigns all templates to the current global context of 'this'.");
+setEnv({global:false});
+assert(output.toString().indexOf('(function(){return this})()') === -1,
+   "Program returns an object when global is false.");
+
 //nested
 setEnv(void 0, true);
 assert(output.toString().indexOf(JavascriptResources.getStringBuffer()) === -1,
