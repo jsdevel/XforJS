@@ -1,1 +1,2 @@
 {namespace misc}
+{import test1.xjs}
