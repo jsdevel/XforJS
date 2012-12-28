@@ -15,6 +15,7 @@
  *
  * For more information, visit http://SOMESITE
  */
+var compiler = new Compiler();
 var output = new Output();
 
 var dummyProduction=new Production();
@@ -23,7 +24,7 @@ var importStatements = new ImportStatements(output);
 var dummyProductionCalled=false;
 var importStatementCalled=false;
 var characters = new CharWrapper("{i");
-var context = new ProductionContext(output);
+var context = new ProductionContext(output, compiler);
 
 dummyProduction.execute=function(){dummyProductionCalled=true;};
 

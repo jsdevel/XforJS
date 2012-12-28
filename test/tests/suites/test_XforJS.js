@@ -17,5 +17,5 @@
  */
 var compiler = XforJS.getCompiler({debug:true});
 assert(compiler instanceof Compiler, "getCompiler returns an instance of Compiler.");
-assert(compiler.getConfiguration('debug'), "getCompiler passes args successfully.");
+assert(compiler.configuration['debug'], "getCompiler passes args successfully.");
 

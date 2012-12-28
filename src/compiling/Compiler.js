@@ -41,29 +41,35 @@ function Compiler(config){
          configuration[name] = _config[name];
       }
    }
-
+   this.configuration=configuration;
    this.javascript = new JavascriptBuilder(configuration);
 
    /**
     * @param {String} input contents to compile.
+    * @param {String} inputFilePath The path to the current file, if the input
+    *    is from a file.  Passing this parameter, will enable import statements.
+    * @param {ProductionContext} previousContext
     * @return {String} compiled javascript string.
     */
-   this.compile=function(input){
-      var output = new Output();
-      if(typeof input !== 'string' || input === ""){
+   this.compile=function(input, inputFilePath, previousContext){
+      if(!input || typeof input !== 'string'){
          throw "input must be a string.";
       }
+      var output = new Output();
       var wrapper = new CharWrapper(input);
+      var context = new ProductionContext(output, this, previousContext);
+
+      if(inputFilePath){
+         context.setInputFilePath(inputFilePath);
+      }
+
+      context.addProduction(new Program(output, this, context, !!previousContext));
+
+
+      while(wrapper.length() > 0){
+         context.executeCurrent(wrapper);
+      }
 
       return output.toString();
-   };
-
-   /**
-    * Returns what has been configured.
-    * @param {String} string
-    * @return {?} mixed
-    */
-   this.getConfiguration=function(string){
-      return configuration[string];
    };
 }

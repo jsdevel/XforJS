@@ -136,9 +136,9 @@ assert['throws'](function(){
 }, "variables must come before templates.");
 
 function setEnv(compilerConfig, isNested){
-   output = new Output();
-   context = new ProductionContext(output);
    compiler = new Compiler(compilerConfig);
+   output = new Output();
+   context = new ProductionContext(output, compiler);
    js = compiler.javascript;
    program = new Program(output, compiler, context, isNested);
    context.addProduction(program);

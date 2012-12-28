@@ -17,22 +17,27 @@
  */
 !function(){//constructing
    var output=new Output();
+   var compiler = new Compiler();
    assert['throws'](function(){
          new ProductionContext(null);
       }, "output must be instanceof Output");
    assert['throws'](function(){
          new ProductionContext(output,true);
+      }, "compiler must be of type Compiler");
+   assert['throws'](function(){
+         new ProductionContext(output, compiler, true);
       }, "previousContext must be of type ProductionContext");
    assert.doesNotThrow(function(){
-         new ProductionContext(output,new ProductionContext(output));
+         new ProductionContext(output, compiler, new ProductionContext(output, compiler));
       }, "ProductionContext allows previousContext.");
 }();
 
 !function(){//productions
+   var compiler = new Compiler();
    var output=new Output();
    var productionA=new Production();
    var productionB=new Production();
-   var context=new ProductionContext(output);
+   var context=new ProductionContext(output, compiler);
    var instance;
 
    productionA.execute=function(output, context){
@@ -73,9 +78,9 @@
 }();
 
 !function(){//variables
+   var compiler = new Compiler();
    var output=new Output();
-   var production=new Production();
-   var context = new ProductionContext(output);
+   var context = new ProductionContext(output, compiler);
    var instance;
 
    var variableOutput = context.getCurrentVariableOutput();
@@ -83,8 +88,10 @@
    assert(instance===context, "addVariableOutput returns instance.");
 
    var newVariableOutput=context.getCurrentVariableOutput();
-   assert(variableOutput instanceof AbstractVariableOutput, "ProductionContext instantiates fresh AbstractVariableOutput inside constructor.");
-   assert(variableOutput!==newVariableOutput && newVariableOutput instanceof AbstractVariableOutput, "addVariableOutput is working.");
+   assert(variableOutput instanceof AbstractVariableOutput,
+      "ProductionContext instantiates fresh AbstractVariableOutput inside constructor.");
+   assert(variableOutput!==newVariableOutput && newVariableOutput instanceof AbstractVariableOutput,
+      "addVariableOutput is working.");
 
    newVariableOutput.add("a", "5");
    assert.doesNotThrow(function(){
@@ -102,15 +109,16 @@
    }, "validateVariableReference throws error when variable hasn't been declared.");
 }();
 !function(){//configuration
+   var compiler = new Compiler();
    var output = new Output();
-   var context = new ProductionContext(output);
+   var context = new ProductionContext(output, compiler);
    var configuration1;
    var configuration2;
    var configuration3;
    var instance;
 
-   assert(typeof context.getConfiguration() === 'object',
-      "configuration is set to empty object by default.");
+   assert(context.getConfiguration('global'),
+      "getConfiguration uses from compiler.configuration by default.");
    assert['throws'](function(){
          context.setConfiguration(true);
       }, "passing non-object to setConfiguration throws error.");
@@ -118,39 +126,44 @@
          context.removeConfiguration();
       }, "Can't remove sole configuration.");
 
-   configuration1 = context.getConfiguration();
+   configuration1 = context.getConfiguration('global');
 
    instance=context.setConfiguration({
-      acceptGlobalTemplates:true
+      global:false
    });
    assert.equal(context, instance, "setConfiguration returns instance.");
 
-   configuration2 = context.getConfiguration();
+   configuration2 = context.getConfiguration('global');
 
+   context.setConfiguration({
+      global:5
+   });
+   configuration3=context.getConfiguration('global');
+
+   assert.doesNotThrow(function(){
+         instance = context.removeConfiguration();
+      }, "configuration can be removed once one other than the default has been set.");
+   assert.equal(context, instance, "removeConfiguration returns instance.");
+
+   assert(
+      configuration1 === true
+      && configuration2 === false
+      && configuration3 === 5,
+      "Setting new configuration doesn't change previous configuration.");
+
+   context.removeConfiguration();
    assert['throws'](function(){
          context.removeConfiguration();
       }, "Can't remove configuration that's after the initial config.");
 
-   context.setConfiguration({
-      acceptGlobalTemplates:5
-   });
-   configuration3=context.getConfiguration();
-
-   assert.doesNotThrow(function(){
-         instance = context.removeConfiguration();
-      }, "configuration can be removed once two + have been set.");
-   assert.equal(context, instance, "removeConfiguration returns instance.");
-
-   assert(
-      !configuration1.acceptGlobalTemplates
-      && configuration2.acceptGlobalTemplates === true
-      && configuration3.acceptGlobalTemplates === 5,
-      "Setting new configuration doesn't change previous configuration.");
+   assert(context.getConfiguration('global') === true,
+      "removeConfiguration resets to the previous configuration.");
 }();
 !function(){//JSParameters
+   var compiler = new Compiler();
    var output = new Output();
-   var context1=new ProductionContext(output);
-   var context2=new ProductionContext(output, context1);
+   var context1=new ProductionContext(output, compiler);
+   var context2=new ProductionContext(output, compiler, context1);
 
    var params=context1.getParams();
    var paramsWrapper=context1.getJSParametersWrapper();
@@ -171,17 +184,52 @@
       "JSArgumentsWrapper is passed between contexts.");
 }();
 !function(){//namespaces
-   var context = new ProductionContext(new Output());
+   var compiler = new Compiler();
+   var context = new ProductionContext(new Output(), compiler);
    context.setNS("boo");
    context.setNS("boo.coo");
    assert.equal(context.getNS(), "boo", "getNS and setNS are working.");
    assert(context.hasNS("boo.coo"), "hasNS is working.");
 }();
+!function(){//importing
+   var compiler = new Compiler();
+   var context = new ProductionContext(new Output(), compiler);
+   var instance;
+   var testFile = "tests/misc/test.xjs";
+   var output;
+   instance=context.setInputFilePath(testFile);
+   assert.equal(instance, context, "setInputFilePath returns instance.");
+   assert['throws'](function(){
+      context.setInputFilePath("tests/misc/test.xjs");
+   }, "setting the input file directory more than once throws an error.");
+
+   context=new ProductionContext(new Output(), compiler);
+   assert['throws'](function(){
+      context.importFile(testFile);
+   }, "setInputFilePath must be called first.");
+
+   context.setInputFilePath(testFile);
+   output=context.importFile("test.xjs");
+
+   //without an initial program with isNested === false, the output will not
+   //have any reference to js_StringBuffer.  This is because Program sets that
+   //value accordingly.
+   assert(output.indexOf('function') > -1 && output.indexOf(js_StringBuffer) === -1, "Import is working.");
+
+   output=context.importFile("test.xjs");
+   assert.equal(output, "", "importing the same file more than once doesn't do anything.");
+
+   context=new ProductionContext(new Output(), compiler, context);
+   context.setInputFilePath(testFile);
+   output=context.importFile("test.xjs");
+   assert.equal(output, "", "nested contexts remember what has been imported from parent contexts.");
+}();
 !function(){//closing
+   var compiler = new Compiler();
    var productionA=new Production();
    var productionB=new Production();
    var productionC=new Production();
-   var context=new ProductionContext(new Output());
+   var context=new ProductionContext(new Output(), compiler);
    var closeArguments=[];
 
    assert['throws'](function(){

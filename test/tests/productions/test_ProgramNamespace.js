@@ -57,6 +57,7 @@ assert['throws'](function(){
 assert.equal(context.getNS(), "wow.boo.coo", "namespace calls getNS appropriately.");
 
 function test_ProgramNamespace_setupContext(){
-   context = new ProductionContext(output);
+   var compiler = new Compiler();
+   context = new ProductionContext(output, compiler);
    context.addProduction(new Production());
 }

@@ -58,11 +58,11 @@ function Program(
    if(isNested){
       output.add("})(").add(globalParamNames).add(");");
    } else {
-      if(!compiler.getConfiguration('global')){
+      if(!context.getConfiguration('global')){
          output.add("return "+js_templateBasket);
       }
 
-      if(compiler.getConfiguration('escapexss')){
+      if(context.getConfiguration('escapexss')){
          globalParams.put(js_EscapeXSS, compiler.javascript.getJSEscapeXSS());
       }
 

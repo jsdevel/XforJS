@@ -20,14 +20,18 @@
  * @constructor
  * @this {ProductionContext}
  * @param {Output} output
+ * @param {Compiler} compiler Used for importing files, and gaining access to
+ *    initial configuration settings.
  * @param {ProductionContext} previousContext
  * @returns {ProductionContext}
  */
 function ProductionContext(
    output,
+   compiler,
    previousContext
 ){
    if(!(output instanceof Output))throw "output must be of type Output.";
+   if(!(compiler instanceof Compiler))throw "compiler must be of type Compiler.";
    if(previousContext&&!(previousContext instanceof ProductionContext))throw "previousContext must be of type ProductionContext.";
 
    //Programs aren't allowed to reference scope of importing file,
@@ -39,30 +43,32 @@ function ProductionContext(
    var productionStack=[];
 
    var programNamespace;
+   var inputFilePath;
 
-   var configuration=previousContext&&previousContext._configuration||{};
-   var configurationStack=[configuration];
 
    if(previousContext){
       this._declaredNamespaces=previousContext._declaredNamespaces;
       this._JSParameters=previousContext._JSParameters;
       this._JSParametersWrapper=previousContext._JSParametersWrapper;
       this._JSArgumentsWrapper=previousContext._JSArgumentsWrapper;
+      this._importedFiles=previousContext._importedFiles;
       this._configuration=previousContext._configuration;
    } else {//default values
       this._declaredNamespaces={};
       this._JSParameters=new JSParameters();
       this._JSParametersWrapper=new JSParametersWrapper(this._JSParameters);
       this._JSArgumentsWrapper=new JSArgumentsWrapper(this._JSParameters);
-      this._configuration=configuration;
+      this._importedFiles={};
+      this._configuration = compiler.configuration;
    }
 
+   var configuration=this._configuration;
+   var configurationStack=[configuration];
+
    if(previousContext){
-      //instance._importedFiles          =previousContext._importedFiles;
       //instance._callManager            =previousContext._callManager;
    } else {//default
       /*
-      _importedFiles = {};
       callManager = new CallManager();
       */
    }
@@ -88,24 +94,28 @@ function ProductionContext(
          }
          configurationStack.push(obj);
          configuration=obj;
-         this._configuration=obj;
+         this._configuration = configuration;
       } else {
          throw "obj must be an object.";
       }
       return this;
    };
    /**
-    * @return {Object}
+    * @param {String} string used as a key in the current configuration.
+    * @return {Object} The object returned is the current configuration at the
+    *    time the method is called.  It isn't gauranteed to always be the
+    *    current configuration of the context.
+    *
     */
-   this.getConfiguration=function(){
-      return configuration;
+   this.getConfiguration=function(string){
+      return configuration[string];
    };
    /**
     * @return {ProductionContext}
     * @throws If attempt to remove &lt;2 configuration.
     */
    this.removeConfiguration=function(){
-      if(configurationStack.length > 2){
+      if(configurationStack.length > 1){
          configurationStack.pop();
          configuration=configurationStack[configurationStack.length-1];
          this._configuration=configuration;
@@ -167,26 +177,47 @@ function ProductionContext(
    };
 
    /**
-    * @param String path
-    * @return {Output}
+    * @param {String} path
+    * @throws @see getInputFilePath
+    * @throws if an attempt to set path more than once is made.
+    * @return {ProductionContext}
     */
-   /*this.importFile=function(path) {
-      var targetFile = new File(path);
-      var absolutePath = targetFile.getCanonicalPath();
-
-      if(!absolutePath.endsWith(Characters.extension_xforj)){
-         throw "Imported files must end with a .xforj extension.";
+   this.setInputFilePath=function(path){
+      if(!inputFilePath){
+         inputFilePath=getInputFilePath(path);
+      } else {
+         throw "can't set path more than once.";
       }
+      return this;
+   };
 
-      LOGGER.debug("Import request: "+path);
-      LOGGER.debug("Actual file path: "+absolutePath);
-
-      if(importedFiles.containsKey(absolutePath)){
-         return new Output();
+   /**
+    * @param {String} filePath
+    * @return {String}
+    */
+   this.importFile=function(filePath) {
+      if(!inputFilePath){
+         throw "Can't import '"+filePath+"' because no inputFilePath was given.";
       }
-      importedFiles.put(absolutePath, true);
-      return XforJ.compileFile(targetFile, new ProductionContext(targetFile, instance));
-   };*/
+      var path = require('path');
+      var fs = require('fs');
+      var input;
+      var directory = path.dirname(inputFilePath);
+      var _path = getInputFilePath(path.resolve(directory, filePath));
+
+      if(this._importedFiles[_path]){
+         return "";
+      } else {
+         this._importedFiles[_path]=true;
+         input=fs.readFileSync(_path, 'utf8');
+
+         return compiler.compile(
+            input,
+            _path,
+            this
+         );
+      }
+   };
 
    /**
     * Adds a production to the current stack.
