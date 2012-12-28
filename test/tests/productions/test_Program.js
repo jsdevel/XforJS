@@ -25,7 +25,6 @@ var result;
 
 var characters;
 
-var globalVariableDeclarationsCalled=false;
 var globalStatementsCalled=false;
 
 
@@ -63,7 +62,6 @@ assert((result=eval(output.toString())) && typeof result === 'object',
 //EXECUTE METHOD TESTING
 
 //Program.execute instantiates these.
-function GlobalVariableDeclarations(){this.execute=function(){globalVariableDeclarationsCalled=true;}}
 function GlobalStatements(){this.execute=function(){globalStatementsCalled=true;}}
 
 setEnv();
@@ -91,7 +89,6 @@ characters = new CharWrapper("{v");
 program.execute(characters, context);
 assert(context.getCurrentProduction() instanceof GlobalVariableDeclarations,
    "GlobalVariableDeclarations is instantiated appropriately.");
-globalVariableDeclarationsCalled=false;
 context.removeProduction();
 
 characters = new CharWrapper("{t");
