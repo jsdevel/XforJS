@@ -75,6 +75,8 @@
    assert.equal(output.toString(),
       "AAA",
       "removeProduction is working.");
+
+   assert.equal(context.getCurrentProduction(), productionA, "getCurrentProduction is working.");
 }();
 
 !function(){//variables

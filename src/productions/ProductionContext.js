@@ -219,6 +219,7 @@ function ProductionContext(
       }
    };
 
+   //PRODUCTIONS
    /**
     * Adds a production to the current stack.
     *
@@ -250,6 +251,12 @@ function ProductionContext(
    this.executeCurrent=function(characters){
       currentProduction.execute(characters, this);
       return this;
+   };
+   /**
+    * @return {Production}
+    */
+   this.getCurrentProduction=function(){
+      return currentProduction;
    };
 
    //VARIABLES
