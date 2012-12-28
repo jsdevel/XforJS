@@ -21,7 +21,7 @@ var __reg_COMMENT = "#[^\\r\\n]+(?:\\r?\\n)?";
 var __reg_name = "[a-zA-Z$_](?:[\\w$]+)?";
 
 //SEQUENCES
-var IMPORT_PATH=     /^((?:[^\}\\]|\\[\}\\])+\.xforj)/;
+var IMPORT_PATH=     /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
 var NS =             new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
 var SPACE =          new RegExp("^((?:\\s|"+__reg_COMMENT+")+)");
 
@@ -77,6 +77,10 @@ var RESERVED_WORDS = {
    "yield":true
 };
 
+/**
+ * @param {String} namespace
+ * @throws if the namespace contains a reserved word.
+ */
 function validateNamespacesAgainstReservedWords(namespace) {
    var names = namespace.split(".");
    var i=0,len=names.length;
@@ -85,6 +89,36 @@ function validateNamespacesAgainstReservedWords(namespace) {
          throw "Usage of the following ECMAScript reserved word is not allowed: "+names[i];
       }
    }
+}
+
+/**
+ * @param {String} inputFilePath
+ * @throws if inputFilePath isn't a string.
+ * @throws if inputFilePath doesn't end with .xjs.
+ * @throws if inputFilePath doesn't exist.
+ * @return {String}  Absolute path.  It is normalized by the following:<br><br>
+ *    1) whitespace is trimmed from the ends<br>
+ *    2) node.js' path.normalize<br>
+ *    3) node.js' path.dirname<br>
+ *    4) node.js' path.resolve<br>
+ */
+function getInputFileDirectory(inputFilePath){
+   var fs = require('fs');
+   var path = require('path');
+   var _path;
+   if(!inputFilePath || typeof inputFilePath !== 'string'){
+      throw "inputFilePath must be a string.";
+   }
+   _path = path.normalize(inputFilePath.replace(/^\s+|\s+$/g, ""));
+
+   if(!/\.xjs$/.test(_path)){
+      throw "inputFilePath must end with '.xjs'.";
+   }
+
+   if(!fs.existsSync(_path)){
+      throw "The following path doesn't exist: \n   "+_path;
+   }
+   return path.resolve(path.dirname(_path));
 }
 
 /**

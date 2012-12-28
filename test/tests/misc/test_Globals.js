@@ -32,12 +32,12 @@
       }
    }();
    !function(){//IMPORT_PATH
-      var samplePath = "d/a.xforj";
+      var samplePath = "d/a.xjs";
       assert.equal(IMPORT_PATH.exec(samplePath)[1], samplePath, "Names with refinement work.");
-      assert(!IMPORT_PATH.exec("d/a.xfor"), "Paths must end with .xforj");
-      assert(!IMPORT_PATH.exec("d/}a.xforj"), "'}' must be escaped with '\\'.");
-      assert(!IMPORT_PATH.exec("d/\\a.xforj"), "'\\' must be escaped with '\\'.");
-      assert.equal(IMPORT_PATH.exec("d/\\\\a\\}.xforj  }")[1], "d/\\\\a\\}.xforj", "'\\' and '}' are valid when escaped with '\\'.");
+      assert(!IMPORT_PATH.exec("d/a.xj"), "Paths must end with .xjs");
+      assert(!IMPORT_PATH.exec("d/}a.xjs"), "'}' must be escaped with '\\'.");
+      assert(!IMPORT_PATH.exec("d/\\a.xjs"), "'\\' must be escaped with '\\'.");
+      assert.equal(IMPORT_PATH.exec("d/\\\\a\\}.xjs  }")[1], "d/\\\\a\\}.xjs", "'\\' and '}' are valid when escaped with '\\'.");
    }();
    !function(){//NS
       assert(!NS.exec("345"), "Numbers don't start namespaces.");
@@ -114,6 +114,26 @@
          validateNamespacesAgainstReservedWords(a);
       }, "Using a reserved word in a namespace throws an error.");
    }
+}();
+!function(){//getInputFilePathDirectory
+   var path = require('path');
+   var somePath="tests/misc/asdf/";
+   var _path="tests/misc/test.xjs";
+   assert.equal(getInputFileDirectory(_path), path.resolve("tests/misc"),
+      "relative path is working.");
+   assert.equal(getInputFileDirectory(path.resolve(_path)), path.resolve("tests/misc"),
+      "absolute path is working.");
+   assert.equal(getInputFileDirectory(somePath+"../test.xjs"), path.resolve("tests/misc"),
+      "relative path is normalized.")
+   assert['throws'](function(){
+      getInputFileDirectory("");
+   }, "path must be a string");
+   assert['throws'](function(){
+      getInputFileDirectory(_path+"asdf");
+   }, "must end with .xjs");
+   assert['throws'](function(){
+      getInputFileDirectory(Date.now()+".xjs");
+   }, "file must exist.");
 }();
 !function(){
    var a="\\{\\#\\#\\{\r\n\\#\r\r\n";
