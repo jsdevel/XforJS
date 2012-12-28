@@ -105,7 +105,7 @@ function Program(
             context.addProduction(new ProgramNamespace(programNamespaceOutput));
             return;
          } else {//hasProgramNamespace
-            if(characters.charAt(0) == '{'){
+            if(characters.charAt(0) === '{'){
                switch(characters.charAt(1)){
                case 'i'://imports
                   if(!hasGlobals && !hasVariables){

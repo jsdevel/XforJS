@@ -27,7 +27,7 @@ function ProgramNamespace(output){
       var extraExcMsg="";
       var chunk;
 
-      if(characters.charAt(0) == '{'){
+      if(characters.charAt(0) === '{'){
          var namespace = characters.match(NAMESPACE);
          if(namespace.find()){
             characters.
@@ -68,7 +68,7 @@ function ProgramNamespace(output){
                }
 
 
-               if(characters.charAt(0) == '}'){
+               if(characters.charAt(0) === '}'){
                   characters.shift(1);
                   context.removeProduction();
                   return;

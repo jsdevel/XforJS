@@ -37,7 +37,7 @@ function ImportStatement(output){
             var importedPath = path.group(1);
             characters.shift(importedPath.length).removeSpace();
 
-            if(characters.charAt(0) == '}'){
+            if(characters.charAt(0) === '}'){
                characters.shift(1);
                output.add(context.importFile(importedPath));
                context.removeProduction();
