@@ -92,6 +92,16 @@ function validateNamespacesAgainstReservedWords(namespace) {
 }
 
 /**
+ * @see getInputFilePath
+ * @return {String}  Absolute path. path.dirname is used on the result of
+ *    getInputFileDirectory.
+ */
+function getInputFileDirectory(inputFilePath){
+   var path = require('path');
+   return path.dirname(getInputFilePath(inputFilePath));
+}
+
+/**
  * @param {String} inputFilePath
  * @throws if inputFilePath isn't a string.
  * @throws if inputFilePath doesn't end with .xjs.
@@ -99,10 +109,9 @@ function validateNamespacesAgainstReservedWords(namespace) {
  * @return {String}  Absolute path.  It is normalized by the following:<br><br>
  *    1) whitespace is trimmed from the ends<br>
  *    2) node.js' path.normalize<br>
- *    3) node.js' path.dirname<br>
- *    4) node.js' path.resolve<br>
+ *    3) node.js' path.resolve<br>
  */
-function getInputFileDirectory(inputFilePath){
+function getInputFilePath(inputFilePath){
    var fs = require('fs');
    var path = require('path');
    var _path;
@@ -118,7 +127,7 @@ function getInputFileDirectory(inputFilePath){
    if(!fs.existsSync(_path)){
       throw "The following path doesn't exist: \n   "+_path;
    }
-   return path.resolve(path.dirname(_path));
+   return path.resolve(_path);
 }
 
 /**

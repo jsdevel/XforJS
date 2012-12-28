@@ -115,7 +115,7 @@
       }, "Using a reserved word in a namespace throws an error.");
    }
 }();
-!function(){//getInputFilePathDirectory
+!function(){//getInputFilePathDirectory|Path
    var path = require('path');
    var somePath="tests/misc/asdf/";
    var _path="tests/misc/test.xjs";
@@ -134,6 +134,11 @@
    assert['throws'](function(){
       getInputFileDirectory(Date.now()+".xjs");
    }, "file must exist.");
+
+   assert.equal(getInputFilePath(_path), path.resolve(_path),
+      "relative path is working.");
+   assert.equal(getInputFilePath(path.resolve(_path)), path.resolve(_path),
+      "absolute path is working.");
 }();
 !function(){
    var a="\\{\\#\\#\\{\r\n\\#\r\r\n";
