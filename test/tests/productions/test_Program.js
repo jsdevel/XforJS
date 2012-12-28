@@ -25,8 +25,6 @@ var result;
 
 var characters;
 
-var programNamespaceCalled=false;
-var importStatementsCalled=false;
 var globalVariableDeclarationsCalled=false;
 var globalStatementsCalled=false;
 
@@ -65,8 +63,6 @@ assert((result=eval(output.toString())) && typeof result === 'object',
 //EXECUTE METHOD TESTING
 
 //Program.execute instantiates these.
-function ProgramNamespace(){this.execute=function(){programNamespaceCalled=true;}}
-function ImportStatements(){this.execute=function(){importStatementsCalled=true;}}
 function GlobalVariableDeclarations(){this.execute=function(){globalVariableDeclarationsCalled=true;}}
 function GlobalStatements(){this.execute=function(){globalStatementsCalled=true;}}
 
@@ -80,25 +76,20 @@ assert['throws'](function(){
 //happy path
 characters = new CharWrapper ("{n");
 program.execute(characters, context);
-context.executeCurrent(characters);
-assert(programNamespaceCalled,
+assert(context.getCurrentProduction() instanceof ProgramNamespace,
    "ProgramNamespace is instantiated appropriately.");
-programNamespaceCalled=false;
 context.removeProduction();
 
 characters = new CharWrapper("   {i");
 program.execute(characters, context);
 assert.equal(characters.charAt(0), "{", "Space is removed after namespace.");
-context.executeCurrent(characters);
-assert(importStatementsCalled,
+assert(context.getCurrentProduction() instanceof ImportStatements,
    "ImportStatements is instantiated appropriately.");
-importStatementsCalled=false;
 context.removeProduction();
 
 characters = new CharWrapper("{v");
 program.execute(characters, context);
-context.executeCurrent(characters);
-assert(globalVariableDeclarationsCalled,
+assert(context.getCurrentProduction() instanceof GlobalVariableDeclarations,
    "GlobalVariableDeclarations is instantiated appropriately.");
 globalVariableDeclarationsCalled=false;
 context.removeProduction();
