@@ -31,8 +31,7 @@ function ProgramNamespace(output){
          var namespace = characters.match(NAMESPACE);
          if(namespace.find()){
             characters.
-               shift(namespace.group(1).length).
-               removeSpace();
+               shift(namespace.group(1).length);
 
             var declaredNS = characters.match(NS);
 

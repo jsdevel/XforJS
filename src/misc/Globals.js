@@ -18,15 +18,16 @@
 
 //Save this section for regex.
 var __reg_COMMENT = "#[^\\r\\n]+(?:\\r?\\n)?";
-var __reg_notName = "(?![a-zA-Z$_])(?:\\s+)?";
-var __reg_name = "[a-zA-Z$_](?:[a-zA-Z0-9$_]+)?";
+var __reg_name = "[a-zA-Z$_](?:[\\w$]+)?";
 
 //SEQUENCES
+var IMPORT_PATH=     /^((?:[^\}\\]|\\[\}\\])+\.xforj)/;
 var NS =             new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
 var SPACE =          new RegExp("^((?:\\s|"+__reg_COMMENT+")+)");
 
 //STATEMENT PATTERNS
-var NAMESPACE =      new RegExp("^(\\{namespace"+__reg_notName+")\\s");
+var IMPORT =         new RegExp("^(\\{import\\s+)");
+var NAMESPACE =      new RegExp("^(\\{namespace\\s+)");
 
 var RESERVED_WORDS = {
    "break":true,

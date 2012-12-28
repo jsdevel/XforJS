@@ -31,6 +31,14 @@
          assert.equal(SPACE.exec(a)[1], a, spaces[a]);
       }
    }();
+   !function(){//IMPORT_PATH
+      var samplePath = "d/a.xforj";
+      assert.equal(IMPORT_PATH.exec(samplePath)[1], samplePath, "Names with refinement work.");
+      assert(!IMPORT_PATH.exec("d/a.xfor"), "Paths must end with .xforj");
+      assert(!IMPORT_PATH.exec("d/}a.xforj"), "'}' must be escaped with '\\'.");
+      assert(!IMPORT_PATH.exec("d/\\a.xforj"), "'\\' must be escaped with '\\'.");
+      assert.equal(IMPORT_PATH.exec("d/\\\\a\\}.xforj  }")[1], "d/\\\\a\\}.xforj", "'\\' and '}' are valid when escaped with '\\'.");
+   }();
    !function(){//NS
       assert(!NS.exec("345"), "Numbers don't start namespaces.");
       assert.equal(NS.exec("boo")[1], "boo", "Names without refinement work.");
@@ -38,10 +46,18 @@
    }();
 
    //STATEMENTS
+   !function(){//IMPORT
+      var _import = "{import";
+      assert(!IMPORT.exec(_import),"Space must follow '"+_import+"'.");
+      _import = "{import   ";
+      assert.equal(IMPORT.exec(_import)[1], _import, "IMPORT is working.");
+   }();
+
    !function(){//NAMESPACE
       var ns = "{namespace";
       assert(!NAMESPACE.exec(ns),"Space must follow '"+ns+"'.");
-      assert.equal(NAMESPACE.exec(ns+" ")[1], ns, "NAMESPACE is working.");
+      ns = "{namespace   ";
+      assert.equal(NAMESPACE.exec(ns)[1], ns, "NAMESPACE is working.");
    }();
 
 !function(){//reserved words
