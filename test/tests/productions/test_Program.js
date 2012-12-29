@@ -15,18 +15,14 @@
  *
  * For more information, visit http://SOMESITE
  */
+!function(){
 //set by setEnv
 var output;
 /** @type {ProductionContext} */var context;
 var compiler;
-var js;
 var program;
 var result;
-
 var characters;
-
-var globalStatementsCalled=false;
-
 
 eval(JavascriptResources.getXforJLib());
 
@@ -60,10 +56,6 @@ assert((result=eval(output.toString())) && typeof result === 'object',
    "When global is false, the return value of a program should be an object.");
 
 //EXECUTE METHOD TESTING
-
-//Program.execute instantiates these.
-function GlobalStatements(){this.execute=function(){globalStatementsCalled=true;}}
-
 setEnv();
 characters = new CharWrapper(" ");
 assert['throws'](function(){
@@ -93,10 +85,8 @@ context.removeProduction();
 
 characters = new CharWrapper("{t");
 program.execute(characters, context);
-context.executeCurrent(characters);
-assert(globalStatementsCalled,
+assert(context.getCurrentProduction() instanceof GlobalStatements,
    "GlobalStatements is instantiated appropriately.");
-globalStatementsCalled=false;
 context.removeProduction();
 
 //wrench it now
@@ -133,7 +123,7 @@ function setEnv(compilerConfig, isNested){
    compiler = new Compiler(compilerConfig);
    output = new Output();
    context = new ProductionContext(output, compiler);
-   js = compiler.javascript;
    program = new Program(output, compiler, context, isNested);
    context.addProduction(program);
 }
+}();
