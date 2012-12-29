@@ -93,7 +93,7 @@ function AbstractVariableOutput(
 
       if(keys.length > 0){
          first = keys.shift();
-         firstValue = variables[first];
+         firstValue = variables[first].toString();
 
          wrappedOutput.push(variableStatementPrefix+first);
 
@@ -105,7 +105,7 @@ function AbstractVariableOutput(
             key=keys[i];
             wrappedOutput.push(","+key);
             value = variables[key];
-            if(value !== ""){
+            if(value.toString()){
                wrappedOutput.push(variableAssignmentOperator+value);
             }
          }
