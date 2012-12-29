@@ -22,7 +22,13 @@ var output;
 var compiler;
 var program;
 var characters;
-
+var setEnv=function(compilerConfig, isNested){
+   compiler = new Compiler(compilerConfig);
+   output = new Output();
+   context = new ProductionContext(output, compiler);
+   program = new Program(output, compiler, context, isNested);
+   context.addProduction(program);
+};
 eval(JavascriptResources.getXforJLib());
 
 setEnv();
@@ -117,12 +123,4 @@ program.execute(new CharWrapper("{t"), context);
 assert['throws'](function(){
    program.execute(new CharWrapper("{v"), context);
 }, "variables must come before templates.");
-
-function setEnv(compilerConfig, isNested){
-   compiler = new Compiler(compilerConfig);
-   output = new Output();
-   context = new ProductionContext(output, compiler);
-   program = new Program(output, compiler, context, isNested);
-   context.addProduction(program);
-}
 }();
