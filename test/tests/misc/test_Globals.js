@@ -64,6 +64,12 @@
       assert.equal(NAMESPACE.exec(ns)[1], ns, "NAMESPACE is working.");
    }();
 
+   !function(){//VAR
+      var input = "{var";
+      assert(!VAR.exec(input),"Space must follow '"+input+"'.");
+      input = "{var   ";
+      assert.equal(VAR.exec(input)[1], input, "NAMESPACE is working.");
+   }();
 !function(){//reserved words
    var a;
    var reservedWords = {

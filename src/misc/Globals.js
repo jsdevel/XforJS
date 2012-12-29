@@ -29,6 +29,7 @@ var SPACE =          new RegExp("^((?:\\s|"+__reg_COMMENT+")+)");
 //STATEMENT PATTERNS
 var IMPORT =         new RegExp("^(\\{import\\s+)");
 var NAMESPACE =      new RegExp("^(\\{namespace\\s+)");
+var VAR =            new RegExp("^(\\{var\\s+)");
 
 var RESERVED_WORDS = {
    "break":true,
