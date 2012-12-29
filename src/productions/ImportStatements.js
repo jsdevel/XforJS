@@ -30,3 +30,8 @@ function ImportStatements(output){
    }
 }
 extend(ImportStatements, Production);
+/**
+ * @const
+ * @type {string}
+ */
+ImportStatements.prototype.name="ImportStatements";

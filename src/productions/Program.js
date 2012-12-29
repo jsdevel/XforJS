@@ -93,13 +93,13 @@ function Program(
       var importStatementsOutput;
 
       if(characters.removeSpace() && !hasProgramNamespace){
-         this.exc("Space isn't allowed before a namespace.");
+         throw "Space isn't allowed before a namespace.";
       }
 
       if(characters.charAt(0) === '{'){
          if(!hasProgramNamespace){
             if(characters.charAt(1) !== 'n'){
-               this.exc("The first Production must be a ProgramNamespace.");
+               throw "The first Production must be a ProgramNamespace.";
             }
             hasProgramNamespace=true;
             context.addProduction(new ProgramNamespace(programNamespaceOutput));
@@ -114,7 +114,7 @@ function Program(
                      context.addProduction(new ImportStatements(importStatementsOutput));
                      return;
                   } else {
-                     this.exc("ImportStatements must appear before GlobalVariableStatements and GlobalStatements.");
+                     throw "ImportStatements must appear before GlobalVariableStatements and GlobalStatements.";
                   }
                case 'v'://variables
                   if(!hasGlobals){
@@ -122,7 +122,7 @@ function Program(
                      context.addProduction(new GlobalVariableDeclarations(variableOutput));
                      return;
                   } else {
-                     this.exc("GlobalVariableDeclarations must appear before GlobalStatements.");
+                     throw "GlobalVariableDeclarations must appear before GlobalStatements.";
                   }
                //Add more here as newer production types are allowed globally.
                case 't'://globals
@@ -134,13 +134,18 @@ function Program(
          }
       }
 
-      this.exc("Unknown characters: "+characters.charAt(0) + characters.charAt(1));
+      throw "Unknown characters: "+characters.charAt(0) + characters.charAt(1);
    };
 
    this.close=function(context){
       if(!hasProgramNamespace){
-         this.exc("No ProgramNamespace was declared.");
+         throw "No ProgramNamespace was declared.";
       }
    };
 }
 extend(Program, Production);
+/**
+ * @const
+ * @type {string}
+ */
+Program.prototype.name="Program";

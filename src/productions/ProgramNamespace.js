@@ -84,3 +84,8 @@ function ProgramNamespace(output){
    };
 }
 extend(ProgramNamespace, Production);
+/**
+ * @const
+ * @type {string}
+ */
+ProgramNamespace.prototype.name="ProgramNamespace";

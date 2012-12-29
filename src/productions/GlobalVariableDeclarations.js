@@ -36,3 +36,8 @@ function GlobalVariableDeclarations(output){
    };
 }
 extend(GlobalVariableDeclarations, Production);
+/**
+ * @const
+ * @type {string}
+ */
+GlobalVariableDeclarations.prototype.name="GlobalVariableDeclarations";

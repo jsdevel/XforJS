@@ -28,14 +28,6 @@ Production.prototype.close=function(context){
    throw "Unable to close: \""+this.constructor.name+"\"";
 };
 /**
- * @param {String} msg
+ * @type {string}
  */
-Production.prototype.exc=function(msg){
-   throw "Invalid "+this.constructor.name+"."+(msg&&"  "+msg||"");
-};
-/**
- * @return {String}
- */
-Production.prototype.getName=function(){
-   return this.constructor.name;
-};
+Production.prototype.name="Production";

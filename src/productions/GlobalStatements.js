@@ -50,3 +50,8 @@ function GlobalStatements(output){
    };
 }
 extend(GlobalStatements, Production);
+/**
+ * @const
+ * @type {string}
+ */
+GlobalStatements.prototype.name="GlobalStatements";

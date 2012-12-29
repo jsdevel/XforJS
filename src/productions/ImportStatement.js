@@ -27,7 +27,6 @@ function ImportStatement(output){
     */
    this.execute=function(characters, context){
       var _import = characters.match(IMPORT);
-      var extraMsg="";
       if(_import.find()){
          var matchedImportTag = _import.group(1);
          characters.shift(matchedImportTag.length);
@@ -44,10 +43,15 @@ function ImportStatement(output){
                return;
             }
          } else {
-            extraMsg = "Invalid import path given";
+            throw "Invalid import path given";
          }
       }
-      this.exc(extraMsg);
+      throw "No statement found.";
    };
 }
 extend(ImportStatement, Production);
+/**
+ * @const
+ * @type {string}
+ */
+ImportStatement.prototype.name="ImportStatement";

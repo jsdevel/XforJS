@@ -105,11 +105,18 @@ function CharWrapper(characters){
    };
 
    /**
-    * Returns the error location in the event of an error.
-    * @return {String}
+    * Returns the current line index.
+    * @return {number}
     */
-   this.getErrorLocation=function(){
-      return   "Line   : "+line+"\n"+
-               "Column : "+column+"\n";
+   this.getLine=function(){
+      return line;
    };
+   /**
+    * Returns the current column index.
+    * @return {number}
+    */
+   this.getColumn=function(){
+      return column;
+   };
+
 }

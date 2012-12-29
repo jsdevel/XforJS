@@ -63,14 +63,19 @@ function Compiler(config){
          context.setInputFilePath(inputFilePath);
       }
 
-      context.addProduction(new Program(output, this, context, !!previousContext));
-
-
-      while(wrapper.length() > 0){
-         context.executeCurrent(wrapper);
+      try{
+         context.addProduction(new Program(output, this, context, !!previousContext));
+         while(wrapper.length() > 0){
+            context.executeCurrent(wrapper);
+         }
+         context.close();
+      } catch(e){
+         throw "ERROR while evaluating: "+context.getCurrentProduction().name+"\n"+
+               "   Line  : "+wrapper.getLine()+"\n"+
+               "   Column: "+wrapper.getColumn()+"\n"+
+               "REASON:\n"+
+               "   "+e;
       }
-
-      context.close();
 
       return output.toString();
    };

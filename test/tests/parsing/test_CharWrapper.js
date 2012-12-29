@@ -33,10 +33,12 @@
    wrapper.shift(5);
    assert.equal(wrapper.length() === 23, wrapper.charAt(0) === " ", "shift is working.");
 
-   assert.equal("Line   : 1\nColumn : 6\n", wrapper.getErrorLocation(), "getErrorLocation is working without line breaks.");
+   assert.equal(6, wrapper.getColumn(), "getColumn is working without line breaks.");
+   assert.equal(1, wrapper.getLine(), "getLine is working without line breaks.");
 
    wrapper.shift(7);
-   assert.equal("Line   : 2\nColumn : 1\n", wrapper.getErrorLocation(), "getErrorLocation is working with line breaks.");
+   assert.equal(1, wrapper.getColumn(), "getColumn is working with line breaks.");
+   assert.equal(2, wrapper.getLine(), "getLine is working with line breaks.");
 
    assert(wrapper.removeSpace() && wrapper.charAt(0) === '!', "remove space is working.");
    assert(wrapper.shift(1) === wrapper && wrapper.charAt(0) === 'H', 'shift returns the instance.');

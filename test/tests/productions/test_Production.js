@@ -15,8 +15,10 @@
  *
  * For more information, visit http://XforJS.com
  */
+!function(){
 function Sample(){}
 extend(Sample, Production);
+Sample.prototype.name="Sample";
 
 var sampleProduction=new Sample();
 
@@ -26,11 +28,8 @@ assert.doesNotThrow(function(){
 assert['throws'](function(){
    sampleProduction.close();
 }, "All Productions throw errors by default when close is called.");
-assert.doesNotThrow(function(){
-   try{
-      sampleProduction.exc("hello");
-   }catch(e){
-      assert.equal("Invalid Sample.  hello", e, "The name of the base object is used.");
-   }
-}, "exc is used to trow more meaningfull error messages.");
-assert.equal("Sample", sampleProduction.getName(), "The name of base objects is returned.");
+assert.equal("Sample", sampleProduction.name, "The name of base objects is returned.");
+}();
+
+var compiler = new Compiler();
+compiler.compile("{namespace boo.goo}\n#asdfasdf\n{import boo}");
