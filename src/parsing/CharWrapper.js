@@ -95,9 +95,8 @@ function CharWrapper(characters){
     * @return {boolean}
     */
    this.removeSpace=function(){
-      var spaceToRemove;
-      if(SPACE.test(_characters)){
-         spaceToRemove=SPACE.exec(_characters);
+      var spaceToRemove = SPACE.exec(_characters);
+      if(spaceToRemove){
          this.shift(spaceToRemove[1].length);
          return true;
       }
