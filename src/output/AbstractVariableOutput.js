@@ -58,7 +58,12 @@ function AbstractVariableOutput(
       if(variables[key]){
          throw "The following has been declared twice: "+name;
       }
-      if(typeof value !== 'string'){
+      if(
+         !(
+            value && typeof value === 'object' ||
+            typeof value === 'string'
+         )
+      ){
          throw "Null value was discovered for the following: \""+name+"\"";
       }
       variables[key]=value;

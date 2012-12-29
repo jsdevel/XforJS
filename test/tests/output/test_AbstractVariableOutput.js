@@ -50,7 +50,7 @@ assert['throws'](function(){
 }, "Adding a variable more than once throws an error.");
 assert['throws'](function(){
    variableOutput.add("d",true);
-}, "Value must be of type string.");
+}, "Value must be an object.");
 assert(variableOutput.add("c", "") instanceof AbstractVariableOutput, "add returns instance.");
 
 //toString
