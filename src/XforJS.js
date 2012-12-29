@@ -50,6 +50,7 @@ var XforJS = (function(){//change the name XforJS to anything you need.
    //INCLUDE productions/Production
    //INCLUDE productions/ProductionContext
 
+   //INCLUDE productions/AbstractVariableDeclaration
 
    //INCLUDE productions/GlobalStatements
    //INCLUDE productions/GlobalVariableDeclarations
