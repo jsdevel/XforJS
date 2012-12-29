@@ -39,6 +39,10 @@
       assert(!IMPORT_PATH.exec("d/\\a.xjs"), "'\\' must be escaped with '\\'.");
       assert.equal(IMPORT_PATH.exec("d/\\\\a\\}.xjs  }")[1], "d/\\\\a\\}.xjs", "'\\' and '}' are valid when escaped with '\\'.");
    }();
+   !function(){//NAME
+      assert(!NAME.exec("345"), "Numbers don't start names.");
+      assert.equal(NAME.exec("_$AQboo_")[1], "_$AQboo_", "Names work.");
+   }();
    !function(){//NS
       assert(!NS.exec("345"), "Numbers don't start namespaces.");
       assert.equal(NS.exec("boo")[1], "boo", "Names without refinement work.");
