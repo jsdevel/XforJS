@@ -30,6 +30,3 @@ assert['throws'](function(){
 }, "All Productions throw errors by default when close is called.");
 assert.equal("Sample", sampleProduction.name, "The name of base objects is returned.");
 }();
-
-var compiler = new Compiler();
-compiler.compile("{namespace boo.goo}\n#asdfasdf\n{import boo}");
