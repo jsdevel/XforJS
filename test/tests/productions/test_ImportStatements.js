@@ -15,28 +15,24 @@
  *
  * For more information, visit http://SOMESITE
  */
+!function(){
 var compiler = new Compiler();
 var output = new Output();
 
-var dummyProduction=new Production();
+var production=new Production();
 var importStatements = new ImportStatements(output);
 
-var dummyProductionCalled=false;
-var importStatementCalled=false;
 var characters = new CharWrapper("{i");
 var context = new ProductionContext(output, compiler);
 
-dummyProduction.execute=function(){dummyProductionCalled=true;};
 
-context.addProduction(dummyProduction);
+context.addProduction(production);
 context.addProduction(importStatements);
 
 //happy-path, although I think there's really only a happy path with this one.
 context.executeCurrent(characters);//statements
-context.executeCurrent(characters);//statement
 
-assert(importStatementCalled, "ImportStatements instantiates ImportStatement.");
-importStatementCalled=false;
+assert(context.getCurrentProduction() instanceof ImportStatement, "ImportStatements instantiates ImportStatement.");
 context.removeProduction();
 
 characters=new CharWrapper("   {i");
@@ -45,7 +41,6 @@ assert.equal(characters.charAt(0), "{", "ImportStatements ignores space.");
 context.removeProduction();
 
 characters=new CharWrapper("   {t");
-context.executeCurrent(characters).executeCurrent(characters);
-assert(dummyProductionCalled, "ImportStatements is properly removed.");
-
-function ImportStatement(){this.execute=function(){importStatementCalled=true;}};
+context.executeCurrent(characters);
+assert.equal(context.getCurrentProduction(), production, "ImportStatements is properly removed.");
+}();
