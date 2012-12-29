@@ -21,7 +21,6 @@ var output;
 /** @type {ProductionContext} */var context;
 var compiler;
 var program;
-var result;
 var characters;
 
 eval(JavascriptResources.getXforJLib());
@@ -52,7 +51,7 @@ assert(output.toString().indexOf(JavascriptResources.getEscapeXSS()) === -1,
    "When useexternal is false and nested, there should be no instance of EscapeXSS.");
 
 setEnv({global:false});
-assert((result=eval(output.toString())) && typeof result === 'object',
+assert(typeof eval(output.toString()) === 'object',
    "When global is false, the return value of a program should be an object.");
 
 //EXECUTE METHOD TESTING
