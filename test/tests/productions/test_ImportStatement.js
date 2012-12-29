@@ -16,37 +16,35 @@
  * For more information, visit http://SOMESITE
  */
 (function(){
-   var compiler = new Compiler({useexternal:true});
-   var testXJS = fs.readFileSync("tests/misc/test.xjs", "utf8");
-   var output=compiler.compile(testXJS, "tests/misc/test.xjs");
-   var production;
-   var dummyProduction = new Production();
-   var dummyProductionCalled = false;
-   dummyProduction.execute=function(){dummyProductionCalled=true;};
+   var compiler = new Compiler();
+   var output=new Output();
+   var production = new Production();
+   var is = new ImportStatement(output);
+   var context = new ProductionContext(output, compiler);
+   var pathUsed="";
+   var characters;
+   context.importFile=function(path){
+      pathUsed=path;
+   };
 
-   eval(JavascriptResources.getXforJLib());
-   eval(output);
-
-   //happy-path
-   assert(typeof misc.test1 === 'object', "ImportStatement is working.");
-
-   //wrench-it
-   output=new Output();
-   context = new ProductionContext(output, compiler);
-   production = new ImportStatement(output);
-   context.addProduction(dummyProduction).addProduction(production);
-   context.setInputFilePath("tests/misc/test.xjs");
+   context.
+      addProduction(production).
+      addProduction(is);
 
    assert['throws'](function(){
-      production.execute(new CharWrapper("asdf"), context);
+      is.execute(new CharWrapper("asdf"), context);
    }, "ImportStatement expects '{import ' to be first.");
 
    assert['throws'](function(){
-      production.execute(new CharWrapper("{import test1.xj}"), context);
+      is.execute(new CharWrapper("{import test1.xj}"), context);
    }, "import paths must be valid.");
-   production.execute(new CharWrapper("{import test1.xjs}"), context);
-   context.executeCurrent(new CharWrapper(" "));
 
-   assert(dummyProductionCalled, "ImportStatement removes itself.");
+   characters = new CharWrapper("{import test1.xjs}");
+   is.execute(characters, context);
+   assert.equal("test1.xjs", pathUsed, "importPath is called.");
+   assert['throws'](function(){
+      characters.charAt(0);
+   }, "Import removes itself.");
+   assert.equal(context.getCurrentProduction(), production, "ImportStatement removes itself.");
 })();
 

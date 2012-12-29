@@ -70,6 +70,8 @@ function Compiler(config){
          context.executeCurrent(wrapper);
       }
 
+      context.close();
+
       return output.toString();
    };
 }

@@ -199,6 +199,11 @@
    var instance;
    var testFile = "tests/misc/test.xjs";
    var output;
+   var compilerCalled=false;
+   compiler.compile=function(input, path, previousContext){
+      compilerCalled = true;
+      assert(input.indexOf("{namespace") > -1, "importFile passes the contents properly.");
+   };
    instance=context.setInputFilePath(testFile);
    assert.equal(instance, context, "setInputFilePath returns instance.");
    assert['throws'](function(){
@@ -213,10 +218,7 @@
    context.setInputFilePath(testFile);
    output=context.importFile("test.xjs");
 
-   //without an initial program with isNested === false, the output will not
-   //have any reference to js_StringBuffer.  This is because Program sets that
-   //value accordingly.
-   assert(output.indexOf('function') > -1 && output.indexOf(js_StringBuffer) === -1, "Import is working.");
+   assert(compilerCalled, "Import is working.");
 
    output=context.importFile("test.xjs");
    assert.equal(output, "", "importing the same file more than once doesn't do anything.");
