@@ -15,7 +15,8 @@
  *
  * For more information, visit http://SOMESITE
  */
+!function(){
 var compiler = XforJS.getCompiler({debug:true});
 assert(compiler instanceof Compiler, "getCompiler returns an instance of Compiler.");
 assert(compiler.configuration['debug'], "getCompiler passes args successfully.");
-
+}();

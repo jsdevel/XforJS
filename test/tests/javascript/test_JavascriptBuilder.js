@@ -15,6 +15,7 @@
  *
  * For more information, visit http://SOMESITE
  */
+!function(){
 var builder;
 var fs = require('fs');
 var instance;
@@ -35,3 +36,4 @@ assert.equal(instance.getJSCount(), "xforj."+js_CountElements, "useexternal caus
 instance = new JavascriptBuilder({});
 
 assert(instance.getJSCount().indexOf("(function") > -1, "useexternal falsy returns full contents of js fragment.");
+}();

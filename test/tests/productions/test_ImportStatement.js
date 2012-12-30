@@ -15,7 +15,7 @@
  *
  * For more information, visit http://SOMESITE
  */
-(function(){
+!function(){
    var compiler = new Compiler();
    var output=new Output();
    var production = new Production();
@@ -46,5 +46,5 @@
       characters.charAt(0);
    }, "Import removes itself.");
    assert.equal(context.getCurrentProduction(), production, "ImportStatement removes itself.");
-})();
+}();
 

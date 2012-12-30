@@ -15,6 +15,7 @@
  *
  * For more information, visit http://XforJS.com
  */
+!function(){
 var output1 = new Output;
 var output2 = new Output;
 
@@ -24,4 +25,4 @@ output2.add(3).add(5);
 output1.add("hello there");
 
 assert.equal(output2.toString(), "12hello there35", "toString and add are both working.");
-
+}();
