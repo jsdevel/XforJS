@@ -24,12 +24,6 @@ var production;
 var newProduction = new Production();
 var characters;
 
-var getPatternCalled;
-var doAssignmentCalled;
-var getVariableOutputCalled;
-var getProductionCalled;
-var doNoAssignmentCalled;
-
 newProduction.execute=function(characters, context){
    var match=characters.match(/([0-9]+)/);
    if(match.find()){
@@ -42,9 +36,8 @@ setEnv();
 characters = new CharWrapper("  {var bla}");
 production.execute(characters, context);
 assert(
-   getPatternCalled &&
-   doNoAssignmentCalled &&
-   characters.length() === 1,
+   characters.length() === 1 &&
+   characters.charAt(0) === '}',
    "no assignment is working.");
 production.execute(characters, context);
 assert(
@@ -56,11 +49,11 @@ setEnv();
 characters = new CharWrapper("  {var bla 5345}");
 production.execute(characters, context);
 context.
-   executeCurrent(characters).
-   executeCurrent(characters);
+   executeCurrent(characters).//newProduction
+   executeCurrent(characters);//production
 assert(
    context.getCurrentProduction() === newProduction &&
-   characters.length() === 0)
+   characters.length() === 0, "All data is consumed.");
 
 setEnv();
 assert['throws'](function(){
@@ -70,46 +63,36 @@ assert['throws'](function(){
 setEnv();
 assert['throws'](function(){
    production.execute(new CharWrapper("{var 5}"), context);
-}, "No name.")
+}, "No name.");
 
 setEnv();
 assert['throws'](function(){
    production.execute(new CharWrapper("{var bla 5}"), context);
-   production.execute(new CharWrapper("{var bla 5}"), context);
-}, "Invalid character.")
+   production.execute(new CharWrapper("5}"), context);
+}, "Invalid character.  Character should be '}'.");
 
 function setEnv(){
    output = new Output();
    variableOutput = AbstractVariableOutput.getVariableOutput();
    production = new AbstractVariableDeclaration();
    production.getPattern=function(){
-      getPatternCalled=true;
       return /(\{var)/;
    };
    production.doAssignment=function(name, output){
       assert.equal(name, "bla", "name is passed to doAssignment.");
       assert(output instanceof Output, "output is passed to doAssignment.");
-      doAssignmentCalled=true;
    };
    production.getVariableOutput=function(name, output){
-      getVariableOutputCalled=true;
       return variableOutput;
    };
    production.getProduction=function(output){
-      getProductionCalled=true;
       return newProduction;
    };
    production.doNoAssignment=function(name, output){
       assert.equal(name, "bla", "name is passed to doNoAssignment.");
-      doNoAssignmentCalled=true;
    };
    context = new ProductionContext(output, compiler);
    context.addProduction(newProduction).addProduction(production);
-   getPatternCalled=false;
-   doAssignmentCalled=false;
-   getVariableOutputCalled=false;
-   getProductionCalled=false;
-   doNoAssignmentCalled=false;
 }
 }();
 
