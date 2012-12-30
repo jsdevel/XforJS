@@ -15,8 +15,6 @@
  *
  * For more information, visit http://SOMESITE
  */
-//TODO: Remove this once it's defined.
-function GlobalVariableDeclaration(){}
 !function(){
 var output = new Output();
 var compiler = new Compiler();
