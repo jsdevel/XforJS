@@ -1,0 +1,57 @@
+/*!
+ * Copyright 2012 Joseph Spencer.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * For more information, visit http://XforJS.com
+ */
+
+/**
+ * @constructor
+ * @param {Output} output
+ */
+function AbstractParenthesizedExpression(output){
+   var expressionOutput = new Output();
+   output.add("(").add(expressionOutput).add(")");
+
+
+   this.execute=function(characters, context){
+      characters.removeSpace();
+      var firstChar = characters.charAt(0);
+
+      switch(firstChar){
+      case ')':
+         if(!this._hasExpression){
+            throw "Empty Expressions are not allowed.";
+         }
+         characters.shift(1);
+         context.removeProduction();
+         return;
+      default:
+         if(!this._hasExpression){
+            this._hasExpression=true;
+            context.addProduction(this.getExpression(expressionOutput));
+            return;
+         }
+      }
+      throw "Possibly an unclosed paren was found.";
+   };
+}
+extend(AbstractParenthesizedExpression, Production);
+AbstractParenthesizedExpression.prototype._hasExpression=false;
+/**
+ *
+ * @param {Output} output
+ * @returns {AbstractExpression}
+ */
+AbstractParenthesizedExpression.prototype.getExpression=function(output){};
