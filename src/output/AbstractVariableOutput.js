@@ -54,7 +54,7 @@ function AbstractVariableOutput(
     */
    this.add=function(name, value){
       var key = _variablePrefix+name;
-      if(variables[key]){
+      if(variables.hasOwnProperty(key)){
          throw "The following has been declared twice: "+name;
       }
       if(
@@ -73,7 +73,7 @@ function AbstractVariableOutput(
    this.hasVariableBeenDeclared=function(name){
       var key = _variablePrefix+name;
       if(
-         variables[key] ||
+         variables.hasOwnProperty(key) ||
          parentScope && parentScope.hasVariableBeenDeclared(name)
       ){
          return true;
