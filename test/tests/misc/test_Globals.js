@@ -70,6 +70,102 @@
       input = "{var   ";
       assert.equal(VAR.exec(input)[1], input, "NAMESPACE is working.");
    }();
+
+   //FUNCTIONS
+   !function(){
+      var tests = {
+         "count(":COUNT_FN,
+         "current()":CURRENT_FN,
+         "last()":LAST_FN,
+         "name()":NAME_FN,
+         "position()":POSITION_FN
+      };
+      var input;
+      var regex;
+      for(input in tests){
+         regex = tests[input];
+         assert(
+            regex.exec(input) && regex.exec(input)[1] === input &&
+            !regex.exec("ssdsds"),
+            input+" is working.");
+      }
+   }();
+   //PRIMITIVES
+   !function(){
+      [
+         "true",
+         "false"
+      ].forEach(function(input){
+         var exec = BOOLEAN.exec(input);
+         assert(exec && exec[1] === input,
+            "BOOLEAN is working with input: '"+input+"'.");
+      });
+      [//happy-numbers
+         "0x334Aaf",
+         "0.2345e-345",
+         "3453235",
+         "0.5",
+         "0e-345"
+      ].forEach(function(input){
+         var exec = NUMBER.exec(input);
+         assert(exec && exec[1] === input,
+            "NUMBER is working with input: '"+input+"'."
+         );
+      });
+      [//wrenched-numbers
+         "0x334Aaf.345",
+         "034.2345e-345",
+         "03453235",
+         "023.5",
+         "00e-345"
+      ].forEach(function(input){
+         var exec = NUMBER.exec(input);
+         assert(!exec,
+            "NUMBER is not matching input: '"+input+"'."
+         );
+      });
+      [//happy-null
+         "null",
+         "null+"
+      ].forEach(function(input){
+         var exec = NULL.exec(input);
+         assert(exec && exec[1] === "null",
+            "NULL is matching input: '"+input+"'."
+         );
+      });
+      [//wrenched-null
+         "null$",
+         "nulld"
+      ].forEach(function(input){
+         var exec = NULL.exec(input);
+         assert(!exec,
+            "NULL is not matching input: '"+input+"'."
+         );
+      });
+      [//happy-string
+         '"asdf4"',
+         '"asdf"',
+         '"\\\\n345"',
+         '"\\\"345345\\\\"'
+      ].forEach(function(input){
+         var exec = STRING.exec(input);
+         assert(exec && exec[1] === input,
+            "STRING is matching input: '"+input+"'."
+         );
+      });
+      [//wrenched-string
+         '"asdf',
+         '"\\asdf"',
+         '"\nasdf"',
+         '"a\\sdf"',
+         '"534sdf'
+      ].forEach(function(input){
+         var exec = STRING.exec(input);
+         assert(!exec,
+            "STRING is not matching input: '"+input+"'."
+         );
+      });
+   }();
 !function(){//reserved words
    var a;
    var reservedWords = {

@@ -31,6 +31,20 @@ var IMPORT =         new RegExp("^(\\{import\\s+)");
 var NAMESPACE =      new RegExp("^(\\{namespace\\s+)");
 var VAR =            new RegExp("^(\\{var\\s+)");
 
+//FUNCTIONS
+var COUNT_FN =    /^(count\()/;
+var CURRENT_FN =  /^(current\(\))/;
+var LAST_FN =     /^(last\(\))/;
+var NAME_FN =     /^(name\(\))/;
+var POSITION_FN = /^(position\(\))/;
+
+//PRIMITIVES
+var BOOLEAN =     /^(false|true)(?![\w$])/;
+var NUMBER =      /^((?:0x(?=([0-9A-Fa-f]+))\2(?!\.)|(?=(0(?![0-9])|[1-9][0-9]*))\3(?!x)(?:\.[0-9]+)?)(?:[eE][-+][0-9]+)?)/;
+var NULL =        /^(null)(?![\w$])/;
+var STRING =      /^((['"])(?=((?:(?:(?!\2|\r?\n|\\)[\s\S]|\\(?:\\|\2|\r?\n))+)?))\3\2)/;
+
+
 var RESERVED_WORDS = {
    "break":true,
    "case":true,
