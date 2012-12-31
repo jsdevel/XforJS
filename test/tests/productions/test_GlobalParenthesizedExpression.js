@@ -15,30 +15,26 @@
  *
  * For more information, visit http://SOMESITE
  */
-//TODO: remove these
-function GlobalVariableValue(){}
 !function(){
    var output;
-   var compiler = new Compiler();
+   var compiler=new Compiler();
    var context;
    var production;
    var characters;
 
    setEnv();
-   characters = new CharWrapper("5");
+   characters=new CharWrapper("5)");
    context.executeCurrent(characters);
-   assert(context.getCurrentProduction() instanceof GlobalVariableValue, "getValue is called.");
-
-   setEnv();
-   characters = new CharWrapper("(");
-   context.executeCurrent(characters);
-   assert(context.getCurrentProduction() instanceof GlobalParenthesizedExpression, "getParenthesizedExpression is called.");
-
+   assert(
+      output.toString() === "()" &&
+      context.getCurrentProduction() instanceof GlobalExpression,
+      "getExpression and getOutput called appropriately."
+   );
 
    function setEnv(){
       output = new Output();
       context = new ProductionContext(output, compiler);
-      production = new GlobalExpression(output);
+      production = new GlobalParenthesizedExpression(output);
       context.addProduction(production);
    }
 }();
