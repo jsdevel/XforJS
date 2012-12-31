@@ -21,15 +21,17 @@ var __reg_COMMENT = "#[^\\r\\n]+(?:\\r?\\n)?";
 var __reg_name = "[a-zA-Z$_](?:[\\w$]+)?";
 
 //SEQUENCES
-var IMPORT_PATH=     /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
-var NAME =           new RegExp("^("+__reg_name+")");
-var NS =             new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
-var SPACE =          new RegExp("^((?:\\s|"+__reg_COMMENT+")+)");
+var IMPORT_PATH=        /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
+var NAME =              new RegExp("^("+__reg_name+")");
+var NS =                new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
+var SPACE =             new RegExp("^((?:\\s|"+__reg_COMMENT+")+)");
 
 //STATEMENT PATTERNS
-var IMPORT =         new RegExp("^(\\{import\\s+)");
-var NAMESPACE =      new RegExp("^(\\{namespace\\s+)");
-var VAR =            new RegExp("^(\\{var\\s+)");
+var IMPORT =            /^(\{import\s+)/;
+var NAMESPACE =         /^(\{namespace\s+)/;
+var TEMPLATE =          /^(\{template\s+)/;
+var TEMPLATE_CLOSING =  /^(\{\/template\})/;
+var VAR =               /^(\{var\s+)/;
 
 //FUNCTIONS
 var COUNT_FN =    /^(count\()/;
