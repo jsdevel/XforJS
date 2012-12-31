@@ -69,6 +69,7 @@ var XforJS = (function(){//change the name XforJS to anything you need.
    //INCLUDE productions/GlobalStatements
 
 
+   //INCLUDE compiling/CallManager
    //INCLUDE compiling/Compiler
 
 
