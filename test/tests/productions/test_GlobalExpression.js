@@ -15,8 +15,6 @@
  *
  * For more information, visit http://SOMESITE
  */
-//TODO: remove these
-function GlobalVariableValue(){}
 !function(){
    var output;
    var compiler = new Compiler();
