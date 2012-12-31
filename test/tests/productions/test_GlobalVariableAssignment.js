@@ -15,8 +15,6 @@
  *
  * For more information, visit http://SOMESITE
  */
-//TODO: remove this
-function GlobalExpression(){}
 !function(){
 var production = new GlobalVariableAssignment();
 assert(production.getExpression() instanceof GlobalExpression,
