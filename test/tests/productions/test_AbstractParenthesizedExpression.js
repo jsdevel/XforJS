@@ -43,7 +43,7 @@
    }, "expecting close paren.");
 
    setEnv();
-   characters = new CharWrapper("()");
+   characters = new CharWrapper("7)");
    context.executeCurrent(characters);
    characters.shift(1);
    context.removeProduction();
