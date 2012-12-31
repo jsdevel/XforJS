@@ -21,7 +21,6 @@ var variableOutput2 = AbstractVariableOutput.getVariableOutput(variableOutput);
 variableOutput.add("asd", "5");
 
 //INSTANTIATING
-assert.equal(variableOutput.variablePrefix, "__", "variable prefix is working.");
 assert['throws'](function(){
    new AbstractVariableOutput(void 0," "," "," "," ");
 }, "variableStatementPrefix is required.");

@@ -35,8 +35,7 @@ function AbstractVariableOutput(
    var variables={};
    var keys=[];
    var wrappedOutput = [];
-
-   this.variablePrefix=variablePrefix||"";
+   var _variablePrefix = variablePrefix||"";
 
    if(typeof variableStatementPrefix !== 'string') {
       throw "Prefix is required.";
@@ -54,7 +53,7 @@ function AbstractVariableOutput(
     * @return {AbstractVariableOutput}
     */
    this.add=function(name, value){
-      var key = variablePrefix+name;
+      var key = _variablePrefix+name;
       if(variables[key]){
          throw "The following has been declared twice: "+name;
       }
@@ -72,7 +71,7 @@ function AbstractVariableOutput(
    };
 
    this.hasVariableBeenDeclared=function(name){
-      var key = variablePrefix+name;
+      var key = _variablePrefix+name;
       if(
          variables[key] ||
          parentScope && parentScope.hasVariableBeenDeclared(name)
