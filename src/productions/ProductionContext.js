@@ -299,7 +299,7 @@ function ProductionContext(
     */
    this.validateVariableReference=function(name){
       if(!currentVariableOutput.hasVariableBeenDeclared(name)){
-         throw "Error while evaluating GlobalVariableValue.  Variable \""+name+"\" hasn't been declared yet.";
+         throw "Variable \""+name+"\" hasn't been declared yet.";
       }
    };
 
