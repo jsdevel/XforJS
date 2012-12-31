@@ -98,7 +98,7 @@
    newVariableOutput.add("a", "5");
    assert.doesNotThrow(function(){
       context.validateVariableReference("a");
-   }, "validateVariableReference doesn't throw when variable has been declared.")
+   }, "validateVariableReference doesn't throw when variable has been declared.");
 
    instance=context.removeVariableOutput();
    assert(instance===context, "removeVariableOutput returns instance.");
@@ -188,6 +188,12 @@
 !function(){//namespaces
    var compiler = new Compiler();
    var context = new ProductionContext(new Output(), compiler);
+   assert['throws'](function(){
+      context.setNS("");
+   }, "namespaces must be valid.");
+   assert['throws'](function(){
+      context.getNS("boo");
+   }, "namespaces must be declared before calling getNS.");
    context.setNS("boo");
    context.setNS("boo.coo");
    assert.equal(context.getNS(), "boo", "getNS and setNS are working.");
@@ -227,6 +233,25 @@
    context.setInputFilePath(testFile);
    output=context.importFile("test.xjs");
    assert.equal(output, "", "nested contexts remember what has been imported from parent contexts.");
+}();
+!function(){//call management
+   var output = new Output();
+   var context = new ProductionContext(output, new Compiler()).addProduction({close:function(){}});
+
+   assert['throws'](function(){
+      context.addCalledTemplate("boo");
+   }, "namespaces must be set first on the context.");
+   context.setNS("testing");
+
+   context.addCalledTemplate("boo");
+   assert['throws'](function(){
+      context.close();
+   }, "templates must be declared before closing.");
+
+   context.addDeclaredTemplate("boo");
+   assert.doesNotThrow(function(){
+      context.close();
+   }, "declaring called templates results in no errors.");
 }();
 !function(){//closing
    var compiler = new Compiler();

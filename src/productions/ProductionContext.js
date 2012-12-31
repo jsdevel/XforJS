@@ -44,6 +44,7 @@ function ProductionContext(
 
    var programNamespace;
    var inputFilePath;
+   var callManager;
 
 
    if(previousContext){
@@ -53,6 +54,7 @@ function ProductionContext(
       this._JSArgumentsWrapper=previousContext._JSArgumentsWrapper;
       this._importedFiles=previousContext._importedFiles;
       this._configuration=previousContext._configuration;
+      callManager=previousContext.getCallManager();
    } else {//default values
       this._declaredNamespaces={};
       this._JSParameters=new JSParameters();
@@ -60,18 +62,11 @@ function ProductionContext(
       this._JSArgumentsWrapper=new JSArgumentsWrapper(this._JSParameters);
       this._importedFiles={};
       this._configuration = compiler.configuration;
+      callManager=new CallManager();
    }
 
    var configuration=this._configuration;
    var configurationStack=[configuration];
-
-   if(previousContext){
-      //instance._callManager            =previousContext._callManager;
-   } else {//default
-      /*
-      callManager = new CallManager();
-      */
-   }
 
    //Configuration
    /* These methods allow for scoped configuration.  So eventually, programs,
@@ -153,9 +148,13 @@ function ProductionContext(
     * Sets the namespace of the current context / program.  Any future attempts
     * to set the namespace of the program will fail.
     *
+    * @throws if an invalid namespace is given.
     * @param {String} namespace
     */
    this.setNS=function(namespace){
+      if(!namespace){
+         throw "invalid namespace given.";
+      }
       if(!programNamespace){
          programNamespace=namespace;
       }
@@ -163,9 +162,13 @@ function ProductionContext(
    };
 
    /**
+    * @throws if setNS hasn't been called.
     * @return {String}
     */
    this.getNS=function(){
+      if(!programNamespace){
+         throw "no namespace has been declared.";
+      }
       return programNamespace||"";
    };
    /**
@@ -245,7 +248,7 @@ function ProductionContext(
    };
    /**
     * Executes the current production.
-    * @pram {CharWrapper} characters
+    * @param {CharWrapper} characters
     * @return {ProductionContext}
     */
    this.executeCurrent=function(characters){
@@ -303,10 +306,36 @@ function ProductionContext(
       }
    };
 
+   //CALLS
+   /**
+    * @return {CallManager}
+    */
+   this.getCallManager=function(){
+      return callManager;
+   };
+   /**
+    * @param {string} name
+    * @returns {ProductionContext}
+    */
+   this.addDeclaredTemplate=function(name){
+      callManager.addDeclaredTemplate(this.getNS()+"."+name);
+      return this;
+   };
+   /**
+    * @param {string} name
+    * @returns {ProductionContext}
+    */
+   this.addCalledTemplate=function(name){
+      callManager.addCalledTemplate(this.getNS()+"."+name);
+      return this;
+   };
+
    //CLOSING
    /**
     * Calls the close method on all productions in the stack.
     * @throws If there are no productions in the stack.
+    * @throws If there were called templates that were
+    * not declared.
     */
    this.close=function(){
       //callManager.validateCalls();
@@ -319,5 +348,6 @@ function ProductionContext(
       } else {
          throw "No productions were found.";
       }
+      callManager.validateCalls();
    };
 }
