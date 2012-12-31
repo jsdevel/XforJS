@@ -18,13 +18,8 @@
 
 /**
  * @constructor
- * @param {Output} output
  */
-function AbstractParenthesizedExpression(output){
-   var expressionOutput = new Output();
-   output.add("(").add(expressionOutput).add(")");
-
-
+function AbstractParenthesizedExpression(){
    this.execute=function(characters, context){
       characters.removeSpace();
       var firstChar = characters.charAt(0);
@@ -40,6 +35,8 @@ function AbstractParenthesizedExpression(output){
       default:
          if(!this._hasExpression){
             this._hasExpression=true;
+            var expressionOutput = new Output();
+            this.getOutput().add("(").add(expressionOutput).add(")");
             context.addProduction(this.getExpression(expressionOutput));
             return;
          }
@@ -55,3 +52,7 @@ AbstractParenthesizedExpression.prototype._hasExpression=false;
  * @returns {AbstractExpression}
  */
 AbstractParenthesizedExpression.prototype.getExpression=function(output){};
+/**
+ * @returns {Output}
+ */
+AbstractParenthesizedExpression.prototype.getOutput=function(){};

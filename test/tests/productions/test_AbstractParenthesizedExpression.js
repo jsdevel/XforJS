@@ -62,6 +62,9 @@
             "Output is passed to getExpression.");
          getExpressionCalled=true;
       };
+      production.getOutput=function(){
+         return output;
+      };
       context.addProduction(production);
    }
 }();
