@@ -15,8 +15,6 @@
  *
  * For more information, visit http://SOMESITE
  */
-//TODO: remove
-function Operator(){}
 !function(){
 var getOutputCalled;
 var getValueCalled;
