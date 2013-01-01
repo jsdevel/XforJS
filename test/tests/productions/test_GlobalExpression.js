@@ -22,18 +22,17 @@
    var production;
    var characters;
 
-   setEnv();
-   characters = new CharWrapper("5");
+   setEnv("5");
    context.executeCurrent(characters);
    assert(context.getCurrentProduction() instanceof GlobalVariableValue, "getValue is called.");
 
-   setEnv();
-   characters = new CharWrapper("(");
+   setEnv("(");
    context.executeCurrent(characters);
    assert(context.getCurrentProduction() instanceof GlobalParenthesizedExpression, "getParenthesizedExpression is called.");
 
 
-   function setEnv(){
+   function setEnv(string){
+      characters = new CharWrapper(string);
       output = new Output();
       context = new ProductionContext(output, compiler);
       production = new GlobalExpression(output);
