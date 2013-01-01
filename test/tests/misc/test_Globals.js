@@ -63,6 +63,12 @@
       ns = "{namespace   ";
       assert.equal(NAMESPACE.exec(ns)[1], ns, "NAMESPACE is working.");
    }();
+   !function(){//PARAM
+      var input = "{param";
+      assert(!PARAM.exec(input),"Space must follow '"+input+"'.");
+      input = "{param   ";
+      assert.equal(PARAM.exec(input)[1], input, "PARAM is working.");
+   }();
    !function(){//TEMPLATE
       var input = "{var";
       assert(!TEMPLATE.exec(input),"Space must follow '"+input+"'.");
