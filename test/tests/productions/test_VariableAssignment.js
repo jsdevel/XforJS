@@ -15,8 +15,6 @@
  *
  * For more information, visit http://SOMESITE
  */
-//TODO: remove this
-function VariableExpression(){}
 !function(){
 var production = new VariableAssignment();
 assert(production.getExpression() instanceof VariableExpression,

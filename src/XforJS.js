@@ -75,6 +75,7 @@ var XforJS = (function(){//change the name XforJS to anything you need.
    //INCLUDE productions/VariableDeclarations
    //INCLUDE productions/VariableDeclaration
    //INCLUDE productions/VariableAssignment
+   //INCLUDE productions/VariableExpression
 
 
    //INCLUDE compiling/CallManager
