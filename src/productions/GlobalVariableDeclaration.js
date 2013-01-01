@@ -28,27 +28,6 @@ function GlobalVariableDeclaration(output){
       return output;
    };
    /**
-    * @return {RegExp}
-    */
-   this.getPattern=function(){
-      return VAR;
-   };
-
-   /**
-    * @param {Output} output
-    * @return {Production}
-    */
-   this.getProduction=function(output){
-      return new GlobalVariableAssignment(output);
-   };
-
-   /**
-    * @param {String} name
-    * @param {Output} output
-    */
-   this.doAssignment=function(name, output){};
-
-   /**
     * @param {String} name
     * @param {ProductionContext} context
     */
@@ -62,3 +41,23 @@ extend(GlobalVariableDeclaration, AbstractVariableDeclaration);
  * @type {string}
  */
 GlobalVariableDeclaration.prototype.name="GlobalVariableDeclaration";
+/**
+ * @return {RegExp}
+ */
+GlobalVariableDeclaration.prototype.getPattern=function(){
+   return VAR;
+};
+
+/**
+ * @param {Output} output
+ * @return {Production}
+ */
+GlobalVariableDeclaration.prototype.getProduction=function(output){
+   return new GlobalVariableAssignment(output);
+};
+
+/**
+ * @param {String} name
+ * @param {Output} output
+ */
+GlobalVariableDeclaration.prototype.doAssignment=function(name, output){};
