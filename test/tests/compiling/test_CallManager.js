@@ -20,9 +20,13 @@
    var instance;
 
    instance = manager.addCalledTemplate("boo");
+   assert(manager.hasCalledTemplate("boo"),
+      "hasCalledTemplate is working.");
    assert.equal(instance, manager,
       "addCalledTemplate returns instance.");
    instance = manager.addDeclaredTemplate("boo");
+   assert(manager.hasDeclaredTemplate("boo"),
+      "hasDeclaredTemplate is working.");
    assert.equal(instance, manager,
       "addDeclaredTemplate returns instance.");
 

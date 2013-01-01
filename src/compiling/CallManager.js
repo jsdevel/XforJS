@@ -45,6 +45,22 @@ function CallManager(){
    };
 
    /**
+    * @param {string} called
+    * @return {boolean}
+    */
+   this.hasCalledTemplate=function(called){
+      return calledTemplates.hasOwnProperty(called);
+   };
+
+   /**
+    * @param {string} declared
+    * @return {boolean}
+    */
+   this.hasDeclaredTemplate=function(declared){
+      return declaredTemplates.hasOwnProperty(declared);
+   };
+
+   /**
     * @throws if there are called templates that haven't
     * been declared.
     */
