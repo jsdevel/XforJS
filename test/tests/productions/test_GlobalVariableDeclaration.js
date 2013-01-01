@@ -26,7 +26,7 @@ var characters;
 setEnv();
 characters=new CharWrapper("{var boo}");
 gvd.execute(characters, context);
-assert( characters.length() === 1 &&
+assert( characters.length() === 0 &&
    context.getCurrentVariableOutput().toString() === "var __boo;",
    "no assignment is working.");
 

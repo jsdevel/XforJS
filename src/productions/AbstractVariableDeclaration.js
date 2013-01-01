@@ -49,17 +49,19 @@ AbstractVariableDeclaration.prototype.execute=function(characters, context){
                this.doAssignment(name, assignmentOutput);
                this.getVariableOutput().add(name, assignmentOutput);
                context.addProduction(this.getProduction(assignmentOutput));
+               return;
             } else {
                this.doNoAssignment(name, context);
             }
-            return;
          } else {
             throw "No valid name was found.";
          }
       } else {
          throw "Invalid start tag.";
       }
-   } else if(characters.charAt(0) === '}'){
+   }
+
+   if(this._hasValue && characters.charAt(0) === '}'){
       characters.shift(1);
       context.removeProduction();
       return;

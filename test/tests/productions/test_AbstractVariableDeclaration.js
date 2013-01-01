@@ -36,14 +36,8 @@ setEnv();
 characters = new CharWrapper("  {var bla}");
 production.execute(characters, context);
 assert(
-   characters.length() === 1 &&
-   characters.charAt(0) === '}',
-   "no assignment is working.");
-production.execute(characters, context);
-assert(
-   context.getCurrentProduction() === newProduction &&
    characters.length() === 0,
-   "closing is working.");
+   "no assignment is working.");
 
 setEnv();
 characters = new CharWrapper("  {var bla 5345}");
