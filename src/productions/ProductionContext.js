@@ -330,6 +330,23 @@ function ProductionContext(
       return this;
    };
 
+   /**
+    * @param {string} called
+    * @return {boolean}
+    */
+   this.hasCalledTemplate=function(called){
+      return callManager.hasCalledTemplate(this.getNS()+"."+called);
+   };
+
+   /**
+    * @param {string} declared
+    * @return {boolean}
+    */
+   this.hasDeclaredTemplate=function(declared){
+      return callManager.hasDeclaredTemplate(this.getNS()+"."+declared);
+   };
+
+
    //CLOSING
    /**
     * Calls the close method on all productions in the stack.

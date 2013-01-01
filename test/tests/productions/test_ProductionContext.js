@@ -252,6 +252,10 @@
    assert.doesNotThrow(function(){
       context.close();
    }, "declaring called templates results in no errors.");
+   assert(
+      context.hasDeclaredTemplate("boo") &&
+      context.hasCalledTemplate("boo"),
+      "methods to determine template declaration / called state are working.");
 }();
 !function(){//closing
    var compiler = new Compiler();
