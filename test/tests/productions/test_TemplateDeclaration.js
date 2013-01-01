@@ -18,7 +18,6 @@
 //TODO: remove these
 function ParamDeclarations(){}
 function VariableDeclarations(){}
-function TemplateBody(){}
 !function(){
    var output;
    var compiler=new Compiler();
