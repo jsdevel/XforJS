@@ -37,4 +37,8 @@ function GlobalParenthesizedExpression(output){
    };
 }
 extend(GlobalParenthesizedExpression, AbstractParenthesizedExpression);
+/**
+ * @const
+ * @type String
+ */
 GlobalParenthesizedExpression.prototype.name="GlobalParenthesizedExpression";
