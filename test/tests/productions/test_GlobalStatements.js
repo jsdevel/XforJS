@@ -15,8 +15,6 @@
  *
  * For more information, visit http://SOMESITE
  */
-//TODO: Remove this once TemplateDeclaration has been defined.
-function TemplateDeclaration(){}
 !function(){
 var output = new Output();
 var compiler = new Compiler();
