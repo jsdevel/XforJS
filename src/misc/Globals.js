@@ -21,10 +21,11 @@ var __reg_COMMENT = "#[^\\r\\n]+(?:\\r?\\n)?";
 var __reg_name = "[a-zA-Z$_](?:[\\w$]+)?";
 
 //SEQUENCES
-var IMPORT_PATH=        /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
-var NAME =              new RegExp("^("+__reg_name+")");
-var NS =                new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
-var SPACE =             new RegExp("^((?:\\s|"+__reg_COMMENT+")+)");
+var IMPORT_PATH=                    /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
+var NAME =                          new RegExp("^("+__reg_name+")");
+var NS =                            new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
+var SPACE =                         new RegExp("^((?:\\s|"+__reg_COMMENT+")+)");
+var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^@("+__reg_name+")\\s*[\\.\\[]");
 
 //STATEMENT PATTERNS
 var IMPORT =            /^(\{import\s+)/;

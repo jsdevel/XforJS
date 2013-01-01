@@ -48,6 +48,12 @@
       assert.equal(NS.exec("boo")[1], "boo", "Names without refinement work.");
       assert(NS.exec("boo.too.goo")[1], "boo.too.goo", "Names with refinement work.");
    }();
+   !function(){//VARIABLE_AS_CONTEXT_SELECTOR
+      assert(!VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo"), "dot or open bracket must procede variable reference.");
+      assert.equal(VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo.")[1], "boo", "names with dots work.");
+      assert(VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo[")[1], "boo", "Names with refinement work.");
+      assert(VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo  \n[")[1], "boo", "space may precede refinement.");
+   }();
 
    //STATEMENTS
    !function(){//IMPORT
