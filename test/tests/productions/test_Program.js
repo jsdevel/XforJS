@@ -26,7 +26,7 @@ var setEnv=function(compilerConfig, isNested){
    compiler = new Compiler(compilerConfig);
    output = new Output();
    context = new ProductionContext(output, compiler);
-   program = new Program(output, compiler, context, isNested);
+   program = new Program(output, context, isNested);
    context.addProduction(program);
 };
 eval(JavascriptResources.getXforJLib());

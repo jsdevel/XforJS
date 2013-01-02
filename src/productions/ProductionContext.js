@@ -54,6 +54,7 @@ function ProductionContext(
       this._JSArgumentsWrapper=previousContext._JSArgumentsWrapper;
       this._importedFiles=previousContext._importedFiles;
       this._configuration=previousContext._configuration;
+      this.javascript=previousContext.javascript;
       callManager=previousContext.getCallManager();
    } else {//default values
       this._declaredNamespaces={};
@@ -62,6 +63,7 @@ function ProductionContext(
       this._JSArgumentsWrapper=new JSArgumentsWrapper(this._JSParameters);
       this._importedFiles={};
       this._configuration = compiler.configuration;
+      this.javascript=compiler.javascript;
       callManager=new CallManager();
    }
 

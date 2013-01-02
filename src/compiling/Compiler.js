@@ -64,7 +64,7 @@ function Compiler(config){
       }
 
       try{
-         context.addProduction(new Program(output, this, context, !!previousContext));
+         context.addProduction(new Program(output, context, !!previousContext));
          while(wrapper.length() > 0){
             context.executeCurrent(wrapper);
          }

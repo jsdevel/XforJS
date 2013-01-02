@@ -18,6 +18,7 @@
 !function(){//constructing
    var output=new Output();
    var compiler = new Compiler();
+   var context;
    assert['throws'](function(){
          new ProductionContext(null);
       }, "output must be instanceof Output");
@@ -30,6 +31,14 @@
    assert.doesNotThrow(function(){
          new ProductionContext(output, compiler, new ProductionContext(output, compiler));
       }, "ProductionContext allows previousContext.");
+   context = new ProductionContext(output, compiler);
+   assert.equal(context.javascript, compiler.javascript,
+      "javascript is transferred from compiler to context."
+   );
+   context = new ProductionContext(output, compiler, context);
+   assert.equal(context.javascript, compiler.javascript,
+      "javascript is transferred from previousContext to context."
+   );
 }();
 
 !function(){//productions

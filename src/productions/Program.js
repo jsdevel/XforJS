@@ -23,14 +23,12 @@
  *
  * @constructor
  * @param {Output} output
- * @param {Compiler} compiler
  * @param {ProductionContext} context
  * @param {boolean} isNested
  *
  */
 function Program(
    output,
-   compiler,
    context,
    isNested
 ){
@@ -63,7 +61,7 @@ function Program(
       }
 
       if(context.getConfiguration('escapexss')){
-         globalParams.put(js_EscapeXSS, compiler.javascript.getJSEscapeXSS());
+         globalParams.put(js_EscapeXSS, context.javascript.getJSEscapeXSS());
       }
 
       output.
@@ -72,7 +70,7 @@ function Program(
       add(");");
 
       globalParams.put(js_StringBuffer,
-         compiler.javascript.getJSStringBuffer()
+         context.javascript.getJSStringBuffer()
       ).put(
          js_templateBasket,
          (
@@ -81,7 +79,7 @@ function Program(
                "{}"
          )
       ).put(js_SafeValue,
-         compiler.javascript.getJSSafeValue()
+         context.javascript.getJSSafeValue()
       );
    }
 
