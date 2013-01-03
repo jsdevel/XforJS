@@ -82,40 +82,98 @@
    }();
 
    //STATEMENTS
-   !function(){//IMPORT
-      var _import = "{import";
-      assert(!IMPORT.exec(_import),"Space must follow '"+_import+"'.");
-      _import = "{import   ";
-      assert.equal(IMPORT.exec(_import)[1], _import, "IMPORT is working.");
-   }();
+   !function(){
+      [
+         {
+            bad:"{call",
+            good:"{call ",
+            regex:CALL
+         },
+         {
+            bad:"{call}",
+            good:"{/call}",
+            regex:CALL_CLOSING
+         },
+         {
+            bad:"{choose",
+            good:"{choose ",
+            regex:CHOOSE
+         },
+         {
+            bad:"{choose}",
+            good:"{/choose}",
+            regex:CHOOSE_CLOSING
+         },
+         {
+            bad:"{foreach",
+            good:"{foreach ",
+            regex:FOREACH
+         },
+         {
+            bad:"{foreach}",
+            good:"{/foreach}",
+            regex:FOREACH_CLOSING
+         },
+         {
+            bad:"{if",
+            good:"{if ",
+            regex:IF
+         },
+         {
+            bad:"{if}",
+            good:"{/if}",
+            regex:IF_CLOSING
+         },
+         {
+            bad:"{import",
+            good:"{import ",
+            regex:IMPORT
+         },
+         {
+            bad:"{log",
+            good:"{log ",
+            regex:LOG
+         },
+         {
+            bad:"{namespace",
+            good:"{namespace ",
+            regex:NAMESPACE
+         },
+         {
+            bad:"{param",
+            good:"{param ",
+            regex:PARAM
+         },
+         {
+            bad:"{template",
+            good:"{template ",
+            regex:TEMPLATE
+         },
+         {
+            bad:"{text }",
+            good:"{text}",
+            regex:TEXT
+         },
+         {
+            bad:"{text}",
+            good:"{/text}",
+            regex:TEXT_CLOSING
+         },
+         {
+            bad:"{var",
+            good:"{var ",
+            regex:VAR
+         }
 
-   !function(){//NAMESPACE
-      var ns = "{namespace";
-      assert(!NAMESPACE.exec(ns),"Space must follow '"+ns+"'.");
-      ns = "{namespace   ";
-      assert.equal(NAMESPACE.exec(ns)[1], ns, "NAMESPACE is working.");
-   }();
-   !function(){//PARAM
-      var input = "{param";
-      assert(!PARAM.exec(input),"Space must follow '"+input+"'.");
-      input = "{param   ";
-      assert.equal(PARAM.exec(input)[1], input, "PARAM is working.");
-   }();
-   !function(){//TEMPLATE
-      var input = "{var";
-      assert(!TEMPLATE.exec(input),"Space must follow '"+input+"'.");
-      input = "{template   ";
-      assert.equal(TEMPLATE.exec(input)[1], input, "TEMPLATE is working.");
-   }();
-   !function(){//TEMPLATE_CLOSING
-      var input = "{/template}";
-      assert.equal(TEMPLATE_CLOSING.exec(input)[1], input, "TEMPLATLE_CLOSING is working.");
-   }();
-   !function(){//VAR
-      var input = "{var";
-      assert(!VAR.exec(input),"Space must follow '"+input+"'.");
-      input = "{var   ";
-      assert.equal(VAR.exec(input)[1], input, "NAMESPACE is working.");
+      ].forEach(function(obj){
+         var bad_input = obj.bad;
+         var good_input = obj.good;
+         var regex = obj.regex;
+         assert(!regex.exec(bad_input),
+            "The following bad input doesn't match: '"+bad_input+"'.");
+         assert.equal(regex.exec(good_input) && regex.exec(good_input)[1], good_input,
+            "The following good input matches: '"+good_input+"'.");
+      });
    }();
 
    //FUNCTIONS

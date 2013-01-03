@@ -36,11 +36,22 @@ var FRAMEWORK_RESERVED_WORDS =      /^(call|choose|foreach|if|import|log|namespa
 
 
 //STATEMENT PATTERNS
+var CALL =                          /^(\{call\s+)/;
+var CALL_CLOSING =                  /^(\{\/call\})/;
+var CHOOSE =                        /^(\{choose\s+)/;
+var CHOOSE_CLOSING =                /^(\{\/choose\})/;
+var FOREACH =                       /^(\{foreach\s+)/;
+var FOREACH_CLOSING =               /^(\{\/foreach\})/;
+var IF =                            /^(\{if\s+)/;
+var IF_CLOSING =                    /^(\{\/if\})/;
 var IMPORT =                        /^(\{import\s+)/;
+var LOG =                           /^(\{log\s+)/;
 var NAMESPACE =                     /^(\{namespace\s+)/;
 var PARAM =                         /^(\{param\s+)/;
 var TEMPLATE =                      /^(\{template\s+)/;
 var TEMPLATE_CLOSING =              /^(\{\/template\})/;
+var TEXT =                          /^(\{text\})/;
+var TEXT_CLOSING =                  /^(\{\/text\})/;
 var VAR =                           /^(\{var\s+)/;
 
 //FUNCTIONS
