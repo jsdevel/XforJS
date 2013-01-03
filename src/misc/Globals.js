@@ -22,7 +22,6 @@ var __reg_name = "[a-zA-Z$_](?:[\\w$]+)?";
 var __reg_variable_reference = "@("+__reg_name+")";
 
 //SEQUENCES
-var CONTEXT_STATIC_REFINEMENT_NS =  new RegExp("^((?:(?:"+__reg_name+"\\s*\\.)+)?\\s*"+__reg_name+"\\s*)");
 var IMPORT_PATH=                    /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
 var NAME =                          new RegExp("^("+__reg_name+")");
 var NS =                            new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
