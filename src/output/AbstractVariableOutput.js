@@ -35,6 +35,7 @@ function AbstractVariableOutput(
    var variables={};
    var keys=[];
    var wrappedOutput = [];
+   /** @type string */
    var _variablePrefix = variablePrefix||"";
 
    if(typeof variableStatementPrefix !== 'string') {
@@ -80,6 +81,13 @@ function AbstractVariableOutput(
       } else {
          return false;
       }
+   };
+
+   /**
+    * @return string
+    */
+   this.getVariablePrefix=function(){
+      return _variablePrefix;
    };
 
    this.toString=function(){

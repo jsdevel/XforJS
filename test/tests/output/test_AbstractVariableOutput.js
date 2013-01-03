@@ -52,6 +52,8 @@ assert['throws'](function(){
    variableOutput.add("d",true);
 }, "Value must be an object.");
 assert(variableOutput.add("c", "") instanceof AbstractVariableOutput, "add returns instance.");
+assert(variableOutput.getVariablePrefix() === "__",
+   "getVariablePrefix is working.");
 
 //toString
 assert.equal(variableOutput.toString(), "var __asd=5,__c;", "toString is working as expected.");
