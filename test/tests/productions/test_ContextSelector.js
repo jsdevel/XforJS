@@ -15,8 +15,6 @@
  *
  * For more information, visit http://SOMESITE
  */
-//TODO: remove this
-function ContextDynamicRefinement(){}
 !function(){
    var compiler=new Compiler();
    var output;
