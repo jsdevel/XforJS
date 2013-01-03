@@ -31,6 +31,22 @@
          assert.equal(SPACE.exec(a)[1], a, spaces[a]);
       }
    }();
+   !function(){//SPACE_PRECEDING_CURLY
+      var spaces = {
+         "  #asdfasdfasdf \n":"Comment with line ending is working.",
+         "  #asdfasdfasdf":"Comment without line ending is working.",
+         "  ":"Space without lines is working.",
+         "  \n":"Space with lines is working.",
+         "  \n#asdfasdf\n#asdf\n":"Space with lines and comments is working."
+      };
+      var a;
+      for(a in spaces){
+         assert(!SPACE_PRECEDING_CURLY.exec(a), spaces[a]+"  Curly must come after.");
+      }
+      for(a in spaces){
+         assert(SPACE_PRECEDING_CURLY.exec(a+"{")[1] === a, spaces[a]+"  Curly comes after.");
+      }
+   }();
    !function(){//IMPORT_PATH
       var samplePath = "d/a.xjs";
       assert.equal(IMPORT_PATH.exec(samplePath)[1], samplePath, "Names with refinement work.");
