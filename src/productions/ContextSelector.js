@@ -166,5 +166,3 @@ function ContextSelector(output, isNested){
 extend(ContextSelector, Production);
 /** @const @type string */
 ContextSelector.prototype.name = "ContextSelector";
-/** @const @type RegExp */
-ContextSelector.prototype.dotWithFurtherRefinement = /^\.[a-zA-Z$_]/;
