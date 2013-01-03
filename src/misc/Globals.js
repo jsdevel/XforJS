@@ -19,21 +19,28 @@
 //Save this section for regex.
 var __reg_COMMENT = "#[^\\r\\n]+(?:\\r?\\n)?";
 var __reg_name = "[a-zA-Z$_](?:[\\w$]+)?";
+var __reg_variable_reference = "@("+__reg_name+")";
 
 //SEQUENCES
+var CONTEXT_STATIC_REFINEMENT_NS =  new RegExp("^((?:(?:"+__reg_name+"\\s*\\.)+)?\\s*"+__reg_name+"\\s*)");
 var IMPORT_PATH=                    /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
 var NAME =                          new RegExp("^("+__reg_name+")");
 var NS =                            new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
 var SPACE =                         new RegExp("^((?:\\s|"+__reg_COMMENT+")+)");
-var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^@("+__reg_name+")\\s*[\\.\\[]");
+var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s*[\\.\\[]");
+var VARIABLE_REFERENCE           = new RegExp("^("+__reg_variable_reference+")");
+
+//RESERVED WORDS
+var FRAMEWORK_RESERVED_WORDS =      /^(call|choose|foreach|if|import|log|namespace|otherwise|param|sort|template|text|var|when)(?![\w$])/;
+
 
 //STATEMENT PATTERNS
-var IMPORT =            /^(\{import\s+)/;
-var NAMESPACE =         /^(\{namespace\s+)/;
-var PARAM =             /^(\{param\s+)/;
-var TEMPLATE =          /^(\{template\s+)/;
-var TEMPLATE_CLOSING =  /^(\{\/template\})/;
-var VAR =               /^(\{var\s+)/;
+var IMPORT =                        /^(\{import\s+)/;
+var NAMESPACE =                     /^(\{namespace\s+)/;
+var PARAM =                         /^(\{param\s+)/;
+var TEMPLATE =                      /^(\{template\s+)/;
+var TEMPLATE_CLOSING =              /^(\{\/template\})/;
+var VAR =                           /^(\{var\s+)/;
 
 //FUNCTIONS
 var COUNT_FN =    /^(count\()/;

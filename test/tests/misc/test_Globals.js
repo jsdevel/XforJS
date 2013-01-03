@@ -54,6 +54,16 @@
       assert(VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo[")[1], "boo", "Names with refinement work.");
       assert(VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo  \n[")[1], "boo", "space may precede refinement.");
    }();
+   !function(){//VARIABLE_REFERENCE
+      assert(
+         !VARIABLE_REFERENCE.exec("  @asd") &&
+         !VARIABLE_REFERENCE.exec("@0"),
+         "Numbers and space don't start variable names.");
+      assert(
+         VARIABLE_REFERENCE.exec("@boo")[1] === "@boo" &&
+         VARIABLE_REFERENCE.exec("@boo")[2] === "boo",
+         "VARIABLE_REFERENCE is working.");
+   }();
 
    //STATEMENTS
    !function(){//IMPORT
