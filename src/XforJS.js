@@ -83,6 +83,7 @@ var XforJS = (function(){//change the name XforJS to anything you need.
    //INCLUDE productions/ContextDynamicRefinement
    //INCLUDE productions/ContextExpression
    //INCLUDE productions/ContextParenthesizedExpression
+   //INCLUDE productions/InputTokens
 
 
    //INCLUDE compiling/CallManager

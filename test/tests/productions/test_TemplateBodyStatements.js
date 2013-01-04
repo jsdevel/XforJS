@@ -16,7 +16,6 @@
  * For more information, visit http://SOMESITE
  */
 //TODO: remove these
-function InputTokens(){}
 function PrintStatement(){}
 function IfStatement(){}
 function LogStatement(){}
