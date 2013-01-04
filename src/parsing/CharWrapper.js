@@ -65,7 +65,7 @@ function CharWrapper(characters){
             next = _characters[i];
             switch(next){
             case '\r':
-               if(_characters[i+1] == '\n'){
+               if(_characters[i+1] === '\n'){
                   i++;
                }
             case '\n':
