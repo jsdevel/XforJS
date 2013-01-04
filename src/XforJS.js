@@ -87,6 +87,7 @@ var XforJS = (function(){//change the name XforJS to anything you need.
    //INCLUDE productions/InputTokens
    //INCLUDE productions/PrintStatement
    //INCLUDE productions/IfStatement
+   //INCLUDE productions/LogStatement
 
 
    //INCLUDE compiling/CallManager

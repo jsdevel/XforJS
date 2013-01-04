@@ -16,7 +16,6 @@
  * For more information, visit http://SOMESITE
  */
 //TODO: remove these
-function LogStatement(){}
 function ChooseStatement(){}
 function CallStatement(){}
 function ForeachStatement(){}
