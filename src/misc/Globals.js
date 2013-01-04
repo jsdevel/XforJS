@@ -24,6 +24,7 @@ var __reg_space = "(?:\\s|"+__reg_COMMENT+")+";
 
 //SEQUENCES
 var IMPORT_PATH=                    /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
+var INPUT_TOKENS=                   /^((?:[^#'\{\\]|\\(?:#|'|\\|\{))+)/;
 var NAME =                          new RegExp("^("+__reg_name+")");
 var NS =                            new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
 var SPACE =                         new RegExp("^("+__reg_space+")");

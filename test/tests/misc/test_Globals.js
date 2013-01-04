@@ -55,6 +55,28 @@
       assert(!IMPORT_PATH.exec("d/\\a.xjs"), "'\\' must be escaped with '\\'.");
       assert.equal(IMPORT_PATH.exec("d/\\\\a\\}.xjs  }")[1], "d/\\\\a\\}.xjs", "'\\' and '}' are valid when escaped with '\\'.");
    }();
+   !function(){//INPUT_TOKENS
+      [
+         "    \\#asdf",
+         "    \\{asdf",
+         "    \\\\asdf",
+         "    \\'asdf"
+      ].forEach(function(good){
+         match = INPUT_TOKENS.exec(good);
+         assert(match && match[1] === good,
+            "good input tokens found: '"+good+"'.");
+      });
+      [
+         "#asdf",
+         "{asdf",
+         "\\asdf",
+         "'asdf"
+      ].forEach(function(bad){
+         assert(!INPUT_TOKENS.exec(bad),
+            "bad input tokens found: '"+bad+"'.");
+      });
+   }();
+
    !function(){//NAME
       assert(!NAME.exec("345"), "Numbers don't start names.");
       assert.equal(NAME.exec("_$AQboo_")[1], "_$AQboo_", "Names work.");
