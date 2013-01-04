@@ -15,7 +15,6 @@
  *
  * For more information, visit http://SOMESITE
  */
-function TemplateBodyStatements(){}
 !function(){
    var output = new Output();
    var compiler = new Compiler();
