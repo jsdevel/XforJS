@@ -18,35 +18,6 @@
 
 //REGEX
    //SEQUENCES
-   !function(){//SPACE
-      var spaces = {
-         "  #asdfasdfasdf \n":"Comment with line ending is working.",
-         "  #asdfasdfasdf":"Comment without line ending is working.",
-         "  ":"Space without lines is working.",
-         "  \n":"Space with lines is working.",
-         "  \n#asdfasdf\n#asdf\n":"Space with lines and comments is working."
-      };
-      var a;
-      for(a in spaces){
-         assert.equal(SPACE.exec(a)[1], a, spaces[a]);
-      }
-   }();
-   !function(){//SPACE_PRECEDING_CURLY
-      var spaces = {
-         "  #asdfasdfasdf \n":"Comment with line ending is working.",
-         "  #asdfasdfasdf":"Comment without line ending is working.",
-         "  ":"Space without lines is working.",
-         "  \n":"Space with lines is working.",
-         "  \n#asdfasdf\n#asdf\n":"Space with lines and comments is working."
-      };
-      var a;
-      for(a in spaces){
-         assert(!SPACE_PRECEDING_CURLY.exec(a), spaces[a]+"  Curly must come after.");
-      }
-      for(a in spaces){
-         assert(SPACE_PRECEDING_CURLY.exec(a+"{")[1] === a, spaces[a]+"  Curly comes after.");
-      }
-   }();
    !function(){//IMPORT_PATH
       var samplePath = "d/a.xjs";
       assert.equal(IMPORT_PATH.exec(samplePath)[1], samplePath, "Names with refinement work.");
@@ -76,7 +47,6 @@
             "bad input tokens found: '"+bad+"'.");
       });
    }();
-
    !function(){//NAME
       assert(!NAME.exec("345"), "Numbers don't start names.");
       assert.equal(NAME.exec("_$AQboo_")[1], "_$AQboo_", "Names work.");
@@ -85,6 +55,47 @@
       assert(!NS.exec("345"), "Numbers don't start namespaces.");
       assert.equal(NS.exec("boo")[1], "boo", "Names without refinement work.");
       assert(NS.exec("boo.too.goo")[1], "boo.too.goo", "Names with refinement work.");
+   }();
+   !function(){//SPACE
+      var spaces = {
+         "  #asdfasdfasdf \n":"Comment with line ending is working.",
+         "  #asdfasdfasdf":"Comment without line ending is working.",
+         "  ":"Space without lines is working.",
+         "  \n":"Space with lines is working.",
+         "  \n#asdfasdf\n#asdf\n":"Space with lines and comments is working."
+      };
+      var a;
+      for(a in spaces){
+         assert.equal(SPACE.exec(a)[1], a, spaces[a]);
+      }
+   }();
+   !function(){//SPACE_BETWEEN_ANGLE_BRACKETS
+      [
+         ">    <",
+         "  <a>  ",
+         "   <",
+         ">  "
+      ].forEach(function(good){
+         var bracket= good.replace(SPACE_BETWEEN_ANGLE_BRACKETS, "$1$2");
+         assert(bracket.indexOf(' ') === -1,
+            "properly removing space between angle brackets.");
+      });
+   }();
+   !function(){//SPACE_PRECEDING_CURLY
+      var spaces = {
+         "  #asdfasdfasdf \n":"Comment with line ending is working.",
+         "  #asdfasdfasdf":"Comment without line ending is working.",
+         "  ":"Space without lines is working.",
+         "  \n":"Space with lines is working.",
+         "  \n#asdfasdf\n#asdf\n":"Space with lines and comments is working."
+      };
+      var a;
+      for(a in spaces){
+         assert(!SPACE_PRECEDING_CURLY.exec(a), spaces[a]+"  Curly must come after.");
+      }
+      for(a in spaces){
+         assert(SPACE_PRECEDING_CURLY.exec(a+"{")[1] === a, spaces[a]+"  Curly comes after.");
+      }
    }();
    !function(){//VARIABLE_AS_CONTEXT_SELECTOR
       assert(!VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo"), "dot or open bracket must procede variable reference.");

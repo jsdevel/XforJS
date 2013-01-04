@@ -28,6 +28,7 @@ var INPUT_TOKENS=                   /^((?:[^#'\{\\]|\\(?:#|'|\\|\{))+)/;
 var NAME =                          new RegExp("^("+__reg_name+")");
 var NS =                            new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
 var SPACE =                         new RegExp("^("+__reg_space+")");
+var SPACE_BETWEEN_ANGLE_BRACKETS =  /(>|<)\s+|\s+(>|<)/g;
 var SPACE_PRECEDING_CURLY =         new RegExp("^("+__reg_space+")(?=\\{)");
 var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s*[\\.\\[]");
 var VARIABLE_REFERENCE           =  new RegExp("^("+__reg_variable_reference+")");
