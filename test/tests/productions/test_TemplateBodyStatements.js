@@ -17,7 +17,6 @@
  */
 //TODO: remove these
 function ChooseStatement(){}
-function CallStatement(){}
 function ForeachStatement(){}
 function TextStatement(){}
 !function(){
