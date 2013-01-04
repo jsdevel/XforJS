@@ -17,6 +17,7 @@
  */
 
 /**
+ * @constructor
  * @param {Output} output
  * @returns {TemplateBodyStatements}
  */
