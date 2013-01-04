@@ -181,9 +181,8 @@ function escapeOutput(input){
    return input.
       replace(/\\{/g, "{").
       replace(/\\#/g, "#").
-      replace(/\n|\r/g, "\\n");
+      replace(/\n|\r/g, "\\\n");
 }
-
 //Names of functions and variables etc. used by the output.
 var js_bld="b";
 var js_context="x";

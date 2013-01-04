@@ -386,5 +386,5 @@
 }();
 !function(){
    var a="\\{\\#\\#\\{\r\n\\#\r\r\n";
-   assert.equal("{##{\\n\\n#\\n\\n\\n", escapeOutput(a), "escapeOutput is working.");
+   assert.equal("{##{\\\n\\\n#\\\n\\\n\\\n", escapeOutput(a), "escapeOutput is working.");
 }();
