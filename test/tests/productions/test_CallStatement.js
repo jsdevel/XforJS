@@ -15,8 +15,6 @@
  *
  * For more information, visit http://SOMESITE
  */
-//TODO: remove these
-function CallExpression(){}
 !function(){
    var output = new Output();
    var production = new CallStatement(output);
