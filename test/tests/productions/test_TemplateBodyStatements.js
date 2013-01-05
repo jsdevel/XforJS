@@ -18,7 +18,6 @@
 //TODO: remove these
 function ChooseStatement(){}
 function ForeachStatement(){}
-function TextStatement(){}
 !function(){
    var compiler=new Compiler();
    var output;
