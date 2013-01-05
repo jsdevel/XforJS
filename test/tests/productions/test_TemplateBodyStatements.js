@@ -17,7 +17,6 @@
  */
 //TODO: remove these
 function ChooseStatement(){}
-function ForeachStatement(){}
 !function(){
    var compiler=new Compiler();
    var output;
