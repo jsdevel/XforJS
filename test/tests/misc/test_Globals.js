@@ -56,6 +56,10 @@
       assert.equal(NS.exec("boo")[1], "boo", "Names without refinement work.");
       assert(NS.exec("boo.too.goo")[1], "boo.too.goo", "Names with refinement work.");
    }();
+   !function(){//NS_FORCED
+      assert(!NS_FORCED.exec("boo"), "Names without refinement don't work.");
+      assert(NS_FORCED.exec("boo.too.goo")[1], "boo.too.goo", "Names with refinement work.");
+   }();
    !function(){//SPACE
       var spaces = {
          "  #asdfasdfasdf \n":"Comment with line ending is working.",
