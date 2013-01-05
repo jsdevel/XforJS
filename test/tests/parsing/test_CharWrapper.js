@@ -20,6 +20,7 @@
    var match;
 
    assert.equal(wrapper.length(), 28, "length is working.");
+   assert(wrapper.startsWith("Hello"), "startsWith is working.");
 
    assert['throws'](function(){
       var emptyStringWrapper = new CharWrapper("");

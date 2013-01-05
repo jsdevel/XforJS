@@ -104,6 +104,14 @@ function CharWrapper(characters){
    };
 
    /**
+    * @param {String} string
+    * @return boolean
+    */
+   this.startsWith=function(string){
+      return _characters.indexOf(string) === 0;
+   };
+
+   /**
     * Returns the current line index.
     * @return {number}
     */
