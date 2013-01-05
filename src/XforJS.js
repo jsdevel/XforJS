@@ -95,6 +95,7 @@ var XforJS = (function(){//change the name XforJS to anything you need.
    //INCLUDE productions/TextStatement
    //INCLUDE productions/ForeachStatement
    //INCLUDE productions/ForeachBodyStatements
+   //INCLUDE productions/SortStatement
 
 
    //INCLUDE compiling/CallManager

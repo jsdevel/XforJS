@@ -18,61 +18,69 @@
 !function(){
    var compiler=new Compiler();
    var output;
+   var output1;
+   var output2;
    var context;
    var production;
-   var previousVariableOutput;
-   var variableOutput;
    var characters;
 
-   setEnv("  sdf{s{v{/");
+   setEnv("}");
+      assert(context.getParams().getParameters().indexOf(js_GetSortArray) > -1,
+         "GetSortArray is used.");
       execute();
-      assert(previousVariableOutput !== context.getCurrentVariableOutput(),
-         "foreach sets new variable output.");
-      assert(prodIs(TemplateBodyStatements),
-         "added Prod without sort and vars.");
+      assert(outputHas(",function("+js_context+"){"),
+         "sort param output correctly.");
+      assert(prodIs(ContextSelector),
+         "ContextSelector is used.");
       remove();
-      characters.shift(3);
       execute();
-      assert(prodIs(TemplateBodyStatements),
-         "sort is ignored after body statments.");
-      remove();
-      characters.shift(2);
-      execute();
-      assert(prodIs(TemplateBodyStatements),
-         "var is ignored after body statments.");
-      remove();
-      characters.shift(2);
-      execute();
-      assert(!context.getCurrentProduction(),
-         "properly closes.");
+      assert(output1Has(",1,0"),
+         "default values.");
+      assert(!prodIs(SortStatement),
+         "closes with defaults.");
 
-   setEnv("  {var {sort {/");
+   setEnv("f}");
       execute();
-      assert(prodIs(VariableDeclarations),
-         "VariableDeclarations properly added.");
       remove();
-      characters.shift(2);
-      execute();
-      assert(prodIs(TemplateBodyStatements),
-         "sort is ignored after variable declarations.");
-      remove();
+      assert['throws'](function(){
+         execute();
+      }, "direction must be asc or desc.");
 
-   setEnv("  {sort {var {/");
+   setEnv("desc}");
       execute();
-      assert(prodIs(SortStatement),
-         "SortStatement properly added.");
       remove();
       execute();
-      assert(prodIs(VariableDeclarations),
-         "variable declarations are allowed after sort.");
-      remove();
-      characters.shift(4);
+      assert(output1Has(",0,0"),
+         "desc as first param.");
+      assert(charAt(0) === "}",
+         "direction is removed.");
+
+   setEnv("asc|in}");
       execute();
-      assert(!context.getCurrentProduction(),
-         "vars may follow sort.");
+      remove();
+      execute();
+      assert(output1Has(",1,1"),
+         "numbers first.");
+      assert(output2Has(",1"),
+         "case sensitivity works.");
+      assert(charAt(0) === "}",
+         "direction + modifiers are removed.");
+   setEnv("asc)");
+      execute();
+      remove();
+      execute();
+      assert['throws'](function(){
+         execute();
+      }, "invalid character.");
 
    function outputHas(string){
       return output.toString().indexOf(string) > -1;
+   }
+   function output1Has(string){
+      return output1.toString().indexOf(string) > -1;
+   }
+   function output2Has(string){
+      return output2.toString().indexOf(string) > -1;
    }
    function execute(){
       context.executeCurrent(characters);
@@ -83,15 +91,19 @@
    function remove(){
       context.removeProduction();
    }
+   function charAt(i){
+      return characters.charAt(i);
+   }
    function setEnv(string){
       output=new Output();
+      output1=new Output();
+      output2=new Output();
       context = new ProductionContext(output, compiler);
-      previousVariableOutput=context.getCurrentVariableOutput();
-      production = new ForeachBodyStatements(
+      production = new SortStatement(
             output,
-            new Output(),
-            new Output(),
-            new Output()
+            output1,
+            output2,
+            context
          );
       characters=new CharWrapper(string);
       context.addProduction(production);
