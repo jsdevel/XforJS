@@ -60,6 +60,42 @@
       assert(!NS_FORCED.exec("boo"), "Names without refinement don't work.");
       assert(NS_FORCED.exec("boo.too.goo")[1], "boo.too.goo", "Names with refinement work.");
    }();
+   !function(){//SORT_DIRECTION
+      [
+         "asc",
+         "desc",
+         "asc ",
+         "desc ",
+         "asc|"
+      ].forEach(function(good){
+         assert(SORT_DIRECTION.exec(good), "SORT_DIRECTION good: '"+good+"'.");
+      });
+      [
+         " asc",
+         " desc"
+      ].forEach(function(bad){
+         assert(!SORT_DIRECTION.exec(bad), "SORT_DIRECTION bad: '"+bad+"'.");
+      });
+   }();
+   !function(){//SORT_MODIFIERS
+      [
+         "|i",
+         "|n",
+         "|in",
+         "|ni"
+      ].forEach(function(good){
+         assert(SORT_MODIFIERS.exec(good), "SORT_MODIFIERS good: '"+good+"'.");
+      });
+      [
+         "|ii",
+         "|nn",
+         "ii",
+         " nn",
+      ].forEach(function(bad){
+         assert(!SORT_MODIFIERS.exec(bad), "SORT_MODIFIERS bad: '"+bad+"'.");
+      });
+
+   }();
    !function(){//SPACE
       var spaces = {
          "  #asdfasdfasdf \n":"Comment with line ending is working.",
