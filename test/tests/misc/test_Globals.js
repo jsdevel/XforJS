@@ -185,6 +185,16 @@
             regex:CALL_CLOSING
          },
          {
+            bad:"{:elif",
+            good:"{:elif ",
+            regex:ELIF
+         },
+         {
+            bad:"{:else",
+            good:"{:else}",
+            regex:ELSE
+         },
+         {
             bad:"{foreach",
             good:"{foreach ",
             regex:FOREACH

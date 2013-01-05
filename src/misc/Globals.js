@@ -55,6 +55,10 @@ var TEXT =                          /^(\{text\})/;
 var TEXT_CLOSING =                  /^(\{\/text\})/;
 var VAR =                           /^(\{var\s+)/;
 
+//CONTINUATIONS
+var ELIF =                          /^(\{:elif\s+)/;
+var ELSE =                          /^(\{:else\})/;
+
 //FUNCTIONS
 var COUNT_FN =    /^(count\()/;
 var CURRENT_FN =  /^(current\(\))/;
