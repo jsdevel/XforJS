@@ -47,7 +47,7 @@ function CallStatement(output){
     * @returns {CallParams}
     */
    this.getBodyStatements=function(output) {
-      return new CallParams(paramOutput);
+      return new CallParamDeclarations(paramOutput);
    };
 
 }
