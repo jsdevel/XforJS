@@ -145,12 +145,12 @@
          "a{sdf{/text}",
          "a'sdf{/text}"
       ].forEach(function(good){
-         assert(TEXT_INPUT.exec(good), "TEXT_INPUT good.");
+         assert(TEXT_INPUT.exec(good), "TEXT_INPUT good: '"+good+"'.");
       });
       [
          "asdf"
-      ].forEach(function(good){
-         assert(!TEXT_INPUT.exec(good), "TEXT_INPUT bad.");
+      ].forEach(function(bad){
+         assert(!TEXT_INPUT.exec(bad), "TEXT_INPUT bad: '"+bad+"'.");
       });
 
    }();
