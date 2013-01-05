@@ -52,6 +52,7 @@ var IMPORT =                        /^(\{import\s+)/;
 var LOG =                           /^(\{log\s+)/;
 var NAMESPACE =                     /^(\{namespace\s+)/;
 var PARAM =                         /^(\{param\s+)/;
+var SORT =                          /^(\{sort\s+)/;
 var TEMPLATE =                      /^(\{template\s+)/;
 var TEMPLATE_CLOSING =              /^(\{\/template\})/;
 var TEXT =                          /^(\{text\})/;

@@ -199,6 +199,11 @@
             regex:PARAM
          },
          {
+            bad:"{sort",
+            good:"{sort ",
+            regex:SORT
+         },
+         {
             bad:"{template",
             good:"{template ",
             regex:TEMPLATE
