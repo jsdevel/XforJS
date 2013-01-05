@@ -28,13 +28,13 @@
    }();
    !function(){//INPUT_TOKENS
       [
-         "    \\#asdf",
-         "    \\{asdf",
-         "    \\\\asdf",
-         "    \\'asdf"
+         "    \\#asdf{",
+         "    \\{asdf\\",
+         "    \\\\asdf#",
+         "    \\'asdf{"
       ].forEach(function(good){
          match = INPUT_TOKENS.exec(good);
-         assert(match && match[1] === good,
+         assert(match && match[1] === good.substring(0, good.length-1),
             "good input tokens found: '"+good+"'.");
       });
       [
