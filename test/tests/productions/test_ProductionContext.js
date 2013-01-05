@@ -44,6 +44,7 @@
 !function(){//productions
    var compiler = new Compiler();
    var output=new Output();
+   var continueBlockCalled=false;
    var productionA=new Production();
    var productionB=new Production();
    var context=new ProductionContext(output, compiler);
@@ -51,6 +52,9 @@
 
    productionA.execute=function(output, context){
       output.add("A");
+   };
+   productionA.continueBlock=function(output, context){
+      continueBlockCalled=true;
    };
    productionB.execute=function(output, context){
       context.addProduction(productionA);
@@ -68,6 +72,11 @@
    instance=context.executeCurrent(output);
    assert(instance === context, "executeCurrent returns instance.");
    assert.equal(output.toString(), "A", "executeCurrent is working.");
+
+   instance=context.continueCurrentBlock();
+   assert(instance === context, "continueCurrentBlock returns instance.");
+   assert(continueBlockCalled,
+      "continueCurrentBlock is called on current production.");
 
    instance=context.addProduction(productionB);
 

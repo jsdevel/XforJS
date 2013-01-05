@@ -258,6 +258,15 @@ function ProductionContext(
       return this;
    };
    /**
+    * Calls the current production's continueBlock method.
+    * @param {CharWrapper} characters
+    * @return {ProductionContext}
+    */
+   this.continueCurrentBlock=function(characters){
+      currentProduction.continueBlock(characters, this);
+      return this;
+   };
+   /**
     * @return {Production}
     */
    this.getCurrentProduction=function(){
