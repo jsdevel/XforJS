@@ -19,6 +19,8 @@
    var compiler=new Compiler();
    var output;
    var context;
+   var priorProduction;
+   var continueBlockCalled;
    var production;
    var characters;
 
@@ -38,8 +40,18 @@
 
    setEnv("{/");
       execute();
-      assert(!context.getCurrentProduction(),
+      assert(context.getCurrentProduction() === priorProduction,
          "'/' following '{' removes production.");
+
+   setEnv("{:");
+      priorProduction.continueBlock=function(){
+         continueBlockCalled=true;
+      };
+      execute();
+      assert(context.getCurrentProduction() === priorProduction,
+         "':' following '{' removes production.");
+      assert(continueBlockCalled,
+         "continueBlock called.");
 
    setEnv("{var ");
       assert['throws'](function(){
@@ -83,11 +95,15 @@
    function execute(){
       context.executeCurrent(characters);
    }
-   function setEnv(string, allowContinuation){
+   function setEnv(string){
+      continueBlockCalled=false;
       output = new Output();
       context = new ProductionContext(output, compiler);
-      production = new TemplateBodyStatements(output, allowContinuation);
+      priorProduction=new Production();
+      production = new TemplateBodyStatements(output);
       characters=new CharWrapper(string);
-      context.addProduction(production);
+      context.
+         addProduction(priorProduction).
+         addProduction(production);
    }
 }();

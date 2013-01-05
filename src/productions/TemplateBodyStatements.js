@@ -41,6 +41,11 @@ function TemplateBodyStatements(output){
 
       if(characters.charAt(0) === '{'){
          switch(characters.charAt(1)){
+         case ':':
+            context.
+               removeProduction().
+               continueCurrentBlock(characters);
+            return;
          case '/':
             context.removeProduction();
             return;
