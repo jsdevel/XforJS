@@ -15,8 +15,6 @@
  *
  * For more information, visit http://SOMESITE
  */
-//TODO remove
-function CallParamDeclaration(){}
 !function(){
    var output = new Output();
    var compiler = new Compiler();
