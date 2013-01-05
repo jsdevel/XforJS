@@ -15,8 +15,6 @@
  *
  * For more information, visit http://SOMESITE
  */
-//TODO remove
-function ForeachBodyStatements(){}
 !function(){
    var output = new Output();
    var context = new ProductionContext(output, new Compiler());
