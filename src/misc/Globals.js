@@ -35,10 +35,6 @@ var TEXT_INPUT =                    /^((?:(?!\{\/text\})[\s\S])+)(?=\{\/text\})/
 var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s*[\\.\\[]");
 var VARIABLE_REFERENCE           =  new RegExp("^("+__reg_variable_reference+")");
 
-//RESERVED WORDS
-var FRAMEWORK_RESERVED_WORDS =      /^(call|choose|foreach|if|import|log|namespace|otherwise|param|sort|template|text|var|when)(?![\w$])/;
-
-
 //STATEMENT PATTERNS
 var CALL =                          /^(\{call\s+)/;
 var CALL_CLOSING =                  /^(\{\/call\})/;
