@@ -185,16 +185,6 @@
             regex:CALL_CLOSING
          },
          {
-            bad:"{choose",
-            good:"{choose ",
-            regex:CHOOSE
-         },
-         {
-            bad:"{choose}",
-            good:"{/choose}",
-            regex:CHOOSE_CLOSING
-         },
-         {
             bad:"{foreach",
             good:"{foreach ",
             regex:FOREACH

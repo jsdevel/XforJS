@@ -15,8 +15,6 @@
  *
  * For more information, visit http://SOMESITE
  */
-//TODO: remove these
-function ChooseStatement(){}
 !function(){
    var compiler=new Compiler();
    var output;
@@ -62,11 +60,6 @@ function ChooseStatement(){}
       execute();
       assert(prodIs(LogStatement),
          "LogStatement allowed.");
-
-   setEnv("{choose ");
-      execute();
-      assert(prodIs(ChooseStatement),
-         "ChooseStatement allowed.");
 
    setEnv("{call ");
       execute();

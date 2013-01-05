@@ -40,8 +40,6 @@ var VARIABLE_REFERENCE           =  new RegExp("^("+__reg_variable_reference+")"
 //STATEMENT PATTERNS
 var CALL =                          /^(\{call\s+)/;
 var CALL_CLOSING =                  /^(\{\/call\})/;
-var CHOOSE =                        /^(\{choose\s+)/;
-var CHOOSE_CLOSING =                /^(\{\/choose\})/;
 var FOREACH =                       /^(\{foreach\s+)/;
 var FOREACH_CLOSING =               /^(\{\/foreach\})/;
 var IF =                            /^(\{if\s+)/;

@@ -78,14 +78,6 @@ function TemplateBodyStatements(output){
             }
             break;
          case 'c':
-            match = characters.match(CHOOSE);
-            if(match.find()){
-               characters.shift(match.group(1).length);
-               statementOutput= new Output();
-               context.addProduction(new ChooseStatement(statementOutput));
-               output.add(statementOutput);
-               return;
-            }
             match = characters.match(CALL);
             if(match.find()){
                characters.shift(match.group(1).length);
