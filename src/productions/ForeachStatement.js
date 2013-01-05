@@ -17,6 +17,7 @@
  */
 
 /**
+ * @constructor
  * @param {Output} output
  * @param {ProductionContext} context
  * @returns {ForeachStatement}
