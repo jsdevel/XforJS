@@ -52,7 +52,7 @@ function SortStatement(){}
       assert(prodIs(VariableDeclarations),
          "VariableDeclarations properly added.");
       remove();
-      characters.shift(2)
+      characters.shift(2);
       execute();
       assert(prodIs(TemplateBodyStatements),
          "sort is ignored after variable declarations.");
