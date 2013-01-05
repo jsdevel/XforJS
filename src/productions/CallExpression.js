@@ -55,9 +55,7 @@ function CallExpression(namespaceOutput, contextOutput){
             characters.removeSpace();
             var firstChar = characters.charAt(0);
             if( firstChar !== '/' && firstChar !== '}'){
-               var selectorOutput = new Output();
-               contextOutput.add(js_SafeValue+"(").add(selectorOutput).add(")");
-               context.addProduction(new ContextSelector(selectorOutput, false));
+               context.addProduction(new ContextSelector(contextOutput, false));
             } else {
                contextOutput.add(js_context);
             }

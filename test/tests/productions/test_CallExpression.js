@@ -51,6 +51,8 @@
       remove();
       assert(!prodIs(CallExpression),
          "CallExpression is removed with context.");
+      assert(output2Has(js_SafeValue+"(function"),
+         "context is output with SafeValue.");
 
 
    function outputHas(string){
