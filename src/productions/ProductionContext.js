@@ -320,7 +320,7 @@ function ProductionContext(
     * @returns {ProductionContext}
     */
    this.addDeclaredTemplate=function(name){
-      callManager.addDeclaredTemplate(this.getNS()+"."+name);
+      callManager.addDeclaredTemplate(name);
       return this;
    };
    /**
@@ -328,7 +328,7 @@ function ProductionContext(
     * @returns {ProductionContext}
     */
    this.addCalledTemplate=function(name){
-      callManager.addCalledTemplate(this.getNS()+"."+name);
+      callManager.addCalledTemplate(name);
       return this;
    };
 
@@ -337,7 +337,7 @@ function ProductionContext(
     * @return {boolean}
     */
    this.hasCalledTemplate=function(called){
-      return callManager.hasCalledTemplate(this.getNS()+"."+called);
+      return callManager.hasCalledTemplate(called);
    };
 
    /**
@@ -345,7 +345,7 @@ function ProductionContext(
     * @return {boolean}
     */
    this.hasDeclaredTemplate=function(declared){
-      return callManager.hasDeclaredTemplate(this.getNS()+"."+declared);
+      return callManager.hasDeclaredTemplate(declared);
    };
 
 

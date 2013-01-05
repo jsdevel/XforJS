@@ -57,7 +57,7 @@
       "template start tag adds new variable output."
    );
    assert(
-      context.hasDeclaredTemplate("boo") &&
+      context.hasDeclaredTemplate(context.getNS()+".boo") &&
       output.toString().indexOf("function") > -1 &&
       context.getCurrentProduction() instanceof ParamDeclarations &&
       characters.length() === 0,

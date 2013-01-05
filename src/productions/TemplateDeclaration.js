@@ -47,7 +47,7 @@ function TemplateDeclaration(output){
                   var nm = name.group(1);
                   characters.shift(nm.length);
 
-                  context.addDeclaredTemplate(nm);
+                  context.addDeclaredTemplate(context.getNS()+"."+nm);
                   output.
                      add(
                         js_currentNS+"."+nm+"=function("+js__data+", "+js__params+"){"+
