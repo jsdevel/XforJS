@@ -31,6 +31,7 @@ var NS_FORCED =                     new RegExp("^("+__reg_name+"(?:\\."+__reg_na
 var SPACE =                         new RegExp("^("+__reg_space+")");
 var SPACE_BETWEEN_ANGLE_BRACKETS =  /(>|<)\s+|\s+(>|<)/g;
 var SPACE_PRECEDING_CURLY =         new RegExp("^("+__reg_space+")(?=\\{)");
+var TEXT_INPUT =                    /^((?:(?!\{\/text\})[\s\S])+)(?=\{\/text\})/;
 var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s*[\\.\\[]");
 var VARIABLE_REFERENCE           =  new RegExp("^("+__reg_variable_reference+")");
 

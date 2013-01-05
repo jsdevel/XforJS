@@ -101,6 +101,23 @@
          assert(SPACE_PRECEDING_CURLY.exec(a+"{")[1] === a, spaces[a]+"  Curly comes after.");
       }
    }();
+   !function(){//TEXT_INPUT
+      [
+         "asdf{/text}",
+         "a\\sdf{/text}",
+         "a#sdf{/text}",
+         "a{sdf{/text}",
+         "a'sdf{/text}"
+      ].forEach(function(good){
+         assert(TEXT_INPUT.exec(good), "TEXT_INPUT good.");
+      });
+      [
+         "asdf"
+      ].forEach(function(good){
+         assert(!TEXT_INPUT.exec(good), "TEXT_INPUT bad.");
+      });
+
+   }();
    !function(){//VARIABLE_AS_CONTEXT_SELECTOR
       assert(!VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo"), "dot or open bracket must procede variable reference.");
       assert.equal(VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo.")[1], "boo", "names with dots work.");
