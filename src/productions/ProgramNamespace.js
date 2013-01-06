@@ -29,14 +29,14 @@ function ProgramNamespace(output){
 
       if(characters.charAt(0) === '{'){
          var namespace = characters.match(NAMESPACE);
-         if(namespace.find()){
+         if(namespace){
             characters.
-               shift(namespace.group(1).length);
+               shift(namespace[1].length);
 
             var declaredNS = characters.match(NS);
 
-            if(declaredNS.find()){
-               chunk = declaredNS.group(1);
+            if(declaredNS){
+               chunk = declaredNS[1];
                characters.shift(chunk.length);
 
                validateNamespacesAgainstReservedWords(chunk);

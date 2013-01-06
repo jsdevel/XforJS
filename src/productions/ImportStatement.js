@@ -27,13 +27,13 @@ function ImportStatement(output){
     */
    this.execute=function(characters, context){
       var _import = characters.match(IMPORT);
-      if(_import.find()){
-         var matchedImportTag = _import.group(1);
+      if(_import){
+         var matchedImportTag = _import[1];
          characters.shift(matchedImportTag.length);
 
          var path = characters.match(IMPORT_PATH);
-         if(path.find()){
-            var importedPath = path.group(1);
+         if(path){
+            var importedPath = path[1];
             characters.shift(importedPath.length).removeSpace();
 
             if(characters.charAt(0) === '}'){

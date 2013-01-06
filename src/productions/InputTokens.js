@@ -28,8 +28,8 @@ function InputTokens(output){
     */
    this.execute=function(characters, context){
       var inputTokens = characters.match(INPUT_TOKENS);
-      if(inputTokens.find()){
-         var oldTokens = inputTokens.group(1);
+      if(inputTokens){
+         var oldTokens = inputTokens[1];
          characters.shift(oldTokens.length);
 
          var newTokens = oldTokens;

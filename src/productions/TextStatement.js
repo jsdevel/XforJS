@@ -30,8 +30,8 @@ function TextStatement(output){
 
       //Get the text input if it exists.
       match = characters.match(TEXT_INPUT);
-      if(match.find()){
-         var input = match.group(1);
+      if(match){
+         var input = match[1];
          characters.shift(input.length);
          output.add(js_bld+"('"+
             input.
@@ -44,8 +44,8 @@ function TextStatement(output){
 
       //Make sure there's a closing tag and exit.
       match = characters.match(TEXT_CLOSING);
-      if(match.find()){
-         characters.shift(match.group(1).length);
+      if(match){
+         characters.shift(match[1].length);
          context.removeProduction();
          return;
       }

@@ -35,8 +35,8 @@ function TemplateBodyStatements(output){
       var statementOutput;
 
       var spacePrecedingCurly = characters.match(SPACE_PRECEDING_CURLY);
-      if(spacePrecedingCurly.find()){
-         characters.shift(spacePrecedingCurly.group(1).length);
+      if(spacePrecedingCurly){
+         characters.shift(spacePrecedingCurly[1].length);
       }
 
       if(characters.charAt(0) === '{'){
@@ -51,21 +51,21 @@ function TemplateBodyStatements(output){
             return;
          case 'v':
             match = characters.match(VAR);
-            if(match.find()){
+            if(match){
                throw "VariableDeclarations are not allowed in this context.";
             }
             break;
          case 'p':
             match = characters.match(PARAM);
-            if(match.find()){
+            if(match){
                throw "ParamDeclarations are not allowed in this context.";
             }
             break;
 
          case 'i':
             match = characters.match(IF);
-            if(match.find()){
-               characters.shift(match.group(1).length);
+            if(match){
+               characters.shift(match[1].length);
                statementOutput=new Output();
                context.addProduction(new IfStatement(statementOutput));
                output.add(statementOutput);
@@ -74,8 +74,8 @@ function TemplateBodyStatements(output){
             break;
          case 'l':
             match = characters.match(LOG);
-            if(match.find()){
-               characters.shift(match.group(1).length);
+            if(match){
+               characters.shift(match[1].length);
                statementOutput=new Output();
                context.addProduction(new LogStatement(statementOutput, context));
                output.add(statementOutput);
@@ -84,8 +84,8 @@ function TemplateBodyStatements(output){
             break;
          case 'c':
             match = characters.match(CALL);
-            if(match.find()){
-               characters.shift(match.group(1).length);
+            if(match){
+               characters.shift(match[1].length);
                statementOutput= new Output();
                context.addProduction(new CallStatement(statementOutput));
                output.add(statementOutput);
@@ -94,8 +94,8 @@ function TemplateBodyStatements(output){
             break;
          case 'f':
             match = characters.match(FOREACH);
-            if(match.find()){
-               characters.shift(match.group(1).length);
+            if(match){
+               characters.shift(match[1].length);
                statementOutput= new Output();
                context.addProduction(new ForeachStatement(statementOutput, context));
                output.add(statementOutput);
@@ -104,8 +104,8 @@ function TemplateBodyStatements(output){
             break;
          case 't':
             match = characters.match(TEXT);
-            if(match.find()){
-               characters.shift(match.group(1).length);
+            if(match){
+               characters.shift(match[1].length);
                statementOutput= new Output();
                context.addProduction(new TextStatement(statementOutput));
                output.add(statementOutput);

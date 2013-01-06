@@ -37,12 +37,12 @@ AbstractVariableDeclaration.prototype.execute=function(characters, context){
    if(!this._hasValue){
       this._hasValue=true;
       var match = characters.match(this.getPattern());
-      if(match.find()){
-         characters.shift(match.group(1).length);
+      if(match){
+         characters.shift(match[1].length);
          characters.removeSpace();
          var nameMatch = characters.match(NAME);
-         if(nameMatch.find()){
-            var name = nameMatch.group(1);
+         if(nameMatch){
+            var name = nameMatch[1];
             characters.shift(name.length);
             if(characters.removeSpace()){
                var assignmentOutput = new Output();

@@ -54,16 +54,16 @@ AbstractExpression.prototype.execute=function(characters, context){
          case '!':
          case '~':
             match = characters.match(this._logicalNot);
-            match.find();
-            negation = match.group(1);
+            match;
+            negation = match[1];
             characters.shift(negation.length);
             characters.removeSpace();
             output.add(negation);
             break;
          case 't':
             match = characters.match(this._typeof);
-            if(match.find()){
-               characters.shift(match.group(1).length);
+            if(match){
+               characters.shift(match[1].length);
                output.add("typeof");
                characters.removeSpace();
                if(characters.charAt(0) !== '('){

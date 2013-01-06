@@ -33,17 +33,17 @@ function CallExpression(namespaceOutput, contextOutput){
       var match;
       if(!hasNamespace){
          match = characters.match(NS_FORCED);
-         if(match.find()){
+         if(match){
             hasNamespace=true;
-            var ns=match.group(1);
+            var ns=match[1];
             characters.shift(ns.length);
             namespaceOutput.add(js_templateBasket+"."+ns);
             context.addCalledTemplate(ns);
          } else {
             match = characters.match(NAME);
-            if(match.find()){
+            if(match){
                hasNamespace=true;
-               var name=match.group(1);
+               var name=match[1];
                characters.shift(name.length);
                namespaceOutput.add(js_currentNS+"."+name);
                context.addCalledTemplate(context.getNS()+"."+name);

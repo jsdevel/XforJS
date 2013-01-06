@@ -48,8 +48,8 @@ function GlobalVariableValue(output){
       case '@':
          characters.shift(1);
          var name = characters.match(NAME);
-         if(name.find()){
-            var value = name.group(1);
+         if(name){
+            var value = name[1];
             context.validateVariableReference(value);
             characters.shift(value.length);
             output.add("__"+value);
@@ -71,8 +71,8 @@ function GlobalVariableValue(output){
 
       if(regexToUse){
          var match = characters.match(regexToUse);
-         if(match.find()){
-            var matchStr = match.group(1);
+         if(match){
+            var matchStr = match[1];
             characters.shift(matchStr.length);
             output.add(matchStr);
             context.removeProduction();

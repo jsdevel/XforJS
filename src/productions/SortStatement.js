@@ -66,18 +66,18 @@ function SortStatement(
          }
          if(!hasSortDirection){
             var sortDirection = characters.match(SORT_DIRECTION);
-            if(sortDirection.find()){
+            if(sortDirection){
                hasSortDirection=true;
 
-               var direction = sortDirection.group(1);
+               var direction = sortDirection[1];
                characters.shift(direction.length);
 
                var asc = direction.indexOf("a") === 0;
                var promoteNum = false;
 
                var sortModifiers = characters.match(SORT_MODIFIERS);
-               if(sortModifiers.find()){
-                  var modifiers = sortModifiers.group(1);
+               if(sortModifiers){
+                  var modifiers = sortModifiers[1];
                   characters.shift(modifiers.length);
 
                   if(modifiers.indexOf("i") > -1){

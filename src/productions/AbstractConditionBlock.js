@@ -78,8 +78,8 @@ AbstractConditionBlock.prototype.execute=function(characters, context){
       if(!this._expectingBodyStatements){
          if(characters.charAt(1) === '/'){
             match = characters.match(this.getClosingPattern());
-            if(match.find()){
-               characters.shift(match.group(1).length);
+            if(match){
+               characters.shift(match[1].length);
                context.removeProduction();
                return;
             }

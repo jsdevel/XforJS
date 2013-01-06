@@ -53,8 +53,8 @@ function ForeachBodyStatements(output, sortContextOutput, sortFunctionOutput, so
             if(!hasSort && !hasVar && !hasTemplateBody){
                hasSort=true;
                match = characters.match(SORT);
-               if(match.find()){
-                  characters.shift(match.group(1).length);
+               if(match){
+                  characters.shift(match[1].length);
                   context.addProduction(new SortStatement(sortContextOutput, sortFunctionOutput, sortCaseSensitivityOutput, context));
                   return;
                }
@@ -64,7 +64,7 @@ function ForeachBodyStatements(output, sortContextOutput, sortFunctionOutput, so
             if(!hasVar && !hasTemplateBody){
                hasVar=true;
                match = characters.match(VAR);
-               if(match.find()){
+               if(match){
                   output.add(context.getCurrentVariableOutput());
                   context.addProduction(new VariableDeclarations(context.getCurrentVariableOutput()));
                   return;

@@ -28,7 +28,7 @@ function AbstractVariableDeclarations(){
       characters.removeSpace();
       if(characters.charAt(0) === '{' && characters.charAt(1) === this._characterAfterOpenCurly){
          var declarationStart = characters.match(this.getDeclarationRegex());
-         if(declarationStart.find()){
+         if(declarationStart){
             context.addProduction(this.getDeclaration());
             return;
          }

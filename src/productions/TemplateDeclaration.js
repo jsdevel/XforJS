@@ -39,12 +39,12 @@ function TemplateDeclaration(output){
             context.addVaribleOutput();
 
             var template = characters.match(TEMPLATE);
-            if(template.find()){
-               characters.shift(template.group(1).length);
+            if(template){
+               characters.shift(template[1].length);
 
                var name = characters.match(NAME);
-               if(name.find()){
-                  var nm = name.group(1);
+               if(name){
+                  var nm = name[1];
                   characters.shift(nm.length);
 
                   context.addDeclaredTemplate(context.getNS()+"."+nm);
@@ -88,8 +88,8 @@ function TemplateDeclaration(output){
             return;
          } else if(characters.charAt(1) === '/'){
             var template = characters.match(TEMPLATE_CLOSING);
-            if(template.find()){
-               characters.shift(template.group(1).length);
+            if(template){
+               characters.shift(template[1].length);
                context.removeProduction();
                context.removeVariableOutput();
                return;

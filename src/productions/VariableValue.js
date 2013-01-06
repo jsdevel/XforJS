@@ -49,8 +49,8 @@ function VariableValue(output, isNestedInContextSelector){
          throw "Unexpected close paren.";
       case '@':
          match = characters.match(VARIABLE_AS_CONTEXT_SELECTOR);
-         if(match.find()){
-            context.validateVariableReference(match.group(1));
+         if(match){
+            context.validateVariableReference(match[1]);
             break;//go to context selector
          }
       case "'":
@@ -69,8 +69,8 @@ function VariableValue(output, isNestedInContextSelector){
          return;
       case 'p':
          match=characters.match(POSITION_FN);
-         if(match.find()){
-            characters.shift(match.group(1).length);
+         if(match){
+            characters.shift(match[1].length);
             output.add(js_position);
             context.removeProduction();
             return;
@@ -78,10 +78,10 @@ function VariableValue(output, isNestedInContextSelector){
          break;
       case 'c':
          match=characters.match(COUNT_FN);
-         if(match.find()){
+         if(match){
             hasOpenParen=true;
             var contextSelectorOutput = new Output();
-            characters.shift(match.group(1).length);
+            characters.shift(match[1].length);
             output.
                add(js_CountElements).
                add("(").
@@ -93,8 +93,8 @@ function VariableValue(output, isNestedInContextSelector){
          break;
       case 'l':
          match=characters.match(LAST_FN);
-         if(match.find()){
-            characters.shift(match.group(1).length);
+         if(match){
+            characters.shift(match[1].length);
             output.add(js_last);
             context.removeProduction();
             return;
@@ -102,13 +102,13 @@ function VariableValue(output, isNestedInContextSelector){
          break;
       case 'n':
          match = characters.match(NULL);
-         if(match.find()){
+         if(match){
             delegateToGlobalVariableValue(characters, context);
             return;
          }
          match = characters.match(NAME_FN);
-         if(match.find()){
-            characters.shift(match.group(1).length);
+         if(match){
+            characters.shift(match[1].length);
             output.add(js_name);
             context.removeProduction();
             return;
@@ -117,7 +117,7 @@ function VariableValue(output, isNestedInContextSelector){
       case 't':
       case 'f':
          match = characters.match(BOOLEAN);
-         if(match.find()){
+         if(match){
                delegateToGlobalVariableValue(characters, context);
             return;
          }

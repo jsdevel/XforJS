@@ -45,7 +45,7 @@
    assert(wrapper.shift(1) === wrapper && wrapper.charAt(0) === 'H', 'shift returns the instance.');
 
    match=wrapper.match(/(Hello)/);
-   assert(match instanceof Matcher, 'match is working.');
+   assert(match instanceof Array, 'match is working.');
 }();
 
 

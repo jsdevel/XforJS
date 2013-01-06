@@ -85,10 +85,10 @@ function CharWrapper(characters){
    /**
     * Returns the result of regex.exec(characters).
     * @param {RegExp} regex
-    * @return {Matcher}
+    * @return {Array|null}
     */
    this.match=function(regex){
-      return new Matcher(regex, _characters);
+      return regex.exec(_characters);
    };
    /**
     * Removes space from the beginning of the characters.

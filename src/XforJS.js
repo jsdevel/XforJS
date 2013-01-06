@@ -29,7 +29,6 @@ var XforJS = (function(){//change the name XforJS to anything you need.
 
    //INCLUDE misc/extend
    //INCLUDE misc/Globals
-   //INCLUDE misc/Matcher
 
    //This needs to be built by buildJavascriptResources in the javascript dir
    //INCLUDE javascript/JavascriptResources

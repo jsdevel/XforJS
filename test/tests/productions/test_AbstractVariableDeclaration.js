@@ -26,8 +26,8 @@ var characters;
 
 newProduction.execute=function(characters, context){
    var match=characters.match(/([0-9]+)/);
-   if(match.find()){
-      characters.shift(match.group(1).length);
+   if(match){
+      characters.shift(match[1].length);
       context.removeProduction();
    }
 };

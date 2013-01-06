@@ -64,8 +64,8 @@ function IfStatement(output){
          return;
       } else {
          match = characters.match(ELIF);
-         if(match.find()){
-            characters.shift(match.group(1).length);
+         if(match){
+            characters.shift(match[1].length);
             output.add("else ").add(newOutput);
             context.
                removeProduction().

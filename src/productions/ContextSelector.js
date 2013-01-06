@@ -63,17 +63,17 @@ function ContextSelector(output, isNested){
          switch(firstChar){
          case '@':
             reference=characters.match(VARIABLE_REFERENCE);
-            if(reference.find()){
-               characters.shift(reference.group(1).length);
+            if(reference){
+               characters.shift(reference[1].length);
                context.
-                  validateVariableReference(reference.group(2));
+                  validateVariableReference(reference[2]);
                contextSelectorOutput.
                   add(
                      context.
                         getCurrentVariableOutput().
                         getVariablePrefix()
                      +
-                     reference.group(2)
+                     reference[2]
                   );
             } else {
                throw "invalid variable reference.";
@@ -82,8 +82,8 @@ function ContextSelector(output, isNested){
             break;
          case 'c':
             match = characters.match(CURRENT_FN);
-            if(match.find()){
-               characters.shift(match.group(1).length);
+            if(match){
+               characters.shift(match[1].length);
             }
             hasContextSelector=true;
             break;
@@ -150,8 +150,8 @@ function ContextSelector(output, isNested){
       characters.removeSpace();
       ns=characters.match(NS);
 
-      if(ns.find()){
-         match = ns.group(1);
+      if(ns){
+         match = ns[1];
          validateNamespacesAgainstReservedWords(match);
          characters.shift(match.length);
          if(allowDotPrepending){
