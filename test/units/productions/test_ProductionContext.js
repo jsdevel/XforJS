@@ -221,7 +221,7 @@
    var compiler = new Compiler();
    var context = new ProductionContext(new Output(), compiler);
    var instance;
-   var testFile = "tests/misc/test.xjs";
+   var testFile = "units/misc/test.xjs";
    var output;
    var compilerCalled=false;
    compiler.compile=function(input, path, previousContext){
@@ -231,7 +231,7 @@
    instance=context.setInputFilePath(testFile);
    assert.equal(instance, context, "setInputFilePath returns instance.");
    assert['throws'](function(){
-      context.setInputFilePath("tests/misc/test.xjs");
+      context.setInputFilePath("units/misc/test.xjs");
    }, "setting the input file directory more than once throws an error.");
 
    context=new ProductionContext(new Output(), compiler);

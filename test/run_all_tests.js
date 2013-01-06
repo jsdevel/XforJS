@@ -22,13 +22,13 @@ var filesToLoad = ["../src/XforJS.js"];
 var filesToTest = [];
 var fileLoader = new common.FileLoader({filesToLoad:filesToLoad});
 var testDirs = [
-   'tests/misc/',
-   'tests/output/',
-   'tests/parsing/',
-   'tests/javascript/',
-   'tests/productions/',
-   'tests/compiling/',
-   'tests/suites/'
+   'units/misc/',
+   'units/output/',
+   'units/parsing/',
+   'units/javascript/',
+   'units/productions/',
+   'units/compiling/',
+   'units/suites/'
 ];
 
 testDirs.forEach(function(value){

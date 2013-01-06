@@ -423,13 +423,13 @@
 }();
 !function(){//getInputFilePathDirectory|Path
    var path = require('path');
-   var somePath="tests/misc/asdf/";
-   var _path="tests/misc/test.xjs";
-   assert.equal(getInputFileDirectory(_path), path.resolve("tests/misc"),
+   var somePath="units/misc/asdf/";
+   var _path="units/misc/test.xjs";
+   assert.equal(getInputFileDirectory(_path), path.resolve("units/misc"),
       "relative path is working.");
-   assert.equal(getInputFileDirectory(path.resolve(_path)), path.resolve("tests/misc"),
+   assert.equal(getInputFileDirectory(path.resolve(_path)), path.resolve("units/misc"),
       "absolute path is working.");
-   assert.equal(getInputFileDirectory(somePath+"../test.xjs"), path.resolve("tests/misc"),
+   assert.equal(getInputFileDirectory(somePath+"../test.xjs"), path.resolve("units/misc"),
       "relative path is normalized.")
    assert['throws'](function(){
       getInputFileDirectory("");
