@@ -85,6 +85,6 @@ AbstractConditionBlock.prototype.execute=function(characters, context){
             }
          }
       }
-   };
+   }
    throw "Invalid Expression found.";
 };

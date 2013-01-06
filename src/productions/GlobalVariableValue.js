@@ -70,9 +70,9 @@ function GlobalVariableValue(output){
       }
 
       if(regexToUse){
-         var match = characters.match(regexToUse);
+         match = characters.match(regexToUse);
          if(match){
-            var matchStr = match[1];
+            matchStr = match[1];
             characters.shift(matchStr.length);
             output.add(matchStr);
             context.removeProduction();

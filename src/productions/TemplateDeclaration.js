@@ -31,6 +31,9 @@ function TemplateDeclaration(output){
     * @param {ProductionContext} context
     */
    this.execute=function(characters, context){
+      var template;
+      var name;
+      var nm;
       characters.removeSpace();
 
       if(characters.charAt(0) === '{'){
@@ -38,13 +41,13 @@ function TemplateDeclaration(output){
             isOpened=true;
             context.addVaribleOutput();
 
-            var template = characters.match(TEMPLATE);
+            template = characters.match(TEMPLATE);
             if(template){
                characters.shift(template[1].length);
 
-               var name = characters.match(NAME);
+               name = characters.match(NAME);
                if(name){
-                  var nm = name[1];
+                  nm = name[1];
                   characters.shift(nm.length);
 
                   context.addDeclaredTemplate(context.getNS()+"."+nm);
@@ -87,7 +90,7 @@ function TemplateDeclaration(output){
             expectingTemplateBody=true;
             return;
          } else if(characters.charAt(1) === '/'){
-            var template = characters.match(TEMPLATE_CLOSING);
+            template = characters.match(TEMPLATE_CLOSING);
             if(template){
                characters.shift(template[1].length);
                context.removeProduction();
@@ -116,4 +119,8 @@ function TemplateDeclaration(output){
    }
 }
 extend(TemplateDeclaration, Production);
+/**
+ * @const
+ * @type string
+ */
 TemplateDeclaration.prototype.name="TemplateDeclaration";

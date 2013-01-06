@@ -32,7 +32,7 @@ function ParamDeclaration(output){
     * @param {ProductionContext} context
     */
    this.doNoAssignment=function(name, context){
-      output.add(name, js_params+"."+name);;
+      output.add(name, js_params+"."+name);
    };
 }
 extend(ParamDeclaration, AbstractVariableDeclaration);
