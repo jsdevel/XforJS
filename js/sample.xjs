@@ -1,11 +1,12 @@
 {namespace sample}
-#here's a comment
 
 #vars that are local to this file
 {var googleURL "http://google.com"}
 
 #As many templates as you like in a file.
 {template buildProfile}
+   {param showInterests false}
+
    <h2>My Name is: {name}</h2>
    <p>
       {if aboutMe}#we could've used shortcircuiting too E.G. aboutMe || desc...
@@ -16,9 +17,17 @@
          Don't wait to build your profile.  <a href="{@googleURL}">Google</a>
          "building profile" to find out how.
       {/if}
+      {if interests && @showInterests}
+         {call buildInterests interests}
+      {/if}
    </p>
 {/template}
 
+#context is interests
 {template buildInterests}
-
+   <ol>
+      {foreach .}
+         <li>{.}</li>
+      {/foreach}
+   </ol>
 {/template}

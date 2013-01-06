@@ -1,12 +1,13 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>XforJS Documentation</title><link href="css/bootstrap.custom.css" rel="stylesheet" type="text/css"/><link href="css/main.css" rel="stylesheet" type="text/css"/></head><body><div class="mcenter code-editor w80p h400px"><div class="w50p h100p dis-in-b vtop"><ul class="nav nav-tabs"><li class="active"><a href="#precompiled" data-toggle="tab">Precompiled</a></li><li><a href="#compiled" data-toggle="tab">Compiled</a></li></ul><div class="tab-content h100p"><div class="tab-pane h100p active" id="precompiled"><textarea class="w100p h100p" id="PreCompiled">
 {namespace sample}
-#here's a comment
 
 #vars that are local to this file
 {var googleURL "http://google.com"}
 
 #As many templates as you like in a file.
 {template buildProfile}
+   {param showInterests false}
+
    <h2>My Name is: {name}</h2>
    <p>
       {if aboutMe}#we could've used shortcircuiting too E.G. aboutMe || desc...
@@ -17,10 +18,18 @@
          Don't wait to build your profile.  <a href="{@googleURL}">Google</a>
          "building profile" to find out how.
       {/if}
+      {if interests && @showInterests}
+         {call buildInterests interests}
+      {/if}
    </p>
 {/template}
 
+#context is interests
 {template buildInterests}
-
+   <ol>
+      {foreach .}
+         <li>{.}</li>
+      {/foreach}
+   </ol>
 {/template}
-                  </textarea></div><div class="tab-pane" id="compiled"><textarea class="w100p h100p" id="Compiled"></textarea></div></div></div><div class="w50p dis-in-b vtop"><ul class="nav nav-tabs"><li><a href="#text" data-toggle="tab">Output</a></li><li class="active"><a href="#rendered" data-toggle="tab">Rendered</a></li></ul><div class="tab-content"><div class="tab-pane" id="text"><pre class="w100p h100p" id="OutputText"></pre></div><div class="tab-pane w100p h100p" id="rendered"></div></div></div></div><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script><script src="js/bootstrap.min.js"></script></body></html>
+                  </textarea></div><div class="tab-pane" id="compiled"><textarea class="w100p h100p" id="Compiled"></textarea></div></div></div><div class="w50p dis-in-b vtop"><ul class="nav nav-tabs"><li class="active"><a href="#text" data-toggle="tab">Output</a></li><li><a href="#rendered" data-toggle="tab">Rendered</a></li></ul><div class="tab-content"><div class="tab-pane active" id="text"><pre class="w100p h100p" id="OutputText"></pre></div><div class="tab-pane w100p h100p" id="rendered"></div></div></div></div><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script><script src="js/bootstrap.min.js"></script><script src="js/XforJS.min.js"></script><script src="js/main.js"></script></body></html>
