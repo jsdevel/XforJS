@@ -22,7 +22,7 @@ cd $DIR_TEST;
 
 function testAll(){
    clear
-   node $DIR_BIN/run_all_tests.js
+   node $DIR_BIN/run_all_unit_tests.js
 }
 
 testAll
