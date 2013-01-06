@@ -1,0 +1,32 @@
+/*
+    Document   : main
+    Created on : Jan 6, 2013, 12:07:18 AM
+    Author     : Joseph Spencer
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.h100p {
+   height:100%;
+}
+.h400px {
+   height:400px;
+}
+.w100p {
+   width:100%;
+}
+.w80p {
+   width:80%;
+}
+.w50p {
+   width:50%;
+}
+.dis-in-b {
+   display: inline-block;
+}
+.vtop {
+   vertical-align: top;
+}
+.mcenter {
+   margin:auto;
+}
+

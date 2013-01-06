@@ -1,0 +1,24 @@
+{namespace sample}
+#here's a comment
+
+#vars that are local to this file
+{var googleURL "http://google.com"}
+
+#As many templates as you like in a file.
+{template buildProfile}
+   <h2>My Name is: {name}</h2>
+   <p>
+      {if aboutMe}#we could've used shortcircuiting too E.G. aboutMe || desc...
+         {aboutMe}
+      {:elif description}
+         {description}
+      {:else}
+         Don't wait to build your profile.  <a href="{@googleURL}">Google</a>
+         "building profile" to find out how.
+      {/if}
+   </p>
+{/template}
+
+{template buildInterests}
+
+{/template}
