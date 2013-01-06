@@ -103,20 +103,17 @@ AbstractExpression.prototype.execute=function(characters, context){
 /**
  * Used to get the Value Production.
  *
- * @abstract
  * @return {Production}
  */
 AbstractExpression.prototype.getValue=function(){};
 
 /**
  * Used when parenthesis are found.
- * @abstract
  * @param {Output} output
  * @return {Production}
  */
 AbstractExpression.prototype.getParenthesizedExpression=function(output){};
 /**
- * @abstract
  * @return {Output}
  */
 AbstractExpression.prototype.getOutput=function(){};
