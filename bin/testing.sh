@@ -19,8 +19,16 @@
 #Print real time results from all unit tests.
 
 cd $DIR_TEST;
-while inotifywait -qr -e MODIFY --exclude .*\\.swp $DIR_PROJECT>/dev/null
-do
+
+function testAll(){
    clear
-   node $DIR_TEST/run_all_tests.js
+   node $DIR_BIN/run_all_tests.js
+}
+
+testAll
+
+while RESULT=$(inotifywait -qr -e MODIFY --exclude .*\\.swp $DIR_PROJECT)
+do
+   testAll
+   #echo $RESULT
 done
