@@ -16,7 +16,6 @@
  * For more information, visit http://SOMESITE
  */
 
-
 /**
  * @constructor
  */
@@ -54,7 +53,6 @@ AbstractExpression.prototype.execute=function(characters, context){
          case '!':
          case '~':
             match = characters.match(this._logicalNot);
-            match;
             negation = match[1];
             characters.shift(negation.length);
             characters.removeSpace();
