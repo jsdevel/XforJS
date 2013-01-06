@@ -23,6 +23,8 @@
  */
 function IfStatement(output){
    var expressionOutput = new Output();
+   /** @type boolean */
+   var allowContinuation=true;
    var bodyOutput = new Output();
       output.
          add("if(").
@@ -30,6 +32,7 @@ function IfStatement(output){
          add("){").
          add(bodyOutput).
          add("}");
+
    /**
     * @returns {VariableExpression}
     */
@@ -41,6 +44,36 @@ function IfStatement(output){
     */
    this.getBodyStatements=function(){
       return new TemplateBodyStatements(bodyOutput);
+   };
+   /**
+    * @param {CharWrapper} characters
+    * @param {ProductionContext} context
+    */
+   this.continueBlock=function(characters, context){
+      var match;
+      var newOutput = new Output();
+
+      if(!allowContinuation){
+         throw "Continuations are not allowed after {:else}";
+      }
+      if(characters.startsWith("{:else}")){
+         allowContinuation=false;
+         characters.shift(7);
+         output.add("else{").add(newOutput).add("}");
+         context.addProduction(new TemplateBodyStatements(new Output()));
+         return;
+      } else {
+         match = characters.match(ELIF);
+         if(match.find()){
+            characters.shift(match.group(1).length);
+            output.add("else ").add(newOutput);
+            context.
+               removeProduction().
+               addProduction(new IfStatement(newOutput));
+            return;
+         }
+      }
+      throw "Unknown continuation.";
    };
 }
 extend(IfStatement, AbstractConditionBlock);
