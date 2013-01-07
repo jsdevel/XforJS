@@ -73,14 +73,14 @@ function ProgramNamespace(output){
                   context.removeProduction();
                   return;
                } else {
-                  extraExcMsg="  Invalid character found after namespace value.";
+                  throw "Invalid character found after namespace value.";
                }
             }
          } else {
-            extraExcMsg="   NameSpace wasn't valid.";
+            throw "NameSpace wasn't valid.";
          }
       }
-      this.exc("Invalid Namespace declaration."+extraExcMsg);
+      throw "Unknown Character: '"+characters.charAt(0);
    };
 }
 extend(ProgramNamespace, Production);
