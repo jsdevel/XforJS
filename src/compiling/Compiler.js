@@ -41,8 +41,14 @@ function Compiler(config){
          configuration[name] = _config[name];
       }
    }
+   /** @type object */
    this.configuration=configuration;
+   /** @type JavascriptBuilder */
    this.javascript = new JavascriptBuilder(configuration);
+   /** @type function */
+   this['getXforJSLib']=function(){
+      return this.javascript['getXforJSLib']();
+   };
 
    /**
     * @param {String} input contents to compile.
