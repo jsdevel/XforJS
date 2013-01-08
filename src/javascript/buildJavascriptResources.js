@@ -39,10 +39,10 @@ var nameMap = {
 };
 var fragments={};
 fs.readdirSync('fragments').forEach(function(value){
-   if(value==="XforJ.lib.js")return;//Ignore the lib here.
+   if(value==="XforJ.lib.js" || !/\.js$/.test(value))return;//Ignore the lib here.
 
    if(!(value in nameMap)){
-      throw "The following name isn't defined in nameMap: '"+name+"' using the following filename: '"+value+"'.";
+      throw "The following name isn't defined in nameMap: '"+value+"' using the following filename: '"+value+"'.";
    }
    fragments[value] = clean(fs.readFileSync("fragments/"+value, "utf8"));
 });
@@ -72,7 +72,7 @@ var XforJLibContents = fs.readFileSync("fragments/XforJ.lib.js", "utf8").
 var indent = "   ";
 var code = new CodeFormatter(indent, new Output()).
    addLine("var JavascriptResources={").addIndent().
-      addLine("getXforJLib:function(){").addIndent().
+      addLine("'getXforJSLib':function(){").addIndent().
          addLine("return \""+XforJLibContents+"\";").removeIndent().
       addLine("},").
 

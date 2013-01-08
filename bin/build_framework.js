@@ -18,9 +18,14 @@
 var common = require('./common');
 var fs = require('fs');
 var exec=require('child_process').exec;
+console.log("reading the src file...");
 var framework = fs.readFileSync("../src/XforJS.js", "utf8");
+console.log("building the src file...");
 var frameworkBuilt = common.buildFile(framework).withPath('../src/').now();
+console.log("writing the src file to ../build/javascript/XforJS.js");
 fs.writeFileSync("../build/javascript/XforJS.js", frameworkBuilt, "utf8");
 
 
-exec('java -jar compiler.jar --js ../build/javascript/XforJS.js --js_output_file ../build/javascript/XforJS.min.js --compilation_level ADVANCED_OPTIMIZATIONS --output_wrapper "!!!function(){%output%}();"');
+console.log("writing compiled file to ../build/javascript/XforJS.min.js");
+exec('java -jar compiler.jar --js ../build/javascript/XforJS.js --js_output_file ../build/javascript/XforJS.min.js --compilation_level ADVANCED_OPTIMIZATIONS --output_wrapper "!function(){%output%}();"');
+console.log("finished");

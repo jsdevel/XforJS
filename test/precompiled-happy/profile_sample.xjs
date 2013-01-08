@@ -1,6 +1,6 @@
 {namespace sample}
 
-#vars that are local to this filea
+#vars that are local to this file
 {var googleURL "http://google.com"}
 
 #As many templates as you like in a file.

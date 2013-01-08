@@ -29,7 +29,7 @@ var setEnv=function(compilerConfig, isNested){
    program = new Program(output, context, isNested);
    context.addProduction(program);
 };
-eval(JavascriptResources.getXforJLib());
+eval(JavascriptResources.getXforJSLib());
 
 setEnv();
 assert.equal(eval(output.toString()), void 0,

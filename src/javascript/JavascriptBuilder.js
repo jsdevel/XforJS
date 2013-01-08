@@ -37,7 +37,7 @@ function JavascriptBuilder(args){
    }
 
    //TODO: Make the namespace configurable.
-   if(args.useexternal){
+   if(args['useexternal']){
       js_count="xforj."+js_CountElements;
       js_escapexss="xforj."+js_EscapeXSS;
       js_foreach="xforj."+js_Foreach;
@@ -53,8 +53,8 @@ function JavascriptBuilder(args){
       js_stringBuffer=JavascriptResources.getStringBuffer();
    }
 
-   this.getXforJLib=function(){
-      return JavascriptResources.getXforJLib();
+   this['getXforJSLib']=function(){
+      return JavascriptResources['getXforJSLib']();
    };
    this.getJSCount=function(){
       return js_count;
@@ -92,7 +92,7 @@ JavascriptBuilder.buildOutputLibraray=function(path){
          if(fs.existsSync(path) && fs.statSync(path).isDirectory()){
             throw "Can't overwrite the following directory with the library: "+path;
          } else {
-            fs.writeFileSync(path, JavascriptResources.getXforJLib());
+            fs.writeFileSync(path, JavascriptResources['getXforJSLib']());
          }
       } catch(e){
          throw "The following happened while attempting to write to '"+path+"':\n"+e;
