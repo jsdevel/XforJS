@@ -7,6 +7,9 @@ DIR_SRC=$DIR_PROJECT/src;
 DIR_TEST=$DIR_PROJECT/test;
 
 case $1 in
+   integrating)
+      . $DIR_BIN/integration_testing.sh
+   ;;
    testing)
       . $DIR_BIN/testing.sh
    ;;

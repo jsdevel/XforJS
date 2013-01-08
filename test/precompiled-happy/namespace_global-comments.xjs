@@ -1,0 +1,5 @@
+{namespace boo}
+
+#these comments should be ok
+#boo
+{template wow}{/template}

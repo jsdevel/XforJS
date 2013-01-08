@@ -1,0 +1,5 @@
+{namespace boo}
+
+{template boo}
+   {var foo coo.goo.qoo[asdf||asdfsdf]}
+{/template}

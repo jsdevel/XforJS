@@ -1,0 +1,13 @@
+{namespace boo}
+
+{template boo}
+   {if 5}
+
+   {:elif 2}
+
+   {:elif 3}
+
+   {:else}
+
+   {/if}
+{/template}
