@@ -60,7 +60,7 @@ function IfStatement(output){
          allowContinuation=false;
          characters.shift(7);
          output.add("else{").add(newOutput).add("}");
-         context.addProduction(new TemplateBodyStatements(new Output()));
+         context.addProduction(new TemplateBodyStatements(newOutput));
          return;
       } else {
          match = characters.match(ELIF);
