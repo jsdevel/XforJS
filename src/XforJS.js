@@ -1,4 +1,5 @@
-/*!
+/**
+ * @preserve
  * Copyright 2012 Joseph Spencer.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
+ * For demos and docs visit http://jsdevel.github.com/XforJS/
+ * For viewing source visit http://github.com/jsdevel/XforJS/
  */
 //This file is wrapped in closure during compilation.
 var XforJS = {
