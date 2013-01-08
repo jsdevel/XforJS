@@ -1,0 +1,59 @@
+{namespace sort}
+
+#the tests herein sort what was passed in accordingly
+
+{template asc}
+   {foreach .}
+      {sort . |asc}
+      {.}
+   {/foreach}
+{/template}
+
+{template asci}
+   {foreach .}
+      {sort . |asc|i}
+      {.}
+   {/foreach}
+{/template}
+
+{template ascn}
+   {foreach .}
+      {sort . |asc|n}
+      {.}
+   {/foreach}
+{/template}
+
+{template ascin}
+   {foreach .}
+      {sort . |asc|in}
+      {.}
+   {/foreach}
+{/template}
+
+{template desc}
+   {foreach .}
+      {sort . |desc}
+      {.}
+   {/foreach}
+{/template}
+
+{template desci}
+   {foreach .}
+      {sort . |asc|i}
+      {.}
+   {/foreach}
+{/template}
+
+{template descn}
+   {foreach .}
+      {sort . |asc|n}
+      {.}
+   {/foreach}
+{/template}
+
+{template descin}
+   {foreach .}
+      {sort . |asc|in}
+      {.}
+   {/foreach}
+{/template}
