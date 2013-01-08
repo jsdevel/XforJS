@@ -20,7 +20,15 @@
 
 cd $DIR_BIN;
 
+function dev()
+{
+   clear
+   node build.js
+}
+
+dev
+
 while RESULT=$(inotifywait -qr -e MODIFY --exclude .*\\.swp $DIR_PROJECT)
 do
-   node build.js
+   dev
 done

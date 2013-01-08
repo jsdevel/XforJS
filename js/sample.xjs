@@ -9,16 +9,16 @@
 
    <h2>My Name is: {name}</h2>
    <p>
-      {if aboutMe}#we could've used shortcircuiting too E.G. aboutMe || desc...
+      {if aboutMe}
          {aboutMe}
       {:elif description}
          {description}
       {:else}
-         Don't wait to build your profile.  <a href="{@googleURL}">Google</a>
+         Don\'t wait to build your profile.  <a href="{@googleURL}">Google</a>
          "building profile" to find out how.
       {/if}
       {if interests && @showInterests}
-         {call buildInterests interests}
+         {call buildInterests interests/}
       {/if}
    </p>
 {/template}

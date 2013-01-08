@@ -5,28 +5,43 @@
     Description:
         Purpose of the stylesheet follows.
 */
-.h100p {
-   height:100%;
+.code-editor {
+   margin: auto;
+   height: 550px;
+   position: relative;
+   width: 80%;
 }
-.h400px {
-   height:400px;
-}
-.w100p {
-   width:100%;
-}
-.w80p {
-   width:80%;
-}
-.w50p {
-   width:50%;
-}
-.dis-in-b {
+.code-editor > div {
    display: inline-block;
-}
-.vtop {
+   height: 100%;
+   position: relative;
    vertical-align: top;
+   width: 50%;
 }
-.mcenter {
-   margin:auto;
+.code-editor ul a[href=".compiled"] {
+   text-align: center;
+   width: 90px;
 }
 
+.code-editor .error {
+   background-color: red !important;
+   color: white !important;
+   font-weight: bold;
+   text-shadow: 0px 0.5px 1px gray;
+}
+.code-editor .tab-content {
+   bottom: 0px;
+   position: absolute;
+   top: 70px;
+   width: 100%;
+}
+.code-editor .tab-pane {
+   height: 100%;
+}
+.code-editor textarea {
+   height: 100%;
+   width: 100%;
+}
+.code-editor .rendered {
+   padding: 10px;
+}

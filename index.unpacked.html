@@ -7,42 +7,61 @@
       <link href="css/main.css" rel="stylesheet" type="text/css"/>
    </head>
    <body>
-      <div class="mcenter code-editor w80p h400px">
-         <div class="w50p h100p dis-in-b vtop">
+      <div class="code-editor">
+         <div>
             <ul class="nav nav-tabs">
-               <li class="active"><a href="#precompiled" data-toggle="tab">Precompiled</a></li>
-               <li><a href="#compiled" data-toggle="tab">Compiled</a></li>
+               <li class="active">
+                  <a href=".precompiled" data-toggle="tab">Precompiled</a>
+               </li>
+               <li>
+                  <a href=".compiled" data-toggle="tab">Compiled</a>
+               </li>
+               <li>
+                  <a href=".input-data" data-toggle="tab">Input Data</a>
+               </li>
+               <li>
+                  <a href=".input-params" data-toggle="tab">Input Params</a>
+               </li>
             </ul>
-            <div class="tab-content h100p">
-               <div class="tab-pane h100p active" id="precompiled">
-                  <textarea class="w100p h100p" id="PreCompiled">
-//INCLUDE js/sample.xjs
+            <div class="tab-content">
+               <div class="tab-pane active precompiled">
+                  <textarea data-tab=".compiled">
+//INCLUDE ../XforJS/test/precompiled-happy/profile_sample.xjs
                   </textarea>
                </div>
-               <div class="tab-pane" id="compiled">
-                  <textarea class="w100p h100p" id="Compiled">
-
+               <div class="tab-pane compiled">
+                  <textarea data-tab=".compiled"></textarea>
+               </div>
+               <div class="tab-pane input-data">
+                  <textarea data-tab=".input-data">
+//INCLUDE json/profile_input.json
+                  </textarea>
+               </div>
+               <div class="tab-pane input-params">
+                  <textarea data-tab=".input-params">
+//INCLUDE json/profile_params.json
                   </textarea>
                </div>
             </div>
          </div>
-         <div class="w50p dis-in-b vtop">
+         <div>
             <ul class="nav nav-tabs">
-               <li class="active"><a href="#text" data-toggle="tab">Output</a></li>
-               <li><a href="#rendered" data-toggle="tab">Rendered</a></li>
+               <li class="active">
+                  <a href=".rendered" data-toggle="tab">Rendered</a>
+               </li>
+               <li>
+                  <a href=".output-text" data-toggle="tab">Output</a>
+               </li>
             </ul>
             <div class="tab-content">
-               <div class="tab-pane active" id="text">
-                  <pre class="w100p h100p" id="OutputText">
-
-                  </pre>
-               </div>
-               <div class="tab-pane w100p h100p" id="rendered">
+               <div class="tab-pane active rendered"></div>
+               <div class="tab-pane output-text">
+                  <textarea></textarea>
                </div>
             </div>
          </div>
       </div>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+      <script src="js/jquery-1.8.3.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <script src="js/XforJS.min.js"></script>
       <script src="js/main.js"></script>

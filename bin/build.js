@@ -7,6 +7,7 @@ var unpacked = fs.readFileSync('../index.unpacked.html', 'utf8');
 unpacked = buildFile(unpacked.replace(/(>)\s+(<)/g, "$1$2")).withPath("../").now();
 fs.writeFileSync('../index.html', unpacked, 'utf8');
 
+console.log(2);
 
 function buildFile(file, addExt){
    var _path="";

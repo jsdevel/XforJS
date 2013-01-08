@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>XforJS Documentation</title><link href="css/bootstrap.custom.css" rel="stylesheet" type="text/css"/><link href="css/main.css" rel="stylesheet" type="text/css"/></head><body><div class="mcenter code-editor w80p h400px"><div class="w50p h100p dis-in-b vtop"><ul class="nav nav-tabs"><li class="active"><a href="#precompiled" data-toggle="tab">Precompiled</a></li><li><a href="#compiled" data-toggle="tab">Compiled</a></li></ul><div class="tab-content h100p"><div class="tab-pane h100p active" id="precompiled"><textarea class="w100p h100p" id="PreCompiled">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>XforJS Documentation</title><link href="css/bootstrap.custom.css" rel="stylesheet" type="text/css"/><link href="css/main.css" rel="stylesheet" type="text/css"/></head><body><div class="code-editor"><div><ul class="nav nav-tabs"><li class="active"><a href=".precompiled" data-toggle="tab">Precompiled</a></li><li><a href=".compiled" data-toggle="tab">Compiled</a></li><li><a href=".input-data" data-toggle="tab">Input Data</a></li><li><a href=".input-params" data-toggle="tab">Input Params</a></li></ul><div class="tab-content"><div class="tab-pane active precompiled"><textarea data-tab=".compiled">
 {namespace sample}
 
 #vars that are local to this file
@@ -8,28 +8,51 @@
 {template buildProfile}
    {param showInterests false}
 
-   <h2>My Name is: {name}</h2>
+    <h1>My Profile</h1>
+    {if gravatar}
+        <img src="{gravatar}" width="100px"/>
+    {/if}
+   <h2>Name: {name}</h2>
    <p>
-      {if aboutMe}#we could've used shortcircuiting too E.G. aboutMe || desc...
+      {if aboutMe}
          {aboutMe}
       {:elif description}
          {description}
       {:else}
-         Don't wait to build your profile.  <a href="{@googleURL}">Google</a>
+         Don\'t wait to build your profile.  <a href="{@googleURL}">Google</a>
          "building profile" to find out how.
       {/if}
       {if interests && @showInterests}
-         {call buildInterests interests}
+         {call buildInterests interests/}
       {/if}
    </p>
 {/template}
 
 #context is interests
 {template buildInterests}
-   <ol>
+   <ul>
       {foreach .}
+         {sort . desc}
          <li>{.}</li>
       {/foreach}
-   </ol>
+   </ul>
 {/template}
-                  </textarea></div><div class="tab-pane" id="compiled"><textarea class="w100p h100p" id="Compiled"></textarea></div></div></div><div class="w50p dis-in-b vtop"><ul class="nav nav-tabs"><li class="active"><a href="#text" data-toggle="tab">Output</a></li><li><a href="#rendered" data-toggle="tab">Rendered</a></li></ul><div class="tab-content"><div class="tab-pane active" id="text"><pre class="w100p h100p" id="OutputText"></pre></div><div class="tab-pane w100p h100p" id="rendered"></div></div></div></div><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script><script src="js/bootstrap.min.js"></script><script src="js/XforJS.min.js"></script><script src="js/main.js"></script></body></html>
+                  </textarea></div><div class="tab-pane compiled"><textarea data-tab=".compiled"></textarea></div><div class="tab-pane input-data"><textarea data-tab=".input-data">
+{
+   name:"Joseph Spencer",
+   aboutMe:"",
+   description:"My name is Joseph Spencer, and I really really love javascript :)",
+    gravatar:"https://secure.gravatar.com/avatar/81e10bb3b6fbba8b7c3ca3e07c785273?s=420&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+   interests:[
+      "religion",
+      "programming",
+      "change"
+   ]
+}
+
+                  </textarea></div><div class="tab-pane input-params"><textarea data-tab=".input-params">
+{
+   showInterests:true
+}
+
+                  </textarea></div></div></div><div><ul class="nav nav-tabs"><li class="active"><a href=".rendered" data-toggle="tab">Rendered</a></li><li><a href=".output-text" data-toggle="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active rendered"></div><div class="tab-pane output-text"><textarea></textarea></div></div></div></div><script src="js/jquery-1.8.3.min.js"></script><script src="js/bootstrap.min.js"></script><script src="js/XforJS.min.js"></script><script src="js/main.js"></script></body></html>

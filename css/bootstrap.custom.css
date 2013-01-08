@@ -192,9 +192,6 @@ a:active {
    border-bottom-color: transparent;
    cursor: default;
 }
-.tab-content {
-   overflow: auto;
-}
 .tabs-below > .nav-tabs,
 .tabs-right > .nav-tabs,
 .tabs-left > .nav-tabs {
