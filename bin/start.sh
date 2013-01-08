@@ -8,13 +8,13 @@ DIR_TEST=$DIR_PROJECT/test;
 
 case $1 in
    integrating)
-      . $DIR_BIN/integration_testing.sh
+      . $DIR_BIN/integrating
    ;;
    testing)
-      . $DIR_BIN/testing.sh
+      . $DIR_BIN/testing
    ;;
    developing)
-      . $DIR_BIN/developing.sh
+      . $DIR_BIN/developing
    ;;
    *)
       echo "Invalid argument $1"
