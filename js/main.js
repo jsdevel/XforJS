@@ -22,7 +22,6 @@
       var inputData;
       var inputParams;
 
-      console.log('[href="'+$this.data('tab')+'"]')
       try{
          inputData = (new Function("return "+$inputData.val().replace(/\s+/, "")))();
          inputParams = (new Function("return "+$inputParams.val().replace(/\s+/, "")))();
