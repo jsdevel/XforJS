@@ -94,6 +94,10 @@ function Program(
          throw "Space isn't allowed before a namespace.";
       }
 
+      if(characters.length() === 0){//leave early
+         return;
+      }
+
       if(characters.charAt(0) === '{'){
          if(!hasProgramNamespace){
             if(characters.charAt(1) !== 'n'){
@@ -138,6 +142,9 @@ function Program(
    this.close=function(context){
       if(!hasProgramNamespace){
          throw "No ProgramNamespace was declared.";
+      }
+      if(!hasGlobals){
+         throw "Global Statements must appear before exiting Program.";
       }
    };
 }

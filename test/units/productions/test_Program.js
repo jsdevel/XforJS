@@ -115,7 +115,6 @@ program.execute(new CharWrapper("{t"), context);
 assert['throws'](function(){
    program.execute(new CharWrapper("{i"), context);
 }, "imports must come before templates.");
-
 setEnv();
 //global then variable should fail
 program.execute(new CharWrapper("{n"), context);
@@ -123,4 +122,21 @@ program.execute(new CharWrapper("{t"), context);
 assert['throws'](function(){
    program.execute(new CharWrapper("{v"), context);
 }, "variables must come before templates.");
+setEnv();
+assert.doesNotThrow(function(){
+   program.execute(new CharWrapper(""));
+   assert(context.getCurrentProduction() instanceof Program,
+      "empty characters does nothing in Program.");
+}, "characters are not required, Program will simply exit.");
+
+//CLOSE METHOD TESTING
+setEnv();
+assert['throws'](function(){
+   program.close();
+}, "closing without namespace throws errors.");
+
+assert['throws'](function(){
+   program.execute(new CharWrapper("{namespace boo}"));
+   program.close();
+}, "closing without global statements throws errors.");
 }();
