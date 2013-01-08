@@ -7,6 +7,10 @@
 {template buildProfile}
    {param showInterests false}
 
+    <h1>My Profile</h1>
+    {if gravatar}
+        <img src="{gravatar}" width="100px"/>
+    {/if}
    <h2>My Name is: {name}</h2>
    <p>
       {if aboutMe}
@@ -25,9 +29,10 @@
 
 #context is interests
 {template buildInterests}
-   <ol>
+   <ul>
       {foreach .}
+         {sort . desc}
          <li>{.}</li>
       {/foreach}
-   </ol>
+   </ul>
 {/template}
