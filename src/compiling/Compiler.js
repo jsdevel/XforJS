@@ -75,12 +75,15 @@ function Compiler(config){
             context.executeCurrent(wrapper);
          }
          context.close();
-      } catch(e){
-         throw "ERROR while evaluating: "+context.getCurrentProduction().name+"\n"+
-               "   Line  : "+wrapper.getLine()+"\n"+
-               "   Column: "+wrapper.getColumn()+"\n"+
-               "REASON:\n"+
-               "   "+e;
+      } catch(reason){
+         throw "=========================\n"+
+               context.getCurrentProduction().name+":\n"+
+               "-------------------------\n"+
+               reason+"\n"+
+               "\n"+
+               "   Line       : "+wrapper.getLine()+"\n"+
+               "   Column     : "+wrapper.getColumn()+"\n"+
+               "=========================\n"
       }
 
       return output.toString();
