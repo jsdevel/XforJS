@@ -7,10 +7,10 @@
 {template buildProfile}
    {param showInterests false}
 
-    <h1>My Profile</h1>
-    {if gravatar}
-        <img src="{gravatar}" width="100px"/>
-    {/if}
+   <h1>My Profile</h1>
+   {if gravatar}
+      <img src="{gravatar}" width="100px"/>
+   {/if}
    <h2>Name: {name}</h2>
    <p>
       {if aboutMe}
