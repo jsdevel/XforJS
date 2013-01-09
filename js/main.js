@@ -43,20 +43,41 @@
       var indent = "    ";
       var keyCode = e.keyCode || e.which;
       var $this = $(this);
+      var start;
+      var end;
+      var offset;
+      var value;
+      var newValue;
+      var carentPosition;
 
-      if (keyCode == 9) {
-         e.preventDefault();
-         var offset = $this.get(0).selectionStart || $this.get(0).selectionEnd;
-         var value = $this.val();
-         var newValue;
+      //handle hitting the tab key in the editors
+      if (keyCode === 9 || keyCode === 8) {
+         start=this.selectionStart;
+         end=this.selectionEnd;
+         offset =  start || end;
+         value = $this.val();
 
          if(offset){
-            newValue = value.substring(0, offset) +
-               indent +
-               value.substring(offset, value.length);
+            if(keyCode === 9){
+               newValue = value.substring(0, offset) +
+                  indent +
+                  value.substring(offset, value.length);
+               carentPosition=offset+indent.length;
+            } else if (keyCode === 8){
+               if(indent === value.substring(offset-indent.length, offset)){
+                  newValue = value.substring(0, offset-indent.length) +
+                     value.substring(offset, value.length);
+                  carentPosition=offset-indent.length;
 
-            $this.val(newValue);
-            $this.get(0).selectionStart = $this.get(0).selectionEnd = offset + indent.length;
+               }
+            }
+
+            if(newValue){
+               e.preventDefault();
+               //set value and caret position
+               $this.val(newValue);
+               this.selectionStart = this.selectionEnd = carentPosition;
+            }
          }
       }
    });
