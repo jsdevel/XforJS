@@ -2,9 +2,38 @@
 
 #the tests herein sort what was passed in accordingly
 
+#asc
 {template asc}
    {foreach .}
       {sort . |asc}
+      {.}
+   {/foreach}
+{/template}
+
+{template ascci}
+   {foreach .}
+      {sort . |asc|ci}
+      {.}
+   {/foreach}
+{/template}
+
+{template ascCi}
+   {foreach .}
+      {sort . |asc|Ci}
+      {.}
+   {/foreach}
+{/template}
+
+{template asccin}
+   {foreach .}
+      {sort . |asc|cin}
+      {.}
+   {/foreach}
+{/template}
+
+{template ascCin}
+   {foreach .}
+      {sort . |asc|Cin}
       {.}
    {/foreach}
 {/template}
@@ -30,6 +59,7 @@
    {/foreach}
 {/template}
 
+#desc
 {template desc}
    {foreach .}
       {sort . |desc}
@@ -37,23 +67,51 @@
    {/foreach}
 {/template}
 
+{template descci}
+   {foreach .}
+      {sort . |desc|ci}
+      {.}
+   {/foreach}
+{/template}
+
+{template descCi}
+   {foreach .}
+      {sort . |desc|Ci}
+      {.}
+   {/foreach}
+{/template}
+
+{template desccin}
+   {foreach .}
+      {sort . |desc|cin}
+      {.}
+   {/foreach}
+{/template}
+
+{template descCin}
+   {foreach .}
+      {sort . |desc|Cin}
+      {.}
+   {/foreach}
+{/template}
+
 {template desci}
    {foreach .}
-      {sort . |asc|i}
+      {sort . |desc|i}
       {.}
    {/foreach}
 {/template}
 
 {template descn}
    {foreach .}
-      {sort . |asc|n}
+      {sort . |desc|n}
       {.}
    {/foreach}
 {/template}
 
 {template descin}
    {foreach .}
-      {sort . |asc|in}
+      {sort . |desc|in}
       {.}
    {/foreach}
 {/template}

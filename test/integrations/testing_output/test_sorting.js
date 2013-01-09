@@ -23,35 +23,67 @@
       0,
       1,
       3,
-      "asdf",
-      "ASDF",
-      "Dasdf"
+      "z",
+      "Z",
+      "c",
+      "z",
+      "D",
+      "A",
+      "Z",
+      "a"
    ];
    var result;
 
    eval(templates);
 
+   //asc
    result=sort.asc(array);
-   assert.equal(result, "ASDFDasdfasdf013", "asc");
+   assert.equal(result, "ADZZaczz013", "asc");
+
+   result=sort.ascci(array);
+   assert.equal(result, "aAcDzzZZ013", "ascci");
+
+   result=sort.ascCi(array);
+   assert.equal(result, "AacDZZzz013", "ascCi");
+
+   result=sort.ascCin(array);
+   assert.equal(result, "013AacDZZzz", "ascCin");
+
+   result=sort.asccin(array);
+   assert.equal(result, "013aAcDzzZZ", "asccin");
 
    result=sort.asci(array);
-   assert.equal(result, "asdfASDFDasdf013", "asci");
+   assert.equal(result, "aAcDzZzZ013", "asci");
 
    result=sort.ascn(array);
-   assert.equal(result, "013ASDFDasdfasdf", "ascn");
+   assert.equal(result, '013ADZZaczz', "ascn");
 
    result=sort.ascin(array);
-   assert.equal(result, "013asdfASDFDasdf", "ascn");
+   assert.equal(result, '013AacDZzzZ', "ascin");
 
+
+   //desc
    result=sort.desc(array);
-   assert.equal(result, "asdfDasdfASDF310", "desc");
+   assert.equal(result, 'zzcaZZDA310', "desc");
+
+   result=sort.descci(array);
+   assert.equal(result, 'zzZZDcaA310', "descci");
+
+   result=sort.descCi(array);
+   assert.equal(result, 'ZZzzDcAa310', "descCi");
+
+   result=sort.descCin(array);
+   assert.equal(result, '310ZZzzDcAa', "descCin");
+
+   result=sort.desccin(array);
+   assert.equal(result, '310zzZZDcaA', "desccin");
 
    result=sort.desci(array);
-   assert.equal(result, "asdfASDFDasdf013", "desci");
+   assert.equal(result, 'ZzZzDcaA310', "desci");
 
    result=sort.descn(array);
-   assert.equal(result, "013ASDFDasdfasdf", "descn");
+   assert.equal(result, '310zzcaZZDA', "descn");
 
    result=sort.descin(array);
-   assert.equal(result, "013asdfASDFDasdf", "descin");
+   assert.equal(result, '310zZzZDcAa', "descin");
 }();

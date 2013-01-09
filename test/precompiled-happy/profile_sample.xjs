@@ -31,7 +31,7 @@
 {template buildInterests}
    <ul>
       {foreach .}
-         {sort . desc}
+         {sort . |desc}
          <li>{.}</li>
       {/foreach}
    </ul>

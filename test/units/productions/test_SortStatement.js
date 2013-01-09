@@ -24,7 +24,7 @@
    var production;
    var characters;
 
-   setEnv("}");
+   setEnv("|asc}");
       assert(context.getParams().getParameters().indexOf(js_GetSortArray) > -1,
          "GetSortArray is used.");
       execute();
@@ -46,32 +46,51 @@
          execute();
       }, "direction must be asc or desc.");
 
-   setEnv("desc}");
+   setEnv(". |desc}");
       execute();
       remove();
+      characters.shift(2);
       execute();
       assert(output1Has(",0,0"),
          "desc as first param.");
-      assert(charAt(0) === "}",
+      assert(characters.length() === 0,
          "direction is removed.");
 
-   setEnv("asc|in}");
+   setEnv(". |asc|in}");
       execute();
       remove();
+      characters.shift(2);
       execute();
       assert(output1Has(",1,1"),
          "numbers first.");
       assert(output2Has(",1"),
          "case sensitivity works.");
-      assert(charAt(0) === "}",
-         "direction + modifiers are removed.");
-   setEnv("asc)");
+      assert(!characters.length(),
+         "properly closes.");
+
+   setEnv(". |asc}");
       execute();
       remove();
+      characters.shift(2);
       execute();
       assert['throws'](function(){
          execute();
       }, "invalid character.");
+
+   [
+      ". |asc|cc}",
+      ". |asc|ii}",
+      ". |asc|nn}"
+   ].forEach(function(input){
+      setEnv(input);
+         execute();
+         remove();
+         characters.shift(2);
+         assert['throws'](function(){
+            execute();
+         });
+   });
+
 
    function outputHas(string){
       return output.toString().indexOf(string) > -1;

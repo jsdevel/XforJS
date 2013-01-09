@@ -22,7 +22,8 @@ var filesToLoad = ["../src/XforJS.js"];
 var filesToTest = [];
 var fileLoader = new common.FileLoader({filesToLoad:filesToLoad});
 var testDirs = [
-   'integrations/compiling_happy/'
+   'integrations/compiling_happy/',
+   'integrations/testing_output/'
 ];
 
 testDirs.forEach(function(value){

@@ -62,11 +62,11 @@
    }();
    !function(){//SORT_DIRECTION
       [
-         "asc",
-         "desc",
-         "asc ",
-         "desc ",
-         "asc|"
+         "|asc",
+         "|desc",
+         "|asc ",
+         "|desc ",
+         "|asc|"
       ].forEach(function(good){
          assert(SORT_DIRECTION.exec(good), "SORT_DIRECTION good: '"+good+"'.");
       });
@@ -82,15 +82,17 @@
          "|i",
          "|n",
          "|in",
+         "|cCin",
+         "|nicC",
          "|ni"
       ].forEach(function(good){
          assert(SORT_MODIFIERS.exec(good), "SORT_MODIFIERS good: '"+good+"'.");
       });
       [
-         "|ii",
-         "|nn",
+         "|iid",
+         "nn",
          "ii",
-         " nn",
+         "nn",
       ].forEach(function(bad){
          assert(!SORT_MODIFIERS.exec(bad), "SORT_MODIFIERS bad: '"+bad+"'.");
       });

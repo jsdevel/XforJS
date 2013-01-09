@@ -55,15 +55,6 @@ function SortStatement(
          context.addProduction(new ContextSelector(contextSelectorOutput, true));
          return;
       } else {
-         if(characters.charAt(0) === '}'){
-            if(!hasSortDirection){
-               sortFunctionOutput.
-                  add(",1,0");
-            }
-            characters.shift(1);
-            context.removeProduction();
-            return;
-         }
          if(!hasSortDirection){
             var sortDirection = characters.match(SORT_DIRECTION);
             if(sortDirection){
@@ -71,9 +62,9 @@ function SortStatement(
 
                var direction = sortDirection[1];
                characters.shift(direction.length);
-
-               var asc = direction.indexOf("a") === 0;
+               var asc = direction.indexOf("|asc") === 0;
                var promoteNum = false;
+               var casePreference = 0;
 
                var sortModifiers = characters.match(SORT_MODIFIERS);
                if(sortModifiers){
@@ -82,14 +73,39 @@ function SortStatement(
 
                   if(modifiers.indexOf("i") > -1){
                      sortCaseSensitivityOutput.add(",1");//added to the params for GetSortArray
+                     if(/i[^i]*?i/i.test(modifiers)){
+                        throw "'i' may only appear once in sort options.";
+                     }
                   }
                   promoteNum=modifiers.indexOf("n") > -1;
+                  if(promoteNum && /n[^n]*?n/i.test(modifiers)){
+                     throw "'n' may only appear once in sort options.";
+                  }
+                  if(modifiers.indexOf("c") > -1){
+                     casePreference = 1;
+                  } else if (modifiers.indexOf("C") > -1){
+                     casePreference = 2;
+                  }
+                  if(casePreference){
+                     if(/c[^c]*?c/i.test(modifiers)){
+                        throw "Only one of 'c' or 'C' may appear in sort options.";
+                     }
+                  }
                }
-               sortFunctionOutput.add(","+(asc?1:0)+","+(promoteNum?1:0));
-               return;
+               sortFunctionOutput.add(","+(asc?1:0)+","+(promoteNum?1:0)+","+casePreference);
             } else {
-               throw "Sort direction must be one of 'asc' or 'desc'.";
+               throw "Sort direction must be one of '|asc' or '|desc'.";
             }
+         }
+
+         if(!hasSortDirection){
+            throw "One of '|asc' or '|desc' is required.";
+         }
+
+         if(characters.charAt(0) === '}'){
+            characters.shift(1);
+            context.removeProduction();
+            return;
          }
       }
       throw "Invalid Character.";

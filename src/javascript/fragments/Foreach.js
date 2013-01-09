@@ -18,21 +18,33 @@
 /*
  * Foreach assumes that context is the output of GetSortArray.
  * The Function itself accepts the following params:
- * obj, callback, [sort order], [sort promoteNumbers].
+ *
+ * obj, callback, sortOrder, promoteNumbers, promoteCase(0=random,1=lower first,2=upper first).
  *
  * The callback is called with the following params:
  * function(context, position, last, name){
  *
  * }
  */
-(function(o,c,so,n){
+(function(o,c,so,n, p){
    var i=0,l,m;
    if(!!o&&typeof(o)==='object'&&typeof(c)==='function'){
       l=o.length;
       if(so!==void(0))o.sort(
          function(c,d){
+            //a=previousKey
+            //b=nextKey
             var a=c.k,b=d.k,at=typeof(a),bt=typeof(b);
-            if(a===b)return 0;
+            if(a===b){
+               switch(p){
+               case(2):
+                  return c.v>d.v?1:-1;
+               case(1):
+                  return c.v<d.v?1:-1;
+               default:
+                  return 0;
+               }
+            }
             if(at===bt)return (!!so?a<b:a>b)?-1:1;
             return (!!n?at<bt:at>bt)?-1:1
          }

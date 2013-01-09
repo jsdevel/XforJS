@@ -25,6 +25,7 @@
             r.push({
                n:a,//name
                c:o[a],//context
+               v:v,//value
                k:typeof(v)==='string'&&i?v.toLowerCase():v//key.  Used by the sort algorithm in foreach.
             });
          } catch(e){
