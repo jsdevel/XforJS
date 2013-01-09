@@ -8,12 +8,19 @@
 * {
    box-sizing: border-box;
 }
+.bumped-dark {
+   box-shadow: 0px 0px 6px rgba(0, 0, 0, 1),
+      inset 0px 0px 4px rgba(0, 0, 0, 1),
+      inset 0px 0px 12px rgba(0, 0, 0, 0.8),
+      inset 0px 0px 20px rgba(0, 0, 0, 0.6);
+}
 header {
    background-color: #545454;
-   box-shadow: 0px 0px 5px gray;
    color: white;
    font-size: 200%;
    line-height: normal;
+   margin: -10px;
+   margin-bottom: 10px;
    padding-bottom: 20px;
    text-align: center;
    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.5);
