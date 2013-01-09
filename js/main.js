@@ -82,9 +82,21 @@
          }
       }
    });
+   /*Not sure if this is wanted, but it would prevent scrolling of window in
+    *textareas
+    *
+   on('click', 'textarea', function(e){
+      e.stopPropagation();
+      $body.addClass('hides');
+   }).
+   on('click', function(){
+      $body.removeClass('hides');
+   });*/
 
-   $body.find('.code-editor .precompiled textarea').
-      trigger('keyup');//force editors to show the rendered data
+   $(window).on('load', function(){
+      $body.find('.code-editor.open .precompiled textarea').
+         trigger('keyup');//force editors to show the rendered data
+   });
 
    /**
     * Used to get the template from an element
