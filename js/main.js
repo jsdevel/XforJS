@@ -42,6 +42,8 @@
    on('keydown', 'textarea', function(e){
       var indent = "    ";
       var keyCode = e.keyCode || e.which;
+      var tab = keyCode === 9;
+      var backspace = keyCode === 8;
       var $this = $(this);
       var start;
       var end;
@@ -51,24 +53,23 @@
       var carentPosition;
 
       //handle hitting the tab key in the editors
-      if (keyCode === 9 || keyCode === 8) {
+      if (tab || backspace) {
          start=this.selectionStart;
          end=this.selectionEnd;
          offset =  start || end;
          value = $this.val();
 
          if(offset){
-            if(keyCode === 9){
+            if(tab){
                newValue = value.substring(0, offset) +
                   indent +
                   value.substring(offset, value.length);
                carentPosition=offset+indent.length;
-            } else if (keyCode === 8){
+            }else if(backspace){
                if(indent === value.substring(offset-indent.length, offset)){
                   newValue = value.substring(0, offset-indent.length) +
                      value.substring(offset, value.length);
                   carentPosition=offset-indent.length;
-
                }
             }
 
