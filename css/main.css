@@ -5,6 +5,36 @@
     Description:
         Purpose of the stylesheet follows.
 */
+* {
+   box-sizing: border-box;
+}
+header {
+   background-color: #545454;
+   box-shadow: 0px 0px 5px gray;
+   color: white;
+   font-size: 200%;
+   line-height: normal;
+   padding-bottom: 20px;
+   text-align: center;
+   text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.5);
+}
+header span {
+   font-size: 300%;
+   text-shadow: 0 -2px 2px rgba(0, 0, 0, 0.5);
+   vertical-align: middle;
+}
+header .logo {
+   font-size: 640%;
+   margin-right: 40px;
+   text-shadow: 0px 20px 8px rgba(0, 0, 0, 0.4);
+}
+
+.copy {
+   margin: auto;
+   padding: 10px;
+   width: 80%;
+}
+/*CODE EDITOR*/
 .code-editor {
    margin: auto;
    height: 550px;
