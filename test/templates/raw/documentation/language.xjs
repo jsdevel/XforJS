@@ -1,10 +1,19 @@
 {namespace my.app.namespace}
-#All files begin with a namespace and must end with a .xjs extension.
+#
+#Template files begin with a namespace and end with a .xjs extension.
+#
+#If you instantiate the compiler with global=>true (default), then
+#you can call window.my.app.namespace in a browser, or in the global scope
+#of where your template is executed.
+#
 #Whitespace isn't allowed before a namespace declaration.  The idea is to enforce
 #A coding style.
 
+
 #This is a comment.  Comments in X borrow from shell scripting.
 
+#You may use imports to combine other template files.
+#More on this in another doc.
 {import profile_sample.xjs}
 
 #This is a global variable.
@@ -12,8 +21,9 @@
 {var boo 5}
 
 #Variables must be declared before they may be referenced.
-#Now that we've declared 'boo', it can be referenced.  References
-#begin with the '@' symbol.
+#Now that we've declared 'boo', it can be referenced.
+#
+#References begin with the '@' symbol.
 {var zoo @boo}
 
 #Global variables allow the following expressions:
@@ -32,10 +42,19 @@
 {var eooo   true}
 {var eoooo  false}
 
-#You probably noticed the use of short-circuiting.  X allows most javascript
-#operators to appear in expression statements.  The following are all valid:
-{var wooo 1 || (2 && 3 && !@woo) && (((('nested parens'||'not nested'))))}
 
+#X allows most ecmascript operators to appear in expression statements.
+#The following is a valid expression:
+{var wooo 1 ||
+      (typeof 2 === 'number' && ~~3 && !@woo) &&
+      #comments ending with \n are
+      #considered white space everywhere!!!
+      (((('nested parens'||'not nested'))))#etc.
+}
+
+
+#You may define as many templates as you wish within a file.
+#Templates are assigned to the namespace declared in their file.
 {template wow}
 
 {/template}
