@@ -1,0 +1,30 @@
+{namespace my.app.namespace}
+#All files begin with a namespace and must end with a .xjs extension.
+#Whitespace isn't allowed before a namespace declaration.  The idea is to enforce
+#A coding style.
+
+#This is a comment.  Comments in X borrow from shell scripting.
+
+{import profile_sample.xjs}
+
+#This is a global variable.
+{var boo 5}
+
+#Variables must be declared before they may be referenced.
+#Now that we've declared 'boo', it can be referenced.  References
+#begin with the '@' symbol.
+{var zoo @boo}
+
+#Global variables allow the following expressions:
+{var coo 1 || 0.4 || 0xa0f}#number
+{var doo 'string' || "string"}
+{var woo null}
+{var qoo true || false}
+
+#You probably noticed the use of short-circuiting.  X allows most javascript
+#operators to appear in expression statements.  The following are all valid:
+{var wooo 1 || (2 && 3 && !@woo) && (((('nested parens'||'not nested'))))}
+
+{template wow}
+
+{/template}

@@ -16,10 +16,10 @@
  * For more information, visit http://SOMESITE
  */
 !function(){
-   var precompiledHappy = fs.readdirSync("templates/precompiled/test_no_compile_errors/");
+   var precompiledHappy = fs.readdirSync("templates/raw/test_no_compile_errors/");
    precompiledHappy.forEach(function(file){
       if(file.indexOf(".xjs") === file.length -4){
-         var source = fs.readFileSync("templates/precompiled/test_no_compile_errors/"+file, "utf8");
+         var source = fs.readFileSync("templates/raw/test_no_compile_errors/"+file, "utf8");
          var compiler = new Compiler();
          try{
             compiler.compile(source);
