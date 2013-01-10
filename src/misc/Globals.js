@@ -17,7 +17,7 @@
  */
 
 //Save this section for regex.
-var __reg_COMMENT = "#[^\\r\\n]+(?:\\r?\\n)?";
+var __reg_COMMENT = "#(?:[^\\r\\n]+)?(?:\\r?\\n)";
 var __reg_name = "[a-zA-Z$_](?:[\\w$]+)?";
 var __reg_variable_reference = "@("+__reg_name+")";
 var __reg_space = "(?:\\s|"+__reg_COMMENT+")+";

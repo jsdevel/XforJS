@@ -99,17 +99,21 @@
 
    }();
    !function(){//SPACE
-      var spaces = {
-         "  #asdfasdfasdf \n":"Comment with line ending is working.",
-         "  #asdfasdfasdf":"Comment without line ending is working.",
-         "  ":"Space without lines is working.",
-         "  \n":"Space with lines is working.",
-         "  \n#asdfasdf\n#asdf\n":"Space with lines and comments is working."
-      };
-      var a;
-      for(a in spaces){
-         assert.equal(SPACE.exec(a)[1], a, spaces[a]);
-      }
+      [//good
+         ["#asdfasdfasdf\n","Comment with line ending."],
+         ["  \n","Space with lines."],
+         ["#\n","Empty comment."],
+         ["  \n#asdfasdf\n#asdf\n","Space, lines and comments."]
+      ].forEach(function(pair){
+         assert.equal(SPACE.exec(pair[0])[1], pair[0], pair[1]);
+      });
+      [//bad
+         ["#asdfasdfasdf","Comment without new line."],
+         ["","No Space."]
+      ].forEach(function(pair){
+         assert(!SPACE.exec(pair[0]), pair[1]);
+      });
+
    }();
    !function(){//SPACE_BETWEEN_ANGLE_BRACKETS
       [
@@ -124,20 +128,24 @@
       });
    }();
    !function(){//SPACE_PRECEDING_CURLY
-      var spaces = {
-         "  #asdfasdfasdf \n":"Comment with line ending is working.",
-         "  #asdfasdfasdf":"Comment without line ending is working.",
-         "  ":"Space without lines is working.",
-         "  \n":"Space with lines is working.",
-         "  \n#asdfasdf\n#asdf\n":"Space with lines and comments is working."
-      };
-      var a;
-      for(a in spaces){
-         assert(!SPACE_PRECEDING_CURLY.exec(a), spaces[a]+"  Curly must come after.");
-      }
-      for(a in spaces){
-         assert(SPACE_PRECEDING_CURLY.exec(a+"{")[1] === a, spaces[a]+"  Curly comes after.");
-      }
+      [//bad
+         ["  #asdfasdfasdf \n","Comment new line."],
+         ["  #asdfasdfasdf","Comment no new line."],
+         ["  ","Space no new lines."],
+         ["  \n","Space with new lines."],
+         ["  \n#asdfasdf\n#asdf\n","Space, new lines and comments."]
+      ].forEach(function(pair){
+         assert(!SPACE_PRECEDING_CURLY.exec(pair[0]),
+            pair[1]+"  No Curly after.");
+      });
+      [//good
+         ["  #asdfasdfasdf \n","Comment with new line."],
+         ["  \n","Space with new lines."],
+         ["  \n#asdfasdf\n#asdf\n","Space new lines and comments."]
+      ].forEach(function(pair){
+         assert(SPACE_PRECEDING_CURLY.exec(pair[0]+"{")[1] === pair[0],
+            pair[1]+"  Curly after.");
+      });
    }();
    !function(){//TEXT_INPUT
       [
