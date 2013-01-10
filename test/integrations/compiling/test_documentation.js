@@ -21,7 +21,7 @@
    precompiledHappy.forEach(function(file){
       if(file.indexOf(".xjs") === file.length -4){
          var source = fs.readFileSync(basedir+file, "utf8");
-         var compiler = new Compiler();
+         var compiler = XforJS.getCompiler();
          try{
             compiler.compile(source, basedir+file);
          }catch(e){

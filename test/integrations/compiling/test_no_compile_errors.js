@@ -20,7 +20,7 @@
    precompiledHappy.forEach(function(file){
       if(file.indexOf(".xjs") === file.length -4){
          var source = fs.readFileSync("templates/raw/test_no_compile_errors/"+file, "utf8");
-         var compiler = new Compiler();
+         var compiler = XforJS.getCompiler();
          try{
             compiler.compile(source);
          }catch(e){

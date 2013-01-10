@@ -16,10 +16,11 @@
  * For more information, visit http://XforJS.com
  */
 !function(){
+   var pathToFramework = "../build/javascript/XforJS.min.js";
    var fs = require('fs');
    var common = require('./common.js');
    var loaded = 0;
-   var filesToLoad = ["../src/XforJS.js"];
+   var filesToLoad = [pathToFramework];
    var filesToTest = [];
    var fileLoader = new common.FileLoader({filesToLoad:filesToLoad});
    var testDirs = [
@@ -36,7 +37,7 @@
    });
 
    fileLoader.loadAll(function(loadedFiles){
-      var framework = common.buildFile(loadedFiles['../src/XforJS.js']).withPath('../src/').now();
+      var framework = loadedFiles[pathToFramework]+";/*INJECT TESTS HERE*/";
 
       filesToTest.forEach(function(file){
          var testFile = loadedFiles[file];
