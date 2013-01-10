@@ -49,22 +49,16 @@
                   <a href=".input-params" data-toggle="tab">Input Params</a>
                </li>
             </ul>
-            <div class="tab-content">
-               <div class="tab-pane active raw">
-                  <textarea data-tab=".compiled">
+            <div class="tab-content left">
+               <textarea class="tab-pane active raw editable" data-tab=".compiled">
 //INCLUDE ../XforJS/test/templates/raw/documentation/profile_sample.xjs
-                  </textarea>
-               </div>
-               <div class="tab-pane input-data">
-                  <textarea data-tab=".input-data">
+               </textarea>
+               <textarea class="tab-pane input-data editable" data-tab=".input-data">
 //INCLUDE json/profile_input.json
-                  </textarea>
-               </div>
-               <div class="tab-pane input-params">
-                  <textarea data-tab=".input-params">
+               </textarea>
+               <textarea class="tab-pane input-params editable" data-tab=".input-params">
 //INCLUDE json/profile_params.json
-                  </textarea>
-               </div>
+               </textarea>
             </div>
          </div>
          <div>
@@ -79,14 +73,10 @@
                   <a href=".output-text" data-toggle="tab">Output</a>
                </li>
             </ul>
-            <div class="tab-content">
-               <div class="tab-pane compiled">
-                  <textarea data-tab=".compiled"></textarea>
-               </div>
+            <div class="tab-content right">
+               <textarea class="tab-pane compiled"></textarea>
                <div class="tab-pane active rendered"></div>
-               <div class="tab-pane output-text">
-                  <textarea></textarea>
-               </div>
+               <textarea class="tab-pane output-text"></textarea>
             </div>
          </div>
       </div>

@@ -16,9 +16,9 @@
       var $this = $(this);
       var $editor = $this.closest('.code-editor');
       var $tab = $editor.find('[href="'+$this.data('tab')+'"]');
-      var $raw = $editor.find('.raw textarea');
-      var $inputData = $editor.find('.input-data textarea');
-      var $inputParams = $editor.find('.input-params textarea');
+      var $raw = $editor.find('textarea.raw');
+      var $inputData = $editor.find('textarea.input-data');
+      var $inputParams = $editor.find('textarea.input-params');
       var inputData;
       var inputParams;
 
@@ -34,8 +34,8 @@
          $tab.addClass('error');
       }
       endTime = Date.now()-startTime;
-      $editor.find('.compiled textarea').text(text);
-      $editor.find('.output-text textarea').text(outputText);
+      $editor.find('.compiled').text(text);
+      $editor.find('.output-text').text(outputText);
       $editor.find('.rendered').html(outputText);
    }).
    //handle tabs etc. in the editors
@@ -94,7 +94,7 @@
    });*/
 
    $(window).on('load', function(){
-      $body.find('.code-editor.open .raw textarea').
+      $body.find('.code-editor.open textarea.raw').
          trigger('keyup');//force editors to show the rendered data
    });
 

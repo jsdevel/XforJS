@@ -77,19 +77,27 @@ header .logo {
    bottom: 0px;
    position: absolute;
    top: 70px;
-   width: 100%;
+}
+.code-editor .tab-content.left {
+   left: 0;
+   right: 10px;
+}
+.code-editor .tab-content.right {
+   right: 0;
+   left: 10px;
 }
 .code-editor .tab-pane {
    height: 100%;
 }
 .code-editor textarea {
-   background-color: black;
-   color: white;
    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
    height: 100%;
    width: 100%;
 }
+.code-editor textarea.editable {
+   background-color: black;
+   color: white;
+}
 .code-editor .rendered {
-   padding: 10px;
    padding-left: 30px;
 }
