@@ -16,7 +16,7 @@
       var $this = $(this);
       var $editor = $this.closest('.code-editor');
       var $tab = $editor.find('[href="'+$this.data('tab')+'"]');
-      var $precompiled = $editor.find('.precompiled textarea');
+      var $raw = $editor.find('.raw textarea');
       var $inputData = $editor.find('.input-data textarea');
       var $inputParams = $editor.find('.input-params textarea');
       var inputData;
@@ -25,7 +25,7 @@
       try{
          inputData = (new Function("return "+$inputData.val().replace(/\s+/, "")))();
          inputParams = (new Function("return "+$inputParams.val().replace(/\s+/, "")))();
-         text=compiler.compile(getTemplate($precompiled));
+         text=compiler.compile(getTemplate($raw));
          eval(text);
          outputText = sample.buildProfile(inputData, inputParams);
          $tab.removeClass('error');
@@ -94,7 +94,7 @@
    });*/
 
    $(window).on('load', function(){
-      $body.find('.code-editor.open .precompiled textarea').
+      $body.find('.code-editor.open .raw textarea').
          trigger('keyup');//force editors to show the rendered data
    });
 
