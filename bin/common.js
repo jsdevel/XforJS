@@ -81,7 +81,8 @@ function insertTestAndRun(fileToTest, test){
          this(msg === "", output);
       };
    }).toString();
-   var newContents = "this.console=console"+fileToTest.replace(/\/\*INJECT\sTESTS\sHERE\*\//,
+   var newContents = fileToTest.replace(
+      /\/\*INJECT\sTESTS\sHERE\*\//,
       logMethod.replace(/^\s*?function\s*?\(\s*?\)\s*?\{|\}\s*?$/g, '')+test);
    eval(newContents);
 }
