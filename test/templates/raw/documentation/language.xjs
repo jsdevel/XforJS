@@ -8,6 +8,7 @@
 {import profile_sample.xjs}
 
 #This is a global variable.
+#Only templates within this file have access to it.
 {var boo 5}
 
 #Variables must be declared before they may be referenced.
@@ -16,10 +17,20 @@
 {var zoo @boo}
 
 #Global variables allow the following expressions:
-{var coo 1 || 0.4 || 0xa0f}#number
-{var doo 'string' || "string"}
-{var woo null}
-{var qoo true || false}
+#numbers
+{var coo    1}
+{var cooo   0x4a09}
+{var coooo  1.345}
+{var coooo9 1.345e-1234}
+
+#strings
+{var doo    'string'}
+{var dooo   "string"}
+
+#null, and booleans
+{var woo    null}
+{var eooo   true}
+{var eoooo  false}
 
 #You probably noticed the use of short-circuiting.  X allows most javascript
 #operators to appear in expression statements.  The following are all valid:
