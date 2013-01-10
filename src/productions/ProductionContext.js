@@ -207,14 +207,14 @@ function ProductionContext(
       var path = require('path');
       var fs = require('fs');
       var input;
-      var directory = path.dirname(inputFilePath);
-      var _path = getInputFilePath(path.resolve(directory, filePath));
+      var directory = path['dirname'](inputFilePath);
+      var _path = getInputFilePath(path['resolve'](directory, filePath));
 
       if(this._importedFiles[_path]){
          return "";
       } else {
          this._importedFiles[_path]=true;
-         input=fs.readFileSync(_path, 'utf8');
+         input=fs['readFileSync'](_path, 'utf8');
 
          return compiler.compile(
             input,

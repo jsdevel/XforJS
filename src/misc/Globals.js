@@ -162,16 +162,16 @@ function getInputFilePath(inputFilePath){
    if(!inputFilePath || typeof inputFilePath !== 'string'){
       throw "inputFilePath must be a string.";
    }
-   _path = path.normalize(inputFilePath.replace(/^\s+|\s+$/g, ""));
+   _path = path['normalize'](inputFilePath.replace(/^\s+|\s+$/g, ""));
 
    if(!/\.xjs$/.test(_path)){
       throw "inputFilePath must end with '.xjs'.";
    }
 
-   if(!fs.existsSync(_path)){
+   if(!fs['existsSync'](_path)){
       throw "The following path doesn't exist: \n   "+_path;
    }
-   return path.resolve(_path);
+   return path['resolve'](_path);
 }
 
 /**

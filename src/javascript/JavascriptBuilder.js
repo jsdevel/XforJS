@@ -89,10 +89,10 @@ JavascriptBuilder.buildOutputLibraray=function(path){
    if(XforJS.server){
       fs=require('fs');
       try {
-         if(fs.existsSync(path) && fs.statSync(path).isDirectory()){
+         if(fs['existsSync'](path) && fs['statSync'](path)['isDirectory']()){
             throw "Can't overwrite the following directory with the library: "+path;
          } else {
-            fs.writeFileSync(path, JavascriptResources['getXforJSLib']());
+            fs['writeFileSync'](path, JavascriptResources['getXforJSLib']());
          }
       } catch(e){
          throw "The following happened while attempting to write to '"+path+"':\n"+e;
