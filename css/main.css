@@ -9,6 +9,7 @@
    box-sizing: border-box;
 }
 body {
+   margin-bottom: 100px;
    overflow-x: hidden;
 }
 .bumped-dark {
