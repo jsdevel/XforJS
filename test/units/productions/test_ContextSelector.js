@@ -62,6 +62,19 @@
    });
 
 //POST CONSTRUCTING
+   setEnv("boo coo", true);
+      context.executeCurrent(characters);
+      assert['throws'](function(){
+         context.executeCurrent(characters);
+      }, "space isn't allowed in a namespace.");
+
+   setEnv("boo .coo doo", true);
+      context.executeCurrent(characters);
+      context.executeCurrent(characters);
+      assert['throws'](function(){
+         context.executeCurrent(characters);
+      }, "after static: space isn't allowed in a namespace.");
+
    setEnv(".boo||", true);
       context.executeCurrent(characters);
       assert(
