@@ -1,6 +1,7 @@
 !function(X,$){
 
    var compiler = X.getCompiler({
+      removelogs:false,
       useexternal:true
    });
    var $body = $('body');
