@@ -11,7 +11,7 @@
    {if gravatar}
       <img src="{gravatar}" width="100px"/>
    {/if}
-   <h2>Name: {name}</h2>
+   <h2>Name: {name.first} {name['last']}</h2>
    <p>
       {if aboutMe}
          {aboutMe}
@@ -29,7 +29,8 @@
 
 #context is interests
 {template buildInterests}
-   {log 5}
+   #You can see the context in your console
+   {log .}
    <ul>
       {foreach .}
          {sort . |desc}
