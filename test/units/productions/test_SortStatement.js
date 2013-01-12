@@ -34,7 +34,7 @@
          "ContextSelector is used.");
       remove();
       execute();
-      assert(output1Has(",1,0"),
+      assert(output1Has(",1,0,0,0"),
          "default values.");
       assert(!prodIs(SortStatement),
          "closes with defaults.");
@@ -51,7 +51,7 @@
       remove();
       characters.shift(2);
       execute();
-      assert(output1Has(",0,0"),
+      assert(output1Has(",0,0,0,0"),
          "desc as first param.");
       assert(characters.length() === 0,
          "direction is removed.");
@@ -61,12 +61,30 @@
       remove();
       characters.shift(2);
       execute();
-      assert(output1Has(",1,1"),
+      assert(output1Has(",1,1,0,1"),
          "numbers first.");
-      assert(output2Has(",1"),
-         "case sensitivity works.");
       assert(!characters.length(),
          "properly closes.");
+
+   setEnv(". |asc|inC}");
+      execute();
+      remove();
+      characters.shift(2);
+      execute();
+      assert(output1Has(",1,1,2,1"),
+         "numbers first.");
+      assert(!characters.length(),
+         "properly closes.");
+   setEnv(". |asc|inc}");
+      execute();
+      remove();
+      characters.shift(2);
+      execute();
+      assert(output1Has(",1,1,1,1"),
+         "numbers first.");
+      assert(!characters.length(),
+         "properly closes.");
+
 
    setEnv(". |asc}");
       execute();
@@ -98,9 +116,6 @@
    function output1Has(string){
       return output1.toString().indexOf(string) > -1;
    }
-   function output2Has(string){
-      return output2.toString().indexOf(string) > -1;
-   }
    function execute(){
       context.executeCurrent(characters);
    }
@@ -121,7 +136,6 @@
       production = new SortStatement(
             output,
             output1,
-            output2,
             context
          );
       characters=new CharWrapper(string);

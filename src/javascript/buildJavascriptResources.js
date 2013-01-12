@@ -124,6 +124,7 @@ function clean(input){
       replace(/\\/g, "\\\\").
       replace(/\/\*(?:(?:(?!\*\/)[\s\S])+)?\*\//g, "").
       replace(/\/\/[^\n\r'"]+/g,"").
+      replace(/else[\r\n\s]+if/g,"else@@##@@if").
       replace(/var\s/g,"var@@##@@").
       replace(/return\s/g,"return@@##@@").
       replace(/typeof\s/g,"typeof@@##@@").

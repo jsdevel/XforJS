@@ -59,6 +59,20 @@
    {/foreach}
 {/template}
 
+{template ascc}
+   {foreach .}
+      {sort . |asc|c}
+      {.}
+   {/foreach}
+{/template}
+
+{template ascC}
+   {foreach .}
+      {sort . |asc|C}
+      {.}
+   {/foreach}
+{/template}
+
 #desc
 {template desc}
    {foreach .}
@@ -112,6 +126,20 @@
 {template descin}
    {foreach .}
       {sort . |desc|in}
+      {.}
+   {/foreach}
+{/template}
+
+{template descc}
+   {foreach .}
+      {sort . |desc|c}
+      {.}
+   {/foreach}
+{/template}
+
+{template descC}
+   {foreach .}
+      {sort . |desc|C}
       {.}
    {/foreach}
 {/template}

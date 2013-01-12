@@ -21,9 +21,8 @@
  * @param {Output} output
  * @param {Output} sortContextOutput
  * @param {Output} sortFunctionOutput
- * @param {Output} sortCaseSensitivityOutput
  */
-function ForeachBodyStatements(output, sortContextOutput, sortFunctionOutput, sortCaseSensitivityOutput) {
+function ForeachBodyStatements(output, sortContextOutput, sortFunctionOutput) {
    /** @type boolean */
    var hasSort=false;
    /** @type boolean */
@@ -55,7 +54,7 @@ function ForeachBodyStatements(output, sortContextOutput, sortFunctionOutput, so
                match = characters.match(SORT);
                if(match){
                   characters.shift(match[1].length);
-                  context.addProduction(new SortStatement(sortContextOutput, sortFunctionOutput, sortCaseSensitivityOutput, context));
+                  context.addProduction(new SortStatement(sortContextOutput, sortFunctionOutput, context));
                   return;
                }
             }

@@ -27,14 +27,12 @@ function ForeachStatement(output, context){
    var bodyOutput = new Output();
    var sortParamOutput=new Output();
    var sortContextOutput=new Output();
-   var sortCaseSensitivityOutput=new Output();
 
    output.
       add(js_Foreach+"(").
             add(js_GetSortArray+"(").
                add(expressionOutput).
                add(sortContextOutput).
-               add(sortCaseSensitivityOutput).
                add(")").
          add(",").
             add(//callback
@@ -68,7 +66,7 @@ function ForeachStatement(output, context){
     * @returns {ForeachBodyStatements}
     */
    this.getBodyStatements=function(){
-      return new ForeachBodyStatements(bodyOutput, sortContextOutput, sortParamOutput, sortCaseSensitivityOutput);
+      return new ForeachBodyStatements(bodyOutput, sortContextOutput, sortParamOutput);
    };
 }
 extend(ForeachStatement, AbstractConditionBlock);

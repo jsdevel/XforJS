@@ -15,23 +15,34 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-(function(l,s,i){
-   var r=[],a,v,o;
+/**
+ * This function returns a new array that may safely be sorted without
+ * corrupting the natural sorting of the input data objects.  It also allows
+ * for case-insensitive sorting by providing lowering the case of the key when
+ * requested.  Only numbers and strings are considered, all other types are
+ * assigned a value of ''.
+ */
+(function(l,s){
+   var r=[],a,v,o,t;
    try{o=l()}catch(e){o=l}
    if(!!o&&typeof(o)==='object'){
       for(a in o){
          try{
             v=s(o[a]);
+            t=typeof(v);
             r.push({
                n:a,//name
                c:o[a],//context
-               v:v,//value
-               k:typeof(v)==='string'&&i?v.toLowerCase():v//key.  Used by the sort algorithm in foreach.
+               l:t==='string'?v.toLowerCase():'',//used to determine case
+               t:t,//type
+               v:(t==='string'||t==='number')?v:''//only sort on these
             });
          } catch(e){
             r.push({
                n:a,
                c:o[a],
+               s:'',
+               v:'',
                k:''
             });
          }

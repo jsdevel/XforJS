@@ -19,14 +19,12 @@
 /**
  * @param {Output} sortContextOutput
  * @param {Output} sortFunctionOutput
- * @param {Output} sortCaseSensitivityOutput
  * @param {Output} context
  * @returns {SortStatement}
  */
 function SortStatement(
    sortContextOutput,
    sortFunctionOutput,
-   sortCaseSensitivityOutput,
    context
 ){
    context.getParams().
@@ -65,6 +63,7 @@ function SortStatement(
                var asc = direction.indexOf("|asc") === 0;
                var promoteNum = false;
                var casePreference = 0;
+               var caseSensitivity=0;
 
                var sortModifiers = characters.match(SORT_MODIFIERS);
                if(sortModifiers){
@@ -72,7 +71,7 @@ function SortStatement(
                   characters.shift(modifiers.length);
 
                   if(modifiers.indexOf("i") > -1){
-                     sortCaseSensitivityOutput.add(",1");//added to the params for GetSortArray
+                     caseSensitivity=1;
                      if(/i[^i]*?i/i.test(modifiers)){
                         throw "'i' may only appear once in sort options.";
                      }
@@ -92,7 +91,7 @@ function SortStatement(
                      }
                   }
                }
-               sortFunctionOutput.add(","+(asc?1:0)+","+(promoteNum?1:0)+","+casePreference);
+               sortFunctionOutput.add(","+(asc?1:0)+","+(promoteNum?1:0)+","+casePreference+","+caseSensitivity);
             } else {
                throw "Sort direction must be one of '|asc' or '|desc'.";
             }

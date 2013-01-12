@@ -61,10 +61,15 @@
    result=sort.ascin(array);
    assert.equal(result, '013AacDZzzZ', "ascin");
 
+   result=sort.ascc(array);
+   assert.equal(result, 'aczzADZZ013', "ascc");
+
+   result=sort.ascC(array);
+   assert.equal(result, 'ADZZaczz013', "ascC");
 
    //desc
    result=sort.desc(array);
-   assert.equal(result, 'zzcaZZDA310', "desc");
+   assert.equal(result, 'ZZDAzzca310', "desc");
 
    result=sort.descci(array);
    assert.equal(result, 'zzZZDcaA310', "descci");
@@ -79,11 +84,17 @@
    assert.equal(result, '310zzZZDcaA', "desccin");
 
    result=sort.desci(array);
-   assert.equal(result, 'ZzZzDcaA310', "desci");
+   assert.equal(result, 'ZzZzDcAa310', "desci");
 
    result=sort.descn(array);
-   assert.equal(result, '310zzcaZZDA', "descn");
+   assert.equal(result, '310ZZDAzzca', "descn");
 
    result=sort.descin(array);
    assert.equal(result, '310zZzZDcAa', "descin");
+
+   result=sort.descc(array);
+   assert.equal(result, 'zzcaZZDA310', "descc");
+
+   result=sort.descC(array);
+   assert.equal(result, 'ZZDAzzca310', "descC");
 }();
