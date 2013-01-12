@@ -41,7 +41,7 @@
    }).
    //handle tabs etc. in the editors
    on('keydown', 'textarea', function(e){
-      var indent = "    ";
+      var indent = "   ";
       var keyCode = e.keyCode || e.which;
       var tab = keyCode === 9;
       var backspace = keyCode === 8;
