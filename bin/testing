@@ -20,15 +20,26 @@
 
 cd $DIR_TEST;
 
-function testAll(){
+#default file
+testFile="$DIR_BIN/run_all_unit_tests.js";
+
+if [ -n "$2" ];then
+   if [ -e $DIR_TEST/$2 ];then
+      testFile="$DIR_TEST/$2";
+   else
+      echo "File not found: $DIR_TEST/$2";
+      exit 1;
+   fi
+fi
+
+function runtest(){
    clear
-   node $DIR_BIN/run_all_unit_tests.js
+   node $testFile
 }
 
-testAll
+runtest
 
 while RESULT=$(inotifywait -qr -e MODIFY --exclude .*\\.swp $DIR_PROJECT)
 do
-   testAll
-   #echo $RESULT
+   runtest
 done

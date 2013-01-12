@@ -16,7 +16,8 @@
  * For more information, visit http://XforJS.com
  */
 !function(){
-   var pathToFramework = "../build/javascript/XforJS.min.js";
+   //var pathToFramework = "../build/javascript/XforJS.min.js";
+   var pathToFramework = "../src/XforJS.js";
    var fs = require('fs');
    var common = require('./common.js');
    var loaded = 0;
@@ -37,7 +38,8 @@
    });
 
    fileLoader.loadAll(function(loadedFiles){
-      var framework = loadedFiles[pathToFramework]+";/*INJECT TESTS HERE*/";
+      //var framework = loadedFiles[pathToFramework]+";/*INJECT TESTS HERE*/";
+      var framework = common.buildFile(loadedFiles[pathToFramework]).withPath('../src/').now();
 
       filesToTest.forEach(function(file){
          var testFile = loadedFiles[file];
