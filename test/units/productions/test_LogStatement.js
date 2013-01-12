@@ -43,7 +43,7 @@
          "closes properly.");
 
    function theOut(){return output.toString();}
-   function shift(int){characters.shift(int);}
+   function shift(i){characters.shift(i);}
    function getProd(){context.getCurrentProduction();}
    function prodIs(Prod){
       return context.getCurrentProduction() instanceof Prod;
