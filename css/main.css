@@ -74,6 +74,8 @@ header .downloads a:active {
    padding: 10px;
    width: 80%;
 }
+
+
 /*CODE EDITOR*/
 .code-editor {
    margin: auto;
@@ -119,10 +121,6 @@ header .downloads a:active {
    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
    height: 100%;
    width: 100%;
-}
-.code-editor textarea.editable {
-   background-color: black;
-   color: white;
 }
 .code-editor .rendered {
    padding-left: 30px;
