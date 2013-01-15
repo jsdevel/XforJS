@@ -37,7 +37,7 @@
       <div class="copy">
          Every editor herein is executable, meaning you can change the contents
          of the textareas and immediately see what the compiler is doing.
-         <span class="text-success">Go ahead.  Try typing '{' in the following template.</span>
+         <span class="text-success">Go ahead.  Change the value of "showRatings" to "false" in the Input Params section.</span>
       </div>
 
       <div class="code-editor open">
@@ -55,13 +55,13 @@
             </ul>
             <div class="tab-content left">
                <textarea class="tab-pane active raw" data-tab=".compiled">
-//INCLUDE ../XforJS/test/templates/raw/documentation/profile_sample.xjs
+//INCLUDE ../XforJS/test/templates/raw/documentation/books_sample.xjs
                </textarea>
                <textarea class="tab-pane input-data" data-tab=".input-data">
-//INCLUDE json/profile_input.json
+//INCLUDE json/books_input.json
                </textarea>
                <textarea class="tab-pane input-params" data-tab=".input-params">
-//INCLUDE json/profile_params.json
+//INCLUDE json/books_params.json
                </textarea>
             </div>
          </div>
@@ -79,7 +79,7 @@
             </ul>
             <div class="tab-content right">
                <textarea class="tab-pane compiled"></textarea>
-               <div class="tab-pane active rendered"></div>
+               <div class="tab-pane active rendered sample-output"></div>
                <textarea class="tab-pane output-text"></textarea>
             </div>
          </div>

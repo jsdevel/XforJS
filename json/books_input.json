@@ -1,0 +1,52 @@
+{"books":[
+      {
+         "name":"The Pragmatic Programmer:  From journeyman to master",
+         "rating":5,
+         "description":"An amazing book.  The book is organized into a series\n\
+            of tips that the writers stumbled upon from years of experience\n\
+            programming.  I spent roughly 8 months reading the book cover to \n\
+            cover, as the chapters were usually so insightful, that a quick\n\
+            pass never did them justice.  This book changed the way I think\n\
+            about programming in general, and gave me cause to question \n\
+            everything I do in code.  This book is probably the reason why this\n\
+            site uses actual integration tests for documentation, as that is\n\
+            one of their tips provided unter automation.\n\
+            The book doesn't need to be read cover to cover, as it is split up\n\
+            by tips.",
+         "img":{
+            "alt":"The Pragmatic Programmer Book",
+            "src":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9wD4bA0yTJuXNUxHKFcXB3kvPQIqpw5ogpqb42BW1ogRUkAKmyNFgfnI"
+         }
+      },
+      {
+         "name":"Extreme Programming Explained",
+         "rating":4,
+         "description":"This book is written by the most authoritative figure\n\
+            on XP, Kent Beck.  There is advice in here that trancends programming\n\
+            and at times feels like mid-eastern thought process.  Be prepared \n\
+            to embrace XP with the man considered to be the founder of the\n\
+            movement if not one of the leading voices.",
+         "img":{
+            "alt":"Extreme Programming Explained",
+            "src":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4EXF16Cx5AyNY5esEObDhJuhThGHX45OZeJI0yJzwCDGyzAnhphNC1Li9"
+         }
+      },
+      {
+         "name":"Design Patterns:  Elements of reusable Object Oriented Software",
+         "rating":4.5,
+         "description":"I bought this book after reading many reviews online,\n\
+            and becuase it is still a highly praised book in the software world\n\
+            despite being first published in 1994!!  The book is organized into\n\
+            sections that relate to different design pattern categories, such\n\
+            as object creation and behavioral patterns.  Be prepared to spend a\n\
+            lot of time pouring over each chapter again and again until you\n\
+            have one of this \"Aha!\" moments.  Well worth the read, and definately\n\
+            provided an invaluable companion to me on many occasions when I\n\
+            was wanting to learn more about Design Patterns.",
+         "img":{
+            "alt":"\" onclick=\"alert(5);\"",
+            "src":"http://upload.wikimedia.org/wikipedia/en/7/78/Design_Patterns_cover.jpg"
+         }
+      }
+   ]
+}
