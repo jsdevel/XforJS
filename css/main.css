@@ -125,3 +125,43 @@ header .downloads a:active {
 .code-editor .rendered {
    padding-left: 30px;
 }
+
+/*Sample*/
+.sample-output {
+   overflow: auto;
+}
+.sample-output img {
+   float: left;
+   margin-right: 20px;
+}
+.sample-output div.rating {
+   font-weight: bold;
+   margin-left: 70px;
+}
+.sample-output span[class*=rating] {
+   display: inline-block;
+   height: 10px;
+   margin-left: 20px;
+   width: 100px;
+}
+.sample-output span.rating-5 {
+   background-color: #20BF0B;
+}
+.sample-output span[class="rating-4.5"] {
+   background: -webkit-linear-gradient(left, #20BF0B, #20BF0B 90%, #ED3B05 90%, #ED3B05);
+}
+.sample-output span.rating-4 {
+   background: -webkit-linear-gradient(left, #20BF0B, #20BF0B 80%, #ED3B05 80%, #ED3B05);
+}
+.sample-output span.rating-3 {
+   background: -webkit-linear-gradient(left, #20BF0B, #20BF0B 60%, #ED3B05 60%, #ED3B05);
+}
+.sample-output span.rating-2 {
+   background: -webkit-linear-gradient(left, #20BF0B, #20BF0B 40%, #ED3B05 40%, #ED3B05);
+}
+.sample-output span.rating-1 {
+   background: -webkit-linear-gradient(left, #20BF0B, #20BF0B 20%, #ED3B05 20%, #ED3B05);
+}
+.sample-output span.rating-0 {
+   background-color: #ED3B05;
+}
