@@ -22,19 +22,32 @@
       var $inputParams = $editor.find('textarea.input-params');
       var inputData;
       var inputParams;
+      var timeRecorder;
+      if(!this.TimeRecorder){
+         this.TimeRecorder=new TimeRecorder();
+      }
+      timeRecorder = this.TimeRecorder;
 
       try{
          inputData = (new Function("return "+$inputData.val().replace(/\s+/, "")))();
+         inputData.time={
+            average:timeRecorder.getAverage(),
+            entries:timeRecorder.getNumberOfEntries(),
+            highest:timeRecorder.getHighTime(),
+            lowest:timeRecorder.getLowTime()
+         };
          inputParams = (new Function("return "+$inputParams.val().replace(/\s+/, "")))();
          text=compiler.compile(getTemplate($raw));
          eval(text);
-         outputText = sample.buildProfile(inputData, inputParams);
+         outputText = documentation.books.buildBookSection(inputData, inputParams);
          $tab.removeClass('error');
       } catch(e){
          text=e;
          $tab.addClass('error');
       }
       endTime = Date.now()-startTime;
+      this.TimeRecorder.addTime(endTime);
+      a=this.TimeRecorder;
       $editor.find('.compiled').text(text);
       $editor.find('.output-text').text(outputText);
       $editor.find('.rendered').html(outputText);
@@ -83,16 +96,6 @@
          }
       }
    });
-   /*Not sure if this is wanted, but it would prevent scrolling of window in
-    *textareas
-    *
-   on('click', 'textarea', function(e){
-      e.stopPropagation();
-      $body.addClass('hides');
-   }).
-   on('click', function(){
-      $body.removeClass('hides');
-   });*/
 
    $(window).on('load', function(){
       $body.find('.code-editor.open textarea.raw').
@@ -104,5 +107,39 @@
     */
    function getTemplate($el){
       return $el.val().replace(/^\s+(\{)|(\})\s+$/, "$1$2")
+   }
+
+   /**
+    * @constructor
+    * Allows for adequate management of time related tasks and information.
+    */
+   function TimeRecorder(){
+      var entries = 0;
+      var totalTime = 0;
+      var highestTime = 0;
+      var lowestTime = 0;
+
+      this.addTime=function(ms){
+         if(lowestTime===0 || ms<lowestTime){
+            lowestTime=ms;
+         }
+         if(highestTime===0 || ms>highestTime){
+            highestTime=ms;
+         }
+         entries++;
+         totalTime+=ms;
+      };
+      this.getAverage=function(){
+         return totalTime/entries;
+      };
+      this.getNumberOfEntries=function(){
+         return entries;
+      };
+      this.getHighTime=function(){
+         return highestTime;
+      };
+      this.getLowTime=function(){
+         return lowestTime;
+      };
    }
 }(XforJS, jQuery);
