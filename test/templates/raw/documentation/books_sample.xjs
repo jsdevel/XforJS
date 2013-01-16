@@ -1,0 +1,20 @@
+{namespace documentation.books}
+
+{template buildBookSection}
+   {param showRatings}
+
+   <h3>Must Have Books</h3>
+   {foreach books}
+      {sort rating|desc}
+      <div class="book">
+         <h5>{name}</h5>
+         <p>
+            <img title="{name}" alt="{img.alt}" src="{img.src}" width="50">
+            {if @showRatings && typeof rating === 'number'}
+               <div class="rating">Rating:  <span class="rating-{rating}"></span></div>
+            {/if}
+            {description}
+         </p>
+      </div>
+   {/foreach}
+{/template}
