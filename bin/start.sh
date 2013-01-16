@@ -16,6 +16,9 @@ case $1 in
    developing)
       . $DIR_BIN/developing
    ;;
+   version)
+      . $DIR_BIN/version
+   ;;
    *)
       echo "Invalid argument $1"
    ;;
