@@ -17,6 +17,13 @@
  */
 var fs = require('fs');
 var unpacked = fs.readFileSync('../index.unpacked.html', 'utf8');
+var placeholders = {
+   "%%VERSION%%":fs.readFileSync('../../XforJS/bin/VERSION', 'utf8')
+};
+var placeholder;
+for(placeholder in placeholders){
+   unpacked = unpacked.replace(new RegExp(placeholder, "g"), placeholders[placeholder]);
+}
 unpacked = buildFile(unpacked.replace(/(>)\s+(<)/g, "$1$2")).withPath("../").now();
 fs.writeFileSync('../index.html', unpacked, 'utf8');
 
