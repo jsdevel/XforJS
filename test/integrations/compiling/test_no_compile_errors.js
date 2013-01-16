@@ -18,11 +18,12 @@
 !function(){
    var precompiledHappy = fs.readdirSync("templates/raw/test_no_compile_errors/");
    precompiledHappy.forEach(function(file){
+      var fullPath = "templates/raw/test_no_compile_errors/"+file;
       if(file.indexOf(".xjs") === file.length -4){
-         var source = fs.readFileSync("templates/raw/test_no_compile_errors/"+file, "utf8");
+         var source = fs.readFileSync(fullPath, "utf8");
          var compiler = XforJS.getCompiler();
          try{
-            compiler.compile(source);
+            compiler.compile(source, fullPath);
          }catch(e){
             console.log("ERROR: "+file+"\n"+e);
          }

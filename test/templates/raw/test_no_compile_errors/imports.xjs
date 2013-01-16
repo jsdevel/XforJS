@@ -1,0 +1,7 @@
+{namespace wowza}
+
+{import params.xjs}
+
+{template dog}
+   {call boo.boo/}
+{/template}
