@@ -61,7 +61,6 @@ This made for a cool effect, but really hurt page perf. on my laptop :(
    margin-left: 5%;
    padding: 10px;
    text-decoration: none;
-   text-shadow: none;
 }
 .header .downloads a:hover {
    background-color: #F78120;
