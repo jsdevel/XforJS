@@ -18,7 +18,7 @@
 var fs = require('fs');
 var unpacked = fs.readFileSync('../index.unpacked.html', 'utf8');
 var placeholders = {
-   "%%VERSION%%":fs.readFileSync('../../XforJS/bin/VERSION', 'utf8')
+   "__VERSION__":fs.readFileSync('../../XforJS/bin/VERSION', 'utf8')
 };
 var placeholder;
 for(placeholder in placeholders){

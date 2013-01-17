@@ -24,11 +24,11 @@ DIR_XFORJS=$(dirname $DIR_PROJECT)/XforJS;
 DIR_BIN=$DIR_PROJECT/bin;
 
 case $1 in
-   developing)
-      . $DIR_BIN/developing
+   developing.sh)
+      . $DIR_BIN/developing.sh
    ;;
-   copy_XforJS.min.js_to_js)
-      . $DIR_BIN/copy_XforJS.min.js_to_js
+   copy_XforJS.min.js_to_js.sh)
+      . $DIR_BIN/copy_XforJS.min.js_to_js.sh
    ;;
    *)
       echo "Invalid argument $1"
