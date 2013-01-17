@@ -2114,6 +2114,10 @@ function GlobalStatements(output){
     */
    this.execute=function(characters, context){
       characters.removeSpace();
+      if(!characters.length()){
+         context.removeProduction();
+         return;
+      }
       if(characters.charAt(0) === '{'){
          hasStatements=true;
          var templateDeclarationOutput = new Output();
@@ -2749,6 +2753,8 @@ function ContextSelector(output, isNested){
    /** @type boolean */
    var allowDotPrepending=true;
    /** @type boolean */
+   var allowNamespace=true;
+   /** @type boolean */
    var allowStaticRefinement=true;
    /** @type boolean */
    var allowDynamicRefinement=true;
@@ -2794,6 +2800,7 @@ function ContextSelector(output, isNested){
                      +
                      reference[2]
                   );
+               allowNamespace=false;
             } else {
                throw "invalid variable reference.";
             }
@@ -2803,6 +2810,7 @@ function ContextSelector(output, isNested){
             match = characters.match(CURRENT_FN);
             if(match){
                characters.shift(match[1].length);
+               allowNamespace=false;
             }
             hasContextSelector=true;
             break;
@@ -2816,7 +2824,7 @@ function ContextSelector(output, isNested){
             contextSelectorOutput.add(js_context);
          }
          contextHasBeenPrependedToOutput=true;
-      }
+      }//end context prepending
 
       characters.removeSpace();
       switch(characters.charAt(0)){
@@ -2824,6 +2832,7 @@ function ContextSelector(output, isNested){
          if(!allowStaticRefinement){
             throw "Unexpected '.'.";
          }
+         allowNamespace=true;
          allowDotPrepending=false;
          allowStaticRefinement=false;
          allowDynamicRefinement=false;
@@ -2835,6 +2844,7 @@ function ContextSelector(output, isNested){
          if(!allowDynamicRefinement){
             throw "Unexpected '['.";
          }
+         allowNamespace=false;
          allowDynamicRefinement=true;
          allowStaticRefinement=true;
          hasContextSelector=true;
@@ -2846,6 +2856,10 @@ function ContextSelector(output, isNested){
       hasNamespace=addNamespace(characters, context);
       allowDotPrepending=true;
       if(hasNamespace){
+         if(!allowNamespace){
+            throw "unexpected name.";
+         }
+         allowNamespace=false;
          hasContextSelector=true;
          return;
       }
