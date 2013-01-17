@@ -22,7 +22,7 @@
    var framework = fs.readFileSync("../src/XforJS.js", "utf8");
    var VERSION = fs.readFileSync("VERSION", "utf8");
    var placeholders = {
-      '%%VERSION%%':VERSION
+      '__VERSION__':VERSION
    };
 
    var placeholder;
