@@ -29,6 +29,7 @@ This made for a cool effect, but really hurt page perf. on my laptop :(
    color: white;
    font-size: 200%;
    line-height: normal;
+   margin-bottom: 30px;
    padding-bottom: 20px;
    text-align: center;
    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.5);
@@ -67,6 +68,18 @@ This made for a cool effect, but really hurt page perf. on my laptop :(
 }
 .header .downloads a:active {
    background-color: #EB781A;
+}
+.changelog {
+   margin: 20px auto;
+   width: 50%;
+}
+.changelog span {
+   cursor: pointer;
+   font-size: 80%;
+}
+.changelog div {
+   font-size: 60%;
+   text-align: left;
 }
 
 .copy {

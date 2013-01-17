@@ -1,5 +1,7 @@
+function safeEval(code){
+   return eval(code);
+}
 !function(X,$){
-
    var compiler = X.getCompiler({
       removelogs:false,
       useexternal:true
@@ -7,7 +9,7 @@
    var $body = $('body');
 
    //assign the lib globally.  We could've had a script tag do this for us.
-   eval(compiler.getXforJSLib());
+   safeEval(compiler.getXforJSLib());
 
    $body.on('keyup', '.code-editor textarea', function(e){
       var startTime=Date.now();
@@ -38,7 +40,7 @@
          };
          inputParams = (new Function("return "+$inputParams.val().replace(/\s+/, "")))();
          text=compiler.compile(getTemplate($raw));
-         eval(text);
+         safeEval(text);
          outputText = documentation.books.buildBookSection(inputData, inputParams);
          $tab.removeClass('error');
       } catch(e){
@@ -102,11 +104,33 @@
          trigger('keyup');//force editors to show the rendered data
    });
 
+   $('.changelog span').click((function(){
+      var loading=false;
+      var $changelog = $('.changelog div');
+      return function(){
+         if(!loading){
+            loading=true;
+            $.getJSON('json/CHANGELOG.json', function(data){
+               loaded=true;
+               buildChangelog();
+               $changelog.html(documentation.changelog(data));
+            });
+         } else {
+            $changelog.toggle();
+         }
+      };
+   })());
+
+   function buildChangelog(){
+      var template = getTemplate($('#XJS_CHANGELOG'));
+      safeEval(compiler.compile(template));
+   }
    /**
     * Used to get the template from an element
     */
    function getTemplate($el){
-      return $el.val().replace(/^\s+(\{)|(\})\s+$/, "$1$2")
+      var content = $el.val() || $el.text();
+      return content.replace(/^\s+(\{)|(\})\s+$/, "$1$2")
    }
 
    /**

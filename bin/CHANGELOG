@@ -1,0 +1,9 @@
+Changing the version placeholder from %%VERSION%% to __VERSION__
+Placing version info in build files.
+closes #3:  Write integration test for import statements. 
+Closes #6: Build script should use latest version.
+GlobalStatements isn't allowing whitespace to exist at the bottom of a file. Closes #5
+Removing an unneeded test.
+Adding books_sample for the documentation.
+Adding cool_books to the documentation.  This will replace the main profile sample.
+#4:  The following statement doesn't throw an error: {boo coo} bug
