@@ -29,6 +29,6 @@
       replace(/""/, '"'+p.VERSION+'"').
       replace(/""/, '"'+p.VERSION_PREVIOUS+'"').
       replace(/\[\]/, "[\n"+CHANGELOG+"\n]");
-   fs.writeFileSync("../json/"+file+".json", template, "utf8");
+   fs.writeFileSync("../json/"+file+"."+p.VERSION+".json", template, "utf8");
 }();
 
