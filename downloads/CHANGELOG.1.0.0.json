@@ -1,7 +1,8 @@
 {
-   "currentVersion":"1.0.0",
+   "currentVersion":"1.0.1",
    "previousVersion":"1.0.0",
    "commitHistory":[
+"Bumping version to 1.0.1",
 "Changing the version placeholder from %%VERSION%% to __VERSION__",
 "Placing version info in build files.",
 "closes #3:  Write integration test for import statements. ",
