@@ -19,13 +19,10 @@
 var output = new Output();
 var compiler = new Compiler();
 var context = new ProductionContext(output, compiler);
-var production = new Production();
 var gs = new GlobalStatements(output);
 var characters = new CharWrapper("     {t");
 
-context.
-   addProduction(production).
-   addProduction(gs);
+context.addProduction(gs);
 
 assert['throws'](function(){
    gs.close(context);
@@ -47,5 +44,10 @@ assert['throws'](function(){
    context.executeCurrent(new CharWrapper("asd"));
 }, "all non-space GlobalStatements must start with '{'.");
 
+assert.doesNotThrow(function(){
+   context.executeCurrent(new CharWrapper("   "));
+}, "space only doesn't throw an error.");
+assert(!context.getCurrentProduction(),
+   "GlobalStatements removes itself when no more characters are left.");
 }();
 

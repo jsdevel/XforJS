@@ -29,6 +29,10 @@ function GlobalStatements(output){
     */
    this.execute=function(characters, context){
       characters.removeSpace();
+      if(!characters.length()){
+         context.removeProduction();
+         return;
+      }
       if(characters.charAt(0) === '{'){
          hasStatements=true;
          var templateDeclarationOutput = new Output();

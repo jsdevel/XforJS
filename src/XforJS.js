@@ -14,6 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * Version: __VERSION__
+ *
  * For demos and docs visit http://jsdevel.github.com/XforJS/
  * For viewing source visit http://github.com/jsdevel/XforJS/
  */

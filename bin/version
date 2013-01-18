@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ -z "$2" ] ; then
+   currentVersion=$(cat VERSION);
+   echo "Enter the new version to update to.  The current version is: $currentVersion";
+   read version;
+else
+   version="$2";
+fi
+
+echo -n "$version" > VERSION;
+
+node build_framework.js
