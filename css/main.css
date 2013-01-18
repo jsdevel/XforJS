@@ -70,11 +70,22 @@ This made for a cool effect, but really hurt page perf. on my laptop :(
 }
 .changelog {
    margin: 20px auto;
+   margin-top: 40px;
    width: 50%;
 }
 .changelog span {
+   background-color:black;
    cursor: pointer;
    font-size: 80%;
+   padding: 10px 20px 10px 20px;
+   text-shadow: 0;
+}
+.changelog span:hover {
+   background-color: #151436;
+}
+.changelog span:active {
+   background-color: #3B3987;
+
 }
 .changelog div {
    font-size: 60%;
