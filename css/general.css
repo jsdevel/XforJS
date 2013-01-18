@@ -1,14 +1,14 @@
 .border-radius-5px {
-   border-radius: 5px;
+           border-radius: 5px;
+      -moz-border-radius: 5px;
+       -ms-border-radius: 5px;
+        -o-border-radius: 5px;
    -webkit-border-radius: 5px;
-   -moz-border-radius: 5px;
-   -o-border-radius: 5px;
-   -ms-border-radius: 5px;
 }
 .ease-bg-color {
-   transition: background-color 0.3s ease;
-   -ms-transition: background-color 0.3s ease;
-   -moz-transition: background-color 0.3s ease;
-   -o-transition: background-color 0.3s ease;
-   -webkit-transition: background-color 0.3s ease;
+           transition: background-color 0.2s ease;
+       -ms-transition: background-color 0.2s ease;
+      -moz-transition: background-color 0.2s ease;
+        -o-transition: background-color 0.2s ease;
+   -webkit-transition: background-color 0.2s ease;
 }
