@@ -74,7 +74,7 @@ This made for a cool effect, but really hurt page perf. on my laptop :(
    width: 50%;
 }
 .changelog span {
-   background-color:black;
+   background-color:#0A091A;
    cursor: pointer;
    font-size: 80%;
    padding: 10px 20px 10px 20px;
