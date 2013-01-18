@@ -106,17 +106,19 @@ function safeEval(code){
 
    $('.changelog span').click((function(){
       var loading=false;
-      var $changelog = $('.changelog div');
+      var $changelog = $('.changelog');
+      var $container = $changelog.find('div');
+      var version = $changelog.data('version');
       return function(){
          if(!loading){
             loading=true;
-            $.getJSON('json/CHANGELOG.json', function(data){
+            $.getJSON('json/CHANGELOG.'+version+'.json', function(data){
                loaded=true;
                buildChangelog();
-               $changelog.html(documentation.changelog(data));
+               $container.html(documentation.changelog(data));
             });
          } else {
-            $changelog.toggle();
+            $container.toggle();
          }
       };
    })());
