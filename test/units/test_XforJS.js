@@ -36,4 +36,12 @@
       XforJS.buildOutputLibrary(testFileName, "boo.doo.foo");
    }, "can't build outptut lib in non server env.");
 
+   var oldRequire = require;
+   require=void 0
+   XforJS.server = true;
+   assert['throws'](function(){
+      XforJS.buildOutputLibrary(testFileName, "boo.doo.foo");
+   }, "When XforJS.server is true, and require isn't defined (as it would be\
+      in a browser, an error is thrown.");
+   require=oldRequire;
 }();

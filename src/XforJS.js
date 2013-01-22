@@ -47,8 +47,8 @@ var XforJS = {
       var fs;
       var lib;
       if(XforJS.server){
-         fs=require('fs');
          try {
+            fs=require('fs');
             if(fs['existsSync'](path) && fs['statSync'](path)['isDirectory']()){
                throw "Can't overwrite the following directory with the library: "+path;
             } else {
