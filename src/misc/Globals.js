@@ -29,7 +29,7 @@ var NAME =                          new RegExp("^("+__reg_name+")");
 var NS =                            new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
 var NS_FORCED =                     new RegExp("^("+__reg_name+"(?:\\."+__reg_name+")+)");
 var SORT_DIRECTION=                 /^(\|(?:asc|desc))(?![\w$])/;
-var SORT_MODIFIERS=                 /^(\|[cCin]{0,4})(?![\w$])/;
+var SORT_MODIFIERS=                 /^(\|[cCin]{1,4})(?![\w$])/;
 var SPACE =                         new RegExp("^("+__reg_space+")");
 var SPACE_BETWEEN_ANGLE_BRACKETS =  /(>|<)\s+|\s+(>|<)/g;
 var SPACE_PRECEDING_CURLY =         new RegExp("^("+__reg_space+")(?=\\{)");
