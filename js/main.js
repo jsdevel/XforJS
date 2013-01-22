@@ -9,7 +9,7 @@ function safeEval(code){
    var $body = $('body');
 
    //assign the lib globally.  We could've had a script tag do this for us.
-   safeEval(compiler.getXforJSLib());
+   safeEval(X.getLib());
 
    $body.on('keyup', '.code-editor textarea', function(e){
       var startTime=Date.now();
