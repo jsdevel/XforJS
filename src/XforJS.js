@@ -28,6 +28,40 @@ var XforJS = {
 
    'getCompiler':function(args){
       return new Compiler(args);
+   },
+   'getLib':function(namespace){
+      return JavascriptResources.getLib(namespace);
+   },
+
+   /**
+   * This method throws an error if any of the following conditions are met:
+   * 1) The path is a directory.
+   * 2) Something happened while attempting to write to the path.
+   * 3) XforJS.server == false
+   *
+   * @param {String} path
+   * @param {String} namespace
+   * @return {JavascriptBuilder}
+   */
+   'buildOutputLibrary':function(path, namespace){
+      var fs;
+      var lib;
+      if(XforJS.server){
+         try {
+            fs=require('fs');
+            if(fs['existsSync'](path) && fs['statSync'](path)['isDirectory']()){
+               throw "Can't overwrite the following directory with the library: "+path;
+            } else {
+               lib = JavascriptResources.getLib(namespace);
+               fs['writeFileSync'](path, lib);
+            }
+         } catch(e){
+            throw "The following happened while attempting to write to '"+path+"':\n"+e;
+         }
+      } else {
+         throw "Unable to output library in a non-server environment.  Configure XforJS.server=true;";
+      }
+      return this;
    }
 };
 

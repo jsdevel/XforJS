@@ -29,7 +29,7 @@ var NAME =                          new RegExp("^("+__reg_name+")");
 var NS =                            new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
 var NS_FORCED =                     new RegExp("^("+__reg_name+"(?:\\."+__reg_name+")+)");
 var SORT_DIRECTION=                 /^(\|(?:asc|desc))(?![\w$])/;
-var SORT_MODIFIERS=                 /^(\|[cCin]{0,4})(?![\w$])/;
+var SORT_MODIFIERS=                 /^(\|[cCin]{1,4})(?![\w$])/;
 var SPACE =                         new RegExp("^("+__reg_space+")");
 var SPACE_BETWEEN_ANGLE_BRACKETS =  /(>|<)\s+|\s+(>|<)/g;
 var SPACE_PRECEDING_CURLY =         new RegExp("^("+__reg_space+")(?=\\{)");
@@ -123,11 +123,18 @@ var RESERVED_WORDS = {
 
 /**
  * @param {String} namespace
- * @throws if the namespace contains a reserved word.
+ * @throws if the namespace contains a reserved word, or is invalid.
  */
 function validateNamespacesAgainstReservedWords(namespace) {
    var names = namespace.split(".");
    var i=0,len=names.length;
+
+   //test and exec convert to string.
+   ///null/.test(null) === true :(
+   if(!namespace || !NS.test(namespace)){
+      throw "Invalid namespace given: '"+namespace+"'.";
+   }
+
    for(;i<len;i++){
       if(RESERVED_WORDS[names[i]]){
          throw "Usage of the following ECMAScript reserved word is not allowed: "+names[i];
@@ -206,3 +213,4 @@ var js_Foreach="F";
 var js_GetSortArray="G";
 var js_SafeValue="V";
 var js_StringBuffer="S";
+var js_LibNamespace = "XforJS.js";

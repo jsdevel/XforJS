@@ -52,9 +52,18 @@
       assert.equal(NAME.exec("_$AQboo_")[1], "_$AQboo_", "Names work.");
    }();
    !function(){//NS
-      assert(!NS.exec("345"), "Numbers don't start namespaces.");
-      assert.equal(NS.exec("boo")[1], "boo", "Names without refinement work.");
-      assert(NS.exec("boo.too.goo")[1], "boo.too.goo", "Names with refinement work.");
+      [
+         "boo",
+         "boo.too.goo"
+      ].forEach(function(good){
+         assert(NS.exec(good), "NS good: '"+good+"'.");
+      });
+      [
+         "345",
+         ""
+      ].forEach(function(bad){
+         assert(!NS.exec(bad), "NS bad: '"+bad+"'.");
+      });
    }();
    !function(){//NS_FORCED
       assert(!NS_FORCED.exec("boo"), "Names without refinement don't work.");
@@ -90,6 +99,7 @@
       });
       [
          "|iid",
+         "|",
          "nn",
          "ii",
          "nn",

@@ -18,7 +18,8 @@
 !function(){
 //set by setEnv
 var output;
-/** @type {ProductionContext} */var context;
+/** @type {ProductionContext} */
+var context;
 var compiler;
 var program;
 var characters;
@@ -29,16 +30,16 @@ var setEnv=function(compilerConfig, isNested){
    program = new Program(output, context, isNested);
    context.addProduction(program);
 };
-eval(JavascriptResources.getXforJSLib());
+eval(JavascriptResources.getLib());
 
 setEnv();
 assert.equal(eval(output.toString()), void 0,
    "When global is true, the return value of a program should be undefined.");
-assert(output.toString().indexOf(JavascriptResources.getStringBuffer()) > -1,
+assert(output.toString().indexOf(JavascriptResources.StringBuffer) > -1,
    "When useexternal is false and not nested, there should be an instance of StringBuffer.");
-assert(output.toString().indexOf(JavascriptResources.getSafeValue()) > -1,
+assert(output.toString().indexOf(JavascriptResources.SafeValue) > -1,
    "When useexternal is false and not nested, there should be an instance of SaveValue.");
-assert(output.toString().indexOf(JavascriptResources.getEscapeXSS()) > -1,
+assert(output.toString().indexOf(JavascriptResources.EscapeXSS) > -1,
    "When useexternal is false and not nested, there should be an instance of EscapeXSS.");
 
 assert(output.toString().indexOf('(function(){return this})()') > -1,
@@ -49,11 +50,11 @@ assert(output.toString().indexOf('(function(){return this})()') === -1,
 
 //nested
 setEnv(void 0, true);
-assert(output.toString().indexOf(JavascriptResources.getStringBuffer()) === -1,
+assert(output.toString().indexOf(JavascriptResources.StringBuffer) === -1,
    "When useexternal is false and nested, there should be no instance of StringBuffer.");
-assert(output.toString().indexOf(JavascriptResources.getSafeValue()) === -1,
+assert(output.toString().indexOf(JavascriptResources.SafeValue) === -1,
    "When useexternal is false and nested, there should be no instance of SaveValue.");
-assert(output.toString().indexOf(JavascriptResources.getEscapeXSS()) === -1,
+assert(output.toString().indexOf(JavascriptResources.EscapeXSS) === -1,
    "When useexternal is false and nested, there should be no instance of EscapeXSS.");
 
 setEnv({global:false});

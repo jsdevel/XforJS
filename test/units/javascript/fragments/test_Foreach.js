@@ -32,7 +32,7 @@
    var asc;
    var promoteNumber;
    var caseLevel;
-   console.log("test_Foreach");
+
    //ASC
    reset();
       test("asc","ACDEaacde126");

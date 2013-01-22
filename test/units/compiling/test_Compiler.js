@@ -29,6 +29,4 @@ assert(compiler.compile("{namespace misc}{template wow}{/template}").indexOf(js_
 
 assert.equal(compiler.configuration['debug'], true, "setting configuration works.");
 assert.equal(compiler.configuration['invalidConfigItem'], void 0, "Invalid config items are ignored in the constructor.");
-assert.equal(compiler.getXforJSLib(), JavascriptResources.getXforJSLib(),
-   "The compiler has a method to output XforJS lib.");
 }();

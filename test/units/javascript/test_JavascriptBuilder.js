@@ -16,24 +16,23 @@
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
 !function(){
-var builder;
-var fs = require('fs');
 var instance;
-var testFileName = +new Date()+"XforJS";
 
 assert['throws'](function(){
    new JavascriptBuilder(null);
 }, "args must be an object.");
 
-assert(!fs.existsSync(testFileName), "The test environment isn't setup.");
-JavascriptBuilder.buildOutputLibraray(testFileName);
-assert(fs.existsSync(testFileName), "constructor successfully creates the output libraray.");
-fs.unlinkSync(testFileName);
-
 instance = new JavascriptBuilder({useexternal:true});
-assert.equal(instance.getJSCount(), "xforj."+js_CountElements, "useexternal causes reference to return in get methods.");
+
+assert.equal(instance.getJSCount(), "XforJS.js."+js_CountElements,
+   "useexternal causes reference to return in get methods.");
+
+instance = new JavascriptBuilder({useexternal:true,libnamespace:"foo.goo"});
+assert.equal(instance.getJSCount(), "foo.goo."+js_CountElements,
+   "libnamespace outputs properly.");
 
 instance = new JavascriptBuilder({});
 
-assert(instance.getJSCount().indexOf("(function") > -1, "useexternal falsy returns full contents of js fragment.");
+assert(instance.getJSCount().indexOf("function") > -1,
+   "useexternal falsy returns full contents of js fragment.");
 }();

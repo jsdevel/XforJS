@@ -1,5 +1,5 @@
 /*!
- * Copyright 2012 Joseph Spencer.
+ * Copyright 2013 Joseph Spencer.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,17 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
+ * For more information, visit http://SOMESITE
  */
-(function(s){
-      if(typeof(s)==='string'){
-         return s.
-            replace(/&(?![a-zA-Z]+;|#[0-9]+;)/g,'&amp;').
-            replace(/"/g, '&#34;').
-            replace(/'/g, '&#39;').
-            replace(/&(?![a-zA-Z]+;|#[0-9]+;)/g, '&#96;').
-            replace(/</g, '&lt;').
-            replace(/>/g, '&gt;');
-      }
-      return s;
-})
+!function(){
+   var SB =  JavascriptResources.StringBuffer();
+   SB(5);
+   SB(6);
+
+   assert(SB.s() === '56',
+      "working.");
+   SB(null);
+   assert(SB.s() === '56',
+      "null is ignored.");
+   SB(function(){return "waa";});
+   assert(SB.s() === '56waa',
+      "functions may return values.");
+}();

@@ -40,8 +40,6 @@
       if(so!==void(0))o.sort(function(c,d){
          var av=c.v,
             bv=d.v,
-            a=c.k,
-            b=d.k,
             al=c.l,
             bl=d.l,
             aisu=al&&al!==av,//a is upper
