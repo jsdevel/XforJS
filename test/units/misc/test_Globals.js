@@ -56,7 +56,7 @@
          "boo",
          "boo.too.goo"
       ].forEach(function(good){
-         assert(NS.exec(good), "SORT_MODIFIERS good: '"+good+"'.");
+         assert(NS.exec(good), "NS good: '"+good+"'.");
       });
       [
          "345"
