@@ -129,7 +129,9 @@ function validateNamespacesAgainstReservedWords(namespace) {
    var names = namespace.split(".");
    var i=0,len=names.length;
 
-   if(!NS.test(namespace)){
+   //test and exec convert to string.
+   ///null/.test(null) === true :(
+   if(!namespace || !NS.test(namespace)){
       throw "Invalid namespace given: '"+namespace+"'.";
    }
 
