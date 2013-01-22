@@ -59,7 +59,8 @@
          assert(NS.exec(good), "NS good: '"+good+"'.");
       });
       [
-         "345"
+         "345",
+         ""
       ].forEach(function(bad){
          assert(!NS.exec(bad), "NS bad: '"+bad+"'.");
       });
