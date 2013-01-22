@@ -21,6 +21,10 @@
    var file = 'CHANGELOG';
    var template = fs.readFileSync("../json/"+file+".template.json", "utf8");
    var CHANGELOG = fs.readFileSync(file, 'utf8').
+         replace(/^IGNORE[^\r\n]+\r?\n/img, "").
+         replace(/^merge[^\r\n]+\r?\n/img, "").
+         replace(/^bumping[^\r\n]+\r?\n/img, "").
+         replace(/\n\n/mg, "\n").
          replace(/\\/g,"\\\\").
          replace(/"/g,"\\\"").
          replace(/^([^\n]+)\n/gm, "\"$1\",\n").
