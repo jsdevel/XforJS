@@ -123,11 +123,16 @@ var RESERVED_WORDS = {
 
 /**
  * @param {String} namespace
- * @throws if the namespace contains a reserved word.
+ * @throws if the namespace contains a reserved word, or is invalid.
  */
 function validateNamespacesAgainstReservedWords(namespace) {
    var names = namespace.split(".");
    var i=0,len=names.length;
+
+   if(!NS.test(namespace)){
+      throw "Invalid namespace given: '"+namespace+"'.";
+   }
+
    for(;i<len;i++){
       if(RESERVED_WORDS[names[i]]){
          throw "Usage of the following ECMAScript reserved word is not allowed: "+names[i];
@@ -206,3 +211,4 @@ var js_Foreach="F";
 var js_GetSortArray="G";
 var js_SafeValue="V";
 var js_StringBuffer="S";
+var js_LibNamespace = "XforJS.js";

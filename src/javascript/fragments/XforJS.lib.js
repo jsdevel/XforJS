@@ -1,4 +1,4 @@
-/*!
+/*!!
  * Copyright 2012 Joseph Spencer.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,12 +15,12 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-xforj={
+XFORJS={
    '##count##':'##countFN##',
    '##escapexss##':'##escapexssFN##',
    '##foreach##':'##foreachFN##',
    '##safeValueName##':'##safeValueFn##',
-   '##sortFunctionName##':'##sorFunctionFn##',
+   '##sortFunctionName##':'##sortFunctionFn##',
    '##stringBufferName##':'##stringBufferFn##'
 };
 

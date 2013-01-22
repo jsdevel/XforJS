@@ -31,31 +31,33 @@ function JavascriptBuilder(args){
    var js_safeValue;
    var js_sortArray;
    var js_stringBuffer;
+   var lib_namespace = args['libnamespace'];
 
    if(!args || typeof args !== 'object'){
       throw "args must be an object.";
    }
 
-   //TODO: Make the namespace configurable.
    if(args['useexternal']){
-      js_count="xforj."+js_CountElements;
-      js_escapexss="xforj."+js_EscapeXSS;
-      js_foreach="xforj."+js_Foreach;
-      js_safeValue="xforj."+js_SafeValue;
-      js_sortArray="xforj."+js_GetSortArray;
-      js_stringBuffer="xforj."+js_StringBuffer;
+      if(lib_namespace){
+         validateNamespacesAgainstReservedWords(lib_namespace);
+      } else {
+         lib_namespace = js_LibNamespace;
+      }
+      js_count=lib_namespace+"."+js_CountElements;
+      js_escapexss=lib_namespace+"."+js_EscapeXSS;
+      js_foreach=lib_namespace+"."+js_Foreach;
+      js_safeValue=lib_namespace+"."+js_SafeValue;
+      js_sortArray=lib_namespace+"."+js_GetSortArray;
+      js_stringBuffer=lib_namespace+"."+js_StringBuffer;
    } else {
-      js_count=JavascriptResources.getCountElements();
-      js_escapexss=JavascriptResources.getEscapeXSS();
-      js_foreach=JavascriptResources.getForeach();
-      js_safeValue = JavascriptResources.getSafeValue();
-      js_sortArray = JavascriptResources.getGetSortArray();
-      js_stringBuffer=JavascriptResources.getStringBuffer();
+      js_count=JavascriptResources.CountElements.toString();
+      js_escapexss=JavascriptResources.EscapeXSS.toString();
+      js_foreach=JavascriptResources.Foreach.toString();
+      js_safeValue = JavascriptResources.SafeValue.toString();
+      js_sortArray = JavascriptResources.GetSortArray.toString();
+      js_stringBuffer=JavascriptResources.StringBuffer.toString();
    }
 
-   this['getXforJSLib']=function(){
-      return JavascriptResources['getXforJSLib']();
-   };
    this.getJSCount=function(){
       return js_count;
    };
@@ -75,30 +77,3 @@ function JavascriptBuilder(args){
       return js_stringBuffer;
    };
 }
-/**
- * This method throws an error if any of the following conditions are met:
- * 1) The path is a directory.
- * 2) Something happened while attempting to write to the path.
- * 3) XforJS.server == false
- *
- * @param {String} path
- * @return {JavascriptBuilder}
- */
-JavascriptBuilder.buildOutputLibraray=function(path){
-   var fs;
-   if(XforJS.server){
-      fs=require('fs');
-      try {
-         if(fs['existsSync'](path) && fs['statSync'](path)['isDirectory']()){
-            throw "Can't overwrite the following directory with the library: "+path;
-         } else {
-            fs['writeFileSync'](path, JavascriptResources['getXforJSLib']());
-         }
-      } catch(e){
-         throw "The following happened while attempting to write to '"+path+"':\n"+e;
-      }
-   } else {
-      throw "Unable to output library in a non-server environment.  Configure XforJS.server=true;";
-   }
-   return this;
-};

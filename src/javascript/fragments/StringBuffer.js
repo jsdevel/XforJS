@@ -29,7 +29,7 @@
          y=typeof(v);
          r[i++]=(t.indexOf(y)>-1)?v:''
       };
-      f.s=function(){
+      f['s']=function(){
          return r.join('')
       };
    return f
