@@ -98,6 +98,7 @@
    [
       ". |asc|cc}",
       ". |asc|ii}",
+      ". |desc|}",
       ". |asc|nn}"
    ].forEach(function(input){
       setEnv(input);
@@ -106,7 +107,7 @@
          characters.shift(2);
          assert['throws'](function(){
             execute();
-         });
+         }, "bad statements throw errors: "+input);
    });
 
 
