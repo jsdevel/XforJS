@@ -34,7 +34,7 @@
       test("asc","ACDEaacde126");
    reset();
       caseInsensitive=1;
-      test("asci","aaACcDdeE126");
+      test("asci","aaACcdDeE126");
    reset();
       promoteNumber=1;
       caseInsensitive=1;
@@ -83,7 +83,7 @@
    reset();
       asc=0;
       caseInsensitive=1;
-      test("desci","EedDCcaaA621");
+      test("desci","eEdDCcaaA621");
    reset();
       asc=0;
       caseInsensitive=1;
@@ -133,6 +133,17 @@
       asc=0;
       caseLevel=2;
       test("descC","EDCAedcaa621");
+
+   array=['The Pragmatic Programmer: From journeyman to master', 'extreme Programming Explained', 'Design Patterns: Elements of reusable Object Oriented Software'];
+
+   //ASC
+   reset();
+      test("asc", "Design Patterns: Elements of reusable Object Oriented SoftwareThe Pragmatic Programmer: From journeyman to masterextreme Programming Explained");
+
+   //DESC
+   reset();
+      asc=0;
+      test("desc", "The Pragmatic Programmer: From journeyman to masterDesign Patterns: Elements of reusable Object Oriented Softwareextreme Programming Explained");
 
    function reset(){
       caseInsensitive=0;
