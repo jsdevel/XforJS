@@ -147,6 +147,7 @@
          replace(/\/\/[^\n\r'"]+/g,"").
          replace(/else[\r\n\s]+if/g,"else@@##@@if").
          replace(/var\s/g,"var@@##@@").
+         replace(/function\s/g,"function@@##@@").
          replace(/return\s/g,"return@@##@@").
          replace(/typeof\s/g,"typeof@@##@@").
          replace(/\s(in|instanceof)\s/g,"@@##@@$1@@##@@").

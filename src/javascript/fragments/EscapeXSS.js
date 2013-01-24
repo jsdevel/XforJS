@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-(function(s){
+function EscapeXSS(s){
       if(typeof(s)==='string'){
          return s.
             replace(/&(?![a-zA-Z]+;|#[0-9]+;)/g,'&amp;').
@@ -26,4 +26,4 @@
             replace(/>/g, '&gt;');
       }
       return s;
-})
+}

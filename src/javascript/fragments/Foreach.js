@@ -33,7 +33,7 @@
  * Case insensitive sorts are not gauranteed to return the same results every
  * time.
  */
-(function(o,c,so,n,p,i){
+function Foreach(o,c,so,n,p,i){
    var j=0,l,m;
    if(!!o&&typeof(o)==='object'&&typeof(c)==='function'){
       l=o.length;
@@ -198,4 +198,4 @@
          c(m.c, j+1, o.length, m.n)
       }
    }
-})
+}

@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-(function(){
+function StringBuffer(){
    var r=[],
       i=0,
       t='number string boolean',
@@ -33,5 +33,4 @@
          return r.join('')
       };
    return f
-})
-
+}

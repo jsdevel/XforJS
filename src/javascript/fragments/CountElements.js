@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-(function(f){
+function CountElements(f){
    var o,
    c=0,
    n;
@@ -30,5 +30,4 @@
       }
    }
    return c
-})
-
+}

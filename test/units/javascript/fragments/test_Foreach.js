@@ -23,15 +23,15 @@
 !function(){
    var fs = require('fs');
    var equal = require('assert').equal;
-   var Foreach = eval(fs.readFileSync("../src/javascript/fragments/Foreach.js", "utf8"));
-   var GetSortArray = eval(fs.readFileSync("../src/javascript/fragments/GetSortArray.js", "utf8"));
    var array = [1,"a","C","d","e","a","D",2,6,"A","c","E"];
-
    var sortArray;
    var caseInsensitive;
    var asc;
    var promoteNumber;
    var caseLevel;
+
+   eval(fs.readFileSync("../src/javascript/fragments/Foreach.js", "utf8"));
+   eval(fs.readFileSync("../src/javascript/fragments/GetSortArray.js", "utf8"));
 
    //ASC
    reset();
