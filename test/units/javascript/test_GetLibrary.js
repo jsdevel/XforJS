@@ -17,7 +17,7 @@
  */
 !function(){
    assert.doesNotThrow(function(){
-      eval(JavascriptResources.getLib());
+      eval(GetLibrary());
    }, "The Lib is built without Syntax Errors.");
 
    assert(
@@ -25,7 +25,7 @@
       "The Lib namespace is built accordingly.");
 
    var foo = {}
-   eval(JavascriptResources.getLib("foo.boo"));
+   eval(GetLibrary("foo.boo"));
    assert(hasMethods(foo.boo),
       "getLib accepts a namespace.");
 

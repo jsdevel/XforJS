@@ -30,7 +30,7 @@ var XforJS = {
       return new Compiler(args);
    },
    'getLib':function(namespace){
-      return JavascriptResources.getLib(namespace);
+      return GetLibrary(namespace);
    },
 
    /**
@@ -52,7 +52,7 @@ var XforJS = {
             if(fs['existsSync'](path) && fs['statSync'](path)['isDirectory']()){
                throw "Can't overwrite the following directory with the library: "+path;
             } else {
-               lib = JavascriptResources.getLib(namespace);
+               lib = GetLibrary(namespace);
                fs['writeFileSync'](path, lib);
             }
          } catch(e){
@@ -68,9 +68,13 @@ var XforJS = {
 //INCLUDE misc/extend
 //INCLUDE misc/Globals
 
-//This needs to be built by buildJavascriptResources in the javascript dir
-//INCLUDE javascript/JavascriptResources
-//INCLUDE javascript/JavascriptBuilder
+//INCLUDE javascript/CountElements
+//INCLUDE javascript/EscapeXSS
+//INCLUDE javascript/Foreach
+//INCLUDE javascript/GetLibrary
+//INCLUDE javascript/GetSortArray
+//INCLUDE javascript/SafeValue
+//INCLUDE javascript/StringBuffer
 
 
 //INCLUDE output/Output
@@ -79,6 +83,7 @@ var XforJS = {
 //INCLUDE output/JSParameters
 //INCLUDE output/JSParametersWrapper
 //INCLUDE output/JSArgumentsWrapper
+//INCLUDE output/JavascriptBuilder
 
 
 //INCLUDE parsing/CharWrapper

@@ -10,8 +10,4 @@ fi
 
 echo -n "$version" > VERSION;
 
-cd $DIR_SRC/javascript;
-node buildJavascriptResources.js
-cd $DIR_BIN;
-
 node build_framework.js

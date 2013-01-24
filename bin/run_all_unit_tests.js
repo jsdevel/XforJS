@@ -27,7 +27,6 @@ var testDirs = [
    'units/output/',
    'units/parsing/',
    'units/javascript/',
-   'units/javascript/fragments/',
    'units/productions/',
    'units/compiling/',
    'units/suites/'
