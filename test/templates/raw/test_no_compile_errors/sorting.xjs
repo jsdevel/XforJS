@@ -143,3 +143,10 @@
       {.}
    {/foreach}
 {/template}
+
+{template rand}
+   {foreach .}
+      {sort . |rand}
+      {.}
+   {/foreach}
+{/template}

@@ -73,15 +73,18 @@
       [
          "|asc",
          "|desc",
+         "|rand",
          "|asc ",
          "|desc ",
+         "|rand ",
          "|asc|"
       ].forEach(function(good){
          assert(SORT_DIRECTION.exec(good), "SORT_DIRECTION good: '"+good+"'.");
       });
       [
          " asc",
-         " desc"
+         " desc",
+         " rand"
       ].forEach(function(bad){
          assert(!SORT_DIRECTION.exec(bad), "SORT_DIRECTION bad: '"+bad+"'.");
       });

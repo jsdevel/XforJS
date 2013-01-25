@@ -34,162 +34,173 @@
  * time.
  */
 function Foreach(o,c,so,n,p,i){
-   var j=0,l,m;
+   var j,l,m,asc=so===0,shuffledArray;
    if(o instanceof Array && typeof(c) === 'function' ){
       l=o.length;
-      if(so!==void(0))sort(o, function(c,d){
-         var av=c.v,
-            bv=d.v,
-            al=c.l,
-            bl=d.l,
-            aisu=al[0]!==av[0],//a is upper
-            bisu=bl[0]!==bv[0],//b is upper
-            at=c.t,
-            bt=d.t,
-            an=at==='number',
-            bn=bt==='number';
-
-         if(av===bv){//both values same
-            return 0;
-         }
-
-         //only one is number
-         if(an!==bn){
-            if(n){//promote numbers
-               return at>bt?1:0;
+      if(so!==void(0)){
+         if(so>1){
+            shuffledArray=[];
+            j=0;
+            for(;j<l;j++){
+               shuffledArray.splice(~~(Math.random()*shuffledArray.length),0, o[j]);
             }
-            return at>bt?0:1;//promote string by default
-         }
+            o=shuffledArray;5
+         } else {
+            sort(o, function(c,d){
+               var av=c.v,
+                  bv=d.v,
+                  al=c.l,
+                  bl=d.l,
+                  aisu=al[0]!==av[0],//a is upper
+                  bisu=bl[0]!==bv[0],//b is upper
+                  at=c.t,
+                  bt=d.t,
+                  an=at==='number',
+                  bn=bt==='number';
 
-         //both are numbers
-         if(an&&bn){
-            if(so){//asc
-               return av>bv?1:0;
-            }else {//desc
-               return av>bv?0:1;
-            }
-         }
-
-         //strings now
-         //lowercase will return emtpy, so we push the value down.
-         if(!al && !bl)return 0;
-         if(!al && bl)return 1;
-         if(al && !bl)return 0;
-
-
-
-         switch(p){
-         case 0://no case preference
-            if(so){//asc
-               if(i){//case insenstive
-                  return al>bl?1:0;
-               } else {//normal
-                  return av > bv ?1:0;
+               if(av===bv){//both values same
+                  return 0;
                }
-            } else {//desc
-               if(i){//case insensitive
-                  if(al===bl){
-                     return 0;
+
+               //only one is number
+               if(an!==bn){
+                  if(n){//promote numbers
+                     return at>bt?1:0;
                   }
-                  return al>bl?0:1;
-               } else {
-                  if(aisu&&!bisu){
-                     return 0;
-                  } else if(!aisu&&bisu){
-                     return 1;
-                  }
-                  return av>bv?0:1;
+                  return at>bt?0:1;//promote string by default
                }
-            }
-            break;
-         case 1://lower case first
-            if(so){//asc
-               if(i){//insensitive
-                  if(al===bl){//same character
-                     if(aisu && !bisu){//a is upper case
-                        return 1;
+
+               //both are numbers
+               if(an&&bn){
+                  if(asc){
+                     return av>bv?1:0;
+                  }else {//desc
+                     return av>bv?0:1;
+                  }
+               }
+
+               //strings now
+               //lowercase will return emtpy, so we push the value down.
+               if(!al && !bl)return 0;
+               if(!al && bl)return 1;
+               if(al && !bl)return 0;
+
+
+
+               switch(p){
+               case 0://no case preference
+                  if(asc){
+                     if(i){//case insenstive
+                        return al>bl?1:0;
+                     } else {//normal
+                        return av > bv ?1:0;
                      }
-                     return 0;
-                  } else {//not same character
-                     return al>bl?1:-1;
-                  }
-               } else {//sensitive
-                  if(aisu && !bisu){//a is upper case
-                     return 1;
-                  } else if(!aisu && bisu){//b is upper case
-                     return 0;
-                  } else {//both lower or upper case
-                     return av>bv?1:-1;
-                  }
-               }
-            } else {//desc
-               if(i){//insensitive
-                  if(al===bl){//same character
-                     if(aisu && !bisu){//a is upper case
-                        return 1;
-                     } else if(!aisu && bisu){//b is upper case
-                        return -1;
-                     } else {//both lower or upper case
-                        return -1;
+                  } else {//desc
+                     if(i){//case insensitive
+                        if(al===bl){
+                           return 0;
+                        }
+                        return al>bl?0:1;
+                     } else {
+                        if(aisu&&!bisu){
+                           return 0;
+                        } else if(!aisu&&bisu){
+                           return 1;
+                        }
+                        return av>bv?0:1;
                      }
-                  } else {//not same character
-                     return al>bl?-1:1;
                   }
-               } else {//sensitive
-                  if((aisu && bisu) ||(!aisu && !bisu)){//both same case
-                     return av>bv?-1:1;
-                  } else {//one is lower
-                     return aisu?1:-1;
-                  }
-               }
-            }
-            break;
-         case 2:
-            if(so){//asc
-               if(i){//insensitive
-                  if(al===bl){//same character
-                     if(aisu && !bisu){//a is upper case
-                        return -1;
-                     } else if(!aisu && bisu){//b is upper case
-                        return 1;
-                     } else {//both lower or upper case
-                        return 0;
+                  break;
+               case 1://lower case first
+                  if(asc){
+                     if(i){//insensitive
+                        if(al===bl){//same character
+                           if(aisu && !bisu){//a is upper case
+                              return 1;
+                           }
+                           return 0;
+                        } else {//not same character
+                           return al>bl?1:-1;
+                        }
+                     } else {//sensitive
+                        if(aisu && !bisu){//a is upper case
+                           return 1;
+                        } else if(!aisu && bisu){//b is upper case
+                           return 0;
+                        } else {//both lower or upper case
+                           return av>bv?1:-1;
+                        }
                      }
-                  } else {//not same character
-                     return al>bl?1:-1;
-                  }
-               } else {//not sensitive
-                  if((aisu && bisu) ||(!aisu && !bisu)){//both same case
-                     return av>bv?1:-1;
-                  } else {//one is lower
-                     return aisu?-1:1;
-                  }
-               }
-            } else {//desc
-               if(i){//insensitive
-                  if(al===bl){//same character
-                     if(aisu && !bisu){//a is upper case
-                        return -1;
-                     } else if(!aisu && bisu){//b is upper case
-                        return 1;
-                     } else {//both lower or upper case
-                        return 0;
+                  } else {//desc
+                     if(i){//insensitive
+                        if(al===bl){//same character
+                           if(aisu && !bisu){//a is upper case
+                              return 1;
+                           } else if(!aisu && bisu){//b is upper case
+                              return -1;
+                           } else {//both lower or upper case
+                              return -1;
+                           }
+                        } else {//not same character
+                           return al>bl?-1:1;
+                        }
+                     } else {//sensitive
+                        if((aisu && bisu) ||(!aisu && !bisu)){//both same case
+                           return av>bv?-1:1;
+                        } else {//one is lower
+                           return aisu?1:-1;
+                        }
                      }
-                  } else {//not same character
-                     return al>bl?-1:1;
                   }
-               } else {//sensitive
-                  if((aisu && bisu) ||(!aisu && !bisu)){//both same case
-                     return av>bv?-1:1;
-                  } else {//one is lower
-                     return aisu?-1:1;
+                  break;
+               case 2:
+                  if(asc){
+                     if(i){//insensitive
+                        if(al===bl){//same character
+                           if(aisu && !bisu){//a is upper case
+                              return -1;
+                           } else if(!aisu && bisu){//b is upper case
+                              return 1;
+                           } else {//both lower or upper case
+                              return 0;
+                           }
+                        } else {//not same character
+                           return al>bl?1:-1;
+                        }
+                     } else {//not sensitive
+                        if((aisu && bisu) ||(!aisu && !bisu)){//both same case
+                           return av>bv?1:-1;
+                        } else {//one is lower
+                           return aisu?-1:1;
+                        }
+                     }
+                  } else {//desc
+                     if(i){//insensitive
+                        if(al===bl){//same character
+                           if(aisu && !bisu){//a is upper case
+                              return -1;
+                           } else if(!aisu && bisu){//b is upper case
+                              return 1;
+                           } else {//both lower or upper case
+                              return 0;
+                           }
+                        } else {//not same character
+                           return al>bl?-1:1;
+                        }
+                     } else {//sensitive
+                        if((aisu && bisu) ||(!aisu && !bisu)){//both same case
+                           return av>bv?-1:1;
+                        } else {//one is lower
+                           return aisu?-1:1;
+                        }
+                     }
                   }
+                  break;
                }
-            }
-            break;
+            });
          }
-      });
-      for(j;j<l;j++){
+      }
+      for(j=0;j<l;j++){
          m=o[j];
          c(m.c, j+1, o.length, m.n)
       }

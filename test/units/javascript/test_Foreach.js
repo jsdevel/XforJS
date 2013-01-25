@@ -25,12 +25,12 @@
    var array = [1,"a","C","d","e","a","D",2,6,"A","c","E"];
    var sortArray;
    var caseInsensitive;
-   var asc;
+   var direction;
    var promoteNumber;
    var caseLevel;
    var start = Date.now();
 
-   //ASC
+   direction="asc";
    reset();
       test("asc","ACDEaacde126");
    reset();
@@ -77,87 +77,75 @@
       caseInsensitive=1;
       test("ascC","AaaCcDdEe126");
 
-   //DESC
+   direction="desc";
    reset();
-      asc=0;
       test("desc","EDCAedcaa621");
    reset();
-      asc=0;
       caseInsensitive=1;
       test("desci","eEdDCcaaA621");
    reset();
-      asc=0;
       caseInsensitive=1;
       promoteNumber=1;
       test("descin","621eEdDCcaaA");
    reset();
-      asc=0;
       caseInsensitive=1;
       caseLevel=1;
       test("descic","eEdDcCaaA621");
    reset();
-      asc=0;
       caseInsensitive=1;
       caseLevel=2;
       test("desciC","EeDdCcAaa621");
    reset();
-      asc=0;
       caseInsensitive=1;
       caseLevel=1;
       promoteNumber=1;
       test("descinc","621eEdDcCaaA");
    reset();
-      asc=0;
       caseInsensitive=1;
       caseLevel=2;
       promoteNumber=1;
       test("descinC","621EeDdCcAaa");
    reset();
-      asc=0;
       promoteNumber=1;
       test("descn","621EDCAedcaa");
    reset();
-      asc=0;
       promoteNumber=1;
       caseLevel=1;
       test("descnc","621edcaaEDCA");
    reset();
-      asc=0;
       promoteNumber=1;
       caseLevel=2;
       test("descnC","621EDCAedcaa");
    reset();
-      asc=0;
       caseLevel=1;
       test("descc","edcaaEDCA621");
    reset();
-      asc=0;
       caseLevel=2;
       test("descC","EDCAedcaa621");
 
    array=['The Pragmatic Programmer: From journeyman to master', 'extreme Programming Explained', 'Design Patterns: Elements of reusable Object Oriented Software'];
 
-   //ASC
+   direction="asc";
    reset();
       test("asc", "Design Patterns: Elements of reusable Object Oriented SoftwareThe Pragmatic Programmer: From journeyman to masterextreme Programming Explained");
 
-   //DESC
+   direction="desc";
    reset();
-      asc=0;
+
       test("desc", "The Pragmatic Programmer: From journeyman to masterDesign Patterns: Elements of reusable Object Oriented Softwareextreme Programming Explained");
 
    //console.log("test_Foreach took: "+(Date.now()-start)+"ms");
 
    function reset(){
       caseInsensitive=0;
-      asc=1;
       promoteNumber = 0;
       caseLevel = 0;
       sortArray = GetSortArray(array, function(value){return value;});
    }
    function test(msg, expected){
       var finalResult="";
-      Foreach(sortArray, function(){}, asc, promoteNumber, caseLevel, caseInsensitive);
+      var directionCode=direction==="asc"?0:(direction==="desc"?1:2);
+      Foreach(sortArray, function(){}, directionCode, promoteNumber, caseLevel, caseInsensitive);
       sortArray.forEach(function(obj){
          finalResult+=obj.v;
       });

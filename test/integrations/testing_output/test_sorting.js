@@ -19,82 +19,55 @@
    var sortXJS = fs.readFileSync('templates/raw/test_no_compile_errors/sorting.xjs', 'utf8');
    var compiler = XforJS.getCompiler();
    var templates = compiler.compile(sortXJS);
-   var array = [
-      0,
-      1,
-      3,
-      "z",
-      "Z",
-      "c",
-      "z",
-      "D",
-      "A",
-      "Z",
-      "a"
-   ];
-   var result;
+   var original;
 
    eval(templates);
 
-   //asc
-   result=sort.asc(array);
-   assert.equal(result, "ADZZaczz013", "asc");
+   //ASC
+   assert.equal(doSort(sort.asc    ), "ADZZaczz013", "asc");
+   assert.equal(doSort(sort.ascci  ), "aAcDzzZZ013", "ascci");
+   assert.equal(doSort(sort.ascCi  ), "AacDZZzz013", "ascCi");
+   assert.equal(doSort(sort.ascCin ), "013AacDZZzz", "ascCin");
+   assert.equal(doSort(sort.asccin ), "013aAcDzzZZ", "asccin");
+   assert.equal(doSort(sort.asci   ), "AacDzZzZ013", "asci");
+   assert.equal(doSort(sort.ascn   ), '013ADZZaczz', "ascn");
+   assert.equal(doSort(sort.ascin  ), '013AacDzZzZ', "ascin");
+   assert.equal(doSort(sort.ascc   ), 'aczzADZZ013', "ascc");
+   assert.equal(doSort(sort.ascC   ), 'ADZZaczz013', "ascC");
 
-   result=sort.ascci(array);
-   assert.equal(result, "aAcDzzZZ013", "ascci");
+   //DESC
+   assert.equal(doSort(sort.desc   ), 'ZZDAzzca310', "desc");
+   assert.equal(doSort(sort.descci ), 'zzZZDcaA310', "descci");
+   assert.equal(doSort(sort.descCi ), 'ZZzzDcAa310', "descCi");
+   assert.equal(doSort(sort.descCin), '310ZZzzDcAa', "descCin");
+   assert.equal(doSort(sort.desccin), '310zzZZDcaA', "desccin");
+   assert.equal(doSort(sort.desci  ), 'zZzZDcAa310', "desci");
+   assert.equal(doSort(sort.descn  ), '310ZZDAzzca', "descn");
+   assert.equal(doSort(sort.descin ), '310zZzZDcAa', "descin");
+   assert.equal(doSort(sort.descc  ), 'zzcaZZDA310', "descc");
+   assert.equal(doSort(sort.descC  ), 'ZZDAzzca310', "descC");
 
-   result=sort.ascCi(array);
-   assert.equal(result, "AacDZZzz013", "ascCi");
+   //RAND
+   original=doSort(sort.rand);
+   assert.notEqual(original, doSort(sort.rand), "rand 1");
+   assert.notEqual(original, doSort(sort.rand), "rand 2");
+   assert.notEqual(original, doSort(sort.rand), "rand 3");
+   assert.notEqual(original, doSort(sort.rand), "rand 4");
+   assert.notEqual(original, doSort(sort.rand), "rand 5");
 
-   result=sort.ascCin(array);
-   assert.equal(result, "013AacDZZzz", "ascCin");
-
-   result=sort.asccin(array);
-   assert.equal(result, "013aAcDzzZZ", "asccin");
-
-   result=sort.asci(array);
-   assert.equal(result, "AacDzZzZ013", "asci");
-
-   result=sort.ascn(array);
-   assert.equal(result, '013ADZZaczz', "ascn");
-
-   result=sort.ascin(array);
-   assert.equal(result, '013AacDzZzZ', "ascin");
-
-   result=sort.ascc(array);
-   assert.equal(result, 'aczzADZZ013', "ascc");
-
-   result=sort.ascC(array);
-   assert.equal(result, 'ADZZaczz013', "ascC");
-
-   //desc
-   result=sort.desc(array);
-   assert.equal(result, 'ZZDAzzca310', "desc");
-
-   result=sort.descci(array);
-   assert.equal(result, 'zzZZDcaA310', "descci");
-
-   result=sort.descCi(array);
-   assert.equal(result, 'ZZzzDcAa310', "descCi");
-
-   result=sort.descCin(array);
-   assert.equal(result, '310ZZzzDcAa', "descCin");
-
-   result=sort.desccin(array);
-   assert.equal(result, '310zzZZDcaA', "desccin");
-
-   result=sort.desci(array);
-   assert.equal(result, 'zZzZDcAa310', "desci");
-
-   result=sort.descn(array);
-   assert.equal(result, '310ZZDAzzca', "descn");
-
-   result=sort.descin(array);
-   assert.equal(result, '310zZzZDcAa', "descin");
-
-   result=sort.descc(array);
-   assert.equal(result, 'zzcaZZDA310', "descc");
-
-   result=sort.descC(array);
-   assert.equal(result, 'ZZDAzzca310', "descC");
+   function doSort(fn){
+      return fn([
+         0,
+         1,
+         3,
+         "z",
+         "Z",
+         "c",
+         "z",
+         "D",
+         "A",
+         "Z",
+         "a"
+      ]);
+   }
 }();
