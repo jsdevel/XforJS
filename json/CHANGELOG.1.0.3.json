@@ -1,0 +1,8 @@
+{
+   "currentVersion":"1.0.3",
+   "previousVersion":"1.0.2",
+   "commitHistory":[
+"closes #18:  Add {sort name[0].bla |rand}, to support a random sort. enhancement.",
+"closes #13:   |desc|C} isn't properly pushing lowercase down on the doc site book example. bug."
+]
+}
