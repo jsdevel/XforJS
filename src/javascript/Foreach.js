@@ -39,12 +39,7 @@ function Foreach(o,c,so,n,p,i){
       l=o.length;
       if(so!==void(0)){
          if(so>1){
-            shuffledArray=[];
-            j=0;
-            for(;j<l;j++){
-               shuffledArray.splice(~~(Math.random()*shuffledArray.length),0, o[j]);
-            }
-            o=shuffledArray;5
+            o=getShuffled(o);
          } else {
             sort(o, function(c,d){
                var av=c.v,
@@ -204,6 +199,18 @@ function Foreach(o,c,so,n,p,i){
          m=o[j];
          c(m.c, j+1, o.length, m.n)
       }
+   }
+
+   function getShuffled(array){
+      var shuffledArray=[];
+      var i=0;
+      var len = array.length;
+      var key;
+      for(;i<len;i++){
+         key = ~~(Math.random()*(shuffledArray.length+1));
+         shuffledArray.splice(key,0, array[i]);
+      }
+      return shuffledArray;
    }
 
    function sort(array, compare){
