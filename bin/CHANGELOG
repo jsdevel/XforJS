@@ -1,14 +1,10 @@
-Merge branch 'develop'.  For 1.0.2.
-
-Bumping version to 1.0.2.
-closes #14:  Error shows for buildOutputLibrary set server = true, when server is set to true. bug.
-closes #12:  Sort modifiers allow |desc|}. bug.
-IGNORE:  Adding bad test to NS.
-IGNORE: fixing name of NS good regex test.
-closes #10:  NS regex flags undefined as true. bug.
-
-closes #15:  The default namespace for the output library is XforJS, which overrides XforJS. bug.
-closes #9:    The lib is built twice. This should be avoided to reduce the minified size. enhancement.
-IGNORE: Adding units/ and javascript/fragments/ to the list of dirs for unit tests.
-IGNORE: Removing a console.log.
-IGNORE: Removing a few unused variables.
+The random sort wasn't properly sorting because the key was wrong.
+Bumping version to 1.0.3.
+closes #18:  Add {sort name[0].bla |rand}, to support a random sort. enhancement.
+Adding a test function.
+Updating the versioning file.
+Cleaning up sort some more.
+closes #13:   |desc|C} isn't properly pushing lowercase down on the doc site book example. bug.
+IGNORE: Cleaning up more fragment code.  I'm also improving the build process by removing the need to build JavascriptResources every time.
+IGNORE: Cleaning up the fragment code.
+IGNORE:  test for #12: Sort modifiers allow |desc|}. I forgot to add this.  bug.
