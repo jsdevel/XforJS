@@ -15,20 +15,11 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-(function(f){
-   var o,
-   c=0,
-   n;
-   try{o=f()}catch(e){o=f}
-   if(!!o && typeof(o)==='object'){
-      if(o.slice&&o.join&&o.pop){
-         return o.length>>>0;
-      }else{
-         for(n in o){
-            c++;
-         }
-      }
+function SafeValue(v){
+   try{
+      return v()
+   }catch(e){
+      return typeof(v)==='function'?void(0):v
    }
-   return c
-})
+}
 

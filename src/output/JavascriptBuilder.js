@@ -50,12 +50,12 @@ function JavascriptBuilder(args){
       js_sortArray=lib_namespace+"."+js_GetSortArray;
       js_stringBuffer=lib_namespace+"."+js_StringBuffer;
    } else {
-      js_count=JavascriptResources.CountElements.toString();
-      js_escapexss=JavascriptResources.EscapeXSS.toString();
-      js_foreach=JavascriptResources.Foreach.toString();
-      js_safeValue = JavascriptResources.SafeValue.toString();
-      js_sortArray = JavascriptResources.GetSortArray.toString();
-      js_stringBuffer=JavascriptResources.StringBuffer.toString();
+      js_count=CountElements.toString();
+      js_escapexss=EscapeXSS.toString();
+      js_foreach=Foreach.toString();
+      js_safeValue = SafeValue.toString();
+      js_sortArray = GetSortArray.toString();
+      js_stringBuffer=StringBuffer.toString();
    }
 
    this.getJSCount=function(){

@@ -49,7 +49,26 @@ function buildFile(file){
 
 
 
-function insertTestAndRun(fileToTest, test){
+function insertTestAndRun(fileToTest, input_test){
+   var hasError=false;
+   var test=function(message,fn,printError){
+      if(typeof message !== 'string'){
+         throw "test requires a message"
+      }
+      if(typeof fn !== 'function'){
+         throw "test requires a function"
+      }
+      try{
+         fn();
+         //console.log("PASS: "+message);
+      } catch(e){
+         console.log("FAIL: "+message);
+         if(printError){
+            console.log(e);
+         }
+         hasError=true;
+      }
+   };
    var logMethod = (function(){
       var assert=require('assert');
       assert.logs=function(fn, expectedMsg, output){
@@ -83,8 +102,9 @@ function insertTestAndRun(fileToTest, test){
    }).toString();
    var newContents = fileToTest.replace(
       /\/\*INJECT\sTESTS\sHERE\*\//,
-      logMethod.replace(/^\s*?function\s*?\(\s*?\)\s*?\{|\}\s*?$/g, '')+test);
+      logMethod.replace(/^\s*?function\s*?\(\s*?\)\s*?\{|\}\s*?$/g, '')+input_test);
    eval(newContents);
+   return hasError;
 }
 
 /**

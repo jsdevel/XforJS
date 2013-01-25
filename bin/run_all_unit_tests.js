@@ -27,7 +27,6 @@ var testDirs = [
    'units/output/',
    'units/parsing/',
    'units/javascript/',
-   'units/javascript/fragments/',
    'units/productions/',
    'units/compiling/',
    'units/suites/'
@@ -46,17 +45,21 @@ fileLoader.loadAll(function(loadedFiles){
 
    filesToTest.forEach(function(file){
       var testFile = loadedFiles[file];
+      var hasError;
+      var header =
+         "=======================================\n"+
+         "FAILED: "+file+"\n"+
+         "=======================================";
 
       if(common.isJSFileName(file)){
          try {
-            common.insertTestAndRun(framework, testFile);
+            hasError=common.insertTestAndRun(framework, testFile);
          } catch(e){
-            console.log(
-               "=======================================\n"+
-               "FAILED: "+file+"\n"+
-               "======================================="
-            );
+            console.log(header);
             console.log(e);
+         }
+         if(hasError){
+            console.log(header);
          }
       }
    });

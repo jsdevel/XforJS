@@ -15,23 +15,19 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-(function(){
-   var r=[],
-      i=0,
-      t='number string boolean',
-      f=function(s){
-         var y,v;
-         try{
-            v=s();
-         }catch(e){
-            v=s;
+function CountElements(f){
+   var o,
+   c=0,
+   n;
+   try{o=f()}catch(e){o=f}
+   if(!!o && typeof(o)==='object'){
+      if(o.slice&&o.join&&o.pop){
+         return o.length>>>0;
+      }else{
+         for(n in o){
+            c++;
          }
-         y=typeof(v);
-         r[i++]=(t.indexOf(y)>-1)?v:''
-      };
-      f['s']=function(){
-         return r.join('')
-      };
-   return f
-})
-
+      }
+   }
+   return c
+}

@@ -1,0 +1,7 @@
+{namespace sort}
+
+{template sort}
+   {foreach .}
+      {sort . |rand|i}
+   {/foreach}
+{/template}

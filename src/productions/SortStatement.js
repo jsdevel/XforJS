@@ -60,13 +60,22 @@ function SortStatement(
 
                var direction = sortDirection[1];
                characters.shift(direction.length);
-               var asc = direction.indexOf("|asc") === 0;
+               var directionCode=0;
                var promoteNum = false;
                var casePreference = 0;
                var caseSensitivity=0;
 
+               switch(direction){
+               case "|asc":directionCode=0;break;
+               case "|desc":directionCode=1;break;
+               case "|rand":directionCode=2;break;
+               }
+
                var sortModifiers = characters.match(SORT_MODIFIERS);
                if(sortModifiers){
+                  if(directionCode===2){
+                     throw "Modifiers are not allowed after |rand";
+                  }
                   var modifiers = sortModifiers[1];
                   characters.shift(modifiers.length);
 
@@ -91,14 +100,14 @@ function SortStatement(
                      }
                   }
                }
-               sortFunctionOutput.add(","+(asc?1:0)+","+(promoteNum?1:0)+","+casePreference+","+caseSensitivity);
+               sortFunctionOutput.add(","+directionCode+","+(promoteNum?1:0)+","+casePreference+","+caseSensitivity);
             } else {
-               throw "Sort direction must be one of '|asc' or '|desc'.";
+               throw "Sort direction must be one of '|asc', '|desc' or '|rand'.";
             }
          }
 
          if(!hasSortDirection){
-            throw "One of '|asc' or '|desc' is required.";
+            throw "One of '|asc', '|desc' or '|rand' is required.";
          }
 
          if(characters.charAt(0) === '}'){

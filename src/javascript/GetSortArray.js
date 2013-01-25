@@ -22,7 +22,7 @@
  * requested.  Only numbers and strings are considered, all other types are
  * assigned a value of ''.
  */
-(function(l,s){
+function GetSortArray(l,s){
    var r=[],a,v,o,t;
    try{o=l()}catch(e){o=l}
    if(!!o&&typeof(o)==='object'){
@@ -49,4 +49,4 @@
       }
    }
    return r
-})
+}

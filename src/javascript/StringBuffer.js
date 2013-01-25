@@ -1,4 +1,4 @@
-/*!!
+/*!
  * Copyright 2012 Joseph Spencer.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,12 +15,22 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-XFORJS={
-   '##count##':'##countFN##',
-   '##escapexss##':'##escapexssFN##',
-   '##foreach##':'##foreachFN##',
-   '##safeValueName##':'##safeValueFn##',
-   '##sortFunctionName##':'##sortFunctionFn##',
-   '##stringBufferName##':'##stringBufferFn##'
-};
-
+function StringBuffer(){
+   var r=[],
+      i=0,
+      t='number string boolean',
+      f=function(s){
+         var y,v;
+         try{
+            v=s();
+         }catch(e){
+            v=s;
+         }
+         y=typeof(v);
+         r[i++]=(t.indexOf(y)>-1)?v:''
+      };
+      f['s']=function(){
+         return r.join('')
+      };
+   return f
+}

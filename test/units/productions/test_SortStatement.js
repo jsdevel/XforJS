@@ -34,8 +34,7 @@
          "ContextSelector is used.");
       remove();
       execute();
-      assert(output1Has(",1,0,0,0"),
-         "default values.");
+      output1Has(",0,0,0,0", "default values.");
       assert(!prodIs(SortStatement),
          "closes with defaults.");
 
@@ -51,8 +50,7 @@
       remove();
       characters.shift(2);
       execute();
-      assert(output1Has(",0,0,0,0"),
-         "desc as first param.");
+      output1Has(",1,0,0,0", "desc as first param.");
       assert(characters.length() === 0,
          "direction is removed.");
 
@@ -61,8 +59,7 @@
       remove();
       characters.shift(2);
       execute();
-      assert(output1Has(",1,1,0,1"),
-         "numbers first.");
+      output1Has(",0,1,0,1", "numbers first.");
       assert(!characters.length(),
          "properly closes.");
 
@@ -71,8 +68,7 @@
       remove();
       characters.shift(2);
       execute();
-      assert(output1Has(",1,1,2,1"),
-         "numbers first.");
+      output1Has(",0,1,2,1", "numbers first.");
       assert(!characters.length(),
          "properly closes.");
    setEnv(". |asc|inc}");
@@ -80,11 +76,27 @@
       remove();
       characters.shift(2);
       execute();
-      assert(output1Has(",1,1,1,1"),
-         "numbers first.");
+      output1Has(",0,1,1,1", "numbers first.");
       assert(!characters.length(),
          "properly closes.");
 
+   test("|rand is allowed.", function(){
+      setEnv(". |rand}");
+         execute();
+         remove();
+         characters.shift(2);
+         execute();
+         output1Has(",2,0,0,0", "default values.");
+   });
+   test("|rand|i throws an error.", function(){
+      setEnv(". |rand|i}");
+         execute();
+         remove();
+         characters.shift(2);
+         assert['throws'](function(){
+            execute();
+         });
+   });
 
    setEnv(". |asc}");
       execute();
@@ -98,6 +110,7 @@
    [
       ". |asc|cc}",
       ". |asc|ii}",
+      ". |desc|}",
       ". |asc|nn}"
    ].forEach(function(input){
       setEnv(input);
@@ -106,15 +119,15 @@
          characters.shift(2);
          assert['throws'](function(){
             execute();
-         });
+         }, "bad statements throw errors: "+input);
    });
 
 
    function outputHas(string){
       return output.toString().indexOf(string) > -1;
    }
-   function output1Has(string){
-      return output1.toString().indexOf(string) > -1;
+   function output1Has(string, msg){
+      assert.equal(output1.toString(), string, msg);
    }
    function execute(){
       context.executeCurrent(characters);
