@@ -28,6 +28,7 @@
    var asc;
    var promoteNumber;
    var caseLevel;
+   var start = Date.now();
 
    //ASC
    reset();
@@ -144,6 +145,8 @@
    reset();
       asc=0;
       test("desc", "The Pragmatic Programmer: From journeyman to masterDesign Patterns: Elements of reusable Object Oriented Softwareextreme Programming Explained");
+
+   //console.log("test_Foreach took: "+(Date.now()-start)+"ms");
 
    function reset(){
       caseInsensitive=0;

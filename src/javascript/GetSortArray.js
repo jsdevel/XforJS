@@ -33,7 +33,7 @@ function GetSortArray(l,s){
             r.push({
                n:a,//name
                c:o[a],//context
-               l:t==='string'?v.charAt(0).toLowerCase()+v.slice(1):'',//used to determine case
+               l:t==='string'?v.toLowerCase():'',//used to determine case
                t:t,//type
                v:(t==='string'||t==='number')?v:''//only sort on these
             });

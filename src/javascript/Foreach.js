@@ -42,8 +42,8 @@ function Foreach(o,c,so,n,p,i){
             bv=d.v,
             al=c.l,
             bl=d.l,
-            aisu=al&&al!==av,//a is upper
-            bisu=bl&&bl!==bv,//b is upper
+            aisu=al[0]!==av[0],//a is upper
+            bisu=bl[0]!==bv[0],//b is upper
             at=c.t,
             bt=d.t,
             an=at==='number',
@@ -76,7 +76,10 @@ function Foreach(o,c,so,n,p,i){
          if(!al && bl)return 1;
          if(al && !bl)return 0;
 
-         if(p===0){//no case preference
+
+
+         switch(p){
+         case 0://no case preference
             if(so){//asc
                if(i){//case insenstive
                   return al>bl?1:0;
@@ -98,9 +101,8 @@ function Foreach(o,c,so,n,p,i){
                   return av>bv?0:1;
                }
             }
-         }
-
-         if(p===1){//lower case first
+            break;
+         case 1://lower case first
             if(so){//asc
                if(i){//insensitive
                   if(al===bl){//same character
@@ -141,8 +143,8 @@ function Foreach(o,c,so,n,p,i){
                   }
                }
             }
-         }
-         if(p===2){
+            break;
+         case 2:
             if(so){//asc
                if(i){//insensitive
                   if(al===bl){//same character
@@ -184,6 +186,7 @@ function Foreach(o,c,so,n,p,i){
                   }
                }
             }
+            break;
          }
       });
       for(j;j<l;j++){
@@ -199,7 +202,7 @@ function Foreach(o,c,so,n,p,i){
       var i=1;
       var successfulIndex=i-1;
       //prevent closure compiler form converting this to boolean.
-      //because we wrap closures vars that represent booleans in closure,
+      //because we wrap closure's vars that represent booleans in closure,
       //the external lib won't have access to those vars.
       /** @type number */
       var regressed=0;
