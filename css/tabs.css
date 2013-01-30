@@ -1,0 +1,21 @@
+.tabs span {
+   cursor: pointer;
+   display: inline-block;
+   height: 100%;
+   padding: 8px;
+   text-align: center;
+}
+.tabs span.active {
+   border-left-style: solid;
+   border-left-width: 1px;
+   border-right-style: solid;
+   border-right-width: 1px;
+   margin-left: -1px;
+   margin-right: -1px;
+}
+.tab-content .tab-pane {
+   display: none;
+}
+.tab-content .tab-pane.active {
+   display: block;
+}

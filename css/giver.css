@@ -1,0 +1,27 @@
+@-webkit-keyframes giver-shown {
+   0% {
+      opacity: 0;
+   }
+   50% {
+      opacity: 1;
+   }
+}
+@-webkit-keyframes giver-hidden {
+   0% {
+      opacity: 1;
+   }
+   50% {
+      opacity: 0;
+   }
+}
+
+.giver.shown {
+   opacity: 1;
+   -webkit-animation-name: giver-shown;
+   -webkit-animation-duration: 0.2s;
+}
+.giver.hidden {
+   opacity: 0;
+   -webkit-animation-name: giver-hidden;
+   -webkit-animation-duration: 0.5s;
+}

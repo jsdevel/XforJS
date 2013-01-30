@@ -3,9 +3,17 @@
    <head>
       <meta charset="utf-8"/>
       <title>XforJS Documentation</title>
-      <link href="css/bootstrap.custom.css" rel="stylesheet" type="text/css"/>
+
+<!--CONCAT css/docs.min.css-->
       <link href="css/general.css" rel="stylesheet" type="text/css"/>
+      <link href="css/buttons.css" rel="stylesheet" type="text/css"/>
+      <link href="css/tabs.css" rel="stylesheet" type="text/css"/>
+      <link href="css/effects.css" rel="stylesheet" type="text/css"/>
+      <link href="css/snapping.css" rel="stylesheet" type="text/css"/>
+      <link href="css/giver.css" rel="stylesheet" type="text/css"/>
       <link href="css/main.css" rel="stylesheet" type="text/css"/>
+<!--END CONCAT-->
+
    </head>
    <body>
       <div class="header">
@@ -16,8 +24,18 @@
                <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"/>
             </a>
          <div class="downloads">
-            <a class="border-radius-5px ease-bg-color" href="downloads/XforJS.__VERSION__.js"><strong>Download __VERSION__</strong><br/><small>(src)</small></a>
-            <a class="border-radius-5px ease-bg-color" href="downloads/XforJS.__VERSION__.min.js"><strong>Download __VERSION__</strong><br/><small>(minified)</small></a>
+            <a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.__VERSION__.js">
+                  <i class="icon">D</i>
+                  <strong class="main">Download</strong>
+                  <strong>__VERSION__</strong>
+                  <small>(src)</small>
+            </a>
+            <a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.__VERSION__.min.js">
+               <i class="icon">D</i>
+               <strong class="main">Download</strong>
+               <strong>__VERSION__</strong>
+               <small>(min)</small>
+            </a>
          </div>
          <div class="changelog" data-version="__VERSION__">
             <span class="border-radius-5px ease-bg-color">View Changelog</span>
@@ -30,34 +48,20 @@
          raw templates <span class="muted">(compiled is preferred ;)</span>.
       </div>
 
-      <div class="copy">
-         <h2>Documentation</h2>
-         What follows is the documentation for X.  This
-         document will try to include the actual integration tests and source
-         files that are used during development of the compiler.  Following this
-         practice allows the source code of the compiler to remain in sync with
-         the documentation and vice versa.
+      <div class="try-it giver" data-gift="body &gt; .code-editor">
+         <strong class="button border-radius-5px"><i class="icon">e</i>Live Demo</strong>
       </div>
 
-      <div class="copy">
-         Every editor herein is executable, meaning you can change the contents
-         of the textareas and immediately see what the compiler is doing.
-         <span class="text-success">Go ahead.  Change the value of "showRatings" to "false" in the Input Params section.</span>
-      </div>
-
-      <div class="code-editor open">
-         <div>
-            <ul class="nav nav-tabs">
-               <li class="active">
-                  <a href=".raw" data-toggle="tab">Template</a>
-               </li>
-               <li>
-                  <a href=".input-data" data-toggle="tab">Input Data</a>
-               </li>
-               <li>
-                  <a href=".input-params" data-toggle="tab">Input Params</a>
-               </li>
-            </ul>
+      <div class="code-editor open snap-to-window border box-shadow-25px">
+         <div class="close-button" data-closes="body > .code-editor">
+            <i class="icon">x</i>
+         </div>
+         <div class="panel">
+            <div class="tabs">
+               <span class="active" data-tab=".raw">Template</span>
+               <span data-tab=".input-data">Input Data</span>
+               <span data-tab=".input-params">Input Params</span>
+            </div>
             <div class="tab-content left">
                <textarea class="tab-pane active raw" data-tab=".compiled">
 //INCLUDE ../XforJS/test/templates/raw/documentation/books_sample.xjs
@@ -70,31 +74,51 @@
                </textarea>
             </div>
          </div>
-         <div>
-            <ul class="nav nav-tabs">
-               <li>
-                  <a href=".compiled" data-toggle="tab">Compiled</a>
-               </li>
-               <li class="active">
-                  <a href=".rendered" data-toggle="tab">Rendered</a>
-               </li>
-               <li>
-                  <a href=".output-text" data-toggle="tab">Output</a>
-               </li>
-            </ul>
+         <div class="panel">
+            <div class="tabs">
+               <span data-tab=".compiled">Compiled</span>
+               <span class="active" data-tab=".rendered">Rendered</span>
+               <span data-tab=".output-text">Output</span>
+               <span data-tab=".statistics">Statistics</span>
+            </div>
             <div class="tab-content right">
                <textarea class="tab-pane compiled"></textarea>
                <div class="tab-pane active rendered sample-output"></div>
                <textarea class="tab-pane output-text"></textarea>
+               <div class="statistics"></div>
             </div>
          </div>
       </div>
-      <script src="js/jquery-1.8.3.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script src="js/XforJS.__VERSION__.min.js"></script>
-      <script src="js/main.js"></script>
+
+      <div class="copy">
+         <h2>Documentation</h2>
+         What follows is the documentation for X.  This
+         document will try to include the actual integration tests and source
+         files that are used during development of the compiler.  Following this
+         practice allows the source code of the compiler to remain in sync with
+         the documentation and vice versa.
+      </div>
+
+      <!--<div class="copy">
+         Every editor herein is executable, meaning you can change the contents
+         of the textareas and immediately see what the compiler is doing.
+         <span class="text-success">Go ahead.  Change the value of "showRatings" to "false" in the Input Params section.</span>
+      </div>-->
+
+
+      <script id="XJS_SAMPLE_STATS" type="text/xjs">
+//INCLUDE xjs/sample_stats.xjs
+      </script>
       <script id="XJS_CHANGELOG" type="text/xjs">
 //INCLUDE xjs/changelog.xjs
       </script>
+
+<!--CONCAT js/docs.min.js-->
+      <script src="js/jquery-1.8.3.min.js"></script>
+      <script src="js/XforJS.__VERSION__.min.js"></script>
+      <script src="js/plugins.js"></script>
+      <script src="js/main.js"></script>
+<!--END CONCAT-->
+
    </body>
 </html>
