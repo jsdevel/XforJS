@@ -42,7 +42,11 @@ function buildFile(file, addExt){
                var fileContents = fs.readFileSync(filePath, 'utf8');
 
                return fileContents.replace(/\/\*\*?!(?:(?!\*\/)[\s\S])*?\*\//g, '');
-            });
+            })//.replace(/<!--CONCAT\s([^\r\n\s-]+)-->((?:(?!<!--)[\s\S])+)<!--END CONCAT-->/gm,
+            /*function(match, group1){
+               console.log(match);
+               console.log(group1);
+            })*/;
       },
       withPath:function(path){
          _path = path;

@@ -7,52 +7,74 @@ function safeEval(code){
       useexternal:true
    });
    var $body = $('body');
-
    //assign the lib globally.  We could've had a script tag do this for us.
    safeEval(X.getLib());
+   buildStats();
 
    $body.on('keyup', '.code-editor textarea', function(e){
-      var startTime=Date.now();
-      var endTime;
       var text;
       var outputText;
       var $this = $(this);
       var $editor = $this.closest('.code-editor');
-      var $tab = $editor.find('[href="'+$this.data('tab')+'"]');
+      var $tab = $editor.find('span[data-tab="'+$this.data('tab')+'"]');
       var $raw = $editor.find('textarea.raw');
       var $inputData = $editor.find('textarea.input-data');
       var $inputParams = $editor.find('textarea.input-params');
       var inputData;
       var inputParams;
-      var timeRecorder;
-      if(!this.TimeRecorder){
-         this.TimeRecorder=new TimeRecorder();
+      var compileTimeRecorder;
+      var outputTimeRecorder;
+      var template;
+      if(!this.CompileTimeRecorder){
+         this.CompileTimeRecorder=new TimeRecorder();
       }
-      timeRecorder = this.TimeRecorder;
+      if(!this.OutputTimeRecorder){
+         this.OutputTimeRecorder=new TimeRecorder();
+      }
+      compileTimeRecorder = this.CompileTimeRecorder;
+      outputTimeRecorder = this.OutputTimeRecorder;
 
       try{
          inputData = (new Function("return "+$inputData.val().replace(/\s+/, "")))();
          inputData.time={
-            average:timeRecorder.getAverage(),
-            entries:timeRecorder.getNumberOfEntries(),
-            highest:timeRecorder.getHighTime(),
-            lowest:timeRecorder.getLowTime()
+            average:compileTimeRecorder.getAverage(),
+            entries:compileTimeRecorder.getNumberOfEntries(),
+            highest:compileTimeRecorder.getHighTime(),
+            lowest:compileTimeRecorder.getLowTime()
          };
+         template = getTemplate($raw);
          inputParams = (new Function("return "+$inputParams.val().replace(/\s+/, "")))();
-         text=compiler.compile(getTemplate($raw));
+            compileTimeRecorder.mark();
+            text=compiler.compile(template);
+            compileTimeRecorder.stop();
          safeEval(text);
-         outputText = documentation.books.buildBookSection(inputData, inputParams);
+            outputTimeRecorder.mark();
+            outputText = documentation.books.buildBookSection(inputData, inputParams);
+            outputTimeRecorder.stop();
          $tab.removeClass('error');
       } catch(e){
          text=e;
          $tab.addClass('error');
       }
-      endTime = Date.now()-startTime;
-      this.TimeRecorder.addTime(endTime);
-      a=this.TimeRecorder;
       $editor.find('.compiled').text(text);
       $editor.find('.output-text').text(outputText);
       $editor.find('.rendered').html(outputText);
+      $editor.find('.statistics').html(
+         documentation.sample_stats.getStats({
+            "Compiling":{
+               'average':~~compileTimeRecorder.getAverage(),
+               'high': compileTimeRecorder.getHighTime(),
+               'low': compileTimeRecorder.getLowTime(),
+               'count': compileTimeRecorder.getNumberOfEntries()
+            },
+            "Output (pre-rendering)":{
+               'average':~~outputTimeRecorder.getAverage(),
+               'high': outputTimeRecorder.getHighTime(),
+               'low': outputTimeRecorder.getLowTime(),
+               'count': outputTimeRecorder.getNumberOfEntries()
+            }
+         })
+      );
    }).
    //handle tabs etc. in the editors
    on('keydown', 'textarea', function(e){
@@ -127,6 +149,10 @@ function safeEval(code){
       var template = getTemplate($('#XJS_CHANGELOG'));
       safeEval(compiler.compile(template));
    }
+   function buildStats(){
+      var template = getTemplate($('#XJS_SAMPLE_STATS'));
+      safeEval(compiler.compile(template));
+   }
    /**
     * Used to get the template from an element
     */
@@ -144,6 +170,9 @@ function safeEval(code){
       var totalTime = 0;
       var highestTime = 0;
       var lowestTime = 0;
+      var startTime;
+      var instance = this;
+
 
       this.addTime=function(ms){
          if(lowestTime===0 || ms<lowestTime){
@@ -154,6 +183,15 @@ function safeEval(code){
          }
          entries++;
          totalTime+=ms;
+      };
+      this.mark=function(){
+         startTime = Date.now();
+      };
+      this.stop=function(){
+         if(startTime){
+            instance.addTime(Date.now()-startTime);
+            startTime=void 0;
+         }
       };
       this.getAverage=function(){
          return totalTime/entries;

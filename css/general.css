@@ -1,14 +1,47 @@
-.border-radius-5px {
-           border-radius: 5px;
-      -moz-border-radius: 5px;
-       -ms-border-radius: 5px;
-        -o-border-radius: 5px;
-   -webkit-border-radius: 5px;
+@font-face{
+	font-family: 'ActionIcons';
+	src: url('../fonts/ActionIcons.eot');
+	src: url('../fonts/ActionIcons.eot?#iefix') format('embedded-opentype'),
+	     url('../fonts/ActionIcons.woff') format('woff'),
+	     url('../fonts/ActionIcons.ttf') format('truetype'),
+	     url('../fonts/ActionIcons.svg#webfont') format('svg');
 }
-.ease-bg-color {
-           transition: background-color 0.2s ease;
-       -ms-transition: background-color 0.2s ease;
-      -moz-transition: background-color 0.2s ease;
-        -o-transition: background-color 0.2s ease;
-   -webkit-transition: background-color 0.2s ease;
+* {
+   box-sizing: border-box;
+}
+html {
+   height: 100%;
+   width:  100%;
+}
+body {
+   color: #333333;
+   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   font-size: 14px;
+   line-height: 20px;
+   margin: 0;
+}
+body.viewport {
+   height: 100%;
+   width:  100%;
+}
+body.no-scroll-bars {
+   overflow: hidden;
+}
+.lead {
+  margin-bottom: 20px;
+  font-size: 21px;
+  font-weight: 200;
+  line-height: 30px;
+}
+.muted {
+  color: #999999;
+}
+
+h2 {
+   font-size: 30px;
+}
+i.icon {
+   font-family: 'ActionIcons';
+   font-style: normal;
+   font-weight: normal;
 }

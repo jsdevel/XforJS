@@ -1,15 +1,5 @@
-/*
-    Document   : main
-    Created on : Jan 6, 2013, 12:07:18 AM
-    Author     : Joseph Spencer
-    Description:
-        Purpose of the stylesheet follows.
-*/
-* {
-   box-sizing: border-box;
-}
 body {
-   margin-bottom: 100px;
+   padding-bottom: 100px;
 }
 /*
 This made for a cool effect, but really hurt page perf. on my laptop :(
@@ -20,9 +10,6 @@ This made for a cool effect, but really hurt page perf. on my laptop :(
       inset 0px 0px 20px rgba(0, 0, 0, 0.6);
 }
 */
-.hides {
-   overflow: hidden;
-}
 .header {
    background-color: #545454;
    border-bottom: 1px solid #474747;
@@ -48,25 +35,22 @@ This made for a cool effect, but really hurt page perf. on my laptop :(
    margin-top: 50px;
 }
 .header .downloads a {
-   background-color: #F2720A;
-   /*box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.4),
-               inset 0px 0px 3px rgba(0, 0, 0, 0.2),
-               0px 0px 1px rgba(0, 0, 0, 0.4),
-               0px 0px 3px rgba(0, 0, 0, 0.2);*/
-   color: white;
-   cursor: pointer;
-   display: inline-block;
    font-size: 80%;
    margin-right: 5%;
    margin-left: 5%;
-   padding: 10px;
-   text-decoration: none;
+   padding: 5px 10px;
 }
-.header .downloads a:hover {
-   background-color: #F78120;
+.header .downloads a i {
+   font-size: 220%;
+   padding-right: 10px;
+   vertical-align: middle;
 }
-.header .downloads a:active {
-   background-color: #EB781A;
+.header .downloads a strong {
+   padding-right: 10px;
+}
+.header .downloads a strong.main {
+   font-size: 120%;
+   vertical-align: middle;
 }
 .changelog {
    margin: 20px auto;
@@ -98,20 +82,31 @@ This made for a cool effect, but really hurt page perf. on my laptop :(
    width: 80%;
 }
 
+/*Try It*/
+.try-it {
+   font-size: 25px;
+   text-align: center;
+}
 
 /*CODE EDITOR*/
 .code-editor {
-   margin: auto;
-   height: 550px;
-   position: relative;
-   width: 80%;
+   background-color: white;
+   color: black;
 }
-.code-editor > div {
+.code-editor .panel {
    display: inline-block;
    height: 100%;
    position: relative;
    vertical-align: top;
    width: 50%;
+}
+.code-editor > .panel > .tabs {
+   height: 40px;
+   background-color: #eee;
+   border-bottom: 1px solid #ddd;
+}
+.code-editor > .panel > .tabs .active {
+   border-color: #ddd;
 }
 .code-editor ul a[href=".compiled"] {
    text-align: center;
@@ -127,26 +122,33 @@ This made for a cool effect, but really hurt page perf. on my laptop :(
 .code-editor .tab-content {
    bottom: 0px;
    position: absolute;
-   top: 70px;
+   top: 40px;
 }
 .code-editor .tab-content.left {
+   border-right: 1px solid #ddd;
    left: 0;
-   right: 10px;
+   right: 0px;
 }
 .code-editor .tab-content.right {
    right: 0;
-   left: 10px;
+   left: 0px;
 }
 .code-editor .tab-pane {
    height: 100%;
 }
 .code-editor textarea {
+   border: none;
    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
    height: 100%;
    width: 100%;
 }
 .code-editor .rendered {
    padding-left: 30px;
+}
+.code-editor .statistics th {
+   padding-top: 10px;
+   text-align: left;
+   text-decoration: underline;
 }
 
 /*Sample*/
@@ -188,3 +190,5 @@ This made for a cool effect, but really hurt page perf. on my laptop :(
 .sample-output span.rating-0 {
    background-color: #ED3B05;
 }
+
+.icon {}
