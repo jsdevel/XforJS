@@ -1,17 +1,34 @@
 {namespace documentation.books}
 
+#comment
+#You can edit the panels on this side to watch it all work.
+#Make sure to view the stats to see how perf. is doing.
+
 {template buildBookSection}
+   #params, then variables
+   #they always appear at the top of a context.
    {param showRatings}
+   {var test}#undefined value
+   {var test1 5}#test1 is always 5 within this scope
 
    <h3>Must Have Books</h3>
-   {foreach books}
-      {sort rating|desc}
+   {foreach books}#new context now. '.' === books object
+      #you can try: |asc or |desc.
+      #try |asc|i as well. |i is a sort modifier (more on this later :)
+      {sort rating|rand}
+
+      {var ratingIsNumber typeof rating === 'number'}
+
       <div class="book">
          <h5>{name}</h5>
          <p>
             <img title="{name}" alt="{img.alt}" src="{img.src}" width="50">
-            {if @showRatings && typeof rating === 'number'}
+            {if @showRatings && @ratingIsNumber}
                <div class="rating">Rating:  <span class="rating-{rating}"></span></div>
+            {:elif @ratingIsNumber}
+               Woot!!!!
+            {:else}
+               Boo, no ratings for you!!!!<br/><br/>
             {/if}
             {description}
          </p>
