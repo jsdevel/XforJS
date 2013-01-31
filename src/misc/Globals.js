@@ -16,59 +16,103 @@
  */
 
 //Save this section for regex.
+/** @const @type {string} */
 var __reg_COMMENT = "#(?:[^\\r\\n]+)?(?:\\r?\\n)";
+/** @const @type {string} */
 var __reg_name = "[a-zA-Z$_](?:[\\w$]+)?";
+/** @const @type {string} */
 var __reg_variable_reference = "@("+__reg_name+")";
+/** @const @type {string} */
 var __reg_space = "(?:\\s|"+__reg_COMMENT+")+";
 
 //SEQUENCES
+/** @const @type {regexp} */
 var IMPORT_PATH=                    /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
+/** @const @type {regexp} */
 var INPUT_TOKENS=                   /^((?:[^#'\{\\]|\\(?:#|'|\\|\{))+)/;
+/** @const @type {regexp} */
 var NAME =                          new RegExp("^("+__reg_name+")");
+/** @const @type {regexp} */
 var NS =                            new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
+/** @const @type {regexp} */
 var NS_FORCED =                     new RegExp("^("+__reg_name+"(?:\\."+__reg_name+")+)");
+/** @const @type {regexp} */
 var SORT_DIRECTION=                 /^(\|(?:asc|desc|rand))(?![\w$])/;
+/** @const @type {regexp} */
 var SORT_MODIFIERS=                 /^(\|[cCin]{1,4})(?![\w$])/;
+/** @const @type {regexp} */
 var SPACE =                         new RegExp("^("+__reg_space+")");
+/** @const @type {regexp} */
 var SPACE_BETWEEN_ANGLE_BRACKETS =  /(>|<)\s+|\s+(>|<)/g;
+/** @const @type {regexp} */
 var SPACE_PRECEDING_CURLY =         new RegExp("^("+__reg_space+")(?=\\{)");
+/** @const @type {regexp} */
 var TEXT_INPUT =                    /^((?:(?!\{\/text\})[\s\S])+)(?=\{\/text\})/;
+/** @const @type {regexp} */
 var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s*[\\.\\[]");
+/** @const @type {regexp} */
 var VARIABLE_REFERENCE           =  new RegExp("^("+__reg_variable_reference+")");
 
 //STATEMENT PATTERNS
+/** @const @type {regexp} */
 var RENDER =                          /^(\{render\s+)/;
+/** @const @type {regexp} */
 var RENDER_CLOSING =                  /^(\{\/render\})/;
+/** @const @type {regexp} */
 var FOREACH =                       /^(\{foreach\s+)/;
+/** @const @type {regexp} */
 var FOREACH_CLOSING =               /^(\{\/foreach\})/;
+/** @const @type {regexp} */
 var IF =                            /^(\{if\s+)/;
+/** @const @type {regexp} */
 var IF_CLOSING =                    /^(\{\/if\})/;
+/** @const @type {regexp} */
 var IMPORT =                        /^(\{import\s+)/;
+/** @const @type {regexp} */
 var LOG =                           /^(\{log\s+)/;
+/** @const @type {regexp} */
 var NAMESPACE =                     /^(\{namespace\s+)/;
+/** @const @type {regexp} */
 var PARAM =                         /^(\{param\s+)/;
+/** @const @type {regexp} */
 var SORT =                          /^(\{sort\s+)/;
+/** @const @type {regexp} */
 var TEMPLATE =                      /^(\{template\s+)/;
+/** @const @type {regexp} */
 var TEMPLATE_CLOSING =              /^(\{\/template\})/;
+/** @const @type {regexp} */
 var TEXT =                          /^(\{text\})/;
+/** @const @type {regexp} */
 var TEXT_CLOSING =                  /^(\{\/text\})/;
+/** @const @type {regexp} */
 var VAR =                           /^(\{var\s+)/;
 
 //CONTINUATIONS
+/** @const @type {regexp} */
 var ELIF =                          /^(\{:elif\s+)/;
+/** @const @type {regexp} */
 var ELSE =                          /^(\{:else\})/;
 
 //FUNCTIONS
+/** @const @type {regexp} */
 var COUNT_FN =    /^(count\()/;
+/** @const @type {regexp} */
 var CURRENT_FN =  /^(current\(\))/;
+/** @const @type {regexp} */
 var LAST_FN =     /^(last\(\))/;
+/** @const @type {regexp} */
 var NAME_FN =     /^(name\(\))/;
+/** @const @type {regexp} */
 var POSITION_FN = /^(position\(\))/;
 
 //PRIMITIVES
+/** @const @type {regexp} */
 var BOOLEAN =     /^(false|true)(?![\w$])/;
+/** @const @type {regexp} */
 var NUMBER =      /^((?:0x(?=([0-9A-Fa-f]+))\2(?!\.)|(?=(0(?![0-9])|[1-9][0-9]*))\3(?!x)(?:\.[0-9]+)?)(?:[eE][-+][0-9]+)?)/;
+/** @const @type {regexp} */
 var NULL =        /^(null)(?![\w$])/;
+/** @const @type {regexp} */
 var STRING =      /^((['"])(?=((?:(?:(?!\2|\r?\n|\\)[\s\S]|\\(?:\\|\2|\r?\n))+)?))\3\2)/;
 
 
