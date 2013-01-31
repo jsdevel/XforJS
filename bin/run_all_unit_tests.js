@@ -44,22 +44,8 @@ fileLoader.loadAll(function(loadedFiles){
 
    filesToTest.forEach(function(file){
       var testFile = loadedFiles[file];
-      var hasError;
-      var header =
-         "=======================================\n"+
-         "FAILED: "+file+"\n"+
-         "=======================================";
-
       if(common.isJSFileName(file)){
-         try {
-            hasError=common.insertTestAndRun(framework, testFile);
-         } catch(e){
-            console.log(header);
-            console.log(e);
-         }
-         if(hasError){
-            console.log(header);
-         }
+         common.insertTestAndRun(framework, testFile);
       }
    });
    console.log("Finished");
