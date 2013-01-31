@@ -78,8 +78,14 @@ AbstractExpression.prototype.execute=function(characters, context){
             context.addProduction(this.getValue());
          }
          return;
-      } else if(this._hasValue){//Go to Operator
+      } else if(this._hasValue){//Go to Operator or call
          switch(characters.charAt(0)){
+         /*case '(':
+            characters.shift(1);
+            context.addProduction(new CallExpression(output));
+            return;
+            break;
+         case ',':*/
          case ']':
          case ')':
             break;
