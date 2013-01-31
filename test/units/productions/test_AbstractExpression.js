@@ -15,7 +15,6 @@
  *
  */
 test("AbstractExpression", function(){
-var getOutputCalled;
 var getValueCalled;
 var getParentesizedExpressionCalled;
 var production;
@@ -81,14 +80,12 @@ function setEnv(str){
    if(typeof str === 'string'){
       characters = new CharWrapper(str);
    }
-   getOutputCalled=false;
    getValueCalled=false;
    getParentesizedExpressionCalled=false;
    output = new Output();
    context = new ProductionContext(output, compiler);
    production = new AbstractExpression();
    production.getOutput=function(){
-      getOutputCalled=true;
       return output;
    };
    production.getValue=function(){
