@@ -16,7 +16,7 @@
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
 
-function CallStatement(output){
+function RenderStatement(output){
    var namespaceOutput = new Output();
    var contextOutput = new Output();
    var paramOutput = new Output();
@@ -36,30 +36,30 @@ function CallStatement(output){
    /**
     * @overrides
     * @param {Output} output
-    * @returns {CallExpression}
+    * @returns {RenderExpression}
     */
    this.getVariableExpression=function(output){
-      return new CallExpression(namespaceOutput, contextOutput);
+      return new RenderExpression(namespaceOutput, contextOutput);
    };
    /**
     * @overrides
     * @param {Output} output
-    * @returns {CallParams}
+    * @returns {RenderParams}
     */
    this.getBodyStatements=function(output) {
-      return new CallParamDeclarations(paramOutput);
+      return new RenderParamDeclarations(paramOutput);
    };
 
 }
-extend(CallStatement, AbstractConditionBlock);
+extend(RenderStatement, AbstractConditionBlock);
 /**
  * @return RexExp
  */
-CallStatement.prototype.getClosingPattern=function(){
-   return CALL_CLOSING;
+RenderStatement.prototype.getClosingPattern=function(){
+   return RENDER_CLOSING;
 };
 /**
  * @const
  * @type String
  */
-CallStatement.prototype.name="CallStatement";
+RenderStatement.prototype.name="RenderStatement";

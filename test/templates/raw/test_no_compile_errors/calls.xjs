@@ -1,7 +1,7 @@
 {namespace boo}
 
 {template wow}
-   {call zoo/}
+   {render zoo/}
 {/template}
 
 {template zoo}
@@ -9,11 +9,11 @@
    {var beez 2}
    {var ceez 2}
 
-   {call foo}
+   {render foo}
       {param geez 5}
       {param beez 5}
       {param ceez 5}
-   {/call}
+   {/render}
 {/template}
 
 {template foo}

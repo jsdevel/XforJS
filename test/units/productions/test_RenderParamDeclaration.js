@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-test("CallParamDeclaration", function(){
+test("RenderParamDeclaration", function(){
    var compiler=new Compiler();
    var output;
    var variableOutput;
@@ -38,7 +38,7 @@ test("CallParamDeclaration", function(){
       }, "invalid character found.");
       characters.shift(1);
       execute();
-      assert(!prodIs(CallParamDeclaration),
+      assert(!prodIs(RenderParamDeclaration),
          "properly closes.");
 
    function execute(){
@@ -54,7 +54,7 @@ test("CallParamDeclaration", function(){
       output=new Output();
       context = new ProductionContext(output, compiler);
       variableOutput = AbstractVariableOutput.getParamOutput();
-      production = new CallParamDeclaration(variableOutput);
+      production = new RenderParamDeclaration(variableOutput);
       characters=new CharWrapper(string);
       context.addProduction(production);
    }

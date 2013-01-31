@@ -198,14 +198,14 @@ test("Globals", function(){
    !function(){
       [
       {
-         bad:"{call",
-         good:"{call ",
-         regex:CALL
+         bad:"{render",
+         good:"{render ",
+         regex:RENDER
       },
       {
-         bad:"{call}",
-         good:"{/call}",
-         regex:CALL_CLOSING
+         bad:"{render}",
+         good:"{/render}",
+         regex:RENDER_CLOSING
       },
       {
          bad:"{:elif",

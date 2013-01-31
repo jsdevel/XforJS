@@ -73,10 +73,10 @@ test("TemplateBodyStatements", function(){
       assert(prodIs(LogStatement),
          "LogStatement allowed.");
 
-   setEnv("{call ");
+   setEnv("{render ");
       execute();
-      assert(prodIs(CallStatement),
-         "CallStatement allowed.");
+      assert(prodIs(RenderStatement),
+         "RenderStatement allowed.");
 
    setEnv("{foreach ");
       execute();

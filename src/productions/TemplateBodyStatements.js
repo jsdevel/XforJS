@@ -82,12 +82,12 @@ function TemplateBodyStatements(output){
                return;
             }
             break;
-         case 'c':
-            match = characters.match(CALL);
+         case 'r':
+            match = characters.match(RENDER);
             if(match){
                characters.shift(match[1].length);
                statementOutput= new Output();
-               context.addProduction(new CallStatement(statementOutput));
+               context.addProduction(new RenderStatement(statementOutput));
                output.add(statementOutput);
                return;
             }

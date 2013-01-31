@@ -20,9 +20,9 @@
  * @constructor
  * @param {Output} namespaceOutput
  * @param {Output} contextOutput
- * @returns {CallExpression}
+ * @returns {RenderExpression}
  */
-function CallExpression(namespaceOutput, contextOutput){
+function RenderExpression(namespaceOutput, contextOutput){
    /** @type boolean */
    var hasNamespace=false;
    /**
@@ -66,9 +66,9 @@ function CallExpression(namespaceOutput, contextOutput){
       throw "Invalid Character";
    };
 }
-extend(CallExpression, Production);
+extend(RenderExpression, Production);
 /**
  * @const
  * @type String
  */
-CallExpression.prototype.name="CallExpression";
+RenderExpression.prototype.name="RenderExpression";

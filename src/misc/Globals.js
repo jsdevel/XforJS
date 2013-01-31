@@ -38,8 +38,8 @@ var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s
 var VARIABLE_REFERENCE           =  new RegExp("^("+__reg_variable_reference+")");
 
 //STATEMENT PATTERNS
-var CALL =                          /^(\{call\s+)/;
-var CALL_CLOSING =                  /^(\{\/call\})/;
+var RENDER =                          /^(\{render\s+)/;
+var RENDER_CLOSING =                  /^(\{\/render\})/;
 var FOREACH =                       /^(\{foreach\s+)/;
 var FOREACH_CLOSING =               /^(\{\/foreach\})/;
 var IF =                            /^(\{if\s+)/;

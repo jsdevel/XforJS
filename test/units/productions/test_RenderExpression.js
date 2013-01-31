@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-test("CallExpression", function(){
+test("RenderExpression", function(){
    var compiler=new Compiler();
    var output;
    var output2;
@@ -30,7 +30,7 @@ test("CallExpression", function(){
 
    setEnv("boo  }");
       execute();
-      assert(!prodIs(CallExpression),
+      assert(!prodIs(RenderExpression),
          "properly closing with local template reference only.");
       assert(outputHas(js_currentNS+".boo"),
          "name only references current ns.");
@@ -39,7 +39,7 @@ test("CallExpression", function(){
 
    setEnv("boo.too  }");
       execute();
-      assert(!prodIs(CallExpression),
+      assert(!prodIs(RenderExpression),
          "properly closing with external template reference.");
       assert(outputHas(js_templateBasket+".boo.too"),
          "namespace references template basket.");
@@ -49,8 +49,8 @@ test("CallExpression", function(){
       assert(prodIs(ContextSelector),
          "ContextSelector is instantiated.");
       remove();
-      assert(!prodIs(CallExpression),
-         "CallExpression is removed with context.");
+      assert(!prodIs(RenderExpression),
+         "RenderExpression is removed with context.");
       assert(output2Has(js_SafeValue+"(function"),
          "context is output with SafeValue.");
 
@@ -74,7 +74,7 @@ test("CallExpression", function(){
       output=new Output();
       output2=new Output();
       context = new ProductionContext(output, compiler);
-      production = new CallExpression(output, output2);
+      production = new RenderExpression(output, output2);
       characters=new CharWrapper(string);
       context.addProduction(production);
       context.setNS("testing");

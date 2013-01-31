@@ -1,5 +1,5 @@
 /*!
- * Copyright 2012 Joseph Spencer.
+ * Copyright 2013 Joseph Spencer.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,18 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-test("CallParamDeclarations", function(){
+test("RenderStatement", function(){
    var output = new Output();
-   var compiler = new Compiler();
-   var context = new ProductionContext(output, compiler);
-   var production = new CallParamDeclarations(output);
+   var production = new RenderStatement(output);
 
-   context.addProduction(production);
-   context.executeCurrent(new CharWrapper("{param "));
-   assert(context.getCurrentProduction() instanceof CallParamDeclaration,
-      "CallParamDeclaration is instantiated."
-   );
-   production.getVariableOutput().add("boo", "'5'");
-   assert(production.getVariableOutput().toString().indexOf(",{boo:'5'}") > -1,
-      "output is working.");
+   assert(output.toString() === js_bld+"(());",
+      "render block output.");
+   assert(production.getBodyStatements() instanceof RenderParamDeclarations,
+      "getBodyStatements is working.");
+   assert(production.getVariableExpression() instanceof RenderExpression,
+      "getVariableExpression is working.");
+   assert(production.getClosingPattern() === RENDER_CLOSING,
+      "getClosingPattern is working.");
+   assert(production._canSelfClose,
+      "RenderStatement can self close.");
 });
