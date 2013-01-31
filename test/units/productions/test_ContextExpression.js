@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("ContextExpression", function(){
    var output;
    var compiler = new Compiler();
    var context;
@@ -38,4 +38,4 @@
       production = new ContextExpression(output);
       context.addProduction(production);
    }
-}();
+});

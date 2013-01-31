@@ -15,8 +15,8 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-
-//REGEX
+test("Globals", function(){
+   //REGEX
    //SEQUENCES
    !function(){//IMPORT_PATH
       var samplePath = "d/a.xjs";
@@ -28,20 +28,20 @@
    }();
    !function(){//INPUT_TOKENS
       [
-         "    \\#asdf{",
-         "    \\{asdf\\",
-         "    \\\\asdf#",
-         "    \\'asdf{"
+      "    \\#asdf{",
+      "    \\{asdf\\",
+      "    \\\\asdf#",
+      "    \\'asdf{"
       ].forEach(function(good){
          match = INPUT_TOKENS.exec(good);
          assert(match && match[1] === good.substring(0, good.length-1),
             "good input tokens found: '"+good+"'.");
       });
       [
-         "#asdf",
-         "{asdf",
-         "\\asdf",
-         "'asdf"
+      "#asdf",
+      "{asdf",
+      "\\asdf",
+      "'asdf"
       ].forEach(function(bad){
          assert(!INPUT_TOKENS.exec(bad),
             "bad input tokens found: '"+bad+"'.");
@@ -53,14 +53,14 @@
    }();
    !function(){//NS
       [
-         "boo",
-         "boo.too.goo"
+      "boo",
+      "boo.too.goo"
       ].forEach(function(good){
          assert(NS.exec(good), "NS good: '"+good+"'.");
       });
       [
-         "345",
-         ""
+      "345",
+      ""
       ].forEach(function(bad){
          assert(!NS.exec(bad), "NS bad: '"+bad+"'.");
       });
@@ -71,41 +71,41 @@
    }();
    !function(){//SORT_DIRECTION
       [
-         "|asc",
-         "|desc",
-         "|rand",
-         "|asc ",
-         "|desc ",
-         "|rand ",
-         "|asc|"
+      "|asc",
+      "|desc",
+      "|rand",
+      "|asc ",
+      "|desc ",
+      "|rand ",
+      "|asc|"
       ].forEach(function(good){
          assert(SORT_DIRECTION.exec(good), "SORT_DIRECTION good: '"+good+"'.");
       });
       [
-         " asc",
-         " desc",
-         " rand"
+      " asc",
+      " desc",
+      " rand"
       ].forEach(function(bad){
          assert(!SORT_DIRECTION.exec(bad), "SORT_DIRECTION bad: '"+bad+"'.");
       });
    }();
    !function(){//SORT_MODIFIERS
       [
-         "|i",
-         "|n",
-         "|in",
-         "|cCin",
-         "|nicC",
-         "|ni"
+      "|i",
+      "|n",
+      "|in",
+      "|cCin",
+      "|nicC",
+      "|ni"
       ].forEach(function(good){
          assert(SORT_MODIFIERS.exec(good), "SORT_MODIFIERS good: '"+good+"'.");
       });
       [
-         "|iid",
-         "|",
-         "nn",
-         "ii",
-         "nn",
+      "|iid",
+      "|",
+      "nn",
+      "ii",
+      "nn",
       ].forEach(function(bad){
          assert(!SORT_MODIFIERS.exec(bad), "SORT_MODIFIERS bad: '"+bad+"'.");
       });
@@ -113,16 +113,16 @@
    }();
    !function(){//SPACE
       [//good
-         ["#asdfasdfasdf\n","Comment with line ending."],
-         ["  \n","Space with lines."],
-         ["#\n","Empty comment."],
-         ["  \n#asdfasdf\n#asdf\n","Space, lines and comments."]
+      ["#asdfasdfasdf\n","Comment with line ending."],
+      ["  \n","Space with lines."],
+      ["#\n","Empty comment."],
+      ["  \n#asdfasdf\n#asdf\n","Space, lines and comments."]
       ].forEach(function(pair){
          assert.equal(SPACE.exec(pair[0])[1], pair[0], pair[1]);
       });
       [//bad
-         ["#asdfasdfasdf","Comment without new line."],
-         ["","No Space."]
+      ["#asdfasdfasdf","Comment without new line."],
+      ["","No Space."]
       ].forEach(function(pair){
          assert(!SPACE.exec(pair[0]), pair[1]);
       });
@@ -130,10 +130,10 @@
    }();
    !function(){//SPACE_BETWEEN_ANGLE_BRACKETS
       [
-         ">    <",
-         "  <a>  ",
-         "   <",
-         ">  "
+      ">    <",
+      "  <a>  ",
+      "   <",
+      ">  "
       ].forEach(function(good){
          var bracket= good.replace(SPACE_BETWEEN_ANGLE_BRACKETS, "$1$2");
          assert(bracket.indexOf(' ') === -1,
@@ -142,19 +142,19 @@
    }();
    !function(){//SPACE_PRECEDING_CURLY
       [//bad
-         ["  #asdfasdfasdf \n","Comment new line."],
-         ["  #asdfasdfasdf","Comment no new line."],
-         ["  ","Space no new lines."],
-         ["  \n","Space with new lines."],
-         ["  \n#asdfasdf\n#asdf\n","Space, new lines and comments."]
+      ["  #asdfasdfasdf \n","Comment new line."],
+      ["  #asdfasdfasdf","Comment no new line."],
+      ["  ","Space no new lines."],
+      ["  \n","Space with new lines."],
+      ["  \n#asdfasdf\n#asdf\n","Space, new lines and comments."]
       ].forEach(function(pair){
          assert(!SPACE_PRECEDING_CURLY.exec(pair[0]),
             pair[1]+"  No Curly after.");
       });
       [//good
-         ["  #asdfasdfasdf \n","Comment with new line."],
-         ["  \n","Space with new lines."],
-         ["  \n#asdfasdf\n#asdf\n","Space new lines and comments."]
+      ["  #asdfasdfasdf \n","Comment with new line."],
+      ["  \n","Space with new lines."],
+      ["  \n#asdfasdf\n#asdf\n","Space new lines and comments."]
       ].forEach(function(pair){
          assert(SPACE_PRECEDING_CURLY.exec(pair[0]+"{")[1] === pair[0],
             pair[1]+"  Curly after.");
@@ -162,16 +162,16 @@
    }();
    !function(){//TEXT_INPUT
       [
-         "asdf{/text}",
-         "a\\sdf{/text}",
-         "a#sdf{/text}",
-         "a{sdf{/text}",
-         "a'sdf{/text}"
+      "asdf{/text}",
+      "a\\sdf{/text}",
+      "a#sdf{/text}",
+      "a{sdf{/text}",
+      "a'sdf{/text}"
       ].forEach(function(good){
          assert(TEXT_INPUT.exec(good), "TEXT_INPUT good: '"+good+"'.");
       });
       [
-         "asdf"
+      "asdf"
       ].forEach(function(bad){
          assert(!TEXT_INPUT.exec(bad), "TEXT_INPUT bad: '"+bad+"'.");
       });
@@ -197,91 +197,91 @@
    //STATEMENTS
    !function(){
       [
-         {
-            bad:"{call",
-            good:"{call ",
-            regex:CALL
-         },
-         {
-            bad:"{call}",
-            good:"{/call}",
-            regex:CALL_CLOSING
-         },
-         {
-            bad:"{:elif",
-            good:"{:elif ",
-            regex:ELIF
-         },
-         {
-            bad:"{:else",
-            good:"{:else}",
-            regex:ELSE
-         },
-         {
-            bad:"{foreach",
-            good:"{foreach ",
-            regex:FOREACH
-         },
-         {
-            bad:"{foreach}",
-            good:"{/foreach}",
-            regex:FOREACH_CLOSING
-         },
-         {
-            bad:"{if",
-            good:"{if ",
-            regex:IF
-         },
-         {
-            bad:"{if}",
-            good:"{/if}",
-            regex:IF_CLOSING
-         },
-         {
-            bad:"{import",
-            good:"{import ",
-            regex:IMPORT
-         },
-         {
-            bad:"{log",
-            good:"{log ",
-            regex:LOG
-         },
-         {
-            bad:"{namespace",
-            good:"{namespace ",
-            regex:NAMESPACE
-         },
-         {
-            bad:"{param",
-            good:"{param ",
-            regex:PARAM
-         },
-         {
-            bad:"{sort",
-            good:"{sort ",
-            regex:SORT
-         },
-         {
-            bad:"{template",
-            good:"{template ",
-            regex:TEMPLATE
-         },
-         {
-            bad:"{text }",
-            good:"{text}",
-            regex:TEXT
-         },
-         {
-            bad:"{text}",
-            good:"{/text}",
-            regex:TEXT_CLOSING
-         },
-         {
-            bad:"{var",
-            good:"{var ",
-            regex:VAR
-         }
+      {
+         bad:"{call",
+         good:"{call ",
+         regex:CALL
+      },
+      {
+         bad:"{call}",
+         good:"{/call}",
+         regex:CALL_CLOSING
+      },
+      {
+         bad:"{:elif",
+         good:"{:elif ",
+         regex:ELIF
+      },
+      {
+         bad:"{:else",
+         good:"{:else}",
+         regex:ELSE
+      },
+      {
+         bad:"{foreach",
+         good:"{foreach ",
+         regex:FOREACH
+      },
+      {
+         bad:"{foreach}",
+         good:"{/foreach}",
+         regex:FOREACH_CLOSING
+      },
+      {
+         bad:"{if",
+         good:"{if ",
+         regex:IF
+      },
+      {
+         bad:"{if}",
+         good:"{/if}",
+         regex:IF_CLOSING
+      },
+      {
+         bad:"{import",
+         good:"{import ",
+         regex:IMPORT
+      },
+      {
+         bad:"{log",
+         good:"{log ",
+         regex:LOG
+      },
+      {
+         bad:"{namespace",
+         good:"{namespace ",
+         regex:NAMESPACE
+      },
+      {
+         bad:"{param",
+         good:"{param ",
+         regex:PARAM
+      },
+      {
+         bad:"{sort",
+         good:"{sort ",
+         regex:SORT
+      },
+      {
+         bad:"{template",
+         good:"{template ",
+         regex:TEMPLATE
+      },
+      {
+         bad:"{text }",
+         good:"{text}",
+         regex:TEXT
+      },
+      {
+         bad:"{text}",
+         good:"{/text}",
+         regex:TEXT_CLOSING
+      },
+      {
+         bad:"{var",
+         good:"{var ",
+         regex:VAR
+      }
 
       ].forEach(function(obj){
          var bad_input = obj.bad;
@@ -316,160 +316,161 @@
    //PRIMITIVES
    !function(){
       [
-         "true",
-         "false"
+      "true",
+      "false"
       ].forEach(function(input){
          var exec = BOOLEAN.exec(input);
          assert(exec && exec[1] === input,
             "BOOLEAN is working with input: '"+input+"'.");
       });
       [//happy-numbers
-         "0x334Aaf",
-         "0.2345e-345",
-         "3453235",
-         "0.5",
-         "0e-345"
+      "0x334Aaf",
+      "0.2345e-345",
+      "3453235",
+      "0.5",
+      "0e-345"
       ].forEach(function(input){
          var exec = NUMBER.exec(input);
          assert(exec && exec[1] === input,
             "NUMBER is working with input: '"+input+"'."
-         );
+            );
       });
       [//wrenched-numbers
-         "0x334Aaf.345",
-         "034.2345e-345",
-         "03453235",
-         "023.5",
-         "00e-345"
+      "0x334Aaf.345",
+      "034.2345e-345",
+      "03453235",
+      "023.5",
+      "00e-345"
       ].forEach(function(input){
          var exec = NUMBER.exec(input);
          assert(!exec,
             "NUMBER is not matching input: '"+input+"'."
-         );
+            );
       });
       [//happy-null
-         "null",
-         "null+"
+      "null",
+      "null+"
       ].forEach(function(input){
          var exec = NULL.exec(input);
          assert(exec && exec[1] === "null",
             "NULL is matching input: '"+input+"'."
-         );
+            );
       });
       [//wrenched-null
-         "null$",
-         "nulld"
+      "null$",
+      "nulld"
       ].forEach(function(input){
          var exec = NULL.exec(input);
          assert(!exec,
             "NULL is not matching input: '"+input+"'."
-         );
+            );
       });
       [//happy-string
-         '"asdf4"',
-         '"asdf"',
-         '"\\\\n345"',
-         '"\\\"345345\\\\"'
+      '"asdf4"',
+      '"asdf"',
+      '"\\\\n345"',
+      '"\\\"345345\\\\"'
       ].forEach(function(input){
          var exec = STRING.exec(input);
          assert(exec && exec[1] === input,
             "STRING is matching input: '"+input+"'."
-         );
+            );
       });
       [//wrenched-string
-         '"asdf',
-         '"\\asdf"',
-         '"\nasdf"',
-         '"a\\sdf"',
-         '"534sdf'
+      '"asdf',
+      '"\\asdf"',
+      '"\nasdf"',
+      '"a\\sdf"',
+      '"534sdf'
       ].forEach(function(input){
          var exec = STRING.exec(input);
          assert(!exec,
             "STRING is not matching input: '"+input+"'."
-         );
+            );
       });
    }();
-!function(){//reserved words
-   var a;
-   var reservedWords = {
-   "break":true,
-   "case":true,
-   "catch":true,
-   "continue":true,
-   "debugger":true,
-   "default":true,
-   "delete":true,
-   "do":true,
-   "else":true,
-   "finally":true,
-   "for":true,
-   "function":true,
-   "if":true,
-   "in":true,
-   "instanceof":true,
-   "new":true,
-   "return":true,
-   "switch":true,
-   "this":true,
-   "throw":true,
-   "try":true,
-   "typeof":true,
-   "var":true,
-   "void":true,
-   "while":true,
-   "with":true,
+   !function(){//reserved words
+      var a;
+      var reservedWords = {
+         "break":true,
+         "case":true,
+         "catch":true,
+         "continue":true,
+         "debugger":true,
+         "default":true,
+         "delete":true,
+         "do":true,
+         "else":true,
+         "finally":true,
+         "for":true,
+         "function":true,
+         "if":true,
+         "in":true,
+         "instanceof":true,
+         "new":true,
+         "return":true,
+         "switch":true,
+         "this":true,
+         "throw":true,
+         "try":true,
+         "typeof":true,
+         "var":true,
+         "void":true,
+         "while":true,
+         "with":true,
 
-   "class":true,
-   "const":true,
-   "enum":true,
-   "export":true,
-   "extends":true,
-   "import":true,
-   "super":true,
+         "class":true,
+         "const":true,
+         "enum":true,
+         "export":true,
+         "extends":true,
+         "import":true,
+         "super":true,
 
-   //future reserved words
-   "implements":true,
-   "interface":true,
-   "let":true,
-   "package":true,
-   "private":true,
-   "protected":true,
-   "public":true,
-   "static":true,
-   "yield":true
-};
-   for(a in reservedWords){
+         //future reserved words
+         "implements":true,
+         "interface":true,
+         "let":true,
+         "package":true,
+         "private":true,
+         "protected":true,
+         "public":true,
+         "static":true,
+         "yield":true
+      };
+      for(a in reservedWords){
+         assert['throws'](function(){
+            validateNamespacesAgainstReservedWords(a);
+         }, "Using a reserved word in a namespace throws an error.");
+      }
+   }();
+   !function(){//getInputFilePathDirectory|Path
+      var path = require('path');
+      var somePath="units/misc/asdf/";
+      var _path="units/misc/test.xjs";
+      assert.equal(getInputFileDirectory(_path), path.resolve("units/misc"),
+         "relative path is working.");
+      assert.equal(getInputFileDirectory(path.resolve(_path)), path.resolve("units/misc"),
+         "absolute path is working.");
+      assert.equal(getInputFileDirectory(somePath+"../test.xjs"), path.resolve("units/misc"),
+         "relative path is normalized.")
       assert['throws'](function(){
-         validateNamespacesAgainstReservedWords(a);
-      }, "Using a reserved word in a namespace throws an error.");
-   }
-}();
-!function(){//getInputFilePathDirectory|Path
-   var path = require('path');
-   var somePath="units/misc/asdf/";
-   var _path="units/misc/test.xjs";
-   assert.equal(getInputFileDirectory(_path), path.resolve("units/misc"),
-      "relative path is working.");
-   assert.equal(getInputFileDirectory(path.resolve(_path)), path.resolve("units/misc"),
-      "absolute path is working.");
-   assert.equal(getInputFileDirectory(somePath+"../test.xjs"), path.resolve("units/misc"),
-      "relative path is normalized.")
-   assert['throws'](function(){
-      getInputFileDirectory("");
-   }, "path must be a string");
-   assert['throws'](function(){
-      getInputFileDirectory(_path+"asdf");
-   }, "must end with .xjs");
-   assert['throws'](function(){
-      getInputFileDirectory(Date.now()+".xjs");
-   }, "file must exist.");
+         getInputFileDirectory("");
+      }, "path must be a string");
+      assert['throws'](function(){
+         getInputFileDirectory(_path+"asdf");
+      }, "must end with .xjs");
+      assert['throws'](function(){
+         getInputFileDirectory(Date.now()+".xjs");
+      }, "file must exist.");
 
-   assert.equal(getInputFilePath(_path), path.resolve(_path),
-      "relative path is working.");
-   assert.equal(getInputFilePath(path.resolve(_path)), path.resolve(_path),
-      "absolute path is working.");
-}();
-!function(){
-   var a="\\{\\#\\#\\{\r\n\\#\r\r\n";
-   assert.equal("{##{\\\n\\\n#\\\n\\\n\\\n", escapeOutput(a), "escapeOutput is working.");
-}();
+      assert.equal(getInputFilePath(_path), path.resolve(_path),
+         "relative path is working.");
+      assert.equal(getInputFilePath(path.resolve(_path)), path.resolve(_path),
+         "absolute path is working.");
+   }();
+   !function(){
+      var a="\\{\\#\\#\\{\r\n\\#\r\r\n";
+      assert.equal("{##{\\\n\\\n#\\\n\\\n\\\n", escapeOutput(a), "escapeOutput is working.");
+   }();
+});

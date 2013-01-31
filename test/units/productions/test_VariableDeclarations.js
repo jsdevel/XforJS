@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("VariableDeclaration", function(){
    var output = new Output();
    var compiler = new Compiler();
    var context = new ProductionContext(output, compiler);
@@ -26,4 +26,4 @@
    assert(context.getCurrentProduction() instanceof VariableDeclaration,
       "VariableDeclaration is instantiated."
    );
-}();
+});

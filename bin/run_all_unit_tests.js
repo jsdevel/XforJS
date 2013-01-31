@@ -28,8 +28,7 @@ var testDirs = [
    'units/parsing/',
    'units/javascript/',
    'units/productions/',
-   'units/compiling/',
-   'units/suites/'
+   'units/compiling/'
 ];
 
 testDirs.forEach(function(value){

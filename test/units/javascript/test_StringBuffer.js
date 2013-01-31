@@ -15,7 +15,7 @@
  *
  * For more information, visit http://SOMESITE
  */
-!function(){
+test("StringBuffer", function(){
    var SB =  StringBuffer();
    SB(5);
    SB(6);
@@ -28,4 +28,4 @@
    SB(function(){return "waa";});
    assert(SB.s() === '56waa',
       "functions may return values.");
-}();
+});

@@ -26,6 +26,7 @@
    var fileLoader = new common.FileLoader({filesToLoad:filesToLoad});
    var testDirs = [
       'integrations/compiling/',
+      'integrations/framework/',
       'integrations/testing_output/'
    ];
 

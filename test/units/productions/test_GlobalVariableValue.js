@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("GlobalVariableValue", function(){
    var compiler=new Compiler();
    var output;
    var context;
@@ -71,4 +71,4 @@
       production = new GlobalVariableValue(output);
       context.addProduction(production);
    }
-}();
+});

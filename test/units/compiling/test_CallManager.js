@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("CallManager",function(){
    var manager = new CallManager();
    var instance;
 
@@ -39,5 +39,4 @@
    assert['throws'](function(){
       manager.validateCalls();
    }, "errors are thrown when there are called templates that haven't been declared.");
-
-}();
+});

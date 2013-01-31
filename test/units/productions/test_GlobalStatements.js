@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("GlobalStatements", function(){
 var output = new Output();
 var compiler = new Compiler();
 var context = new ProductionContext(output, compiler);
@@ -49,5 +49,4 @@ assert.doesNotThrow(function(){
 }, "space only doesn't throw an error.");
 assert(!context.getCurrentProduction(),
    "GlobalStatements removes itself when no more characters are left.");
-}();
-
+});

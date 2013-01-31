@@ -15,7 +15,7 @@
  *
  * For more information, visit http://SOMESITE
  */
-!function(){
+test("XforJS", function(){
    var fs = require('fs');
    var testFileName = +new Date()+"XforJS";
 
@@ -44,4 +44,4 @@
    }, "When XforJS.server is true, and require isn't defined (as it would be\
       in a browser, an error is thrown.");
    require=oldRequire;
-}();
+});

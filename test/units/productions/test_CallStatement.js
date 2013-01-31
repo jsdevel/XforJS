@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("CallStatement", function(){
    var output = new Output();
    var production = new CallStatement(output);
 
@@ -29,4 +29,4 @@
       "getClosingPattern is working.");
    assert(production._canSelfClose,
       "CallStatement can self close.");
-}();
+});

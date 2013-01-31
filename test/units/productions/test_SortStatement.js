@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("SortStatement", function(){
    var compiler=new Compiler();
    var output;
    var output1;
@@ -154,4 +154,4 @@
       characters=new CharWrapper(string);
       context.addProduction(production);
    }
-}();
+});

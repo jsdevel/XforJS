@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("ContextSelector", function(){
    var compiler=new Compiler();
    var output;
    /** @type ProductionContext */
@@ -194,4 +194,4 @@
       characters=new CharWrapper(string);
       variableOutput = context.getCurrentVariableOutput();
    }
-}();
+});

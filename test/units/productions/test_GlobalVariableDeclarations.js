@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("GlobalVariableDeclarations", function(){
 var output = new Output();
 var compiler = new Compiler();
 var context = new ProductionContext(output, compiler);
@@ -40,5 +40,4 @@ context.executeCurrent(characters);
 
 assert.equal(characters.charAt(0), "{", "space is removed from the beginning.");
 assert.equal(context.getCurrentProduction(), production, "productions are properly removed.");
-}();
-
+});

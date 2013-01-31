@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("ParamDeclarations", function(){
    var output = new Output();
    var compiler = new Compiler();
    var context = new ProductionContext(output, compiler);
@@ -26,4 +26,4 @@
    assert(context.getCurrentProduction() instanceof ParamDeclaration,
       "ParamDeclaration is instantiated."
    );
-}();
+});

@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("CallExpression", function(){
    var compiler=new Compiler();
    var output;
    var output2;
@@ -79,4 +79,4 @@
       context.addProduction(production);
       context.setNS("testing");
    }
-}();
+});

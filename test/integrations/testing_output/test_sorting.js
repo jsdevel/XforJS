@@ -15,7 +15,7 @@
  *
  * For more information, visit http://SOMESITE
  */
-!function(){
+test("sorting", function(){
    var sortXJS = fs.readFileSync('templates/raw/test_no_compile_errors/sorting.xjs', 'utf8');
    var compiler = XforJS.getCompiler();
    var templates = compiler.compile(sortXJS);
@@ -70,4 +70,4 @@
          "a"
       ]);
    }
-}();
+});

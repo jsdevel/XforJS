@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("TemplateBody", function(){
    var output = new Output();
    var compiler = new Compiler();
    var context = new ProductionContext(output, compiler);
@@ -35,4 +35,4 @@
       !(context.getCurrentProduction() instanceof TemplateBody),
       "body removed."
    );
-}();
+});

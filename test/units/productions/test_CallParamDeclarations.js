@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("CallParamDeclarations", function(){
    var output = new Output();
    var compiler = new Compiler();
    var context = new ProductionContext(output, compiler);
@@ -29,4 +29,4 @@
    production.getVariableOutput().add("boo", "'5'");
    assert(production.getVariableOutput().toString().indexOf(",{boo:'5'}") > -1,
       "output is working.");
-}();
+});

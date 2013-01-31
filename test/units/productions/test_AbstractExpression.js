@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("AbstractExpression", function(){
 var getOutputCalled;
 var getValueCalled;
 var getParentesizedExpressionCalled;
@@ -103,5 +103,4 @@ function setEnv(){
    };
    context.addProduction(production);
 }
-}();
-
+});

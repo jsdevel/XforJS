@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("AbstractVariableOutput", function(){
 var variableOutput = AbstractVariableOutput.getVariableOutput();
 var variableOutput2 = AbstractVariableOutput.getVariableOutput(variableOutput);
 variableOutput.add("asd", "5");
@@ -67,4 +67,4 @@ assert(variableOutput2.hasVariableBeenDeclared(("asd")),
 variableOutput2.add("hello", "there");
 assert.equal(variableOutput2.toString(), "var __hello=there;",
    "toString working for child scope.");
-}();
+});

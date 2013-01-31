@@ -15,7 +15,7 @@
  *
  * For more information, visit http://SOMESITE
  */
-!function(){
+test("documentation", function(){
    var basedir = "templates/raw/documentation/";
    var precompiledHappy = fs.readdirSync(basedir);
    precompiledHappy.forEach(function(file){
@@ -29,4 +29,4 @@
          }
       }
    });
-}();
+});

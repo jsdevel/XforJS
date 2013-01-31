@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("ProgramNamespace", function(){
 var output = new Output();
 var programNamespace = new ProgramNamespace(output);
 var characters;
@@ -62,4 +62,4 @@ function test_ProgramNamespace_setupContext(){
    context = new ProductionContext(output, compiler);
    context.addProduction(new Production());
 }
-}();
+});

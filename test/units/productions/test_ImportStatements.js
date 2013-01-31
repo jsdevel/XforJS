@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("ImportStatements", function(){
 var compiler = new Compiler();
 var output = new Output();
 
@@ -43,4 +43,4 @@ context.removeProduction();
 characters=new CharWrapper("   {t");
 context.executeCurrent(characters);
 assert.equal(context.getCurrentProduction(), production, "ImportStatements is properly removed.");
-}();
+});

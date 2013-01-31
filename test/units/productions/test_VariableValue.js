@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("VariableValue", function(){
    var compiler = new Compiler();
    var output;
    /** @type ProductionContext */
@@ -121,4 +121,4 @@
       context.addProduction(production);
       variableOutput=context.getCurrentVariableOutput();
    }
-}();
+});

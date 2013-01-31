@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("Compiler",function(){
 var compiler = new Compiler({debug:true, invalidConfigItem:"boo"});
 
 assert(compiler.javascript instanceof JavascriptBuilder,
@@ -29,4 +29,4 @@ assert(compiler.compile("{namespace misc}{template wow}{/template}").indexOf(js_
 
 assert.equal(compiler.configuration['debug'], true, "setting configuration works.");
 assert.equal(compiler.configuration['invalidConfigItem'], void 0, "Invalid config items are ignored in the constructor.");
-}();
+});

@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("JavascriptBuilder", function(){
 var instance;
 
 assert['throws'](function(){
@@ -35,4 +35,4 @@ instance = new JavascriptBuilder({});
 
 assert(instance.getJSCount().indexOf("function") > -1,
    "useexternal falsy returns full contents of js fragment.");
-}();
+});

@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("PrintStatement", function(){
    var compiler;
    var output;
    var context;
@@ -68,4 +68,4 @@
       characters=new CharWrapper(string);
       context.addProduction(production);
    }
-}();
+});

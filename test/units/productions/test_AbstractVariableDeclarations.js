@@ -16,7 +16,7 @@
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
 
-!function(){
+test("AbstractVaraibleDeclarations", function(){
    var getDeclarationRegexCalled=false;
    var getDeclarationCalled=false;
    var output = new Output();
@@ -49,4 +49,4 @@
       !(context.getCurrentProduction() instanceof AbstractVariableDeclarations),
       "closes properly."
    );
-}();
+});

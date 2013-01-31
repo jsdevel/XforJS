@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("CallParamDeclaration", function(){
    var compiler=new Compiler();
    var output;
    var variableOutput;
@@ -58,5 +58,4 @@
       characters=new CharWrapper(string);
       context.addProduction(production);
    }
-}();
-
+});

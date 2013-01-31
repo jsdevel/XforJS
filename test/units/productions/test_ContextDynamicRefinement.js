@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("ContextDynamicRefinement", function(){
    var compiler = new Compiler();
    var output;
    var context;
@@ -56,4 +56,4 @@
       characters=new CharWrapper(string);
       context.addProduction(production);
    }
-}();
+});

@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("AbstractParenthesizedExpression", function(){
    var output;
    var context;
    var production;
@@ -67,4 +67,4 @@
       };
       context.addProduction(production);
    }
-}();
+});

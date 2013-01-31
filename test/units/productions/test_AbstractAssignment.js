@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("AbstractAssignment", function(){
 var getExpressionCalled=false;
 var addProductionCalled=false;
 var removeProductionCalled=false;
@@ -38,5 +38,4 @@ production.execute(null, {removeProduction:function(){
 assert(removeProductionCalled,
    "second execution is working.");
 
-}();
-
+});

@@ -15,7 +15,7 @@
  *
  * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("ContextParenthesizedExpression", function(){
    var output;
    var compiler=new Compiler();
    var context;
@@ -37,4 +37,4 @@
       production = new ContextParenthesizedExpression(output);
       context.addProduction(production);
    }
-}();
+});
