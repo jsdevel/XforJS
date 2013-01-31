@@ -24,7 +24,6 @@ var output;
 var compiler=new Compiler();
 var characters;
 
-setEnv();
 assert(
    AbstractExpression.prototype._logicalNot.test("!!!~~~!!!1") &&
    !AbstractExpression.prototype._logicalNot.test(""),
@@ -37,16 +36,14 @@ assert(
    ,
    "regex for typeof is working.");
 
-characters = new CharWrapper("   }");
+setEnv("   }");
 assert['throws'](function(){
    production.execute(characters, context);
 }, "empty expression.");
-
 assert(characters.charAt(0) === '}',
    "removes leading space.");
 
-setEnv();
-characters=new CharWrapper("!!345");
+setEnv("!!345");
 production.execute(characters, context);
 assert(
    output.toString() === '!!' &&
@@ -54,8 +51,7 @@ assert(
    context.getCurrentProduction() !== production,
    "logical / binary not is working.");
 
-setEnv();
-characters=new CharWrapper("typeof 345");
+setEnv("typeof 345");
 production.execute(characters, context);
 assert(
    output.toString() === 'typeof ' &&
@@ -63,8 +59,7 @@ assert(
    context.getCurrentProduction() !== production,
    "typeof is working.");
 
-setEnv();
-characters=new CharWrapper("(345");
+setEnv("(345");
 production.execute(characters, context);
 assert(
    characters.charAt(0) === '3' &&
@@ -78,12 +73,14 @@ assert(context.getCurrentProduction() instanceof Operator,
    "operator is instantiated.");
 context.removeProduction();
 characters = new CharWrapper("}");
-
 assert['throws'](function(){
    context.executeCurrent(characters);
 }, "unclosed operator.");
 
-function setEnv(){
+function setEnv(str){
+   if(typeof str === 'string'){
+      characters = new CharWrapper(str);
+   }
    getOutputCalled=false;
    getValueCalled=false;
    getParentesizedExpressionCalled=false;
