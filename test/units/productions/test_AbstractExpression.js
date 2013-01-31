@@ -23,18 +23,6 @@ var output;
 var compiler=new Compiler();
 var characters;
 
-assert(
-   AbstractExpression.prototype._logicalNot.test("!!!~~~!!!1") &&
-   !AbstractExpression.prototype._logicalNot.test(""),
-   "regex for logicl / bitwise not is working.");
-
-assert(
-   AbstractExpression.prototype._typeof.test("typeof ") &&
-   AbstractExpression.prototype._typeof.test("typeof(") &&
-   !AbstractExpression.prototype._typeof.test("typeof")
-   ,
-   "regex for typeof is working.");
-
 setEnv("   }");
 assert['throws'](function(){
    production.execute(characters, context);

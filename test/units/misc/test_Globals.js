@@ -68,6 +68,19 @@ test("Globals", function(){
       assert(!NS_FORCED.exec("boo"), "Names without refinement don't work.");
       assert(NS_FORCED.exec("boo.too.goo")[1], "boo.too.goo", "Names with refinement work.");
    }();
+   test("REGEX Operators", function(){
+      assert(
+         OPERATOR_NOT.test("!!!~~~!!!1") &&
+         !OPERATOR_NOT.test(""),
+         "regex for logicl / bitwise not is working.");
+
+      assert(
+         OPERATOR_TYPEOF.test("typeof ") &&
+         OPERATOR_TYPEOF.test("typeof(") &&
+         !OPERATOR_TYPEOF.test("typeof")
+         ,
+         "regex for typeof is working.");
+   });
    !function(){//SORT_DIRECTION
       [
       "|asc",

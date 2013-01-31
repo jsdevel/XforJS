@@ -52,6 +52,10 @@ var TEXT_INPUT =                    /^((?:(?!\{\/text\})[\s\S])+)(?=\{\/text\})/
 var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s*[\\.\\[]");
 /** @const @type {regexp} */
 var VARIABLE_REFERENCE           =  new RegExp("^("+__reg_variable_reference+")");
+/** @const @type {regexp} */
+var OPERATOR_NOT=/^([!~]+)/;
+/** @const @type {regexp} */
+var OPERATOR_TYPEOF=/^(typeof)(?=[\(\s])/;
 
 //STATEMENT PATTERNS
 /** @const @type {regexp} */
