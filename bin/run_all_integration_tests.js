@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://XforJS.com
  */
 !function(){
    //var pathToFramework = "../build/javascript/XforJS.min.js";
