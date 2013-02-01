@@ -37,6 +37,10 @@ var NS =                            new RegExp("^("+__reg_name+"(?:(?:\\."+__reg
 /** @const @type {regexp} */
 var NS_FORCED =                     new RegExp("^("+__reg_name+"(?:\\."+__reg_name+")+)");
 /** @const @type {regexp} */
+var OPERATOR_NOT=/^([!~]+)/;
+/** @const @type {regexp} */
+var OPERATOR_TYPEOF=/^(typeof)(?=[\(\s])/;
+/** @const @type {regexp} */
 var SORT_DIRECTION=                 /^(\|(?:asc|desc|rand))(?![\w$])/;
 /** @const @type {regexp} */
 var SORT_MODIFIERS=                 /^(\|[cCin]{1,4})(?![\w$])/;
@@ -52,10 +56,6 @@ var TEXT_INPUT =                    /^((?:(?!\{\/text\})[\s\S])+)(?=\{\/text\})/
 var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s*[\\.\\[]");
 /** @const @type {regexp} */
 var VARIABLE_REFERENCE           =  new RegExp("^("+__reg_variable_reference+")");
-/** @const @type {regexp} */
-var OPERATOR_NOT=/^([!~]+)/;
-/** @const @type {regexp} */
-var OPERATOR_TYPEOF=/^(typeof)(?=[\(\s])/;
 
 //STATEMENT PATTERNS
 /** @const @type {regexp} */
