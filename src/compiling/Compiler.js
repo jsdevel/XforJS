@@ -55,7 +55,7 @@ function Compiler(config){
     */
    this.compile=function(input, inputFilePath, previousContext){
       if(!input || typeof input !== 'string'){
-         throw "input must be a string.";
+         throw "No template string to parse.";
       }
       var output = new Output();
       var wrapper = new CharWrapper(input);
