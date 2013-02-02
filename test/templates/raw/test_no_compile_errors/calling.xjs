@@ -1,0 +1,6 @@
+{namespace foo}
+
+{template boo}
+   {param foo}
+   {@foo()}
+{/template}

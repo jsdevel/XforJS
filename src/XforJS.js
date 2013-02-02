@@ -122,6 +122,8 @@ var XforJS = {
 //INCLUDE productions/VariableExpression
 //INCLUDE productions/VariableParenthesizedExpression
 //INCLUDE productions/VariableValue
+//INCLUDE productions/CallExpression
+//INCLUDE productions/CallArguments
 //INCLUDE productions/ContextSelector
 //INCLUDE productions/ContextDynamicRefinement
 //INCLUDE productions/ContextExpression

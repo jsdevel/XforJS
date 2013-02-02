@@ -12,18 +12,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
-test("compile_errors", function(){
-   var precompiledHappy = fs.readdirSync("templates/raw/test_compile_errors/");
-   precompiledHappy.forEach(function(file){
-      var fullPath = "templates/raw/test_compile_errors/"+file;
-      if(file.indexOf(".xjs") === file.length -4){
-         var source = fs.readFileSync(fullPath, "utf8");
-         var compiler = XforJS.getCompiler();
-         assert['throws'](function(){
-            compiler.compile(source, fullPath);
-         }, "The following file doesn't not compile: "+file);
-      }
-   });
-}, true);
+test("calling within a template", function(){
+   var fs = require('fs');
+   var compiler = XforJS.getCompiler();
+   var calling = fs.readFileSync("templates/raw/test_no_compile_errors/calling.xjs", "utf8");
+   var template = compiler.compile(calling);
+   eval(template);
+   assert.equal(foo.boo({},{foo:function(){return "dog;"}}), "dog;");
+});

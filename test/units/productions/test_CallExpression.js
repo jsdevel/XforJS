@@ -12,18 +12,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
-test("compile_errors", function(){
-   var precompiledHappy = fs.readdirSync("templates/raw/test_compile_errors/");
-   precompiledHappy.forEach(function(file){
-      var fullPath = "templates/raw/test_compile_errors/"+file;
-      if(file.indexOf(".xjs") === file.length -4){
-         var source = fs.readFileSync(fullPath, "utf8");
-         var compiler = XforJS.getCompiler();
-         assert['throws'](function(){
-            compiler.compile(source, fullPath);
-         }, "The following file doesn't not compile: "+file);
-      }
-   });
-}, true);
+test("CallExpression", function(){
+   var output;
+   var compiler=new Compiler();
+   var context;
+   var production;
+   var characters;
+
+   setEnv("5,4,5,3)");
+   context.executeCurrent(characters);
+   assert(context.getCurrentProduction() instanceof CallArguments);
+
+   function setEnv(string){
+      characters=new CharWrapper(string);
+      output = new Output();
+      context = new ProductionContext(output, compiler);
+      production = new CallExpression(output);
+      context.addProduction(production);
+   }
+});
+

@@ -1,0 +1,5 @@
+{namespace foo}
+
+{template boo}
+   {var boo 5)}
+{/template}
