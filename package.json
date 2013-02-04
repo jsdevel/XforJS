@@ -1,0 +1,23 @@
+{
+   "name": "xforjs",
+   "version": "1.0.3",
+   "description": "A Javscript Template Compiler that would make Mama proud.",
+   "preferGlobal": "true",
+   "main": "./index.js",
+   "author": "Joseph Spencer <js.developer.undefined@gmail.com>",
+   "keywords": [
+      "javascript", 
+      "template", 
+      "compiler"
+   ],
+   "analyze": false,
+   "license": "apache 2.0",
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/jsdevel/XforJS.git"
+   },
+   "readmeFilename": "README.md",
+   "engines": { 
+      "node": "*"
+   }
+}
