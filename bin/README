@@ -1,9 +1,0 @@
-This directory enables you to develop XforJS fast!
-
-A linux shell environment is assumed.
-
-The start.sh script is the main entry point for anything that happens herein.
-Take a look at that file first before doing anything.
-
-start.sh should be self-explanitory, but if not please file an issue on
-github :)

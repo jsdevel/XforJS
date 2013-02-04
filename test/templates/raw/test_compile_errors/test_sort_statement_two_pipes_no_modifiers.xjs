@@ -1,7 +1,0 @@
-{namespace sort}
-
-{template sort}
-   {foreach .}
-      {sort . |desc|}
-   {/foreach}
-{/template}

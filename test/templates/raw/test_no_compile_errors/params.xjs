@@ -1,9 +1,0 @@
-{namespace boo}
-
-{template boo}
-   {param wow true}
-{/template}
-
-{template coo}
-   {param wow doo}
-{/template}

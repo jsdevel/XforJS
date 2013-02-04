@@ -1,7 +1,0 @@
-{namespace boo}
-
-{template boo}
-   {var boo 5 || 2 && 3 === !!!!~~~!!!45 && typeof "" === "string"}
-   #parenthesized
-   {var coo (5 || ((((2)))) && (3 === !!!!~~~!!!45) && (typeof "" === "string"))}
-{/template}

@@ -1,7 +1,0 @@
-{namespace boo}
-
-{template boo}
-   {foreach wow}
-
-   {/foreach}
-{/template}
