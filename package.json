@@ -2,7 +2,7 @@
    "name": "xforjs",
    "version": "1.0.3",
    "description": "A Javscript Template Compiler that would make Mama proud.",
-   "preferGlobal": "true",
+   "preferGlobal": "false",
    "main": "./index.js",
    "author": "Joseph Spencer <js.developer.undefined@gmail.com>",
    "keywords": [
