@@ -26,11 +26,12 @@
          replace(/\\/g,"\\\\").
          replace(/"/g,"\\\"").
          replace(/^([^\n]+)\n/gm, "\"$1\",\n").
-         replace(/,\n$/,"");
+         replace(/,\n*$/,"");
    template = template.
       replace(/""/, '"'+p.VERSION+'"').
       replace(/""/, '"'+p.VERSION_PREVIOUS+'"').
-      replace(/\[\]/, "[\n"+CHANGELOG+"\n]");
+      replace(/\[\]/, "[\n"+CHANGELOG+"\n]").
+      replace(/,[\s\r\n]+(\]|\})/g, "$1");
    fs.writeFileSync("../json/"+file+"."+p.VERSION+".json", template, "utf8");
 }();
 

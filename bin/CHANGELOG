@@ -1,10 +1,34 @@
-The random sort wasn't properly sorting because the key was wrong.
-Bumping version to 1.0.3.
-closes #18:  Add {sort name[0].bla |rand}, to support a random sort. enhancement.
-Adding a test function.
-Updating the versioning file.
-Cleaning up sort some more.
-closes #13:   |desc|C} isn't properly pushing lowercase down on the doc site book example. bug.
-IGNORE: Cleaning up more fragment code.  I'm also improving the build process by removing the need to build JavascriptResources every time.
-IGNORE: Cleaning up the fragment code.
-IGNORE:  test for #12: Sort modifiers allow |desc|}. I forgot to add this.  bug.
+Merge branch 'develop' for 1.0.4.
+
+bumping version to 1.0.4.
+
+closes #21:  The helper functions aren't run in a try / catch. bug.
+closes #22:  helper functions are allowed to appear on numbers, null, etc. bug.
+Updating a test script to use test().
+Updating URL.
+
+closes #17: Allow for formatting helper functions. I'm going to log some defects against this commit, but for now it's entirely possible to call helper funcitons. enhancement.
+Adding a test for render statement.
+Organizing regex.
+Updating an error message from the compiler.
+Moving some regex out of AbstractExpression and into Globals.
+Adding some type declarations to the regexp variables for closure optimizations.
+Preparing to develop CallExpression.  Just adding some commented out code for now.
+Updating a test script.
+Updating a test script.
+Cleaning up the license headers.
+Reducing verbosity in the testing output.
+closes #20:  Instead of CallStatement, mimic Ruby and use RenderStatement. enhancement.
+Updating all the test cases to allow for better loggin.
+Merge branch 'develop'
+
+Updating the doc site sample.
+Updating the doc site sample.
+Merge branch 'develop' for 1.0.3.
+
+Merge branch 'develop'.  For 1.0.2.
+
+Merge branch 'develop' with version 1.0.1
+
+Merge branch 'develop' in preparation of 1.0.1
+
