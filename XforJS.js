@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Version: 1.0.3
+ * Version: 1.0.4
  *
  * For demos and docs visit http://jsdevel.github.com/XforJS/
  * For viewing source visit http://github.com/jsdevel/XforJS/
@@ -79,59 +79,107 @@ function extend(Child, Parent){
 
 
 //Save this section for regex.
+/** @const @type {string} */
 var __reg_COMMENT = "#(?:[^\\r\\n]+)?(?:\\r?\\n)";
+/** @const @type {string} */
 var __reg_name = "[a-zA-Z$_](?:[\\w$]+)?";
+/** @const @type {string} */
 var __reg_variable_reference = "@("+__reg_name+")";
+/** @const @type {string} */
 var __reg_space = "(?:\\s|"+__reg_COMMENT+")+";
 
 //SEQUENCES
+/** @const @type {regexp} */
 var IMPORT_PATH=                    /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
+/** @const @type {regexp} */
 var INPUT_TOKENS=                   /^((?:[^#'\{\\]|\\(?:#|'|\\|\{))+)/;
+/** @const @type {regexp} */
 var NAME =                          new RegExp("^("+__reg_name+")");
+/** @const @type {regexp} */
 var NS =                            new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
+/** @const @type {regexp} */
 var NS_FORCED =                     new RegExp("^("+__reg_name+"(?:\\."+__reg_name+")+)");
+/** @const @type {regexp} */
+var OPERATOR_NOT=/^([!~]+)/;
+/** @const @type {regexp} */
+var OPERATOR_TYPEOF=/^(typeof)(?=[\(\s])/;
+/** @const @type {regexp} */
 var SORT_DIRECTION=                 /^(\|(?:asc|desc|rand))(?![\w$])/;
+/** @const @type {regexp} */
 var SORT_MODIFIERS=                 /^(\|[cCin]{1,4})(?![\w$])/;
+/** @const @type {regexp} */
 var SPACE =                         new RegExp("^("+__reg_space+")");
+/** @const @type {regexp} */
 var SPACE_BETWEEN_ANGLE_BRACKETS =  /(>|<)\s+|\s+(>|<)/g;
+/** @const @type {regexp} */
 var SPACE_PRECEDING_CURLY =         new RegExp("^("+__reg_space+")(?=\\{)");
+/** @const @type {regexp} */
 var TEXT_INPUT =                    /^((?:(?!\{\/text\})[\s\S])+)(?=\{\/text\})/;
-var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s*[\\.\\[]");
+/** @const @type {regexp} */
+var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s*[\\.\\[\\(]");
+/** @const @type {regexp} */
 var VARIABLE_REFERENCE           =  new RegExp("^("+__reg_variable_reference+")");
 
 //STATEMENT PATTERNS
-var CALL =                          /^(\{call\s+)/;
-var CALL_CLOSING =                  /^(\{\/call\})/;
+/** @const @type {regexp} */
+var RENDER =                          /^(\{render\s+)/;
+/** @const @type {regexp} */
+var RENDER_CLOSING =                  /^(\{\/render\})/;
+/** @const @type {regexp} */
 var FOREACH =                       /^(\{foreach\s+)/;
+/** @const @type {regexp} */
 var FOREACH_CLOSING =               /^(\{\/foreach\})/;
+/** @const @type {regexp} */
 var IF =                            /^(\{if\s+)/;
+/** @const @type {regexp} */
 var IF_CLOSING =                    /^(\{\/if\})/;
+/** @const @type {regexp} */
 var IMPORT =                        /^(\{import\s+)/;
+/** @const @type {regexp} */
 var LOG =                           /^(\{log\s+)/;
+/** @const @type {regexp} */
 var NAMESPACE =                     /^(\{namespace\s+)/;
+/** @const @type {regexp} */
 var PARAM =                         /^(\{param\s+)/;
+/** @const @type {regexp} */
 var SORT =                          /^(\{sort\s+)/;
+/** @const @type {regexp} */
 var TEMPLATE =                      /^(\{template\s+)/;
+/** @const @type {regexp} */
 var TEMPLATE_CLOSING =              /^(\{\/template\})/;
+/** @const @type {regexp} */
 var TEXT =                          /^(\{text\})/;
+/** @const @type {regexp} */
 var TEXT_CLOSING =                  /^(\{\/text\})/;
+/** @const @type {regexp} */
 var VAR =                           /^(\{var\s+)/;
 
 //CONTINUATIONS
+/** @const @type {regexp} */
 var ELIF =                          /^(\{:elif\s+)/;
+/** @const @type {regexp} */
 var ELSE =                          /^(\{:else\})/;
 
 //FUNCTIONS
+/** @const @type {regexp} */
 var COUNT_FN =    /^(count\()/;
+/** @const @type {regexp} */
 var CURRENT_FN =  /^(current\(\))/;
+/** @const @type {regexp} */
 var LAST_FN =     /^(last\(\))/;
+/** @const @type {regexp} */
 var NAME_FN =     /^(name\(\))/;
+/** @const @type {regexp} */
 var POSITION_FN = /^(position\(\))/;
 
 //PRIMITIVES
+/** @const @type {regexp} */
 var BOOLEAN =     /^(false|true)(?![\w$])/;
+/** @const @type {regexp} */
 var NUMBER =      /^((?:0x(?=([0-9A-Fa-f]+))\2(?!\.)|(?=(0(?![0-9])|[1-9][0-9]*))\3(?!x)(?:\.[0-9]+)?)(?:[eE][-+][0-9]+)?)/;
+/** @const @type {regexp} */
 var NULL =        /^(null)(?![\w$])/;
+/** @const @type {regexp} */
 var STRING =      /^((['"])(?=((?:(?:(?!\2|\r?\n|\\)[\s\S]|\\(?:\\|\2|\r?\n))+)?))\3\2)/;
 
 
@@ -1602,8 +1650,7 @@ AbstractExpression.prototype.name="AbstractExpression";
 
 AbstractExpression.prototype._hasOperator=false;
 AbstractExpression.prototype._hasValue=false;
-AbstractExpression.prototype._logicalNot=/^([!~]+)/;
-AbstractExpression.prototype._typeof=/^(typeof)(?=[\(\s])/;
+
 /**
  * @override
  * @param {CharWrapper} characters
@@ -1625,14 +1672,14 @@ AbstractExpression.prototype.execute=function(characters, context){
          switch(characters.charAt(0)){
          case '!':
          case '~':
-            match = characters.match(this._logicalNot);
+            match = characters.match(OPERATOR_NOT);
             negation = match[1];
             characters.shift(negation.length);
             characters.removeSpace();
             output.add(negation);
             break;
          case 't':
-            match = characters.match(this._typeof);
+            match = characters.match(OPERATOR_TYPEOF);
             if(match){
                characters.shift(match[1].length);
                output.add("typeof");
@@ -1652,8 +1699,9 @@ AbstractExpression.prototype.execute=function(characters, context){
             context.addProduction(this.getValue());
          }
          return;
-      } else if(this._hasValue){//Go to Operator
+      } else if(this._hasValue){//Go to Operator or call
          switch(characters.charAt(0)){
+         case ',':
          case ']':
          case ')':
             break;
@@ -2700,12 +2748,12 @@ function TemplateBodyStatements(output){
                return;
             }
             break;
-         case 'c':
-            match = characters.match(CALL);
+         case 'r':
+            match = characters.match(RENDER);
             if(match){
                characters.shift(match[1].length);
                statementOutput= new Output();
-               context.addProduction(new CallStatement(statementOutput));
+               context.addProduction(new RenderStatement(statementOutput));
                output.add(statementOutput);
                return;
             }
@@ -3095,6 +3143,106 @@ VariableValue.prototype.name="VariableValue";
 
 
 /**
+ * @param {Output} output
+ * @returns {CallExpression}
+ */
+function CallExpression(output){
+   /** @type {boolean} */
+   var _hasExpression=false;
+   var argumentOutput = new Output();
+
+   output.add("(").add(argumentOutput).add(")");
+
+   /**
+    * @param {CharWrapper} characters
+    * @param {ProductionContext} context
+    */
+   this.execute=function(characters, context){
+      characters.removeSpace();
+
+      if(characters.charAt(0) === ")"){
+         characters.shift(1);
+         context.removeProduction();
+         return;
+      } else {
+         if(_hasExpression){
+            throw "Multiple Expressions not allowed here.";
+         }
+         _hasExpression=true;
+         context.addProduction(new CallArguments(argumentOutput));
+         return;
+      }
+   };
+}
+extend(CallExpression, Production);
+/**
+ * @const
+ * @type String
+ */
+CallExpression.prototype.name="CallExpression";
+
+
+/**
+ * @constructor
+ * @param {Output} output
+ * @return {CallArguments}
+ */
+function CallArguments(output){
+   /** @type {boolean} */
+   var _hasComma=false;
+   /** @type {boolean} */
+   var _hasValue=false;
+   /** @type {string} */
+   var elisionMsg = "Elision not allowed here.";
+
+   /**
+    * @param {CharWrapper} characters
+    * @param {ProductionContext} context
+    */
+   this.execute=function(characters, context){
+      /** @type {Output} */
+      var expressionOutput;
+
+      characters.removeSpace();
+      if(characters.charAt(0) === ")"){
+         if(_hasComma){
+            throw elisionMsg;
+         }
+         context.removeProduction();
+         return;
+      } else {
+         if(characters.charAt(0) === ","){
+            if(!_hasValue || _hasComma){
+               throw elisionMsg;
+            }
+            _hasValue=false;
+            _hasComma=true;
+            characters.shift(1);
+            output.add(",");
+            return;
+         } else {
+            if(_hasValue){
+               throw "Expected comma or close paren.";
+            }
+            _hasValue=true;
+            _hasComma=false;
+            expressionOutput=new Output();
+            output.add(expressionOutput);
+            context.addProduction(new VariableExpression(expressionOutput));
+         }
+      }
+   };
+}
+extend(CallArguments, Production);
+
+/**
+ * @const
+ * @type {string}
+ */
+CallArguments.prototype.name="CallArguments";
+
+
+/**
  * @constructor
  * @extends Production
  * @param {Output} output
@@ -3183,6 +3331,14 @@ function ContextSelector(output, isNested){
 
       characters.removeSpace();
       switch(characters.charAt(0)){
+      case '(':
+         if(!hasContextSelector){
+            throw "Cannot make a call on a non-existent item.";
+         }
+         hasContextSelector=true;
+         characters.shift(1);
+         context.addProduction(new CallExpression(contextSelectorOutput));
+         return;
       case '.':
          if(!allowStaticRefinement){
             throw "Unexpected '.'.";
@@ -3584,7 +3740,7 @@ extend(LogStatement, Production);
 LogStatement.prototype.name="LogStatement";
 
 
-function CallStatement(output){
+function RenderStatement(output){
    var namespaceOutput = new Output();
    var contextOutput = new Output();
    var paramOutput = new Output();
@@ -3604,41 +3760,41 @@ function CallStatement(output){
    /**
     * @overrides
     * @param {Output} output
-    * @returns {CallExpression}
+    * @returns {RenderExpression}
     */
    this.getVariableExpression=function(output){
-      return new CallExpression(namespaceOutput, contextOutput);
+      return new RenderExpression(namespaceOutput, contextOutput);
    };
    /**
     * @overrides
     * @param {Output} output
-    * @returns {CallParams}
+    * @returns {RenderParams}
     */
    this.getBodyStatements=function(output) {
-      return new CallParamDeclarations(paramOutput);
+      return new RenderParamDeclarations(paramOutput);
    };
 
 }
-extend(CallStatement, AbstractConditionBlock);
+extend(RenderStatement, AbstractConditionBlock);
 /**
  * @return RexExp
  */
-CallStatement.prototype.getClosingPattern=function(){
-   return CALL_CLOSING;
+RenderStatement.prototype.getClosingPattern=function(){
+   return RENDER_CLOSING;
 };
 /**
  * @const
  * @type String
  */
-CallStatement.prototype.name="CallStatement";
+RenderStatement.prototype.name="RenderStatement";
 
 
 /**
  * @constructor
  * @param {Output} output
- * @returns {CallParamDeclarations}
+ * @returns {RenderParamDeclarations}
  */
-function CallParamDeclarations(output){
+function RenderParamDeclarations(output){
    var paramOutput = new AbstractVariableOutput(",{", "", ":", "}", null);
    var expectingParam = true;
 
@@ -3649,25 +3805,25 @@ function CallParamDeclarations(output){
       return paramOutput;
    };
    /**
-    * @returns {CallParamDeclarations}
+    * @returns {RenderParamDeclarations}
     */
    this.getDeclaration=function(){
       if(expectingParam){
          expectingParam=false;
          output.add(paramOutput);
       }
-      return new CallParamDeclaration(paramOutput);
+      return new RenderParamDeclaration(paramOutput);
    };
 }
-extend(CallParamDeclarations, AbstractVariableDeclarations);
+extend(RenderParamDeclarations, AbstractVariableDeclarations);
 /** @type String */
-CallParamDeclarations.prototype.name="CallParams";
+RenderParamDeclarations.prototype.name="RenderParams";
 /** @type String */
-CallParamDeclarations.prototype._characterAfterOpenCurly="p";
+RenderParamDeclarations.prototype._characterAfterOpenCurly="p";
 /**
  * @return {RegExp}
  */
-CallParamDeclarations.prototype.getDeclarationRegex=function(){
+RenderParamDeclarations.prototype.getDeclarationRegex=function(){
    return PARAM;
 };
 
@@ -3675,9 +3831,9 @@ CallParamDeclarations.prototype.getDeclarationRegex=function(){
 /**
  * @constructor
  * @param {AbstractVariableOutput} variableOutput
- * @returns {CallParamDeclaration}
+ * @returns {RenderParamDeclaration}
  */
-function CallParamDeclaration(variableOutput){
+function RenderParamDeclaration(variableOutput){
    /**
     * @return {AbstractVariableOutput}
     */
@@ -3685,35 +3841,35 @@ function CallParamDeclaration(variableOutput){
       return variableOutput;
    };
 }
-extend(CallParamDeclaration, AbstractVariableDeclaration);
+extend(RenderParamDeclaration, AbstractVariableDeclaration);
 /**
  * @const
  * @type String
  */
-CallParamDeclaration.prototype.name="CallParamDeclaration";
+RenderParamDeclaration.prototype.name="RenderParamDeclaration";
 /**
  * @type RegExp
  */
-CallParamDeclaration.prototype.getPattern=function(){
+RenderParamDeclaration.prototype.getPattern=function(){
    return PARAM;
 };
 /**
  * @param {Output} output
  * @returns {VariableAssignment}
  */
-CallParamDeclaration.prototype.getProduction=function(output){
+RenderParamDeclaration.prototype.getProduction=function(output){
    return new VariableAssignment(output);
 };
 /**
  * @param {String} name
  * @param {Output} output
  */
-CallParamDeclaration.prototype.doAssignment=function(name, output){};
+RenderParamDeclaration.prototype.doAssignment=function(name, output){};
 /**
  * @param {String} name
  * @param {ProductionContext} context
  */
-CallParamDeclaration.prototype.doNoAssignment=function(name, context){
+RenderParamDeclaration.prototype.doNoAssignment=function(name, context){
    throw "An assignment must be made here.";
 };
 
@@ -3722,9 +3878,9 @@ CallParamDeclaration.prototype.doNoAssignment=function(name, context){
  * @constructor
  * @param {Output} namespaceOutput
  * @param {Output} contextOutput
- * @returns {CallExpression}
+ * @returns {RenderExpression}
  */
-function CallExpression(namespaceOutput, contextOutput){
+function RenderExpression(namespaceOutput, contextOutput){
    /** @type boolean */
    var hasNamespace=false;
    /**
@@ -3768,12 +3924,12 @@ function CallExpression(namespaceOutput, contextOutput){
       throw "Invalid Character";
    };
 }
-extend(CallExpression, Production);
+extend(RenderExpression, Production);
 /**
  * @const
  * @type String
  */
-CallExpression.prototype.name="CallExpression";
+RenderExpression.prototype.name="RenderExpression";
 
 
 /**
@@ -4171,7 +4327,7 @@ function Compiler(config){
     */
    this.compile=function(input, inputFilePath, previousContext){
       if(!input || typeof input !== 'string'){
-         throw "input must be a string.";
+         throw "No template string to parse.";
       }
       var output = new Output();
       var wrapper = new CharWrapper(input);
