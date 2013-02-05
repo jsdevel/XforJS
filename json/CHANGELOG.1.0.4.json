@@ -1,0 +1,11 @@
+{
+   "currentVersion":"1.0.4",
+   "previousVersion":"1.0.3",
+   "commitHistory":[
+
+"closes #21:  The helper functions aren't run in a try / catch. bug.",
+"closes #22:  helper functions are allowed to appear on numbers, null, etc. bug.",
+"closes #17: Allow for formatting helper functions. I'm going to log some defects against this commit, but for now it's entirely possible to call helper funcitons. enhancement.",
+"closes #20:  Instead of CallStatement, mimic Ruby and use RenderStatement. enhancement."
+]
+}
