@@ -104,6 +104,14 @@ function ContextSelector(output, isNested){
 
       characters.removeSpace();
       switch(characters.charAt(0)){
+      case '(':
+         if(!hasContextSelector){
+            throw "Cannot make a call on a non-existent item.";
+         }
+         hasContextSelector=true;
+         characters.shift(1);
+         context.addProduction(new CallExpression(contextSelectorOutput));
+         return;
       case '.':
          if(!allowStaticRefinement){
             throw "Unexpected '.'.";

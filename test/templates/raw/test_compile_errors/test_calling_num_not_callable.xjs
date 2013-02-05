@@ -1,5 +1,5 @@
 {namespace foo}
 
 {template boo}
-   {var boo 5)}
+   {5()}
 {/template}

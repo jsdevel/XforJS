@@ -193,6 +193,7 @@ test("Globals", function(){
       assert(!VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo"), "dot or open bracket must procede variable reference.");
       assert.equal(VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo.")[1], "boo", "names with dots work.");
       assert(VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo[")[1], "boo", "Names with refinement work.");
+      assert(VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo(")[1], "boo", "Variables may be called.");
       assert(VARIABLE_AS_CONTEXT_SELECTOR.exec("@boo  \n[")[1], "boo", "space may precede refinement.");
    }();
    !function(){//VARIABLE_REFERENCE

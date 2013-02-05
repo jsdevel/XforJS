@@ -104,6 +104,16 @@ test("ContextSelector", function(){
          "dynamic with leading ns.");
    });
 
+   test("leading variable with call expression", function(){
+      setEnv("@boo()||");
+      variableOutput.add("boo", "");
+      context.executeCurrent(characters);
+      assert.equal(
+         output.toString(),
+         'V(function(){return __boo()})',
+         'non-nested calls are safe.');
+   });
+
    test("leading namespace with variable.", function(){
       setEnv("@boo.coo||", true);
       variableOutput.add("boo", "");

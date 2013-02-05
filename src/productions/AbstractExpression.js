@@ -79,10 +79,6 @@ AbstractExpression.prototype.execute=function(characters, context){
          return;
       } else if(this._hasValue){//Go to Operator or call
          switch(characters.charAt(0)){
-         case '(':
-            characters.shift(1);
-            context.addProduction(new CallExpression(output));
-            return;
          case ',':
          case ']':
          case ')':

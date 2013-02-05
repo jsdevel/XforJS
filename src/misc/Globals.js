@@ -53,7 +53,7 @@ var SPACE_PRECEDING_CURLY =         new RegExp("^("+__reg_space+")(?=\\{)");
 /** @const @type {regexp} */
 var TEXT_INPUT =                    /^((?:(?!\{\/text\})[\s\S])+)(?=\{\/text\})/;
 /** @const @type {regexp} */
-var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s*[\\.\\[]");
+var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s*[\\.\\[\\(]");
 /** @const @type {regexp} */
 var VARIABLE_REFERENCE           =  new RegExp("^("+__reg_variable_reference+")");
 
