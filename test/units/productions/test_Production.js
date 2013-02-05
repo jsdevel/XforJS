@@ -13,25 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
-function Sample(){}
-extend(Sample, Production);
-Sample.prototype.name="Sample";
+test("Production", function(){
+   function Sample(){}
+   extend(Sample, Production);
+   Sample.prototype.name="Sample";
 
-var sampleProduction=new Sample();
+   var sampleProduction=new Sample();
 
-assert.doesNotThrow(function(){
-   sampleProduction.execute();
-}, "All Productions should have an execute method.");
-assert['throws'](function(){
-   sampleProduction.close();
-}, "All Productions throw errors by default when close is called.");
-assert.equal("Sample", sampleProduction.name, "The name of base objects is returned.");
-assert(typeof sampleProduction.continueBlock === "function",
-   "Productions have a continueBlock method.");
-assert['throws'](function(){
-   sampleProduction.continueBlock();
-}, "continueBlock throws an error by default.");
-}();
+   assert.doesNotThrow(function(){
+      sampleProduction.execute();
+   }, "All Productions should have an execute method.");
+   assert['throws'](function(){
+      sampleProduction.close();
+   }, "All Productions throw errors by default when close is called.");
+   assert.equal("Sample", sampleProduction.name, "The name of base objects is returned.");
+   assert(typeof sampleProduction.continueBlock === "function",
+      "Productions have a continueBlock method.");
+   assert['throws'](function(){
+      sampleProduction.continueBlock();
+   }, "continueBlock throws an error by default.");
+});

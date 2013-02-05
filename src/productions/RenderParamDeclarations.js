@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
 
 /**
  * @constructor
  * @param {Output} output
- * @returns {CallParamDeclarations}
+ * @returns {RenderParamDeclarations}
  */
-function CallParamDeclarations(output){
+function RenderParamDeclarations(output){
    var paramOutput = new AbstractVariableOutput(",{", "", ":", "}", null);
    var expectingParam = true;
 
@@ -32,24 +31,24 @@ function CallParamDeclarations(output){
       return paramOutput;
    };
    /**
-    * @returns {CallParamDeclarations}
+    * @returns {RenderParamDeclarations}
     */
    this.getDeclaration=function(){
       if(expectingParam){
          expectingParam=false;
          output.add(paramOutput);
       }
-      return new CallParamDeclaration(paramOutput);
+      return new RenderParamDeclaration(paramOutput);
    };
 }
-extend(CallParamDeclarations, AbstractVariableDeclarations);
+extend(RenderParamDeclarations, AbstractVariableDeclarations);
 /** @type String */
-CallParamDeclarations.prototype.name="CallParams";
+RenderParamDeclarations.prototype.name="RenderParams";
 /** @type String */
-CallParamDeclarations.prototype._characterAfterOpenCurly="p";
+RenderParamDeclarations.prototype._characterAfterOpenCurly="p";
 /**
  * @return {RegExp}
  */
-CallParamDeclarations.prototype.getDeclarationRegex=function(){
+RenderParamDeclarations.prototype.getDeclarationRegex=function(){
    return PARAM;
 };

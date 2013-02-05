@@ -122,6 +122,8 @@ var XforJS = {
 //INCLUDE productions/VariableExpression
 //INCLUDE productions/VariableParenthesizedExpression
 //INCLUDE productions/VariableValue
+//INCLUDE productions/CallExpression
+//INCLUDE productions/CallArguments
 //INCLUDE productions/ContextSelector
 //INCLUDE productions/ContextDynamicRefinement
 //INCLUDE productions/ContextExpression
@@ -130,10 +132,10 @@ var XforJS = {
 //INCLUDE productions/PrintStatement
 //INCLUDE productions/IfStatement
 //INCLUDE productions/LogStatement
-//INCLUDE productions/CallStatement
-//INCLUDE productions/CallParamDeclarations
-//INCLUDE productions/CallParamDeclaration
-//INCLUDE productions/CallExpression
+//INCLUDE productions/RenderStatement
+//INCLUDE productions/RenderParamDeclarations
+//INCLUDE productions/RenderParamDeclaration
+//INCLUDE productions/RenderExpression
 //INCLUDE productions/TextStatement
 //INCLUDE productions/ForeachStatement
 //INCLUDE productions/ForeachBodyStatements

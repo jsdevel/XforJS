@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://SOMESITE
  */
-!function(){
+test("GetLibrary", function(){
    assert.doesNotThrow(function(){
       eval(GetLibrary());
    }, "The Lib is built without Syntax Errors.");
@@ -37,5 +36,4 @@
       obj[js_SafeValue] &&
       obj[js_StringBuffer];
    }
-}();
-
+});

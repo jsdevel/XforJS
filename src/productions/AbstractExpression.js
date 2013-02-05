@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
 
 /**
@@ -29,8 +28,7 @@ AbstractExpression.prototype.name="AbstractExpression";
 
 AbstractExpression.prototype._hasOperator=false;
 AbstractExpression.prototype._hasValue=false;
-AbstractExpression.prototype._logicalNot=/^([!~]+)/;
-AbstractExpression.prototype._typeof=/^(typeof)(?=[\(\s])/;
+
 /**
  * @override
  * @param {CharWrapper} characters
@@ -52,14 +50,14 @@ AbstractExpression.prototype.execute=function(characters, context){
          switch(characters.charAt(0)){
          case '!':
          case '~':
-            match = characters.match(this._logicalNot);
+            match = characters.match(OPERATOR_NOT);
             negation = match[1];
             characters.shift(negation.length);
             characters.removeSpace();
             output.add(negation);
             break;
          case 't':
-            match = characters.match(this._typeof);
+            match = characters.match(OPERATOR_TYPEOF);
             if(match){
                characters.shift(match[1].length);
                output.add("typeof");
@@ -79,8 +77,9 @@ AbstractExpression.prototype.execute=function(characters, context){
             context.addProduction(this.getValue());
          }
          return;
-      } else if(this._hasValue){//Go to Operator
+      } else if(this._hasValue){//Go to Operator or call
          switch(characters.charAt(0)){
+         case ',':
          case ']':
          case ')':
             break;

@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
-var getOutputCalled;
+test("AbstractExpression", function(){
 var getValueCalled;
 var getParentesizedExpressionCalled;
 var production;
@@ -25,29 +23,14 @@ var output;
 var compiler=new Compiler();
 var characters;
 
-setEnv();
-assert(
-   AbstractExpression.prototype._logicalNot.test("!!!~~~!!!1") &&
-   !AbstractExpression.prototype._logicalNot.test(""),
-   "regex for logicl / bitwise not is working.");
-
-assert(
-   AbstractExpression.prototype._typeof.test("typeof ") &&
-   AbstractExpression.prototype._typeof.test("typeof(") &&
-   !AbstractExpression.prototype._typeof.test("typeof")
-   ,
-   "regex for typeof is working.");
-
-characters = new CharWrapper("   }");
+setEnv("   }");
 assert['throws'](function(){
    production.execute(characters, context);
 }, "empty expression.");
-
 assert(characters.charAt(0) === '}',
    "removes leading space.");
 
-setEnv();
-characters=new CharWrapper("!!345");
+setEnv("!!345");
 production.execute(characters, context);
 assert(
    output.toString() === '!!' &&
@@ -55,8 +38,7 @@ assert(
    context.getCurrentProduction() !== production,
    "logical / binary not is working.");
 
-setEnv();
-characters=new CharWrapper("typeof 345");
+setEnv("typeof 345");
 production.execute(characters, context);
 assert(
    output.toString() === 'typeof ' &&
@@ -64,8 +46,7 @@ assert(
    context.getCurrentProduction() !== production,
    "typeof is working.");
 
-setEnv();
-characters=new CharWrapper("(345");
+setEnv("(345");
 production.execute(characters, context);
 assert(
    characters.charAt(0) === '3' &&
@@ -79,20 +60,20 @@ assert(context.getCurrentProduction() instanceof Operator,
    "operator is instantiated.");
 context.removeProduction();
 characters = new CharWrapper("}");
-
 assert['throws'](function(){
    context.executeCurrent(characters);
 }, "unclosed operator.");
 
-function setEnv(){
-   getOutputCalled=false;
+function setEnv(str){
+   if(typeof str === 'string'){
+      characters = new CharWrapper(str);
+   }
    getValueCalled=false;
    getParentesizedExpressionCalled=false;
    output = new Output();
    context = new ProductionContext(output, compiler);
    production = new AbstractExpression();
    production.getOutput=function(){
-      getOutputCalled=true;
       return output;
    };
    production.getValue=function(){
@@ -103,5 +84,4 @@ function setEnv(){
    };
    context.addProduction(production);
 }
-}();
-
+});

@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("TemplateBodyStatements", function(){
    var compiler=new Compiler();
    var output;
    var context;
@@ -73,10 +72,10 @@
       assert(prodIs(LogStatement),
          "LogStatement allowed.");
 
-   setEnv("{call ");
+   setEnv("{render ");
       execute();
-      assert(prodIs(CallStatement),
-         "CallStatement allowed.");
+      assert(prodIs(RenderStatement),
+         "RenderStatement allowed.");
 
    setEnv("{foreach ");
       execute();
@@ -106,4 +105,4 @@
          addProduction(priorProduction).
          addProduction(production);
    }
-}();
+});

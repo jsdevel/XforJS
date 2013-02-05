@@ -22,7 +22,7 @@
          "building profile" to find out how.
       {/if}
       {if interests && @showInterests}
-         {call buildInterests interests/}
+         {render buildInterests interests/}
       {/if}
    </p>
 {/template}

@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("CodeFormatter", function(){
 var output=new Output();
 var indent = "   ";
 var code = new CodeFormatter(indent, output);5
@@ -59,4 +58,4 @@ code = new CodeFormatter(indent, new Output());
 instance=code.add("hello there");
 assert.equal(instance, code, "add returns instance.");
 assert.equal(code.toString(), "hello there", "add is working.");
-}();
+});

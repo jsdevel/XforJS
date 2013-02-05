@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://SOMESITE
  */
 
 /**
  * Sorting can sometimes produce random results.  The expected values herein in
  * some cases were simply taken from what the actual result was.
  */
-!function(){
+test("Foreach", function(){
    var equal = require('assert').equal;
    var array = [1,"a","C","d","e","a","D",2,6,"A","c","E"];
    var sortArray;
@@ -155,4 +154,4 @@
          console.log("A:"+e.actual+" E:"+e.expected+" M:"+e.message);
       }
    }
-}();
+});

@@ -3,5 +3,5 @@
 {import params.xjs}
 
 {template dog}
-   {call boo.boo/}
+   {render boo.boo/}
 {/template}

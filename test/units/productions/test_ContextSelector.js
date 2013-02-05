@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("ContextSelector", function(){
    var compiler=new Compiler();
    var output;
    /** @type ProductionContext */
@@ -26,74 +25,76 @@
    var variableOutput;
 
    //constructing
-   setEnv(".", true);
+   test("non-nested contexts do not call safe value.", function(){
+      setEnv(".", true);
+      assert(!outputHas("function"));
+   });
+
+   test("nested contexts call safe value.", function(){
+      setEnv(".", false);
+      assert(outputHas("function"));
+   });
+
+   test("variables must be declared.", function(){
+      setEnv("@boo||");
+      assert['throws'](function(){context.executeCurrent(characters);});
+   });
+
+   test("variables in context selector", function(){
+      setEnv("@boo||");
+      assert.doesNotThrow(function(){
+         variableOutput.add("boo","");
+         context.executeCurrent(characters);
+      }, "declared variables may be used.");
       assert(
-         !outputHas("function"),
-         "non-nested contexts do not call safe value.");
-
-   setEnv(".", false);
-      assert(
-         outputHas("function"),
-         "nested contexts call safe value.");
-
-   setEnv("@boo||");
-   assert['throws'](function(){
-      context.executeCurrent(characters);
-   }, "variables must be declared.");
-
-   setEnv("@boo||");
-   assert.doesNotThrow(function(){
-      variableOutput.add("boo","");
-      context.executeCurrent(characters);
-   }, "declared variables may be used.");
-   assert(
-      outputHas("return __boo"),
-      "variable references are output properly.");
-
-   [
-      "current()||",
-      ".||"
-   ].forEach(function(value){
-      setEnv(value);
-      context.executeCurrent(characters);
-      assert(
-         outputHas("return "+js_context),
-         "reference to context is output for: '"+value+"'.");
+         outputHas("return __boo"),
+         "variable references are output properly.");
+      [
+         "current()||",
+         ".||"
+      ].forEach(function(value){
+         setEnv(value);
+         context.executeCurrent(characters);
+         assert(
+            outputHas("return "+js_context),
+            "reference to context is output for: '"+value+"'.");
+      });
    });
 
 //POST CONSTRUCTING
-   setEnv("boo coo", true);
+   test("space isn't allowed in a namespace.", function(){
+      setEnv("boo coo", true);
       context.executeCurrent(characters);
-      assert['throws'](function(){
-         context.executeCurrent(characters);
-      }, "space isn't allowed in a namespace.");
+      assert['throws'](function(){context.executeCurrent(characters);});
+   });
 
-   setEnv("boo .coo doo", true);
+   test("after static: space isn't allowed in a namespace.", function(){
+      setEnv("boo .coo doo", true);
       context.executeCurrent(characters);
       context.executeCurrent(characters);
-      assert['throws'](function(){
-         context.executeCurrent(characters);
-      }, "after static: space isn't allowed in a namespace.");
+      assert['throws'](function(){context.executeCurrent(characters);});
+   });
 
-   setEnv(".boo||", true);
+   test("leading namespace.", function(){
+      setEnv(".boo||", true);
       context.executeCurrent(characters);
-      assert(
-         outputHas(js_context+".boo") && prodIs(ContextSelector),
-         "leading namespace.");
+      assert(outputHas(js_context+".boo") && prodIs(ContextSelector));
+   });
 
-   setEnv("boo||", true);
+   test("leading namespace.", function(){
+      setEnv("boo||", true);
       context.executeCurrent(characters);
-      assert(
-         outputHas(js_context+".boo") && prodIs(ContextSelector),
-         "leading namespace.");
+      assert(outputHas(js_context+".boo") && prodIs(ContextSelector));
+   });
 
-   setEnv("boo.coo||", true);
+   test("leading namespace with static refinement.", function(){
+      setEnv("boo.coo||", true);
       context.executeCurrent(characters);
-      assert(
-         outputHas(js_context+".boo.coo") && prodIs(ContextSelector),
-         "leading namespace with static refinement.");
+      assert(outputHas(js_context+".boo.coo") && prodIs(ContextSelector));
+   });
 
-   setEnv("boo[]||", true);
+   test("namespaces", function(){
+      setEnv("boo[]||", true);
       context.executeCurrent(characters);
       assert(
          outputHas(js_context+".boo") && prodIs(ContextSelector),
@@ -101,84 +102,106 @@
       context.executeCurrent(characters);
       assert(prodIs(ContextDynamicRefinement),
          "dynamic with leading ns.");
+   });
 
-   setEnv("@boo.coo||", true);
+   test("leading variable with call expression", function(){
+      setEnv("@boo()||");
       variableOutput.add("boo", "");
       context.executeCurrent(characters);
-      assert(outputHas("__boo.coo") && prodIs(ContextSelector),
-         "leading namespace with variable.");
+      assert.equal(
+         output.toString(),
+         'V(function(){return __boo()})',
+         'non-nested calls are safe.');
+   });
 
-   setEnv("@boo[]||", true);
+   test("leading namespace with variable.", function(){
+      setEnv("@boo.coo||", true);
       variableOutput.add("boo", "");
       context.executeCurrent(characters);
-      assert(outputHas("__boo") && prodIs(ContextDynamicRefinement),
-         "variable with dynamic refinement.");
+      assert(outputHas("__boo.coo") && prodIs(ContextSelector));
+   });
 
-   setEnv("current().boo||", true);
+   test("variable with dynamic refinement.", function(){
+      setEnv("@boo[]||", true);
+      variableOutput.add("boo", "");
       context.executeCurrent(characters);
-      assert(outputHas(js_context+".boo") && prodIs(ContextSelector),
-         "current() with static refinement.");
+      assert(outputHas("__boo") && prodIs(ContextDynamicRefinement));
+   });
 
-   setEnv("current()[]||", true);
+   test("current() with static refinement.", function(){
+      setEnv("current().boo||", true);
       context.executeCurrent(characters);
-      assert(outputHas(js_context) && prodIs(ContextDynamicRefinement),
-         "current() with dynamic refinement.");
+      assert(outputHas(js_context+".boo") && prodIs(ContextSelector));
+   });
 
-   setEnv("[]||", true);
+   test("current() with dynamic refinement.", function(){
+      setEnv("current()[]||", true);
       context.executeCurrent(characters);
-      assert(outputHas(js_context) && prodIs(ContextDynamicRefinement),
-         "leading dynamic refinement.");
+      assert(outputHas(js_context) && prodIs(ContextDynamicRefinement));
+   });
 
-   setEnv("[].boo||", true);
+   test("leading dynamic refinement.", function(){
+      setEnv("[]||", true);
+      context.executeCurrent(characters);
+      assert(outputHas(js_context) && prodIs(ContextDynamicRefinement));
+   });
+
+   test("leading dynamic refinement with ns.", function(){
+      setEnv("[].boo||", true);
       context.executeCurrent(characters);
       characters.shift(2);
       output.add("[5]");
       context.removeProduction();
       context.executeCurrent(characters);
-      assert(outputHas(js_context+"[5].boo") && prodIs(ContextSelector),
-         "leading dynamic refinement with ns.");
+      assert(outputHas(js_context+"[5].boo") && prodIs(ContextSelector));
+   });
 
-   setEnv("[][][]||", true);
+   test("leading dynamic refinement with dynamic refinement.", function(){
+      setEnv("[][][]||", true);
       [5,4,3].forEach(function(value){
          context.executeCurrent(characters);
          characters.shift(2);
          output.add("["+value+"]");
          context.removeProduction();
       });
-      assert(outputHas(js_context+"[5][4]") && prodIs(ContextSelector),
-         "leading dynamic refinement with dynamic refinement.");
+      assert(outputHas(js_context+"[5][4]") && prodIs(ContextSelector));
+   });
 
-   setEnv("||");
-      assert['throws'](function(){
-         context.executeCurrent(characters);
-      }, "leading invalid character.");
+   test("leading invalid character.", function(){
+      setEnv("||");
+      assert['throws'](function(){context.executeCurrent(characters) });
+   });
 
-   //CLOSING
-   setEnv("boo||", true);
+//CLOSING
+   test("sole ns closes.", function(){
+      setEnv("boo||", true);
       context.executeCurrent(characters);
       context.executeCurrent(characters);
-      assert(!context.getCurrentProduction(),
-         "sole ns closes.");
+      assert(!context.getCurrentProduction());
+   });
 
-   setEnv("@boo||", true);
+   test("variable closes.", function(){
+      setEnv("@boo||", true);
       variableOutput.add("boo", "");
       context.executeCurrent(characters);
-      assert(!context.getCurrentProduction(),
-         "variable closes.");
+      assert(!context.getCurrentProduction());
+   });
 
-   setEnv("[]||", true);
+   test("dynamic refinement closes.", function(){
+      setEnv("[]||", true);
       context.executeCurrent(characters);
       characters.shift(2);
       context.removeProduction();
       context.executeCurrent(characters);
-      assert(!context.getCurrentProduction(),
-         "dynamic refinement closes.");
+      assert(!context.getCurrentProduction());
+   });
 
-   setEnv("current().boo||", true);
+   test("current() with static refinement closes.", function(){
+      setEnv("current().boo||", true);
       context.executeCurrent(characters);
       context.executeCurrent(characters);
-      assert(!context.getCurrentProduction(),
-         "current() with static refinement closes.");
+      assert(!context.getCurrentProduction());
+   });
 
    function outputHas(string){
       return output.toString().indexOf(string) > -1;
@@ -194,4 +217,4 @@
       characters=new CharWrapper(string);
       variableOutput = context.getCurrentVariableOutput();
    }
-}();
+});

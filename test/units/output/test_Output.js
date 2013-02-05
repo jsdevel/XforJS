@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("Output", function(){
 var output1 = new Output;
 var output2 = new Output;
 
@@ -25,4 +24,4 @@ output2.add(3).add(5);
 output1.add("hello there");
 
 assert.equal(output2.toString(), "12hello there35", "toString and add are both working.");
-}();
+});

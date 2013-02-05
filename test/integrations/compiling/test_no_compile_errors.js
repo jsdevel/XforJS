@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://SOMESITE
  */
-!function(){
+test("no_compile_errors", function(){
    var precompiledHappy = fs.readdirSync("templates/raw/test_no_compile_errors/");
    precompiledHappy.forEach(function(file){
       var fullPath = "templates/raw/test_no_compile_errors/"+file;
@@ -29,6 +28,4 @@
          }
       }
    });
-}();
-
-
+});

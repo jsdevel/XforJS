@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("CharWrapper", function(){
    var wrapper = new CharWrapper("Hello World\n   !Hello Again!");
    var match;
 
@@ -46,6 +45,4 @@
 
    match=wrapper.match(/(Hello)/);
    assert(match instanceof Array, 'match is working.');
-}();
-
-
+});

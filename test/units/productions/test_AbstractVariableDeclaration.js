@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("AbstractVariableDeclaration", function(){
 var output;
 var variableOutput;
 var compiler = new Compiler();
@@ -88,5 +87,4 @@ function setEnv(){
    context = new ProductionContext(output, compiler);
    context.addProduction(newProduction).addProduction(production);
 }
-}();
-
+});

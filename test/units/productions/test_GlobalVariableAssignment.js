@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("GlobalVariableAssignment", function(){
 var production = new GlobalVariableAssignment();
 assert(production.getExpression() instanceof GlobalExpression,
    "getExpression is working.");
-}();
-
+});

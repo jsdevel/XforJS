@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("Program", function(){
 //set by setEnv
 var output;
 /** @type {ProductionContext} */
@@ -140,4 +139,4 @@ assert['throws'](function(){
    program.execute(new CharWrapper("{namespace boo}"));
    program.close();
 }, "closing without global statements throws errors.");
-}();
+});

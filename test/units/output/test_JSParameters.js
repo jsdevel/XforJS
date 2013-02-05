@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("JSParameters", function(){
 var params = new JSParameters();
 
 assert.equal(
@@ -30,4 +29,4 @@ assert.equal("hello,charlie", params.getArguments(), "getArguments is working.")
 
 params.put("dog","chancey");
 assert.equal("hello,charlie", params.getArguments(), "changing a value isn't accepted.");
-}();
+});

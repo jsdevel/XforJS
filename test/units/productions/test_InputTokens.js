@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("InputTokens", function(){
    var compiler;
    var output;
    var context;
@@ -79,4 +78,4 @@
       characters = new CharWrapper(string);
       context.addProduction(production);
    }
-}();
+});

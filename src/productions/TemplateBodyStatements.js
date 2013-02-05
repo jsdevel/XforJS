@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
 
 /**
@@ -82,12 +81,12 @@ function TemplateBodyStatements(output){
                return;
             }
             break;
-         case 'c':
-            match = characters.match(CALL);
+         case 'r':
+            match = characters.match(RENDER);
             if(match){
                characters.shift(match[1].length);
                statementOutput= new Output();
-               context.addProduction(new CallStatement(statementOutput));
+               context.addProduction(new RenderStatement(statementOutput));
                output.add(statementOutput);
                return;
             }

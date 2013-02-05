@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
 
-!function(){
+test("IfStatement", function(){
    var compiler = new Compiler();
    var output;
    var production;
@@ -89,4 +88,4 @@
       context = new ProductionContext(output, compiler);
       context.addProduction(production);
    }
-}();
+});

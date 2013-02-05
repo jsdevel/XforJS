@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("ImportStatement", function(){
    var compiler = new Compiler();
    var output=new Output();
    var production = new Production();
@@ -46,5 +45,4 @@
       characters.charAt(0);
    }, "Import removes itself.");
    assert.equal(context.getCurrentProduction(), production, "ImportStatement removes itself.");
-}();
-
+});

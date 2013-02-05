@@ -1,0 +1,21 @@
+{namespace foo}
+
+{template foo}
+   {param foo}
+
+   {@foo()}
+{/template}
+
+{template doo}
+   {param doo}
+
+   {@doo.doo()}
+{/template}
+
+#Making sure other happy paths are OK.
+{template goo}
+   {.()}
+   {.asdf()}
+   {.[5]()}
+   {.[5].substring(5,3)}
+{/template}

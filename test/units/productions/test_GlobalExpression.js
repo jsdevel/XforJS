@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("GlobalExpression", function(){
    var output;
    var compiler = new Compiler();
    var context;
@@ -38,4 +37,4 @@
       production = new GlobalExpression(output);
       context.addProduction(production);
    }
-}();
+});

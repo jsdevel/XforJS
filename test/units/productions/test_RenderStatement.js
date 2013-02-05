@@ -13,20 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("RenderStatement", function(){
    var output = new Output();
-   var production = new CallStatement(output);
+   var production = new RenderStatement(output);
 
    assert(output.toString() === js_bld+"(());",
-      "call block output.");
-   assert(production.getBodyStatements() instanceof CallParamDeclarations,
+      "render block output.");
+   assert(production.getBodyStatements() instanceof RenderParamDeclarations,
       "getBodyStatements is working.");
-   assert(production.getVariableExpression() instanceof CallExpression,
+   assert(production.getVariableExpression() instanceof RenderExpression,
       "getVariableExpression is working.");
-   assert(production.getClosingPattern() === CALL_CLOSING,
+   assert(production.getClosingPattern() === RENDER_CLOSING,
       "getClosingPattern is working.");
    assert(production._canSelfClose,
-      "CallStatement can self close.");
-}();
+      "RenderStatement can self close.");
+});

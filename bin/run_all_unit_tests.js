@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://XforJS.com
  */
 var fs = require('fs');
 var common = require('./common.js');
@@ -28,8 +27,7 @@ var testDirs = [
    'units/parsing/',
    'units/javascript/',
    'units/productions/',
-   'units/compiling/',
-   'units/suites/'
+   'units/compiling/'
 ];
 
 testDirs.forEach(function(value){
@@ -45,22 +43,8 @@ fileLoader.loadAll(function(loadedFiles){
 
    filesToTest.forEach(function(file){
       var testFile = loadedFiles[file];
-      var hasError;
-      var header =
-         "=======================================\n"+
-         "FAILED: "+file+"\n"+
-         "=======================================";
-
       if(common.isJSFileName(file)){
-         try {
-            hasError=common.insertTestAndRun(framework, testFile);
-         } catch(e){
-            console.log(header);
-            console.log(e);
-         }
-         if(hasError){
-            console.log(header);
-         }
+         common.insertTestAndRun(framework, testFile);
       }
    });
    console.log("Finished");

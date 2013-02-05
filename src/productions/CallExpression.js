@@ -13,57 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
 
 /**
- * @constructor
- * @param {Output} namespaceOutput
- * @param {Output} contextOutput
+ * @param {Output} output
  * @returns {CallExpression}
  */
-function CallExpression(namespaceOutput, contextOutput){
-   /** @type boolean */
-   var hasNamespace=false;
+function CallExpression(output){
+   /** @type {boolean} */
+   var _hasExpression=false;
+   var argumentOutput = new Output();
+
+   output.add("(").add(argumentOutput).add(")");
+
    /**
     * @param {CharWrapper} characters
     * @param {ProductionContext} context
     */
    this.execute=function(characters, context){
-      var match;
-      if(!hasNamespace){
-         match = characters.match(NS_FORCED);
-         if(match){
-            hasNamespace=true;
-            var ns=match[1];
-            characters.shift(ns.length);
-            namespaceOutput.add(js_templateBasket+"."+ns);
-            context.addCalledTemplate(ns);
-         } else {
-            match = characters.match(NAME);
-            if(match){
-               hasNamespace=true;
-               var name=match[1];
-               characters.shift(name.length);
-               namespaceOutput.add(js_currentNS+"."+name);
-               context.addCalledTemplate(context.getNS()+"."+name);
-            }
-         }
+      characters.removeSpace();
 
-         if(hasNamespace){
-            context.removeProduction();
-            characters.removeSpace();
-            var firstChar = characters.charAt(0);
-            if( firstChar !== '/' && firstChar !== '}'){
-               context.addProduction(new ContextSelector(contextOutput, false));
-            } else {
-               contextOutput.add(js_context);
-            }
-            return;
+      if(characters.charAt(0) === ")"){
+         characters.shift(1);
+         context.removeProduction();
+         return;
+      } else {
+         if(_hasExpression){
+            throw "Multiple Expressions not allowed here.";
          }
-         throw "A valid Namespace must be given.";
+         _hasExpression=true;
+         context.addProduction(new CallArguments(argumentOutput));
+         return;
       }
-      throw "Invalid Character";
    };
 }
 extend(CallExpression, Production);

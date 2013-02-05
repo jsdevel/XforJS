@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
-function Dog(){}
-function Mamal(){}
-extend(Dog, Mamal);
+test("extend", function(){
+   function Dog(){}
+   function Mamal(){}
+   extend(Dog, Mamal);
 
-var a=new Dog();
-assert(a instanceof Dog, "extend maintains original constructor.");
-assert(a instanceof Mamal, "extend allows another object to appear in the prototype chain.");
-}();
+   var a=new Dog();
+   assert(a instanceof Dog, "extend maintains original constructor.");
+   assert(a instanceof Mamal, "extend allows another object to appear in the prototype chain.");
+});

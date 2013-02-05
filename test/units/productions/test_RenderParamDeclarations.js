@@ -13,20 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("RenderParamDeclarations", function(){
    var output = new Output();
    var compiler = new Compiler();
    var context = new ProductionContext(output, compiler);
-   var production = new CallParamDeclarations(output);
+   var production = new RenderParamDeclarations(output);
 
    context.addProduction(production);
    context.executeCurrent(new CharWrapper("{param "));
-   assert(context.getCurrentProduction() instanceof CallParamDeclaration,
-      "CallParamDeclaration is instantiated."
+   assert(context.getCurrentProduction() instanceof RenderParamDeclaration,
+      "RenderParamDeclaration is instantiated."
    );
    production.getVariableOutput().add("boo", "'5'");
    assert(production.getVariableOutput().toString().indexOf(",{boo:'5'}") > -1,
       "output is working.");
-}();
+});

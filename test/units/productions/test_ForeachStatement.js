@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
-!function(){
+test("ForeachStatement", function(){
    var output = new Output();
    var context = new ProductionContext(output, new Compiler());
    var production = new ForeachStatement(output, context);
@@ -41,4 +40,4 @@
       "getVariableExpression is working.");
    assert(production.getClosingPattern() === FOREACH_CLOSING,
       "getClosingPattern is working.");
-}();
+});

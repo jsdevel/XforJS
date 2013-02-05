@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * For more information, visit http://jsdevel.github.com/XforJS/
  */
 
 /**
  * @constructor
  * @param {AbstractVariableOutput} variableOutput
- * @returns {CallParamDeclaration}
+ * @returns {RenderParamDeclaration}
  */
-function CallParamDeclaration(variableOutput){
+function RenderParamDeclaration(variableOutput){
    /**
     * @return {AbstractVariableOutput}
     */
@@ -29,34 +28,34 @@ function CallParamDeclaration(variableOutput){
       return variableOutput;
    };
 }
-extend(CallParamDeclaration, AbstractVariableDeclaration);
+extend(RenderParamDeclaration, AbstractVariableDeclaration);
 /**
  * @const
  * @type String
  */
-CallParamDeclaration.prototype.name="CallParamDeclaration";
+RenderParamDeclaration.prototype.name="RenderParamDeclaration";
 /**
  * @type RegExp
  */
-CallParamDeclaration.prototype.getPattern=function(){
+RenderParamDeclaration.prototype.getPattern=function(){
    return PARAM;
 };
 /**
  * @param {Output} output
  * @returns {VariableAssignment}
  */
-CallParamDeclaration.prototype.getProduction=function(output){
+RenderParamDeclaration.prototype.getProduction=function(output){
    return new VariableAssignment(output);
 };
 /**
  * @param {String} name
  * @param {Output} output
  */
-CallParamDeclaration.prototype.doAssignment=function(name, output){};
+RenderParamDeclaration.prototype.doAssignment=function(name, output){};
 /**
  * @param {String} name
  * @param {ProductionContext} context
  */
-CallParamDeclaration.prototype.doNoAssignment=function(name, context){
+RenderParamDeclaration.prototype.doNoAssignment=function(name, context){
    throw "An assignment must be made here.";
 };

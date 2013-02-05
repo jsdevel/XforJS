@@ -14,9 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# For more information, visit http://XforJS.com
-#
-#Print real time results from all unit tests.
+# Print real time results from all unit tests.
 cd $DIR_SRC;
 while inotifywait -qr -e MODIFY --exclude .*\\.swp $DIR_SRC>/dev/null
 do
