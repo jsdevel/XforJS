@@ -12,9 +12,11 @@
    #params, then variables
    #they always appear at the top of a context.
    {param showRatings}
+   {param fn}
    {var test}#undefined value
    {var test1 5}#test1 is always 5 within this scope
 
+   {@fn.date.getStandardDate()}
    <h3>Must Have Books</h3>
    {foreach books}#new context now. '.' === books object
       #you can try: |asc or |desc.
@@ -94,9 +96,21 @@
 }
 
                </textarea><textarea class="tab-pane input-params" data-tab=".input-params">
-{
+({
+   //helper functions are possible
+   "fn":{
+      "date":{
+         "getStandardDate":function(){
+            var d=new Date();
+            return d.getMonth()+1+"/"+d.getDate()+"/"+d.getFullYear();
+         }
+      },
+      "rand":function(prefix){
+         return (prefix||"")+Math.random();
+      }
+   },
    "showRatings":true
-}
+})
 
                </textarea></div></div><div class="panel"><div class="tabs"><span data-tab=".compiled">Compiled</span><span class="active" data-tab=".rendered">Rendered</span><span data-tab=".output-text">Output</span><span data-tab=".statistics">Statistics</span></div><div class="tab-content right"><textarea class="tab-pane compiled"></textarea><div class="tab-pane active rendered sample-output"></div><textarea class="tab-pane output-text"></textarea><div class="statistics"></div></div></div></div><div class="copy"><h2>Documentation</h2>
          What follows is the documentation for X.  This
