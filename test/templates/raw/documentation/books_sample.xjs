@@ -8,9 +8,11 @@
    #params, then variables
    #they always appear at the top of a context.
    {param showRatings}
+   {param fn}
    {var test}#undefined value
    {var test1 5}#test1 is always 5 within this scope
 
+   {@fn.date.getStandardDate()}
    <h3>Must Have Books</h3>
    {foreach books}#new context now. '.' === books object
       #you can try: |asc or |desc.
