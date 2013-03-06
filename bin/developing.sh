@@ -23,6 +23,9 @@ cd $DIR_BIN;
 function dev()
 {
    clear
+   cat << HERE
+Development is underway...
+HERE
    node build.js
 }
 
