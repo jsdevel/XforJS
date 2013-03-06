@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>XforJS Documentation</title><!--CONCAT css/docs.min.css--><link href="css/general.css" rel="stylesheet" type="text/css"/><link href="css/buttons.css" rel="stylesheet" type="text/css"/><link href="css/tabs.css" rel="stylesheet" type="text/css"/><link href="css/effects.css" rel="stylesheet" type="text/css"/><link href="css/snapping.css" rel="stylesheet" type="text/css"/><link href="css/giver.css" rel="stylesheet" type="text/css"/><link href="css/main.css" rel="stylesheet" type="text/css"/><!--END CONCAT--></head><body><div class="header"><span class="logo">X</span><span>for JS</span><p>A Template Lang that would make Mama proud.</p><a href="https://github.com/jsdevel/XforJS" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"/></a><div class="downloads"><a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.1.0.4.js"><i class="icon">D</i><strong class="main">Download</strong><strong>1.0.4</strong><small>(src)</small></a><a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.1.0.4.min.js"><i class="icon">D</i><strong class="main">Download</strong><strong>1.0.4</strong><small>(min)</small></a><div><code class="border-radius-5px">npm install xforjs</code></div></div><div class="changelog" data-version="1.0.4"><span class="border-radius-5px ease-bg-color">View Changelog</span><div></div></div></div><div class="copy lead">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>XforJS Documentation</title><!--CONCAT css/docs.min.css--><link href="css/general.css" rel="stylesheet" type="text/css"/><link href="css/buttons.css" rel="stylesheet" type="text/css"/><link href="css/tabs.css" rel="stylesheet" type="text/css"/><link href="css/effects.css" rel="stylesheet" type="text/css"/><link href="css/snapping.css" rel="stylesheet" type="text/css"/><link href="css/giver.css" rel="stylesheet" type="text/css"/><link href="css/main.css" rel="stylesheet" type="text/css"/><link href="css/code-highlighting.css" rel="stylesheet" type="text/css"/><!--END CONCAT--></head><body><div class="header"><span class="logo">X</span><span>for JS</span><p>A Template Lang that would make Mama proud.</p><a href="https://github.com/jsdevel/XforJS" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"/></a><div class="downloads"><a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.1.0.4.js"><i class="icon">D</i><strong class="main">Download</strong><strong>1.0.4</strong><small>(src)</small></a><a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.1.0.4.min.js"><i class="icon">D</i><strong class="main">Download</strong><strong>1.0.4</strong><small>(min)</small></a><div><code class="border-radius-5px">npm install xforjs</code></div></div><div class="changelog" data-version="1.0.4"><span class="border-radius-5px ease-bg-color">View Changelog</span><div></div></div></div><div class="copy lead">
          X is a Template Language for Javascript.  You can serve up compiled or
          raw templates <span class="muted">(compiled is preferred ;)</span>.
       </div><div class="try-it giver" data-gift="body &gt; .code-editor"><strong class="button border-radius-5px"><i class="icon">e</i>Live Demo</strong></div><div class="code-editor open snap-to-window border box-shadow-25px"><div class="close-button" data-closes="body > .code-editor"><i class="icon">x</i></div><div class="panel"><div class="tabs"><span class="active" data-tab=".raw">Template</span><span data-tab=".input-data">Input Data</span><span data-tab=".input-params">Input Params</span></div><div class="tab-content left"><textarea class="tab-pane active raw" data-tab=".compiled">
@@ -118,7 +118,70 @@
          files that are used during development of the compiler.  Following this
          practice allows the source code of the compiler to remain in sync with
          the documentation and vice versa.
-      </div><script id="XJS_SAMPLE_STATS" type="text/xjs">
+      </div><div class="copy"><h3>Language</h3>
+         This integration test describes the full capabilities of the language in detail.
+         <pre class="code-highlighter">
+<span class='start-brace'>{</span><span class='keyword'>namespace</span> my.app.namespace<span class='end-brace'>}</span>
+<span class='comment'>#</span>
+<span class='comment'>#Template files begin with a namespace and end with a .xjs extension.</span>
+<span class='comment'>#</span>
+<span class='comment'>#If you instantiate the compiler with global=&gt;true (default), then</span>
+<span class='comment'>#you can call window.my.app.namespace in a browser, or in the global scope</span>
+<span class='comment'>#of where your template is executed.</span>
+<span class='comment'>#</span>
+<span class='comment'>#Whitespace isn't allowed before a namespace declaration.  The idea is to enforce</span>
+<span class='comment'>#A coding style.</span>
+
+
+<span class='comment'>#This is a comment.  Comments in X borrow from shell scripting.</span>
+
+<span class='comment'>#You may use imports to combine other template files.</span>
+<span class='comment'>#More on this in another doc.</span>
+<span class='start-brace'>{</span><span class='keyword'>import</span> profile_sample.xjs<span class='end-brace'>}</span>
+
+<span class='comment'>#This is a global variable.</span>
+<span class='comment'>#Only templates within this file have access to it.</span>
+<span class='start-brace'>{</span><span class='keyword'>var</span> boo 5<span class='end-brace'>}</span>
+
+<span class='comment'>#Variables must be declared before they may be referenced.</span>
+<span class='comment'>#Now that we've declared 'boo', it can be referenced.</span>
+<span class='comment'>#</span>
+<span class='comment'>#References begin with the '@' symbol.</span>
+<span class='start-brace'>{</span><span class='keyword'>var</span> zoo <span class='variable-reference'>@boo</span><span class='end-brace'>}</span>
+
+<span class='comment'>#Global variables allow the following expressions:</span>
+<span class='comment'>#numbers</span>
+<span class='start-brace'>{</span><span class='keyword'>var</span> coo    1<span class='end-brace'>}</span>
+<span class='start-brace'>{</span><span class='keyword'>var</span> cooo   0x4a09<span class='end-brace'>}</span>
+<span class='start-brace'>{</span><span class='keyword'>var</span> coooo  1.345<span class='end-brace'>}</span>
+<span class='start-brace'>{</span><span class='keyword'>var</span> coooo9 1.345e-1234<span class='end-brace'>}</span>
+
+<span class='comment'>#strings</span>
+<span class='start-brace'>{</span><span class='keyword'>var</span> doo    'string'<span class='end-brace'>}</span>
+<span class='start-brace'>{</span><span class='keyword'>var</span> dooo   "string"<span class='end-brace'>}</span>
+
+<span class='comment'>#null, and booleans</span>
+<span class='start-brace'>{</span><span class='keyword'>var</span> woo    null<span class='end-brace'>}</span>
+<span class='start-brace'>{</span><span class='keyword'>var</span> eooo   true<span class='end-brace'>}</span>
+<span class='start-brace'>{</span><span class='keyword'>var</span> eoooo  false<span class='end-brace'>}</span>
+
+
+<span class='comment'>#X allows most ecmascript operators to appear in expression statements.</span>
+<span class='comment'>#The following is a valid expression:</span>
+<span class='start-brace'>{</span><span class='keyword'>var</span> wooo 1 ||
+      (typeof 2 === 'number' &amp;&amp; ~~3 &amp;&amp; !<span class='variable-reference'>@woo</span>) &amp;&amp;
+      <span class='comment'>#comments ending with \n are</span>
+      <span class='comment'>#considered white space everywhere!!!</span>
+      (((('nested parens'||'not nested'))))<span class='comment'>#etc.</span>
+<span class='end-brace'>}</span>
+
+
+<span class='comment'>#You may define as many templates as you wish within a file.</span>
+<span class='comment'>#Templates are assigned to the namespace declared in their file.</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> wow<span class='end-brace'>}</span>
+
+<span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
+         </pre></div><script id="XJS_SAMPLE_STATS" type="text/xjs">
 {namespace documentation.sample_stats}
 
 {template getStats}

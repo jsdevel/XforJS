@@ -36,13 +36,53 @@ function buildFile(file, addExt){
 
    return {
       now:function(){
-         return file.replace(/^\s*?\/\/INCLUDE\s([^\n\r]+)/gm,
+         return file.
+            replace(/^\s*?\/\/INCLUDE\s([^\n\r]+)/gm,
             function(match,group1){
                var filePath = _path+group1+(addExt?".js":"");
                var fileContents = fs.readFileSync(filePath, 'utf8');
 
                return fileContents.replace(/\/\*\*?!(?:(?!\*\/)[\s\S])*?\*\//g, '');
-            })//.replace(/<!--CONCAT\s([^\r\n\s-]+)-->((?:(?!<!--)[\s\S])+)<!--END CONCAT-->/gm,
+            }).
+            replace(/^\s*?\/\/INCLUDE-HTML-ESCAPED\s([^\n\r]+)/gm,
+            function(match, group1){
+               var filePath = _path+group1+(addExt?".js":"");
+               var fileContents = fs.readFileSync(filePath, 'utf8');
+
+               return fileContents.
+                       replace(/&/g, "&amp;").
+                       replace(/>/g,"&gt;").
+                       replace(/</g,"&lt;");
+            }).
+            replace(/^\s*?\/\/INCLUDE-XFORJS-HIGHLIGHTED\s([^\n\r]+)/gm,
+            function(match, group1){
+               var filePath = _path+group1+(addExt?".js":"");
+               var fileContents = fs.readFileSync(filePath, 'utf8');
+
+               return fileContents.
+                  replace(/&/g, "&amp;").
+                  replace(/>/g,"&gt;").
+                  replace(/</g,"&lt;").
+
+                  //comments
+                  replace(/\\#/g, "&#35;").
+                  replace(/(#[^\r\n]*)/g, "<span class='comment'>$1</span>").
+
+                  //tags keywords
+                  replace(/(\{\/?)(template|var|text|render|namespace|import)/g, "$1<span class='keyword'>$2</span>").
+
+                  //start/end of tags
+                  replace(/\\\{/g, "&#123;").
+                  replace(/\{/g, "<span class='start-brace'>{</span>").
+                  replace(/\}/g, "<span class='end-brace'>}</span>").
+                  replace(/(@[a-z0-9_$]+)/ig, "<span class='variable-reference'>$1</span>")
+
+                       ;
+            })
+
+            ;
+
+            //.replace(/<!--CONCAT\s([^\r\n\s-]+)-->((?:(?!<!--)[\s\S])+)<!--END CONCAT-->/gm,
             /*function(match, group1){
                console.log(match);
                console.log(group1);
