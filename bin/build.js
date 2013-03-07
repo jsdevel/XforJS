@@ -65,19 +65,18 @@ function buildFile(file, addExt){
                   replace(/</g,"&lt;").
 
                   //comments
+                  replace(/##([^\r\n]+)/mg, "<span class='comment'>&#35;</span><span class='comment-header'>$1</span>").
                   replace(/\\#/g, "&#35;").
-                  replace(/(#[^\r\n]*)/g, "<span class='comment'>$1</span>").
+                  replace(/(#(?!35;)[^\r\n]*)/g, "<span class='comment'>$1</span>").
 
                   //tags keywords
-                  replace(/(\{\/?)(template|var|text|render|namespace|import)/g, "$1<span class='keyword'>$2</span>").
+                  replace(/(\{\/?)(template|var|text|render|namespace|import|log|param|sort|foreach|:else|:elif|if)/g, "$1<span class='keyword'>$2</span>").
 
                   //start/end of tags
                   replace(/\\\{/g, "&#123;").
                   replace(/\{/g, "<span class='start-brace'>{</span>").
                   replace(/\}/g, "<span class='end-brace'>}</span>").
-                  replace(/(@[a-z0-9_$]+)/ig, "<span class='variable-reference'>$1</span>")
-
-                       ;
+                  replace(/(@[a-z0-9_$]+)/ig, "<span class='variable-reference'>$1</span>");
             })
 
             ;
