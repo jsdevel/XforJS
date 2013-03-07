@@ -120,36 +120,62 @@
          the documentation and vice versa.
       </div><div class="copy"><h3>Language</h3>
          This integration test describes the full capabilities of the language in detail.
-         <pre class="code-highlighter">
+         <pre class="code-highlighter border-radius-5px">
 <span class='start-brace'>{</span><span class='keyword'>namespace</span> my.app.namespace<span class='end-brace'>}</span>
+<span class='comment'>&#35;</span><span class='comment-header'>Namespace</span>
 <span class='comment'>#</span>
 <span class='comment'>#Template files begin with a namespace and end with a .xjs extension.</span>
 <span class='comment'>#</span>
 <span class='comment'>#If you instantiate the compiler with global=&gt;true (default), then</span>
 <span class='comment'>#you can call window.my.app.namespace in a browser, or in the global scope</span>
-<span class='comment'>#of where your template is executed.</span>
+<span class='comment'>#of where your template is executed.  You can optionally set global=&gt;false, in</span>
+<span class='comment'>#this case, X would return an object, and the namespaces would be assigned to</span>
+<span class='comment'>#said object.</span>
 <span class='comment'>#</span>
 <span class='comment'>#Whitespace isn't allowed before a namespace declaration.  The idea is to enforce</span>
 <span class='comment'>#A coding style.</span>
 
-
+<span class='comment'>&#35;</span><span class='comment-header'>Comments</span>
+<span class='comment'>#</span>
 <span class='comment'>#This is a comment.  Comments in X borrow from shell scripting.</span>
 
-<span class='comment'>#You may use imports to combine other template files.</span>
-<span class='comment'>#More on this in another doc.</span>
+<span class='comment'>&#35;</span><span class='comment-header'>Import</span>
+<span class='comment'>#</span>
+<span class='comment'>#You may use imports to combine other template files.  When you import another</span>
+<span class='comment'>#file, all of the templates in that file are added to the resulting namespace</span>
+<span class='comment'>#specified by the compiler options (global namespace or a newly returned</span>
+<span class='comment'>#namespace object).  None of the variables defined in an imported file are</span>
+<span class='comment'>#available in an importing file.</span>
+<span class='comment'>#</span>
+<span class='comment'>#You can specify a relative path I.E. ../../file.xjs, or an absolute path I.E.</span>
+<span class='comment'>#/file.xjs.  This example is using relative path.  Relative paths are always</span>
+<span class='comment'>#relative to the document declaring the import statement, so profile_sample.xjs</span>
+<span class='comment'>#is a sibling file in the parent directory of the current file.</span>
 <span class='start-brace'>{</span><span class='keyword'>import</span> profile_sample.xjs<span class='end-brace'>}</span>
 
-<span class='comment'>#This is a global variable.</span>
-<span class='comment'>#Only templates within this file have access to it.</span>
+<span class='comment'>&#35;</span><span class='comment-header'>GlobalVariable</span>
+<span class='comment'>#</span>
+<span class='comment'>#This is a global variable. Only templates within this file have access to it.</span>
 <span class='start-brace'>{</span><span class='keyword'>var</span> boo 5<span class='end-brace'>}</span>
 
-<span class='comment'>#Variables must be declared before they may be referenced.</span>
-<span class='comment'>#Now that we've declared 'boo', it can be referenced.</span>
+<span class='comment'>&#35;</span><span class='comment-header'>VariableAssignment</span>
 <span class='comment'>#</span>
-<span class='comment'>#References begin with the '@' symbol.</span>
+<span class='comment'>#Variables don't need to have an assigned value.  Variables my only be</span>
+<span class='comment'>#initialized.  Compile errors will occur if a reference is found to a variable</span>
+<span class='comment'>#that hasn't been declared.  Variables without a value are undefined.</span>
+<span class='start-brace'>{</span><span class='keyword'>var</span> zamboni<span class='end-brace'>}</span><span class='comment'>#undefined value FOREVER!</span>
+
+<span class='comment'>&#35;</span><span class='comment-header'>Referencing Variables</span>
+<span class='comment'>#</span>
+<span class='comment'>#Variables must be declared before they may be referenced.  Now that we've</span>
+<span class='comment'>#declared 'boo', it can be referenced.  References begin with the '@' symbol.</span>
 <span class='start-brace'>{</span><span class='keyword'>var</span> zoo <span class='variable-reference'>@boo</span><span class='end-brace'>}</span>
 
-<span class='comment'>#Global variables allow the following expressions:</span>
+<span class='comment'>&#35;</span><span class='comment-header'>GlobalVariable Types</span>
+<span class='comment'>#</span>
+<span class='comment'>#Global variables, unlike variables that appear within a template, are limited</span>
+<span class='comment'>#to the following types and expressions:</span>
+
 <span class='comment'>#numbers</span>
 <span class='start-brace'>{</span><span class='keyword'>var</span> coo    1<span class='end-brace'>}</span>
 <span class='start-brace'>{</span><span class='keyword'>var</span> cooo   0x4a09<span class='end-brace'>}</span>
@@ -165,21 +191,200 @@
 <span class='start-brace'>{</span><span class='keyword'>var</span> eooo   true<span class='end-brace'>}</span>
 <span class='start-brace'>{</span><span class='keyword'>var</span> eoooo  false<span class='end-brace'>}</span>
 
-
-<span class='comment'>#X allows most ecmascript operators to appear in expression statements.</span>
+<span class='comment'>#expressions</span>
+<span class='comment'>#X allows most ECMAScript operators to appear in expression statements.  The</span>
+<span class='comment'>#value of any variable may be derived form a short-circuited expression.</span>
 <span class='comment'>#The following is a valid expression:</span>
 <span class='start-brace'>{</span><span class='keyword'>var</span> wooo 1 ||
       (typeof 2 === 'number' &amp;&amp; ~~3 &amp;&amp; !<span class='variable-reference'>@woo</span>) &amp;&amp;
       <span class='comment'>#comments ending with \n are</span>
       <span class='comment'>#considered white space everywhere!!!</span>
       (((('nested parens'||'not nested'))))<span class='comment'>#etc.</span>
-<span class='end-brace'>}</span>
+<span class='end-brace'>}</span><span class='comment'>#Can you guess what the value of <span class='variable-reference'>@wooo</span> is now?</span>
 
+<span class='comment'>&#35;</span><span class='comment-header'>Operators</span>
+<span class='comment'>#</span>
+<span class='comment'>#The following operators (separated by space), are directly output to the</span>
+<span class='comment'>#compiled result.  The precedence is exactly what it is in ECMAScript, and is</span>
+<span class='comment'>#not given in any intentional order herein:</span>
+<span class='comment'>#</span>
+<span class='comment'>#Logical:</span>
+<span class='comment'>#== === != !== || &amp;&amp; &lt; &lt;= &gt; &gt;=</span>
+<span class='comment'>#</span>
+<span class='comment'>#Mathmatical:</span>
+<span class='comment'>#+ - % * /</span>
+<span class='comment'>#</span>
+<span class='comment'>#Unary:</span>
+<span class='comment'>#typeof !!! ~~~</span>
+<span class='comment'>#</span>
+<span class='comment'>#Parenthetical:</span>
+<span class='comment'>#(((expression)))</span>
+<span class='comment'>#</span>
 
-<span class='comment'>#You may define as many templates as you wish within a file.</span>
-<span class='comment'>#Templates are assigned to the namespace declared in their file.</span>
-<span class='start-brace'>{</span><span class='keyword'>template</span> wow<span class='end-brace'>}</span>
+<span class='comment'>&#35;</span><span class='comment-header'>Templates</span>
+<span class='comment'>#</span>
+<span class='comment'>#You may define as many templates as you wish within a file.  Templates are</span>
+<span class='comment'>#assigned to the namespace declared in their file.  Templates end up as methods</span>
+<span class='comment'>#within their namespace, so in the case of wow (assuming the namespace is</span>
+<span class='comment'>#applied globally, you would call it like this:</span>
+<span class='comment'>#my.app.namespace.wow(data, params);</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> wow<span class='end-brace'>}</span><span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
 
+<span class='comment'>#As you can see, wow doesn't do very much.  wow2 prints: Hello!</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> wow2<span class='end-brace'>}</span>
+   Hello!
+<span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
+
+<span class='comment'>&#35;</span><span class='comment-header'>Context</span>
+<span class='comment'>#</span>
+<span class='comment'>#When calling templates, the first parameter is the data, or context with which</span>
+<span class='comment'>#the template uses for processing.  Here are some valid context selectors:</span>
+<span class='comment'>#</span>
+<span class='comment'>#Property Names. Property names follow the same naming conventions that exist in</span>
+<span class='comment'>#ECMAScript E.G. /[a-zA-Z_$][a-zA-Z_$0-9]*/. You may select any property by name</span>
+<span class='comment'>#like this: tables.  And to drill down: tables.first.name.  If a property name</span>
+<span class='comment'>#is a reserved word or contains invalid characters, you may use dynamic</span>
+<span class='comment'>#refinement like this: ['table-inventory'].  And to driill down:</span>
+<span class='comment'>#['table-inventory']['count'].  Mixing static and dynamic refinement:</span>
+<span class='comment'>#tables['table-inventory'].first[0+4].   Any valid expression is allowable</span>
+<span class='comment'>#inside dynamic refinement.</span>
+<span class='comment'>#</span>
+<span class='comment'>#Current Context.  You can directly access the current context using one of the</span>
+<span class='comment'>#following selectors:</span>
+<span class='comment'>#. current()</span>
+<span class='comment'>#</span>
+<span class='comment'>#The context at the template level is always the first argument do the template.</span>
+<span class='comment'>#</span>
+<span class='comment'>#Functions.  The following functions are built-ins and are reserved.  Some of</span>
+<span class='comment'>#them really only take on meaning inside foreach statements.</span>
+<span class='comment'>#</span>
+<span class='comment'>#count: Returns the number of items in an array or properties in an object.</span>
+<span class='comment'>#count(contextSelector)</span>
+<span class='comment'>#</span>
+<span class='comment'>#name:  Outputs the name of the current item in a foreach loop.  This may be a</span>
+<span class='comment'>#number if iterating over an array, or a string if iterating over and object.</span>
+<span class='comment'>#name()</span>
+<span class='comment'>#</span>
+<span class='comment'>#position: Outputs the current index in the foreach loop.  This may be random</span>
+<span class='comment'>#when looping over properties in an object.</span>
+<span class='comment'>#position()</span>
+<span class='comment'>#</span>
+<span class='comment'>#last: Returns the highest possible index in the current iteration in a foreach</span>
+<span class='comment'>#statement.</span>
+<span class='comment'>#last()</span>
+
+<span class='comment'>&#35;</span><span class='comment-header'>Params</span>
+<span class='comment'>#</span>
+<span class='comment'>#When calling templates, the second parameter represents the params you wish to</span>
+<span class='comment'>#make available to your templates.  In order to access params, you must declare</span>
+<span class='comment'>#them at the top of your templates.  Param values are the same as any other</span>
+<span class='comment'>#template variable.</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> params<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>param</span> foo<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>param</span> too 5<span class='end-brace'>}</span><span class='comment'>#if too isn't supplied, then the default is number 5.</span>
+<span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
+
+<span class='comment'>&#35;</span><span class='comment-header'>Variables</span>
+<span class='comment'>#</span>
+<span class='comment'>#Variables and Params within a template inherit the same rules that Global</span>
+<span class='comment'>#Variables follow, and additionally allow context selectors.</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> vars<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>var</span> foo1 .<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>var</span> foo2 ['5']<span class='end-brace'>}</span>
+<span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
+
+<span class='comment'>&#35;</span><span class='comment-header'>Helpers</span>
+<span class='comment'>#</span>
+<span class='comment'>#You can directly call any variable reference, or context selector in the same</span>
+<span class='comment'>#way you would normal javascript methods / functions. I.E. <span class='variable-reference'>@boo</span>(5,4) &amp;&amp;</span>
+<span class='comment'>#property.name[0]().  Currently the way to pass helpers to a template is to do</span>
+<span class='comment'>#so through params, or the context.  A way to globally register helpers is in</span>
+<span class='comment'>#the works and suggestions are welcomed.</span>
+
+<span class='comment'>&#35;</span><span class='comment-header'>PrintStatement</span>
+<span class='comment'>#</span>
+<span class='comment'>#To directly print the same type of values allowed for variables, you can wrap</span>
+<span class='comment'>#the value in semi-colons.  Doing so outputs the value.</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> print<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>var</span> greeting 'Top of the morning to ya!'<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span>hello<span class='end-brace'>}</span><span class='comment'>#output the value of hello in the current context.</span>
+   <span class='start-brace'>{</span>hello || hola<span class='end-brace'>}</span><span class='comment'>#If hello is falsey, output the value of hola.</span>
+<span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
+
+<span class='comment'>&#35;</span><span class='comment-header'>InputTokens</span>
+<span class='comment'>#</span>
+<span class='comment'>#Any value between <span class='end-brace'>}</span> and <span class='start-brace'>{</span> in a template will be output.  Certain values must</span>
+<span class='comment'>#be escaped with the '\' character.  The following characters need to be escaped</span>
+<span class='comment'>#as input tokens: ' \ # and <span class='start-brace'>{</span>.  An unescaped '#' results in a comment that is</span>
+<span class='comment'>#considered to be space.</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> inputTokens<span class='end-brace'>}</span>
+   &lt;h1&gt;A header&lt;/h1&gt;
+   &#35;Escaped comment.
+<span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
+
+<span class='comment'>&#35;</span><span class='comment-header'>If</span>
+<span class='comment'>#</span>
+<span class='comment'>#If statements allow for control flow within a template.  To facilitate else if,</span>
+<span class='comment'>#and else, continuation statements of the form <span class='start-brace'>{</span><span class='keyword'>:elif</span><span class='end-brace'>}</span> and <span class='start-brace'>{</span><span class='keyword'>:else</span><span class='end-brace'>}</span> are used.</span>
+<span class='comment'>#Note that <span class='start-brace'>{</span><span class='keyword'>:elif</span><span class='end-brace'>}</span> and <span class='start-brace'>{</span><span class='keyword'>:else</span><span class='end-brace'>}</span> are optional.</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> IF<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>if</span> someValue<span class='end-brace'>}</span><span class='comment'>#Do something</span>
+   <span class='start-brace'>{</span><span class='keyword'>:elif</span> anotherValue<span class='end-brace'>}</span><span class='comment'>#Do something else</span>
+   <span class='start-brace'>{</span><span class='keyword'>:elif</span> anotherValue||anyExpression<span class='end-brace'>}</span><span class='comment'>#Do something else yet again.</span>
+   <span class='start-brace'>{</span><span class='keyword'>:else</span><span class='end-brace'>}</span><span class='comment'>#Otherwise</span>
+   <span class='start-brace'>{</span>/<span class='keyword'>if</span><span class='end-brace'>}</span>
+<span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
+
+<span class='comment'>&#35;</span><span class='comment-header'>Foreach</span>
+<span class='comment'>#</span>
+<span class='comment'>#You can loop over arrays and objects using foreach.  Foreach establishes a new</span>
+<span class='comment'>#context, so the item you iterate over becomes the new value of '.' and</span>
+<span class='comment'>#'current()'.</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> foreach<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>foreach</span> person<span class='end-brace'>}</span>
+      <span class='start-brace'>{</span>age<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span>/<span class='keyword'>foreach</span><span class='end-brace'>}</span>
+<span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
+
+<span class='comment'>&#35;</span><span class='comment-header'>Sort</span>
+<span class='comment'>#</span>
+<span class='comment'>#The first statement within a foreach.  Sorting items does NOT affect the</span>
+<span class='comment'>#original object.  You can sort on any context selector to control the ordering</span>
+<span class='comment'>#of items.</span>
+<span class='comment'>#</span>
+<span class='comment'>#The following types of sort are allowed:</span>
+<span class='comment'>#asc desc rand</span>
+<span class='comment'>#</span>
+<span class='comment'>#You may use any of the following sort modifiers after specifying the sort type:</span>
+<span class='comment'>#i Makes the sort case-insensitive.</span>
+<span class='comment'>#c Shifts lowercase items leftward where possible.</span>
+<span class='comment'>#C Shifts uppercase items leftward where possible.</span>
+<span class='comment'>#n Shifts numbers leftward.</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> sort<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>foreach</span> person<span class='end-brace'>}</span>
+      <span class='start-brace'>{</span><span class='keyword'>sort</span> hobbies.favorite |asc<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span>/<span class='keyword'>foreach</span><span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>foreach</span> person<span class='end-brace'>}</span><span class='comment'>#with modifiers.  Case insensitive and uppercase first.</span>
+      <span class='start-brace'>{</span><span class='keyword'>sort</span> hobbies.favorite |asc|iC<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span>/<span class='keyword'>foreach</span><span class='end-brace'>}</span>
+<span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
+
+<span class='comment'>&#35;</span><span class='comment-header'>Text</span>
+<span class='comment'>#</span>
+<span class='comment'>#To avoid excessive escaping on InputTokens, you can use the text statement.</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> text<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>text</span><span class='end-brace'>}</span>
+   '
+   <span class='comment'>#'<span class='start-brace'>{</span></span>
+   <span class='start-brace'>{</span>/<span class='keyword'>text</span><span class='end-brace'>}</span>
+<span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
+
+<span class='comment'>&#35;</span><span class='comment-header'>Log</span>
+<span class='comment'>#</span>
+<span class='comment'>#Use console.log under the hood.  By default logs are removed.  You must</span>
+<span class='comment'>#configure the compiler accordingly if you wish to use log statements.</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> log<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>log</span> 5<span class='end-brace'>}</span>
 <span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
          </pre></div><script id="XJS_SAMPLE_STATS" type="text/xjs">
 {namespace documentation.sample_stats}

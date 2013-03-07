@@ -3,9 +3,6 @@ pre.code-highlighter {
    color: white;
    padding: 10px;
 }
-.code-highlighter .comment {
-   color: gray;
-}
 .code-highlighter .keyword {
    color: yellow;
 }
@@ -15,4 +12,14 @@ pre.code-highlighter {
 .code-highlighter .start-brace,
 .code-highlighter .end-brace {
    font-weight: bold;
+}
+.code-highlighter .comment-header {
+   color: skyblue;
+}
+.code-highlighter .comment,
+.code-highlighter .comment .keyword,
+.code-highlighter .comment .variable-reference,
+.code-highlighter .comment .start-brace,
+.code-highlighter .comment .end-brace {
+   color: gray;
 }
