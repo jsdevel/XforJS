@@ -28,7 +28,7 @@
       <div class="book">
          <h5>{name}</h5>
          <p>
-            <img title="{name}" alt="{img.alt}" src="{img.src}" width="50">
+            {render bookImage ./}
             {if @showRatings && @ratingIsNumber}
                <div class="rating">Rating:  <span class="rating-{rating}"></span></div>
             {:elif @ratingIsNumber}
@@ -40,6 +40,10 @@
          </p>
       </div>
    {/foreach}
+{/template}
+
+{template bookImage}#partial
+   <img title="{name}" alt="{img.alt}" src="{img.src}" width="50">
 {/template}
                </textarea><textarea class="tab-pane input-data" data-tab=".input-data">
 {"books":[
@@ -118,7 +122,7 @@
          files that are used during development of the compiler.  Following this
          practice allows the source code of the compiler to remain in sync with
          the documentation and vice versa.
-      </div><div class="copy"><h3>Language</h3>
+      </div><div class="copy"><h3>Compiling Templates</h3><code>TODO:  Author this content.</code></div><div class="copy"><h3>Language</h3><!--asdf-->
          This integration test describes the full capabilities of the language in detail.
          <pre class="code-highlighter border-radius-5px">
 <span class='start-brace'>{</span><span class='keyword'>namespace</span> my.app.namespace<span class='end-brace'>}</span>
@@ -385,6 +389,30 @@
 <span class='comment'>#configure the compiler accordingly if you wish to use log statements.</span>
 <span class='start-brace'>{</span><span class='keyword'>template</span> log<span class='end-brace'>}</span>
    <span class='start-brace'>{</span><span class='keyword'>log</span> 5<span class='end-brace'>}</span>
+<span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
+
+<span class='comment'>&#35;</span><span class='comment-header'>Render</span>
+<span class='comment'>#</span>
+<span class='comment'>#To call a template within another template (partials), use the render</span>
+<span class='comment'>#statement.  You can render any template defined in an imported file, or the</span>
+<span class='comment'>#current file.  If the imported file defines a namespace different than the</span>
+<span class='comment'>#importing file, then you must use the full path to the namespace I.E.</span>
+<span class='comment'>#<span class='start-brace'>{</span><span class='keyword'>render</span> name.space.of.imported.file.template/<span class='end-brace'>}</span>, otherwise you can supply the</span>
+<span class='comment'>#short form for any template defined in the current namespace.  Compile time</span>
+<span class='comment'>#checking will insure that the desired template has been declared.</span>
+<span class='comment'>#</span>
+<span class='comment'>#To set the context, declare a second argument in the render statement I.E.</span>
+<span class='comment'>#<span class='start-brace'>{</span><span class='keyword'>render</span> some.template context/<span class='end-brace'>}</span>.  This changes the context of some.template to</span>
+<span class='comment'>#the value of context when rendered.</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> partial<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>param</span> foo<span class='end-brace'>}</span>
+   I\'m a partial<span class='start-brace'>{</span><span class='variable-reference'>@foo</span><span class='end-brace'>}</span>.<span class='comment'>#Prints: I'm a partial5 when redered from renderPartial.</span>
+<span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> renderPartial<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>render</span> partial/<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='keyword'>render</span> partial<span class='end-brace'>}</span><span class='comment'>#with params</span>
+      <span class='start-brace'>{</span><span class='keyword'>param</span> foo 5<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span>/<span class='keyword'>render</span><span class='end-brace'>}</span>
 <span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
          </pre></div><script id="XJS_SAMPLE_STATS" type="text/xjs">
 {namespace documentation.sample_stats}
