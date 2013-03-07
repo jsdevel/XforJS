@@ -1,0 +1,18 @@
+pre.code-highlighter {
+   background-color: black;
+   color: white;
+   padding: 10px;
+}
+.code-highlighter .comment {
+   color: gray;
+}
+.code-highlighter .keyword {
+   color: yellow;
+}
+.code-highlighter .variable-reference {
+   color: #70FF69;
+}
+.code-highlighter .start-brace,
+.code-highlighter .end-brace {
+   font-weight: bold;
+}
