@@ -24,7 +24,7 @@
       <div class="book">
          <h5>{name}</h5>
          <p>
-            <img title="{name}" alt="{img.alt}" src="{img.src}" width="50">
+            {render bookImage ./}
             {if @showRatings && @ratingIsNumber}
                <div class="rating">Rating:  <span class="rating-{rating}"></span></div>
             {:elif @ratingIsNumber}
@@ -36,4 +36,8 @@
          </p>
       </div>
    {/foreach}
+{/template}
+
+{template bookImage}#partial
+   <img title="{name}" alt="{img.alt}" src="{img.src}" width="50">
 {/template}
