@@ -23,15 +23,17 @@ test("SortStatement", function(){
    var production;
    var characters;
 
-   setEnv("|asc}");
+   setEnv(". |asc}");
       assert(context.getParams().getParameters().indexOf(js_GetSortArray) > -1,
          "GetSortArray is used.");
       execute();
-      assert(outputHas(",function("+js_context+"){"),
-         "sort param output correctly.");
+
       assert(prodIs(ContextSelector),
          "ContextSelector is used.");
-      remove();
+
+      execute();
+      assert(outputHas(",function("+js_context+", "+js_name+"){"),
+         "sort param output correctly.");
       execute();
       output1Has(",0,0,0,0", "default values.");
       assert(!prodIs(SortStatement),

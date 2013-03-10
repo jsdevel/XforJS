@@ -47,6 +47,7 @@ test("RenderExpression", function(){
       execute();
       assert(prodIs(ContextSelector),
          "ContextSelector is instantiated.");
+      context.executeCurrent(characters, context);
       remove();
       assert(!prodIs(RenderExpression),
          "RenderExpression is removed with context.");
