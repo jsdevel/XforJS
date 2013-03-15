@@ -219,7 +219,9 @@ function getInputFilePath(inputFilePath){
    _path = path['normalize'](inputFilePath.replace(/^\s+|\s+$/g, ""));
 
    if(!/\.xjs$/.test(_path)){
-      throw "inputFilePath must end with '.xjs'.";
+      throw "\n\
+inputFilePath must end with '.xjs'.\n\
+Also be sure to supply an abslolute path.";
    }
 
    if(!fs['existsSync'](_path)){
