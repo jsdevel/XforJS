@@ -25,7 +25,7 @@ test("SortStatement", function(){
 
    setEnv(". |asc}");
       assert(context.getParams().getParameters().indexOf(js_GetSortArray) > -1,
-         "GetSortArray is used.");
+         "GetSortArray is appended in the constructor.");
       execute();
 
       assert(prodIs(ContextSelector),
