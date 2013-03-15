@@ -23,7 +23,6 @@
  */
 function ProgramNamespace(output){
    this.execute=function(characters, context){
-      var extraExcMsg="";
       var chunk;
 
       if(characters.charAt(0) === '{'){
