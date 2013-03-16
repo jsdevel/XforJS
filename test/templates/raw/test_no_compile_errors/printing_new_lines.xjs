@@ -1,0 +1,7 @@
+{namespace testspace}
+
+{template newlines}
+\n
+test\n
+\n
+{/template}
