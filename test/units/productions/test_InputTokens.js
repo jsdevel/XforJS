@@ -21,28 +21,38 @@ test("InputTokens", function(){
    var production;
    var characters;
 
-   [
-      "{",
-      "'",
-      "#"
-   ].forEach(function(input){
-      setEnv(input);
-         assert['throws'](function(){
-            execute();
-         }, "some characters must be escaped: '"+input+"'.");
-   });
-   [
-      "\\{",
-      "\\'",
-      "\\#"
-   ].forEach(function(input){
-      setEnv(input);
-         assert.doesNotThrow(function(){
-            execute();
-         }, "escaped characters: '"+input+"'.");
-   });
+   test("certain characters remove production",function(){
+      [
+         "{",
+         "#"
+      ].forEach(function(input){
+         setEnv(input);
+         execute();
+         assert(!prodIs(InputTokens));
+      });
+   }, true);
+   test("escaped characters are removed.",function(){
+      [
+         "\\\\",
+         "\\{",
+         "\\#"
+      ].forEach(function(input){
+         setEnv(input);
+         execute();
+         assert(characters.length() === 0);
+      });
+   }, true);
 
-   setEnv("asdfasd    asdfasd>   <f \\# \n \\'");
+   test("output is escaped",function(){
+      setEnv("\\#  \\  \n\\n\\''",{
+         minifyhtml:false,
+         normalizespace:false
+      });
+      execute();
+      assert(outputIs("b('#  \\\\  \\n\\n\\'\\'');"));
+   }, true);
+   test("",function(){
+      setEnv("asdfasd    asdfasd>   <f \\# \n'");
       execute();
       assert(characters.length() === 0,
          "tokens are removed.");
@@ -50,25 +60,33 @@ test("InputTokens", function(){
          "normalize space by default.");
       assert(outputHas("><"),
          "minifyhtml by default.");
-      assert(!outputHas("\\#") && outputHas("#") && outputHas("\\'"),
-         "output is escaped");
       assert(outputHas(js_bld+"("),
          "calls StringBuffer.");
       assert(!context.getCurrentProduction(),
          "context is removed.");
+   }, true);
 
-   setEnv("asdfasd    asdfasd>   <f \\# \n \\'", {minifyhtml:false, normalizespace:false});
+   test("normalizespace", function(){
+      setEnv("  a  ");
       execute();
-      assert(outputHas("   "),
-         "normalizespace is configurable.");
-      assert(outputHas(">   <"),
-         "minifyhtml is configurable.");
-
+      assert(outputHas(" a "));
+   });
+   test("minifyhtml",function(){
+      setEnv("  <>    <>  ");
+      execute();
+      assert(outputHas("<><>"));
+   });
+   function outputIs(string){
+      return output.toString() === string;
+   }
    function outputHas(string){
       return output.toString().indexOf(string) > -1;
    }
    function execute(){
       context.executeCurrent(characters);
+   }
+   function prodIs(prod){
+      return context.getCurrentProduction() instanceof prod;
    }
    function setEnv(string, compilerConfig){
       compiler = new Compiler(compilerConfig);
@@ -78,4 +96,4 @@ test("InputTokens", function(){
       characters = new CharWrapper(string);
       context.addProduction(production);
    }
-});
+}, true);

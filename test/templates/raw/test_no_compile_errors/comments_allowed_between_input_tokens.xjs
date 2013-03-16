@@ -1,0 +1,10 @@
+{namespace foo}
+
+{template foo}
+   <asdf>
+
+      asdf#asdfasdfasdf
+
+   <asdfasdf>
+   #asdfasdfasdf
+{/template}

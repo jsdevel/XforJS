@@ -90,11 +90,24 @@ function CharWrapper(characters){
       return regex.exec(_characters);
    };
    /**
-    * Removes space from the beginning of the characters.
+    * Removes space comments from the beginning of the characters.
     * @return {boolean}
     */
    this.removeSpace=function(){
       var spaceToRemove = SPACE.exec(_characters);
+      if(spaceToRemove){
+         this.shift(spaceToRemove[1].length);
+         return true;
+      }
+      return false;
+   };
+   /**
+    * Removes space preceding open curlys and comments from the beginning of the
+    * characters.
+    * @return {boolean}
+    */
+   this.removeSpacePrecedingCurly=function(){
+      var spaceToRemove = SPACE_PRECEDING_CURLY.exec(_characters);
       if(spaceToRemove){
          this.shift(spaceToRemove[1].length);
          return true;
@@ -124,5 +137,11 @@ function CharWrapper(characters){
    this.getColumn=function(){
       return column;
    };
-
+   /**
+    * Returns the current character sequence as a string.
+    * @return {string}
+    */
+   this.toString=function(){
+      return _characters;
+   };
 }

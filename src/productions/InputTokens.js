@@ -26,27 +26,29 @@ function InputTokens(output){
     * @param {ProductionContext} context
     */
    this.execute=function(characters, context){
-      var inputTokens = characters.match(INPUT_TOKENS);
-      if(inputTokens){
-         var oldTokens = inputTokens[1];
-         characters.shift(oldTokens.length);
-
-         var newTokens = oldTokens;
+      var match = characters.match(INPUT_TOKENS);
+      var tokens;
+      if(match){
+         tokens = match[1];
+         characters.shift(tokens.length);
 
          if(context.getConfiguration('normalizespace')){
-            newTokens = newTokens.replace(/\s+/g, " ");
+            tokens = tokens.replace(/\s+/g, " ");
          }
 
          if(context.getConfiguration('minifyhtml')){
-            newTokens = newTokens.replace(SPACE_BETWEEN_ANGLE_BRACKETS, "$1$2");
+            tokens = tokens.replace(SPACE_BETWEEN_ANGLE_BRACKETS, "$1$2");
          }
+         tokens = tokens.replace(/\\#/g, "#");
+         tokens = tokens.replace(/\\(?![n'])/g, "\\\\");
+         tokens = tokens.replace(/^'|([^\\])'/g, "$1\\'");
+         tokens = tokens.replace(/\r?\n/g, "\\n");
 
-         newTokens = escapeOutput(newTokens);
-         output.add(js_bld+"('"+newTokens+"');");
-         context.removeProduction();
-      } else {
-         throw "Invalid Character found.";
+         //tokens = escapeOutput(tokens);
+         output.add(js_bld+"('"+tokens+"');");
       }
+
+      context.removeProduction();
    };
 }
 extend(InputTokens, Production);

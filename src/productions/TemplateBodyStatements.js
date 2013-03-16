@@ -33,10 +33,7 @@ function TemplateBodyStatements(output){
       var match;
       var statementOutput;
 
-      var spacePrecedingCurly = characters.match(SPACE_PRECEDING_CURLY);
-      if(spacePrecedingCurly){
-         characters.shift(spacePrecedingCurly[1].length);
-      }
+      characters.removeSpacePrecedingCurly();
 
       if(characters.charAt(0) === '{'){
          switch(characters.charAt(1)){

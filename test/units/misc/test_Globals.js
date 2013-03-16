@@ -25,27 +25,24 @@ test("Globals", function(){
       assert(!IMPORT_PATH.exec("d/\\a.xjs"), "'\\' must be escaped with '\\'.");
       assert.equal(IMPORT_PATH.exec("d/\\\\a\\}.xjs  }")[1], "d/\\\\a\\}.xjs", "'\\' and '}' are valid when escaped with '\\'.");
    }();
-   !function(){//INPUT_TOKENS
+   //INPUT_TOKENS
+   test("matching InputTokens",function(){
       [
-      "    \\#asdf{",
-      "    \\{asdf\\",
-      "    \\\\asdf#",
-      "    \\'asdf{"
+      "\\#asdf{",
+      "\\{asdf\\",
+      "\\\\asdf#"
       ].forEach(function(good){
-         match = INPUT_TOKENS.exec(good);
-         assert(match && match[1] === good.substring(0, good.length-1),
-            "good input tokens found: '"+good+"'.");
+         assert(INPUT_TOKENS.exec(good));
       });
+   });
+   test("non-matching InputTokens",function(){
       [
-      "#asdf",
-      "{asdf",
-      "\\asdf",
-      "'asdf"
+         "#asdf",
+         "{asdf"
       ].forEach(function(bad){
-         assert(!INPUT_TOKENS.exec(bad),
-            "bad input tokens found: '"+bad+"'.");
+         assert(!INPUT_TOKENS.exec(bad));
       });
-   }();
+   });
    !function(){//NAME
       assert(!NAME.exec("345"), "Numbers don't start names.");
       assert.equal(NAME.exec("_$AQboo_")[1], "_$AQboo_", "Names work.");
@@ -123,7 +120,7 @@ test("Globals", function(){
       });
 
    }();
-   !function(){//SPACE
+   test("space",function(){
       [//good
       ["#asdfasdfasdf\n","Comment with line ending."],
       ["  \n","Space with lines."],
@@ -138,8 +135,7 @@ test("Globals", function(){
       ].forEach(function(pair){
          assert(!SPACE.exec(pair[0]), pair[1]);
       });
-
-   }();
+   });
    !function(){//SPACE_BETWEEN_ANGLE_BRACKETS
       [
       ">    <",
@@ -152,7 +148,7 @@ test("Globals", function(){
             "properly removing space between angle brackets.");
       });
    }();
-   !function(){//SPACE_PRECEDING_CURLY
+   test("SPACE_PRECEDING_CURLY",function(){
       [//bad
       ["  #asdfasdfasdf \n","Comment new line."],
       ["  #asdfasdfasdf","Comment no new line."],
@@ -164,14 +160,14 @@ test("Globals", function(){
             pair[1]+"  No Curly after.");
       });
       [//good
-      ["  #asdfasdfasdf \n","Comment with new line."],
+      ["#asdfasdfasdf \n","Comment with new line."],
       ["  \n","Space with new lines."],
-      ["  \n#asdfasdf\n#asdf\n","Space new lines and comments."]
+      ["#asdfasdf\n","Space new lines and comments."]
       ].forEach(function(pair){
          assert(SPACE_PRECEDING_CURLY.exec(pair[0]+"{")[1] === pair[0],
             pair[1]+"  Curly after.");
       });
-   }();
+   });
    !function(){//TEXT_INPUT
       [
       "asdf{/text}",
@@ -486,4 +482,4 @@ test("Globals", function(){
       var a="\\{\\#\\#\\{\r\n\\#\r\r\n";
       assert.equal("{##{\\\n\\\n#\\\n\\\n\\\n", escapeOutput(a), "escapeOutput is working.");
    }();
-});
+}, true);
