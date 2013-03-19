@@ -78,7 +78,7 @@ test("Globals", function(){
          ,
          "regex for typeof is working.");
    });
-   !function(){//SORT_DIRECTION
+   test("SORT_DIRECTION",function(){
       [
       "|asc",
       "|desc",
@@ -97,8 +97,8 @@ test("Globals", function(){
       ].forEach(function(bad){
          assert(!SORT_DIRECTION.exec(bad), "SORT_DIRECTION bad: '"+bad+"'.");
       });
-   }();
-   !function(){//SORT_MODIFIERS
+   });
+   test("SORT_MODIFIERS",function(){
       [
       "|i",
       "|n",
@@ -119,7 +119,7 @@ test("Globals", function(){
          assert(!SORT_MODIFIERS.exec(bad), "SORT_MODIFIERS bad: '"+bad+"'.");
       });
 
-   }();
+   });
    test("space",function(){
       [//good
       ["#asdfasdfasdf\n","Comment with line ending."],
