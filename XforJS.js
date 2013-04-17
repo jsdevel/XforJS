@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Version: 1.0.4
+ * Version: 1.0.5
  *
  * For demos and docs visit http://jsdevel.github.com/XforJS/
  * For viewing source visit http://github.com/jsdevel/XforJS/
@@ -85,14 +85,12 @@ var __reg_COMMENT = "#(?:[^\\r\\n]+)?(?:\\r?\\n)";
 var __reg_name = "[a-zA-Z$_](?:[\\w$]+)?";
 /** @const @type {string} */
 var __reg_variable_reference = "@("+__reg_name+")";
-/** @const @type {string} */
-var __reg_space = "(?:\\s|"+__reg_COMMENT+")+";
 
 //SEQUENCES
 /** @const @type {regexp} */
 var IMPORT_PATH=                    /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
 /** @const @type {regexp} */
-var INPUT_TOKENS=                   /^((?:[^#'\{\\]|\\(?:#|'|\\|\{))+)/;
+var INPUT_TOKENS=                   /^((?:\\[#\{]|(?![#\{])[\s\S])+)/;
 /** @const @type {regexp} */
 var NAME =                          new RegExp("^("+__reg_name+")");
 /** @const @type {regexp} */
@@ -104,15 +102,19 @@ var OPERATOR_NOT=/^([!~]+)/;
 /** @const @type {regexp} */
 var OPERATOR_TYPEOF=/^(typeof)(?=[\(\s])/;
 /** @const @type {regexp} */
+var MODIFIER=                        /^(\|)(?!\|)/;
+/** @const @type {regexp} */
+var PRINT_MODIFIERS=                 /^(\|[eE]{1,2})(?=\})/;
+/** @const @type {regexp} */
 var SORT_DIRECTION=                 /^(\|(?:asc|desc|rand))(?![\w$])/;
 /** @const @type {regexp} */
 var SORT_MODIFIERS=                 /^(\|[cCin]{1,4})(?![\w$])/;
 /** @const @type {regexp} */
-var SPACE =                         new RegExp("^("+__reg_space+")");
+var SPACE =                         new RegExp("^((?:\\s+|"+__reg_COMMENT+")+)");
 /** @const @type {regexp} */
 var SPACE_BETWEEN_ANGLE_BRACKETS =  /(>|<)\s+|\s+(>|<)/g;
 /** @const @type {regexp} */
-var SPACE_PRECEDING_CURLY =         new RegExp("^("+__reg_space+")(?=\\{)");
+var SPACE_PRECEDING_CURLY =         new RegExp("^((?:\\s+(?=\\{)|"+__reg_COMMENT+")+)");
 /** @const @type {regexp} */
 var TEXT_INPUT =                    /^((?:(?!\{\/text\})[\s\S])+)(?=\{\/text\})/;
 /** @const @type {regexp} */
@@ -282,7 +284,9 @@ function getInputFilePath(inputFilePath){
    _path = path['normalize'](inputFilePath.replace(/^\s+|\s+$/g, ""));
 
    if(!/\.xjs$/.test(_path)){
-      throw "inputFilePath must end with '.xjs'.";
+      throw "\n\
+inputFilePath must end with '.xjs'.\n\
+Also be sure to supply an abslolute path.";
    }
 
    if(!fs['existsSync'](_path)){
@@ -637,24 +641,18 @@ function GetSortArray(l,s){
    if(!!o&&typeof(o)==='object'){
       for(a in o){
          try{
-            v=s(o[a]);
-            t=typeof(v);
-            r.push({
-               n:a,//name
-               c:o[a],//context
-               l:t==='string'?v.toLowerCase():'',//used to determine case
-               t:t,//type
-               v:(t==='string'||t==='number')?v:''//only sort on these
-            });
+            v=s(o[a], a);
          } catch(e){
-            r.push({
-               n:a,
-               c:o[a],
-               s:'',
-               v:'',
-               k:''
-            });
+            v=o[a];
          }
+         t=typeof(v);
+         r.push({
+            n:a,//name
+            c:o[a],//context
+            l:t==='string'?v.toLowerCase():'',//used to determine case
+            t:t,//type
+            v:(t==='string'||t==='number')?v:''//only sort on these
+         });
       }
    }
    return r
@@ -1112,11 +1110,24 @@ function CharWrapper(characters){
       return regex.exec(_characters);
    };
    /**
-    * Removes space from the beginning of the characters.
+    * Removes space comments from the beginning of the characters.
     * @return {boolean}
     */
    this.removeSpace=function(){
       var spaceToRemove = SPACE.exec(_characters);
+      if(spaceToRemove){
+         this.shift(spaceToRemove[1].length);
+         return true;
+      }
+      return false;
+   };
+   /**
+    * Removes space preceding open curlys and comments from the beginning of the
+    * characters.
+    * @return {boolean}
+    */
+   this.removeSpacePrecedingCurly=function(){
+      var spaceToRemove = SPACE_PRECEDING_CURLY.exec(_characters);
       if(spaceToRemove){
          this.shift(spaceToRemove[1].length);
          return true;
@@ -1146,7 +1157,13 @@ function CharWrapper(characters){
    this.getColumn=function(){
       return column;
    };
-
+   /**
+    * Returns the current character sequence as a string.
+    * @return {string}
+    */
+   this.toString=function(){
+      return _characters;
+   };
 }
 
 function Production(){}
@@ -1213,6 +1230,7 @@ function ProductionContext(
       this._importedFiles=previousContext._importedFiles;
       this._configuration=previousContext._configuration;
       this.javascript=previousContext.javascript;
+      this.isEscapeXSSOutput = previousContext.isEscapeXSSOutput;
       callManager=previousContext.getCallManager();
    } else {//default values
       this._declaredNamespaces={};
@@ -1360,7 +1378,9 @@ function ProductionContext(
     */
    this.importFile=function(filePath) {
       if(!inputFilePath){
-         throw "Can't import '"+filePath+"' because no inputFilePath was given to the ProductionContext.";
+         throw "\n\\n\
+Can't import '"+filePath+"' because no inputFilePath was given to the ProductionContext.\n\
+Have you supplied '"+filePath+"' to the compile method?";
       }
       var path = require('path');
       var fs = require('fs');
@@ -1538,6 +1558,9 @@ function ProductionContext(
    };
 }
 
+/** @type boolean */
+ProductionContext.prototype.isEscapeXSSOutput=false;
+
 
 
 function AbstractAssignment(){}
@@ -1699,7 +1722,7 @@ AbstractExpression.prototype.execute=function(characters, context){
             context.addProduction(this.getValue());
          }
          return;
-      } else if(this._hasValue){//Go to Operator or call
+      } else if(this._hasValue && !characters.match(MODIFIER)){//Go to Operator or call
          switch(characters.charAt(0)){
          case ',':
          case ']':
@@ -2034,10 +2057,6 @@ function Program(
          output.add("return "+js_templateBasket);
       }
 
-      if(context.getConfiguration('escapexss')){
-         globalParams.put(js_EscapeXSS, context.javascript.getJSEscapeXSS());
-      }
-
       output.
       add("})(").
          add(context.getArgumentsWrapper()).
@@ -2138,7 +2157,6 @@ Program.prototype.name="Program";
  */
 function ProgramNamespace(output){
    this.execute=function(characters, context){
-      var extraExcMsg="";
       var chunk;
 
       if(characters.charAt(0) === '{'){
@@ -2700,10 +2718,7 @@ function TemplateBodyStatements(output){
       var match;
       var statementOutput;
 
-      var spacePrecedingCurly = characters.match(SPACE_PRECEDING_CURLY);
-      if(spacePrecedingCurly){
-         characters.shift(spacePrecedingCurly[1].length);
-      }
+      characters.removeSpacePrecedingCurly();
 
       if(characters.charAt(0) === '{'){
          switch(characters.charAt(1)){
@@ -3094,13 +3109,6 @@ function VariableValue(output, isNestedInContextSelector){
             delegateToGlobalVariableValue(characters, context);
             return;
          }
-         match = characters.match(NAME_FN);
-         if(match){
-            characters.shift(match[1].length);
-            output.add(js_name);
-            context.removeProduction();
-            return;
-         }
          break;
       case 't':
       case 'f':
@@ -3266,10 +3274,6 @@ function ContextSelector(output, isNested){
 
    if(!isNested){
       contextSelectorOutput=new Output();
-      output.
-         add(js_SafeValue+"(function(){return ").
-            add(contextSelectorOutput).
-         add("})");
    } else {
       contextSelectorOutput=output;
    }
@@ -3289,6 +3293,26 @@ function ContextSelector(output, isNested){
          characters.removeSpace();
          firstChar=characters.charAt(0);
          switch(firstChar){
+         case 'n':
+            break;
+         default:
+            if(!isNested){
+               output.
+                  add(js_SafeValue+"(function(){return ").
+                     add(contextSelectorOutput).
+                  add("})");
+            }
+         }
+         switch(firstChar){
+         case 'n':
+            match = characters.match(NAME_FN);
+            if(match){
+               characters.shift(match[1].length);
+               output.add(js_name);
+               context.removeProduction();
+               return;
+            }
+            break;
          case '@':
             reference=characters.match(VARIABLE_REFERENCE);
             if(reference){
@@ -3537,27 +3561,29 @@ function InputTokens(output){
     * @param {ProductionContext} context
     */
    this.execute=function(characters, context){
-      var inputTokens = characters.match(INPUT_TOKENS);
-      if(inputTokens){
-         var oldTokens = inputTokens[1];
-         characters.shift(oldTokens.length);
-
-         var newTokens = oldTokens;
+      var match = characters.match(INPUT_TOKENS);
+      var tokens;
+      if(match){
+         tokens = match[1];
+         characters.shift(tokens.length);
 
          if(context.getConfiguration('normalizespace')){
-            newTokens = newTokens.replace(/\s+/g, " ");
+            tokens = tokens.replace(/\s+/g, " ");
          }
 
          if(context.getConfiguration('minifyhtml')){
-            newTokens = newTokens.replace(SPACE_BETWEEN_ANGLE_BRACKETS, "$1$2");
+            tokens = tokens.replace(SPACE_BETWEEN_ANGLE_BRACKETS, "$1$2");
          }
+         tokens = tokens.replace(/\\#/g, "#");
+         tokens = tokens.replace(/\\(?![n'])/g, "\\\\");
+         tokens = tokens.replace(/^'|([^\\])'/g, "$1\\'");
+         tokens = tokens.replace(/\r?\n/g, "\\n");
 
-         newTokens = escapeOutput(newTokens);
-         output.add(js_bld+"('"+newTokens+"');");
-         context.removeProduction();
-      } else {
-         throw "Invalid Character found.";
+         //tokens = escapeOutput(tokens);
+         output.add(js_bld+"('"+tokens+"');");
       }
+
+      context.removeProduction();
    };
 }
 extend(InputTokens, Production);
@@ -3575,29 +3601,38 @@ InputTokens.prototype.name="InputTokens";
  */
 function PrintStatement(output){
    var hasOpenCurly=false;
+   var variableAssignmentOutput = new Output();
+   var validPrintModMsg="Valid PrintModifiers are: 'e' 'E'.\nExample:  {name|e}";
 
    /**
     * @param {CharWrapper} characters
     * @param {ProductionContext} context
     */
    this.execute=function(characters, context){
-      var variableAssignmentOutput;
+      var hasEscapeXSSModifier;
+      var modifierMatch;
+      var modifier;
+      if(hasOpenCurly && characters.charAt(0) !== '}'){
+         modifierMatch = characters.match(PRINT_MODIFIERS);
+         if(!modifierMatch){
+            throw "Invalid PrintModifier.  \n"+validPrintModMsg;
+         }
+         modifier = modifierMatch[1];
+         if(modifier.indexOf('e') > -1){
+            hasEscapeXSSModifier = false;
+         } else if(modifier.indexOf('E') > -1){
+            hasEscapeXSSModifier = true;
+         } else {
+            throw "Unknown PrintModifier:  \n"+modifier+validPrintModMsg;
+         }
+         characters.shift(modifier.length);
+      }
       switch(characters.charAt(0)){
       case '{':
          if(!hasOpenCurly){
             hasOpenCurly=true;
             variableAssignmentOutput=new Output();
             characters.shift(1);
-            output.
-               add(js_bld+"(");
-                  if(context.getConfiguration('escapexss')){
-                     output.add(js_EscapeXSS+"(").
-                        add(variableAssignmentOutput).
-                        add(")");
-                  } else {
-                     output.add(variableAssignmentOutput);
-                  }
-            output.add(");");
             context.addProduction(new VariableExpression(variableAssignmentOutput));
             return;
          }
@@ -3605,6 +3640,25 @@ function PrintStatement(output){
       case '}':
          if(hasOpenCurly){
             characters.shift(1);
+            output.add(js_bld+"(");
+            if(
+               (context.getConfiguration('escapexss') && hasEscapeXSSModifier === void(0))
+               ||
+               hasEscapeXSSModifier
+            ){
+
+               if(!context.isEscapeXSSOutput){
+                  context.isEscapeXSSOutput=true;
+                  context.getParams().put(js_EscapeXSS, context.javascript.getJSEscapeXSS());
+               }
+
+               output.add(js_EscapeXSS+"(").
+                  add(variableAssignmentOutput).
+                  add(")");
+            } else {
+               output.add(variableAssignmentOutput);
+            }
+            output.add(");");
             context.removeProduction();
             return;
          }
@@ -4148,7 +4202,7 @@ function SortStatement(
          hasContextSelector=true;
          var contextSelectorOutput = new Output();
          sortContextOutput.
-            add(",function("+js_context+"){return ").
+            add(",function("+js_context+", "+js_name+"){return ").
                add(contextSelectorOutput).
             add("}");
          context.addProduction(new ContextSelector(contextSelectorOutput, true));
