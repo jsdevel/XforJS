@@ -77,7 +77,7 @@ AbstractExpression.prototype.execute=function(characters, context){
             context.addProduction(this.getValue());
          }
          return;
-      } else if(this._hasValue){//Go to Operator or call
+      } else if(this._hasValue && !characters.match(MODIFIER)){//Go to Operator or call
          switch(characters.charAt(0)){
          case ',':
          case ']':

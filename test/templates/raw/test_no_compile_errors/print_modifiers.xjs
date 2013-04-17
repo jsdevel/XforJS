@@ -1,0 +1,21 @@
+{namespace print}
+
+#escapexss false
+{template disableXSSWithEscapeXSSSetToFalse}
+   {test |e}
+{/template}
+
+#escapexss true
+{template disableXSSWithEscapeXSSSetToTrue}
+   {test |e}
+{/template}
+
+#escapexss false
+{template enableXSSWithEscapeXSSSetToFalse}
+   {test |E}
+{/template}
+
+#escapexss true
+{template enableXSSWithEscapeXSSSetToTrue}
+   {test |E}
+{/template}

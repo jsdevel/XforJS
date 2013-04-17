@@ -78,6 +78,40 @@ test("Globals", function(){
          ,
          "regex for typeof is working.");
    });
+   test("MODIFIER",function(){
+      [
+      "|e}",
+      "|E}",
+      "|Ee}",
+      "|Ee}"
+      ].forEach(function(good){
+         assert(MODIFIER.exec(good), "MODIFIER good: '"+good+"'.");
+      });
+      [
+      "||"
+      ].forEach(function(bad){
+         assert(!MODIFIER.exec(bad), "MODIFIER bad: '"+bad+"'.");
+      });
+   });
+
+   test("PRINT_MODIFIERS",function(){
+      [
+      "|e}",
+      "|E}",
+      "|Ee}",
+      "|Ee}"
+      ].forEach(function(good){
+         assert(PRINT_MODIFIERS.exec(good), "PRINT_MODIFIERS good: '"+good+"'.");
+      });
+      [
+      "|e",
+      "|E",
+      "e}"
+      ].forEach(function(bad){
+         assert(!PRINT_MODIFIERS.exec(bad), "PRINT_MODIFIERS bad: '"+bad+"'.");
+      });
+   });
+
    test("SORT_DIRECTION",function(){
       [
       "|asc",
@@ -118,7 +152,6 @@ test("Globals", function(){
       ].forEach(function(bad){
          assert(!SORT_MODIFIERS.exec(bad), "SORT_MODIFIERS bad: '"+bad+"'.");
       });
-
    });
    test("space",function(){
       [//good

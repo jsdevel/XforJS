@@ -59,10 +59,6 @@ function Program(
          output.add("return "+js_templateBasket);
       }
 
-      if(context.getConfiguration('escapexss')){
-         globalParams.put(js_EscapeXSS, context.javascript.getJSEscapeXSS());
-      }
-
       output.
       add("})(").
          add(context.getArgumentsWrapper()).

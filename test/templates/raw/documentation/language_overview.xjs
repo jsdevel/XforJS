@@ -181,11 +181,18 @@
 ##PrintStatement
 #
 #To directly print the same type of values allowed for variables, you can wrap
-#the value in semi-colons.  Doing so outputs the value.
+#the value in curly braces.  Doing so outputs the value.
+#
+#You can optionally modify the output with PrintModifiers.  Valid PrintModifiers
+#are:
+#e: Disables XSS escaping.
+#E: Enables  XSS escaping.
 {template print}
    {var greeting 'Top of the morning to ya!'}
    {hello}#output the value of hello in the current context.
    {hello || hola}#If hello is falsey, output the value of hola.
+   {hello |e}
+   {hello |E}
 {/template}
 
 ##InputTokens

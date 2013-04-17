@@ -39,6 +39,10 @@ var OPERATOR_NOT=/^([!~]+)/;
 /** @const @type {regexp} */
 var OPERATOR_TYPEOF=/^(typeof)(?=[\(\s])/;
 /** @const @type {regexp} */
+var MODIFIER=                        /^(\|)(?!\|)/;
+/** @const @type {regexp} */
+var PRINT_MODIFIERS=                 /^(\|[eE]{1,2})(?=\})/;
+/** @const @type {regexp} */
 var SORT_DIRECTION=                 /^(\|(?:asc|desc|rand))(?![\w$])/;
 /** @const @type {regexp} */
 var SORT_MODIFIERS=                 /^(\|[cCin]{1,4})(?![\w$])/;

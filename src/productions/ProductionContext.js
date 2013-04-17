@@ -54,6 +54,7 @@ function ProductionContext(
       this._importedFiles=previousContext._importedFiles;
       this._configuration=previousContext._configuration;
       this.javascript=previousContext.javascript;
+      this.isEscapeXSSOutput = previousContext.isEscapeXSSOutput;
       callManager=previousContext.getCallManager();
    } else {//default values
       this._declaredNamespaces={};
@@ -380,3 +381,6 @@ Have you supplied '"+filePath+"' to the compile method?";
       callManager.validateCalls();
    };
 }
+
+/** @type boolean */
+ProductionContext.prototype.isEscapeXSSOutput=false;
