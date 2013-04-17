@@ -1,0 +1,13 @@
+{
+   "currentVersion":"1.0.5",
+   "previousVersion":"1.0.4",
+   "commitHistory":[
+
+"closes #26:  Add modifiers to print statements to override compiler settings.  enhancement.",
+"closes #27:  Can't print newline characters. bug.",
+"closes #24:  Comments aren't allowed at the end of a file. bug.",
+"closes #30:  Comments not allowed between input tokens. bug.",
+"closes #32:  Error message isn't intuitive when importing a file. bug.",
+"closes #31: can't sort by name(). bug."
+]
+}

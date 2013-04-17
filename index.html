@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>XforJS Documentation</title><!--CONCAT css/docs.min.css--><link href="css/general.css" rel="stylesheet" type="text/css"/><link href="css/buttons.css" rel="stylesheet" type="text/css"/><link href="css/tabs.css" rel="stylesheet" type="text/css"/><link href="css/effects.css" rel="stylesheet" type="text/css"/><link href="css/snapping.css" rel="stylesheet" type="text/css"/><link href="css/giver.css" rel="stylesheet" type="text/css"/><link href="css/main.css" rel="stylesheet" type="text/css"/><link href="css/code-highlighting.css" rel="stylesheet" type="text/css"/><!--END CONCAT--></head><body><div class="header"><span class="logo">X</span><span>for JS</span><p>A Template Lang that would make Mama proud.</p><a href="https://github.com/jsdevel/XforJS" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"/></a><div class="downloads"><a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.1.0.4.js"><i class="icon">D</i><strong class="main">Download</strong><strong>1.0.4</strong><small>(src)</small></a><a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.1.0.4.min.js"><i class="icon">D</i><strong class="main">Download</strong><strong>1.0.4</strong><small>(min)</small></a><div><code class="border-radius-5px">npm install xforjs</code></div></div><div class="changelog" data-version="1.0.4"><span class="border-radius-5px ease-bg-color">View Changelog</span><div></div></div></div><div class="copy lead">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>XforJS Documentation</title><!--CONCAT css/docs.min.css--><link href="css/general.css" rel="stylesheet" type="text/css"/><link href="css/buttons.css" rel="stylesheet" type="text/css"/><link href="css/tabs.css" rel="stylesheet" type="text/css"/><link href="css/effects.css" rel="stylesheet" type="text/css"/><link href="css/snapping.css" rel="stylesheet" type="text/css"/><link href="css/giver.css" rel="stylesheet" type="text/css"/><link href="css/main.css" rel="stylesheet" type="text/css"/><link href="css/code-highlighting.css" rel="stylesheet" type="text/css"/><!--END CONCAT--></head><body><div class="header"><span class="logo">X</span><span>for JS</span><p>A Template Lang that would make Mama proud.</p><a href="https://github.com/jsdevel/XforJS" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"/></a><div class="downloads"><a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.1.0.5.js"><i class="icon">D</i><strong class="main">Download</strong><strong>1.0.5</strong><small>(src)</small></a><a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.1.0.5.min.js"><i class="icon">D</i><strong class="main">Download</strong><strong>1.0.5</strong><small>(min)</small></a><div><code class="border-radius-5px">npm install xforjs</code></div></div><div class="changelog" data-version="1.0.5"><span class="border-radius-5px ease-bg-color">View Changelog</span><div></div></div></div><div class="copy lead">
          X is a Template Language for Javascript.  You can serve up compiled or
          raw templates <span class="muted">(compiled is preferred ;)</span>.
       </div><div class="try-it giver" data-gift="body &gt; .code-editor"><strong class="button border-radius-5px"><i class="icon">e</i>Live Demo</strong></div><div class="code-editor open snap-to-window border box-shadow-25px"><div class="close-button" data-closes="body > .code-editor"><i class="icon">x</i></div><div class="panel"><div class="tabs"><span class="active" data-tab=".raw">Template</span><span data-tab=".input-data">Input Data</span><span data-tab=".input-params">Input Params</span></div><div class="tab-content left"><textarea class="tab-pane active raw" data-tab=".compiled">
@@ -308,11 +308,18 @@
 <span class='comment'>&#35;</span><span class='comment-header'>PrintStatement</span>
 <span class='comment'>#</span>
 <span class='comment'>#To directly print the same type of values allowed for variables, you can wrap</span>
-<span class='comment'>#the value in semi-colons.  Doing so outputs the value.</span>
+<span class='comment'>#the value in curly braces.  Doing so outputs the value.</span>
+<span class='comment'>#</span>
+<span class='comment'>#You can optionally modify the output with PrintModifiers.  Valid PrintModifiers</span>
+<span class='comment'>#are:</span>
+<span class='comment'>#e: Disables XSS escaping.</span>
+<span class='comment'>#E: Enables  XSS escaping.</span>
 <span class='start-brace'>{</span><span class='keyword'>template</span> print<span class='end-brace'>}</span>
    <span class='start-brace'>{</span><span class='keyword'>var</span> greeting 'Top of the morning to ya!'<span class='end-brace'>}</span>
    <span class='start-brace'>{</span>hello<span class='end-brace'>}</span><span class='comment'>#output the value of hello in the current context.</span>
    <span class='start-brace'>{</span>hello || hola<span class='end-brace'>}</span><span class='comment'>#If hello is falsey, output the value of hola.</span>
+   <span class='start-brace'>{</span>hello |e<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span>hello |E<span class='end-brace'>}</span>
 <span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
 
 <span class='comment'>&#35;</span><span class='comment-header'>InputTokens</span>
@@ -454,4 +461,4 @@
       {/foreach}
    </ul>
 {/template}
-      </script><!--CONCAT js/docs.min.js--><script src="js/jquery-1.8.3.min.js"></script><script src="js/XforJS.1.0.4.min.js"></script><script src="js/plugins.js"></script><script src="js/main.js"></script><!--END CONCAT--></body></html>
+      </script><!--CONCAT js/docs.min.js--><script src="js/jquery-1.8.3.min.js"></script><script src="js/XforJS.1.0.5.min.js"></script><script src="js/plugins.js"></script><script src="js/main.js"></script><!--END CONCAT--></body></html>
