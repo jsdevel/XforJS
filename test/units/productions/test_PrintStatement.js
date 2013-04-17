@@ -28,24 +28,29 @@ test("PrintStatement", function(){
 
    setEnv("{}");
       execute();
-      assert(characters.charAt(0) !== "{",
-         "open curly is shifted.");
-      assert(outputHas(js_bld+"("),
-         "output calls StringBuffer.");
-      assert(outputHas(js_EscapeXSS+"("),
-         "default configuration adds escapexss calls.");
+      assert(characters.charAt(0) !== "{", "open curly is shifted.");
       assert(prodIs(VariableExpression));
       remove();
       execute();
-      assert(
-         !context.getCurrentProduction() &&
-         characters.length() === 0,
-         "properly closes.");
+      assert(outputHas(js_bld+"("), "output calls StringBuffer.");
+      assert(outputHas(js_EscapeXSS+"("), "default configuration adds escapexss calls.");
+      assert(!context.getCurrentProduction() &&characters.length() === 0, "properly closes.");
 
    setEnv("{}", {escapexss:false});
       execute();
       assert(!outputHas(js_EscapeXSS+"("),
          "escapexss may be configured not to output anything.");
+
+   test("override escapexss", function(){
+      setEnv("{|s}");execute();remove();
+      assert['throws'](function(){
+         execute();
+      });
+      setEnv("{|e}");execute();remove();execute();
+      assert(!outputHas(js_EscapeXSS+"("));
+      setEnv("{|E}", {escapexss:false});execute();remove();execute();
+      assert(outputHas(js_EscapeXSS+"("));
+   }, true);
 
    function execute(){
       context.executeCurrent(characters);
@@ -67,4 +72,4 @@ test("PrintStatement", function(){
       characters=new CharWrapper(string);
       context.addProduction(production);
    }
-});
+}, true);

@@ -150,3 +150,10 @@
       {.}
    {/foreach}
 {/template}
+
+{template sort_by_name_fn}
+   {foreach .}
+      {sort name() |asc}
+      {name()}
+   {/foreach}
+{/template}

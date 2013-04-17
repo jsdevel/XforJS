@@ -39,10 +39,6 @@ function ContextSelector(output, isNested){
 
    if(!isNested){
       contextSelectorOutput=new Output();
-      output.
-         add(js_SafeValue+"(function(){return ").
-            add(contextSelectorOutput).
-         add("})");
    } else {
       contextSelectorOutput=output;
    }
@@ -62,6 +58,26 @@ function ContextSelector(output, isNested){
          characters.removeSpace();
          firstChar=characters.charAt(0);
          switch(firstChar){
+         case 'n':
+            break;
+         default:
+            if(!isNested){
+               output.
+                  add(js_SafeValue+"(function(){return ").
+                     add(contextSelectorOutput).
+                  add("})");
+            }
+         }
+         switch(firstChar){
+         case 'n':
+            match = characters.match(NAME_FN);
+            if(match){
+               characters.shift(match[1].length);
+               output.add(js_name);
+               context.removeProduction();
+               return;
+            }
+            break;
          case '@':
             reference=characters.match(VARIABLE_REFERENCE);
             if(reference){

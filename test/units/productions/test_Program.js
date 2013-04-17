@@ -38,8 +38,6 @@ assert(output.toString().indexOf(StringBuffer) > -1,
    "When useexternal is false and not nested, there should be an instance of StringBuffer.");
 assert(output.toString().indexOf(SafeValue) > -1,
    "When useexternal is false and not nested, there should be an instance of SaveValue.");
-assert(output.toString().indexOf(EscapeXSS) > -1,
-   "When useexternal is false and not nested, there should be an instance of EscapeXSS.");
 
 assert(output.toString().indexOf('(function(){return this})()') > -1,
    "By default, Program assigns all templates to the current global context of 'this'.");
@@ -53,8 +51,6 @@ assert(output.toString().indexOf(StringBuffer) === -1,
    "When useexternal is false and nested, there should be no instance of StringBuffer.");
 assert(output.toString().indexOf(SafeValue) === -1,
    "When useexternal is false and nested, there should be no instance of SaveValue.");
-assert(output.toString().indexOf(EscapeXSS) === -1,
-   "When useexternal is false and nested, there should be no instance of EscapeXSS.");
 
 setEnv({global:false});
 assert(typeof eval(output.toString()) === 'object',

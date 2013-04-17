@@ -30,8 +30,9 @@ test("ContextSelector", function(){
       assert(!outputHas("function"));
    });
 
-   test("nested contexts call safe value.", function(){
-      setEnv(".", false);
+   test("non-nested contexts call safe value.", function(){
+      setEnv(".name", false);
+      context.executeCurrent(characters, context);
       assert(outputHas("function"));
    });
 

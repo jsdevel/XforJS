@@ -105,13 +105,6 @@ function VariableValue(output, isNestedInContextSelector){
             delegateToGlobalVariableValue(characters, context);
             return;
          }
-         match = characters.match(NAME_FN);
-         if(match){
-            characters.shift(match[1].length);
-            output.add(js_name);
-            context.removeProduction();
-            return;
-         }
          break;
       case 't':
       case 'f':

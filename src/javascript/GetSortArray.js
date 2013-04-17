@@ -27,24 +27,18 @@ function GetSortArray(l,s){
    if(!!o&&typeof(o)==='object'){
       for(a in o){
          try{
-            v=s(o[a]);
-            t=typeof(v);
-            r.push({
-               n:a,//name
-               c:o[a],//context
-               l:t==='string'?v.toLowerCase():'',//used to determine case
-               t:t,//type
-               v:(t==='string'||t==='number')?v:''//only sort on these
-            });
+            v=s(o[a], a);
          } catch(e){
-            r.push({
-               n:a,
-               c:o[a],
-               s:'',
-               v:'',
-               k:''
-            });
+            v=o[a];
          }
+         t=typeof(v);
+         r.push({
+            n:a,//name
+            c:o[a],//context
+            l:t==='string'?v.toLowerCase():'',//used to determine case
+            t:t,//type
+            v:(t==='string'||t==='number')?v:''//only sort on these
+         });
       }
    }
    return r

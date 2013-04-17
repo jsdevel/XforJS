@@ -34,6 +34,11 @@
    fs.writeFileSync("../build/javascript/XforJS."+VERSION+".js", frameworkBuilt, "utf8");
 
    console.log("writing compiled file to ../build/javascript/XforJS."+VERSION+".min.js");
-   exec('java -jar google-closure/compiler.jar --js ../build/javascript/XforJS.'+VERSION+'.js --js_output_file ../build/javascript/XforJS.'+VERSION+'.min.js --compilation_level ADVANCED_OPTIMIZATIONS --output_wrapper "!function(){%output%}();"');
+   exec('java -jar google-closure/compiler.jar \
+      --js ../build/javascript/XforJS.'+VERSION+'.js \
+      --js_output_file ../build/javascript/XforJS.'+VERSION+'.min.js \
+      --compilation_level ADVANCED_OPTIMIZATIONS \
+      --accept_const_keyword \
+      --output_wrapper "!function(){%output%}();"');
    console.log("finished");
 }();

@@ -54,6 +54,16 @@ test("sorting", function(){
    assert.notEqual(original, doSort(sort.rand), "rand 4");
    assert.notEqual(original, doSort(sort.rand), "rand 5");
 
+   //Sort by fns
+   var objects={
+      "b":5,
+      "c":5,
+      "f":5,
+      "e":5,
+   };
+   assert.equal("bcef", sort.sort_by_name_fn(objects), "Sorting by name().");
+
+
    function doSort(fn){
       return fn([
          0,
@@ -69,4 +79,4 @@ test("sorting", function(){
          "a"
       ]);
    }
-});
+}, true);

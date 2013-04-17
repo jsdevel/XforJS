@@ -77,8 +77,14 @@ test("VariableValue", function(){
       var input = array[0];
       setEnv(input);
       context.executeCurrent(characters);
+
+      if(input === 'name()'){
+         assert(context.getCurrentProduction() instanceof ContextSelector);
+         context.executeCurrent(characters);
+      } else {
+         assert(!context.getCurrentProduction());
+      }
       assert(
-         !context.getCurrentProduction() &&
          characters.length() === 0 &&
          output.toString().indexOf(array[1]) > -1,
          input+" is working.");
@@ -120,4 +126,4 @@ test("VariableValue", function(){
       context.addProduction(production);
       variableOutput=context.getCurrentVariableOutput();
    }
-});
+}, true);

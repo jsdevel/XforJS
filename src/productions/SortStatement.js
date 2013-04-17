@@ -46,7 +46,7 @@ function SortStatement(
          hasContextSelector=true;
          var contextSelectorOutput = new Output();
          sortContextOutput.
-            add(",function("+js_context+"){return ").
+            add(",function("+js_context+", "+js_name+"){return ").
                add(contextSelectorOutput).
             add("}");
          context.addProduction(new ContextSelector(contextSelectorOutput, true));

@@ -54,6 +54,7 @@ function ProductionContext(
       this._importedFiles=previousContext._importedFiles;
       this._configuration=previousContext._configuration;
       this.javascript=previousContext.javascript;
+      this.isEscapeXSSOutput = previousContext.isEscapeXSSOutput;
       callManager=previousContext.getCallManager();
    } else {//default values
       this._declaredNamespaces={};
@@ -201,7 +202,9 @@ function ProductionContext(
     */
    this.importFile=function(filePath) {
       if(!inputFilePath){
-         throw "Can't import '"+filePath+"' because no inputFilePath was given to the ProductionContext.";
+         throw "\n\\n\
+Can't import '"+filePath+"' because no inputFilePath was given to the ProductionContext.\n\
+Have you supplied '"+filePath+"' to the compile method?";
       }
       var path = require('path');
       var fs = require('fs');
@@ -378,3 +381,6 @@ function ProductionContext(
       callManager.validateCalls();
    };
 }
+
+/** @type boolean */
+ProductionContext.prototype.isEscapeXSSOutput=false;

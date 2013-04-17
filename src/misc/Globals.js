@@ -22,14 +22,12 @@ var __reg_COMMENT = "#(?:[^\\r\\n]+)?(?:\\r?\\n)";
 var __reg_name = "[a-zA-Z$_](?:[\\w$]+)?";
 /** @const @type {string} */
 var __reg_variable_reference = "@("+__reg_name+")";
-/** @const @type {string} */
-var __reg_space = "(?:\\s|"+__reg_COMMENT+")+";
 
 //SEQUENCES
 /** @const @type {regexp} */
 var IMPORT_PATH=                    /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
 /** @const @type {regexp} */
-var INPUT_TOKENS=                   /^((?:[^#'\{\\]|\\(?:#|'|\\|\{))+)/;
+var INPUT_TOKENS=                   /^((?:\\[#\{]|(?![#\{])[\s\S])+)/;
 /** @const @type {regexp} */
 var NAME =                          new RegExp("^("+__reg_name+")");
 /** @const @type {regexp} */
@@ -41,15 +39,19 @@ var OPERATOR_NOT=/^([!~]+)/;
 /** @const @type {regexp} */
 var OPERATOR_TYPEOF=/^(typeof)(?=[\(\s])/;
 /** @const @type {regexp} */
+var MODIFIER=                        /^(\|)(?!\|)/;
+/** @const @type {regexp} */
+var PRINT_MODIFIERS=                 /^(\|[eE]{1,2})(?=\})/;
+/** @const @type {regexp} */
 var SORT_DIRECTION=                 /^(\|(?:asc|desc|rand))(?![\w$])/;
 /** @const @type {regexp} */
 var SORT_MODIFIERS=                 /^(\|[cCin]{1,4})(?![\w$])/;
 /** @const @type {regexp} */
-var SPACE =                         new RegExp("^("+__reg_space+")");
+var SPACE =                         new RegExp("^((?:\\s+|"+__reg_COMMENT+")+)");
 /** @const @type {regexp} */
 var SPACE_BETWEEN_ANGLE_BRACKETS =  /(>|<)\s+|\s+(>|<)/g;
 /** @const @type {regexp} */
-var SPACE_PRECEDING_CURLY =         new RegExp("^("+__reg_space+")(?=\\{)");
+var SPACE_PRECEDING_CURLY =         new RegExp("^((?:\\s+(?=\\{)|"+__reg_COMMENT+")+)");
 /** @const @type {regexp} */
 var TEXT_INPUT =                    /^((?:(?!\{\/text\})[\s\S])+)(?=\{\/text\})/;
 /** @const @type {regexp} */
@@ -219,7 +221,9 @@ function getInputFilePath(inputFilePath){
    _path = path['normalize'](inputFilePath.replace(/^\s+|\s+$/g, ""));
 
    if(!/\.xjs$/.test(_path)){
-      throw "inputFilePath must end with '.xjs'.";
+      throw "\n\
+inputFilePath must end with '.xjs'.\n\
+Also be sure to supply an abslolute path.";
    }
 
    if(!fs['existsSync'](_path)){
