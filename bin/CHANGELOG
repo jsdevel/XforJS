@@ -1,19 +1,6 @@
-Merge branch 'develop' for 1.0.5.
+Incrementing version.
 
-closes #26:  Add modifiers to print statements to override compiler settings.  enhancement.
-Adding more test calls.
-Formatting file.
-closes #27:  Can't print newline characters. bug.
-Renaming a file.
-closes #24:  Comments aren't allowed at the end of a file. bug.
-closes #30:  Comments not allowed between input tokens. bug.
-Updating a comment.
-Removing an unused variable.
-closes #32:  Error message isn't intuitive when importing a file. bug.
-closes #31: can't sort by name(). bug.
-Bumping version to 1.0.5.
-Adding Render to the language_overview.
-Showing an example of partials in the docs.
-Updating the language_overview template file for the documentation.
-Updating the documentation.
-
+Updating JSDocs for the closure compiler.
+Adding more compile time checking to the compiler options.
+closes #35:  '\{' outputs '\{' when it should output '{'. This is happening in InputTokens. bug.
+closes #34:  Context Selectors starting with 'n' are ignored. bug.
