@@ -59,7 +59,13 @@ function ContextSelector(output, isNested){
          firstChar=characters.charAt(0);
          switch(firstChar){
          case 'n':
-            break;
+            match = characters.match(NAME_FN);
+            if(match){
+               characters.shift(match[1].length);
+               output.add(js_name);
+               context.removeProduction();
+               return;
+            }
          default:
             if(!isNested){
                output.
@@ -69,15 +75,6 @@ function ContextSelector(output, isNested){
             }
          }
          switch(firstChar){
-         case 'n':
-            match = characters.match(NAME_FN);
-            if(match){
-               characters.shift(match[1].length);
-               output.add(js_name);
-               context.removeProduction();
-               return;
-            }
-            break;
          case '@':
             reference=characters.match(VARIABLE_REFERENCE);
             if(reference){
