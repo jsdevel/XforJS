@@ -40,6 +40,7 @@ function InputTokens(output){
             tokens = tokens.replace(SPACE_BETWEEN_ANGLE_BRACKETS, "$1$2");
          }
          tokens = tokens.replace(/\\#/g, "#");
+         tokens = tokens.replace(/\\\{/g, "{");
          tokens = tokens.replace(/\\(?![n'])/g, "\\\\");
          tokens = tokens.replace(/^'|([^\\])'/g, "$1\\'");
          tokens = tokens.replace(/\r?\n/g, "\\n");
