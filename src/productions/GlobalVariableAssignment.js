@@ -17,6 +17,7 @@
 
 /**
  * @constructor
+ * @extends {AbstractAssignment}
  * @param {Output} output
  */
 function GlobalVariableAssignment(output){

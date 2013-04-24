@@ -17,11 +17,11 @@
 
 /**
  * @constructor
+ * @extends {Production}
  */
 function AbstractVariableDeclaration(){}
 extend(AbstractVariableDeclaration, Production);
 /**
- * @const
  * @type {string}
  */
 AbstractVariableDeclaration.prototype.name="AbstractVariableDeclaration";
@@ -86,12 +86,12 @@ AbstractVariableDeclaration.prototype.getProduction=function(output){};
  * For instance, in the case of ParamDeclarations, we want the following to be
  * prepended to the assignment: 'params.d||'.
  *
- * @param {String} name
+ * @param {string} name
  * @param {Output} output  The Assignment Output.
  */
 AbstractVariableDeclaration.prototype.doAssignment=function(name, output){};
 /**
- * @param {String} name
+ * @param {string} name
  * @param {ProductionContext} context
  */
 AbstractVariableDeclaration.prototype.doNoAssignment=function(name, context){};

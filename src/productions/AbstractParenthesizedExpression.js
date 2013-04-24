@@ -17,6 +17,7 @@
 
 /**
  * @constructor
+ * @extends {Production}
  */
 function AbstractParenthesizedExpression(){
    this.execute=function(characters, context){
@@ -44,14 +45,16 @@ function AbstractParenthesizedExpression(){
    };
 }
 extend(AbstractParenthesizedExpression, Production);
+/**
+ * @type {boolean}
+ */
 AbstractParenthesizedExpression.prototype._hasExpression=false;
 /**
- *
  * @param {Output} output
- * @returns {AbstractExpression}
+ * @return {AbstractExpression}
  */
 AbstractParenthesizedExpression.prototype.getExpression=function(output){};
 /**
- * @returns {Output}
+ * @return {Output}
  */
 AbstractParenthesizedExpression.prototype.getOutput=function(){};

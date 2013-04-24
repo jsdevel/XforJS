@@ -16,9 +16,10 @@
  */
 
 /**
+ * @constructor
+ * @extends {Production}
  * @param {Output} output
  * @param {ProductionContext} context
- * @returns {LogStatement}
  */
 function LogStatement(output, context){
    /** @type Output */
@@ -55,6 +56,6 @@ function LogStatement(output, context){
 extend(LogStatement, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 LogStatement.prototype.name="LogStatement";

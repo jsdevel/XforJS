@@ -1,0 +1,7 @@
+{namespace testPrint}
+
+#There were issues using 'name' as a key for some reason.  This should echo back
+#whatever was passed in.
+{template name}
+{name}
+{/template}

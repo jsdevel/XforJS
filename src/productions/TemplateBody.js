@@ -16,8 +16,8 @@
  */
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {TemplateBody}
  */
 function TemplateBody(output){
    /**

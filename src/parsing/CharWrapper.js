@@ -17,7 +17,7 @@
 
 /**
  * @constructor
- * @param {String} characters
+ * @param {string} characters
  */
 function CharWrapper(characters){
    var _characters = typeof characters === 'string' && characters || "";
@@ -116,7 +116,7 @@ function CharWrapper(characters){
    };
 
    /**
-    * @param {String} string
+    * @param {string} string
     * @return boolean
     */
    this.startsWith=function(string){

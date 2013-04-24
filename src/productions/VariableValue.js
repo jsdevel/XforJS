@@ -16,9 +16,10 @@
  */
 
 /**
+ * @constructor
+ * @extends {Production}
  * @param {Output} output
  * @param {boolean} isNestedInContextSelector
- * @returns {VariableValue}
  */
 function VariableValue(output, isNestedInContextSelector){
    /** @type boolean */
@@ -141,6 +142,6 @@ function VariableValue(output, isNestedInContextSelector){
 extend(VariableValue, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 VariableValue.prototype.name="VariableValue";

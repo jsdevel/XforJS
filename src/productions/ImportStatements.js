@@ -16,6 +16,7 @@
  */
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
  */
 function ImportStatements(output){

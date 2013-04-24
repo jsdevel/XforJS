@@ -24,8 +24,8 @@ function JSParameters(){
    var map = {};
 
    /**
-    * @param {String} key
-    * @param {Object} value
+    * @param {string} key
+    * @param {Object|string} value
     * @return {JSParameters}
     */
    this.put=function(key, value){
@@ -38,14 +38,14 @@ function JSParameters(){
    };
 
    /**
-    * @return {String}
+    * @return {string}
     */
    this.getParameters=function(){
       return keys.join(',');
    };
 
    /**
-    * @return {String}
+    * @return {string}
     */
    this.getArguments=function(){
       return values.join(',');

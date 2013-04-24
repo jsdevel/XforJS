@@ -17,8 +17,8 @@
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {ContextDynamicRefinement}
  */
 function ContextDynamicRefinement(output){
    /** @type boolean */

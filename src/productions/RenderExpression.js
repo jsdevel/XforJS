@@ -17,9 +17,9 @@
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} namespaceOutput
  * @param {Output} contextOutput
- * @returns {RenderExpression}
  */
 function RenderExpression(namespaceOutput, contextOutput){
    /** @type boolean */
@@ -68,6 +68,6 @@ function RenderExpression(namespaceOutput, contextOutput){
 extend(RenderExpression, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 RenderExpression.prototype.name="RenderExpression";

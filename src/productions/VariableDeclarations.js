@@ -16,20 +16,22 @@
  */
 
 /**
+ * @constructor
+ * @extends {AbstractVariableDeclarations}
  * @param {AbstractVariableOutput} output
  */
 function VariableDeclarations(output){
    /**
-    * @returns {VariableDeclaration}
+    * @return {VariableDeclaration}
     */
    this.getDeclaration=function(){
       return new VariableDeclaration(output);
    };
 }
 extend(VariableDeclarations, AbstractVariableDeclarations);
-/** @type String */
+/** @type {string} */
 VariableDeclarations.prototype.name="VariableDeclarations";
-/** @type String */
+/** @type {string} */
 VariableDeclarations.prototype._characterAfterOpenCurly="v";
 /**
  * @return {RegExp}

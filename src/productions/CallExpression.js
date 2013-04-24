@@ -16,8 +16,9 @@
  */
 
 /**
+ * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {CallExpression}
  */
 function CallExpression(output){
    /** @type {boolean} */
@@ -50,6 +51,6 @@ function CallExpression(output){
 extend(CallExpression, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 CallExpression.prototype.name="CallExpression";

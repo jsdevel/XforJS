@@ -17,28 +17,28 @@
 
 /**
  * @constructor
+ * @extends {Production}
  */
 function AbstractConditionBlock(){}
 extend(AbstractConditionBlock, Production);
 /**
- * @const
- * @type String
+ * @type {string}
  */
 AbstractConditionBlock.prototype.name="AbstractConditionBlock";
-/** @type Boolean */
+/** @type {boolean} */
 AbstractConditionBlock.prototype._canSelfClose=false;
-/** @type Boolean */
+/** @type {boolean} */
 AbstractConditionBlock.prototype._expectingVariableExpression=true;
-/** @type Boolean */
+/** @type {boolean} */
 AbstractConditionBlock.prototype._expectingBodyStatements=true;
 /**
- * @returns {Production}
+ * @return {Production}
  */
 AbstractConditionBlock.prototype.getBodyStatements=function(){};
-/** @return RegExp */
+/** @return {RegExp} */
 AbstractConditionBlock.prototype.getClosingPattern=function(){};
 /**
- * @returns {Production}
+ * @return {Production}
  */
 AbstractConditionBlock.prototype.getVariableExpression=function(){};
 /**

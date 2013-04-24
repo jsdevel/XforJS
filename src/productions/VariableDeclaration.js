@@ -17,6 +17,7 @@
 
 /**
  * @constructor
+ * @extends {AbstractVariableDeclaration}
  * @param {AbstractVariableOutput} output
  */
 function VariableDeclaration(output){

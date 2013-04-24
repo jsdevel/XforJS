@@ -16,9 +16,9 @@
  */
 
 /**
- *
+ * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {GlobalVariableValue}
  */
 function GlobalVariableValue(output){
    /**

@@ -17,8 +17,8 @@
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @return InputTokens
  */
 function InputTokens(output){
    /**
@@ -40,6 +40,7 @@ function InputTokens(output){
             tokens = tokens.replace(SPACE_BETWEEN_ANGLE_BRACKETS, "$1$2");
          }
          tokens = tokens.replace(/\\#/g, "#");
+         tokens = tokens.replace(/\\\{/g, "{");
          tokens = tokens.replace(/\\(?![n'])/g, "\\\\");
          tokens = tokens.replace(/^'|([^\\])'/g, "$1\\'");
          tokens = tokens.replace(/\r?\n/g, "\\n");
@@ -54,6 +55,6 @@ function InputTokens(output){
 extend(InputTokens, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 InputTokens.prototype.name="InputTokens";

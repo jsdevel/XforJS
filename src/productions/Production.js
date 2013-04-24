@@ -14,6 +14,9 @@
  * limitations under the License.
  *
  */
+/**
+ * @constructor
+ */
 function Production(){}
 /**
  * @param {CharWrapper} characters

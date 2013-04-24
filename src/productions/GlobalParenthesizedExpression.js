@@ -17,19 +17,20 @@
 
 /**
  * @constructor
+ * @extends {AbstractParenthesizedExpression}
  * @param {Output} output
  */
 function GlobalParenthesizedExpression(output){
    /**
     * @param {Output} expressionOutput The output used for the return production.
-    * @returns {GlobalExpression}
+    * @return {GlobalExpression}
     */
    this.getExpression=function(expressionOutput){
       return new GlobalExpression(expressionOutput);
    };
    /**
     *
-    * @returns {Output}
+    * @return {Output}
     */
    this.getOutput=function(){
       return output;
@@ -38,6 +39,6 @@ function GlobalParenthesizedExpression(output){
 extend(GlobalParenthesizedExpression, AbstractParenthesizedExpression);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 GlobalParenthesizedExpression.prototype.name="GlobalParenthesizedExpression";

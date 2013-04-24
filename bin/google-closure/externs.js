@@ -1,5 +1,5 @@
 /*!
- * Copyright 2012 Joseph Spencer.
+ * Copyright 2013 Joseph Spencer.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,25 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
+
 /**
- * @constructor
- * @extends {AbstractAssignment}
- * @param {Output} output
+ * @param {string} string
+ * @return {Object}
  */
-function VariableAssignment(output){
-   /**
-    * @return {VariableExpression}
-    */
-   this.getExpression=function() {
-      return new VariableExpression(output);
-   };
-}
-extend(VariableAssignment, AbstractAssignment);
-/**
- * @const
- * @type {string}
- */
-VariableAssignment.prototype.name="AbstractAssignment";
+function require(string){}

@@ -17,6 +17,7 @@
 
 /**
  * @constructor
+ * @extends {AbstractVariableDeclaration}
  * @param {AbstractVariableOutput} output
  */
 function ParamDeclaration(output){
@@ -27,7 +28,7 @@ function ParamDeclaration(output){
       return output;
    };
    /**
-    * @param {String} name
+    * @param {string} name
     * @param {ProductionContext} context
     */
    this.doNoAssignment=function(name, context){

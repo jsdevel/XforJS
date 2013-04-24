@@ -15,9 +15,17 @@
  *
  */
 
+/**
+ * @constructor
+ * @extends {AbstractConditionBlock}
+ * @param {Output} output
+ */
 function RenderStatement(output){
+   /** @type {Output} */
    var namespaceOutput = new Output();
+   /** @type {Output} */
    var contextOutput = new Output();
+   /** @type {Output} */
    var paramOutput = new Output();
 
    this._canSelfClose=true;
@@ -33,32 +41,32 @@ function RenderStatement(output){
       add(");");
 
    /**
-    * @overrides
-    * @param {Output} output
-    * @returns {RenderExpression}
+    * @return {RenderExpression}
+    * @override
     */
-   this.getVariableExpression=function(output){
+   this.getVariableExpression=function(){
       return new RenderExpression(namespaceOutput, contextOutput);
    };
    /**
-    * @overrides
-    * @param {Output} output
-    * @returns {RenderParams}
+    * @return {RenderParamDeclarations}
+    * @override
     */
-   this.getBodyStatements=function(output) {
+   this.getBodyStatements=function() {
       return new RenderParamDeclarations(paramOutput);
    };
 
 }
 extend(RenderStatement, AbstractConditionBlock);
+
 /**
- * @return RexExp
+ * @const
+ * @return {RegExp}
  */
 RenderStatement.prototype.getClosingPattern=function(){
    return RENDER_CLOSING;
 };
 /**
  * @const
- * @type String
+ * @type {string}
  */
 RenderStatement.prototype.name="RenderStatement";

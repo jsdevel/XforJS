@@ -16,112 +16,257 @@
  */
 
 //Save this section for regex.
-/** @const @type {string} */
+/**
+ * @const
+ * @type {string}
+ */
 var __reg_COMMENT = "#(?:[^\\r\\n]+)?(?:\\r?\\n)";
-/** @const @type {string} */
+/**
+ * @const
+ * @type {string}
+ */
 var __reg_name = "[a-zA-Z$_](?:[\\w$]+)?";
-/** @const @type {string} */
+/**
+ * @const
+ * @type {string}
+ */
 var __reg_variable_reference = "@("+__reg_name+")";
 
 //SEQUENCES
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var IMPORT_PATH=                    /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var INPUT_TOKENS=                   /^((?:\\[#\{]|(?![#\{])[\s\S])+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NAME =                          new RegExp("^("+__reg_name+")");
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NS =                            new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NS_FORCED =                     new RegExp("^("+__reg_name+"(?:\\."+__reg_name+")+)");
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var OPERATOR_NOT=/^([!~]+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var OPERATOR_TYPEOF=/^(typeof)(?=[\(\s])/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var MODIFIER=                        /^(\|)(?!\|)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var PRINT_MODIFIERS=                 /^(\|[eE]{1,2})(?=\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var SORT_DIRECTION=                 /^(\|(?:asc|desc|rand))(?![\w$])/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var SORT_MODIFIERS=                 /^(\|[cCin]{1,4})(?![\w$])/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var SPACE =                         new RegExp("^((?:\\s+|"+__reg_COMMENT+")+)");
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var SPACE_BETWEEN_ANGLE_BRACKETS =  /(>|<)\s+|\s+(>|<)/g;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var SPACE_PRECEDING_CURLY =         new RegExp("^((?:\\s+(?=\\{)|"+__reg_COMMENT+")+)");
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var TEXT_INPUT =                    /^((?:(?!\{\/text\})[\s\S])+)(?=\{\/text\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s*[\\.\\[\\(]");
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var VARIABLE_REFERENCE           =  new RegExp("^("+__reg_variable_reference+")");
 
 //STATEMENT PATTERNS
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var RENDER =                          /^(\{render\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var RENDER_CLOSING =                  /^(\{\/render\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var FOREACH =                       /^(\{foreach\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var FOREACH_CLOSING =               /^(\{\/foreach\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var IF =                            /^(\{if\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var IF_CLOSING =                    /^(\{\/if\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var IMPORT =                        /^(\{import\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var LOG =                           /^(\{log\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NAMESPACE =                     /^(\{namespace\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var PARAM =                         /^(\{param\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var SORT =                          /^(\{sort\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var TEMPLATE =                      /^(\{template\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var TEMPLATE_CLOSING =              /^(\{\/template\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var TEXT =                          /^(\{text\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var TEXT_CLOSING =                  /^(\{\/text\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var VAR =                           /^(\{var\s+)/;
 
 //CONTINUATIONS
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var ELIF =                          /^(\{:elif\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var ELSE =                          /^(\{:else\})/;
 
 //FUNCTIONS
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var COUNT_FN =    /^(count\()/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var CURRENT_FN =  /^(current\(\))/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var LAST_FN =     /^(last\(\))/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NAME_FN =     /^(name\(\))/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var POSITION_FN = /^(position\(\))/;
 
 //PRIMITIVES
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var BOOLEAN =     /^(false|true)(?![\w$])/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NUMBER =      /^((?:0x(?=([0-9A-Fa-f]+))\2(?!\.)|(?=(0(?![0-9])|[1-9][0-9]*))\3(?!x)(?:\.[0-9]+)?)(?:[eE][-+][0-9]+)?)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NULL =        /^(null)(?![\w$])/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var STRING =      /^((['"])(?=((?:(?:(?!\2|\r?\n|\\)[\s\S]|\\(?:\\|\2|\r?\n))+)?))\3\2)/;
 
 
+/**
+ * @const
+ * @enum {boolean}
+ */
 var RESERVED_WORDS = {
    "break":true,
    "case":true,
@@ -171,7 +316,7 @@ var RESERVED_WORDS = {
 };
 
 /**
- * @param {String} namespace
+ * @param {string} namespace
  * @throws if the namespace contains a reserved word, or is invalid.
  */
 function validateNamespacesAgainstReservedWords(namespace) {
@@ -192,8 +337,9 @@ function validateNamespacesAgainstReservedWords(namespace) {
 }
 
 /**
+ * @param {string} inputFilePath
  * @see getInputFilePath
- * @return {String}  Absolute path. path.dirname is used on the result of
+ * @return {string}  Absolute path. path.dirname is used on the result of
  *    getInputFileDirectory.
  */
 function getInputFileDirectory(inputFilePath){
@@ -202,11 +348,11 @@ function getInputFileDirectory(inputFilePath){
 }
 
 /**
- * @param {String} inputFilePath
+ * @param {string} inputFilePath
  * @throws if inputFilePath isn't a string.
  * @throws if inputFilePath doesn't end with .xjs.
  * @throws if inputFilePath doesn't exist.
- * @return {String}  Absolute path.  It is normalized by the following:<br><br>
+ * @return {string}  Absolute path.  It is normalized by the following:<br><br>
  *    1) whitespace is trimmed from the ends<br>
  *    2) node.js' path.normalize<br>
  *    3) node.js' path.resolve<br>
@@ -236,7 +382,7 @@ Also be sure to supply an abslolute path.";
  * Escapes escaped output from within a template.  # needs to be escaped in xforjs
  * template files, so this converts \# to # for the output, etc.
  *
- * @param {String} input
+ * @param {string} input
  */
 function escapeOutput(input){
    return input.
@@ -245,23 +391,99 @@ function escapeOutput(input){
       replace(/\n|\r/g, "\\\n");
 }
 //Names of functions and variables etc. used by the output.
+/**
+ * @const
+ * @type {string}
+ */
 var js_bld="b";
+/**
+ * @const
+ * @type {string}
+ */
 var js_context="x";
+/**
+ * @const
+ * @type {string}
+ */
 var js_count="T";
+/**
+ * @const
+ * @type {string}
+ */
 var js_currentNS="N";
+/**
+ * @const
+ * @type {string}
+ */
 var js_data="D";
+/**
+ * @const
+ * @type {string}
+ */
 var js__data="A";
+/**
+ * @const
+ * @type {string}
+ */
 var js_last="L";
+/**
+ * @const
+ * @type {string}
+ */
 var js_name="n";
+/**
+ * @const
+ * @type {string}
+ */
 var js_params="P";
+/**
+ * @const
+ * @type {string}
+ */
 var js__params="M";
+/**
+ * @const
+ * @type {string}
+ */
 var js_position="O";
+/**
+ * @const
+ * @type {string}
+ */
 var js_templateBasket="B";
 
+/**
+ * @const
+ * @type {string}
+ */
 var js_CountElements="C";
+/**
+ * @const
+ * @type {string}
+ */
 var js_EscapeXSS="X";
+/**
+ * @const
+ * @type {string}
+ */
 var js_Foreach="F";
+/**
+ * @const
+ * @type {string}
+ */
 var js_GetSortArray="G";
+/**
+ * @const
+ * @type {string}
+ */
 var js_SafeValue="V";
+/**
+ * @const
+ * @type {string}
+ */
 var js_StringBuffer="S";
+/**
+ * @const
+ * @type {string}
+ */
 var js_LibNamespace = "XforJS.js";
