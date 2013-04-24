@@ -17,8 +17,8 @@
 
 /**
  * @constructor
+ * @extends {AbstractVariableDeclarations}
  * @param {Output} output
- * @returns {RenderParamDeclarations}
  */
 function RenderParamDeclarations(output){
    var paramOutput = new AbstractVariableOutput(",{", "", ":", "}", null);
@@ -31,7 +31,7 @@ function RenderParamDeclarations(output){
       return paramOutput;
    };
    /**
-    * @returns {RenderParamDeclarations}
+    * @return {RenderParamDeclaration}
     */
    this.getDeclaration=function(){
       if(expectingParam){
@@ -42,9 +42,9 @@ function RenderParamDeclarations(output){
    };
 }
 extend(RenderParamDeclarations, AbstractVariableDeclarations);
-/** @type String */
+/** @type {string} */
 RenderParamDeclarations.prototype.name="RenderParams";
-/** @type String */
+/** @type {string} */
 RenderParamDeclarations.prototype._characterAfterOpenCurly="p";
 /**
  * @return {RegExp}

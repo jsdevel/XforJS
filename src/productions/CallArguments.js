@@ -16,8 +16,8 @@
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @return {CallArguments}
  */
 function CallArguments(output){
    /** @type {boolean} */

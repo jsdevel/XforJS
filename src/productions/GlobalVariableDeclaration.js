@@ -17,6 +17,7 @@
 
 /**
  * @constructor
+ * @extends {AbstractVariableDeclaration}
  * @param {AbstractVariableOutput} output
  */
 function GlobalVariableDeclaration(output){
@@ -27,7 +28,7 @@ function GlobalVariableDeclaration(output){
       return output;
    };
    /**
-    * @param {String} name
+    * @param {string} name
     * @param {ProductionContext} context
     */
    this.doNoAssignment=function(name, context){
@@ -56,7 +57,7 @@ GlobalVariableDeclaration.prototype.getProduction=function(output){
 };
 
 /**
- * @param {String} name
+ * @param {string} name
  * @param {Output} output
  */
 GlobalVariableDeclaration.prototype.doAssignment=function(name, output){};

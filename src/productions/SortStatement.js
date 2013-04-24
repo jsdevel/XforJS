@@ -16,10 +16,11 @@
  */
 
 /**
+ * @constructor
+ * @extends {Production}
  * @param {Output} sortContextOutput
  * @param {Output} sortFunctionOutput
- * @param {Output} context
- * @returns {SortStatement}
+ * @param {ProductionContext} context
  */
 function SortStatement(
    sortContextOutput,
@@ -31,7 +32,13 @@ function SortStatement(
       context.javascript.getJSSortArray()
    );
 
+   /**
+    * @type {boolean}
+    */
    var hasContextSelector=false;
+   /**
+    * @type {boolean}
+    */
    var hasSortDirection=false;
 
    /**
@@ -44,9 +51,12 @@ function SortStatement(
 
       if(!hasContextSelector){
          hasContextSelector=true;
+         /**
+          * @type {Output}
+          */
          var contextSelectorOutput = new Output();
          sortContextOutput.
-            add(",function("+js_context+", "+js_name+"){return ").
+               add(",function("+js_context+", "+js_name+"){return ").
                add(contextSelectorOutput).
             add("}");
          context.addProduction(new ContextSelector(contextSelectorOutput, true));
@@ -121,6 +131,6 @@ function SortStatement(
 extend(SortStatement, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 SortStatement.prototype.name="SortStatement";

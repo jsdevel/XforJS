@@ -17,7 +17,7 @@
 
 /**
  * @constructor
- * @extends Production
+ * @extends {Production}
  * @param {Output} output
  * @param {boolean} isNested
  */
@@ -45,7 +45,6 @@ function ContextSelector(output, isNested){
 
 
    /**
-    * @overrides
     * @param {CharWrapper} characters
     * @param {ProductionContext} context
     */

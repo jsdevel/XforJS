@@ -17,11 +17,11 @@
 
 /**
  * @constructor
+ * @extends {Production}
  */
 function AbstractExpression(){}
 extend(AbstractExpression, Production);
 /**
- * @const
  * @type {string}
  */
 AbstractExpression.prototype.name="AbstractExpression";

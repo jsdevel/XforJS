@@ -17,6 +17,7 @@
 
 /**
  * @constructor
+ * @extends {Production}
  */
 function AbstractVariableDeclarations(){
    /**
@@ -36,20 +37,20 @@ function AbstractVariableDeclarations(){
    };
 }
 extend(AbstractVariableDeclarations, Production);
-/** @type String */
+/** @type {string} */
 AbstractVariableDeclarations.prototype.name="AbstractVariableDeclarations";
 
 /**
  * Example: 'p' for {param etc.
- * @type String
+ * @type {string}
  */
 AbstractVariableDeclarations.prototype._characterAfterOpenCurly="";
 /**
- * @returns {Production}
+ * @return {Production}
  */
 AbstractVariableDeclarations.prototype.getDeclaration=function(){};
 /**
  * Matches the start tag for declarations.
- * @returns {RegExp}
+ * @return {RegExp}
  */
 AbstractVariableDeclarations.prototype.getDeclarationRegex=function(){};

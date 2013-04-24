@@ -17,8 +17,8 @@
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @return InputTokens
  */
 function InputTokens(output){
    /**
@@ -55,6 +55,6 @@ function InputTokens(output){
 extend(InputTokens, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 InputTokens.prototype.name="InputTokens";

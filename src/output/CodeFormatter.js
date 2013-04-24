@@ -18,10 +18,13 @@
 
 /**
  * @constructor
- * @param {String} indent
+ * @param {string} indent
  * @param {Output} output
  */
 function CodeFormatter(indent, output){
+   /**
+    * @type {number}
+    */
    var indentCount=0;
 
    if(typeof indent !== 'string'){
@@ -33,7 +36,7 @@ function CodeFormatter(indent, output){
    }
 
    /**
-    * @param {int} amount
+    * @param {number} amount
     * @return {CodeFormatter}
     */
    this.addIndent=function(amount){
@@ -46,7 +49,7 @@ function CodeFormatter(indent, output){
    };
 
    /**
-    * @param {String} input optional
+    * @param {Object|string} input optional
     * @return {CodeFormatter}
     */
    this.doIndent=function(input){
@@ -63,7 +66,7 @@ function CodeFormatter(indent, output){
    };
 
    /**
-    * @param {int} amount
+    * @param {number} amount
     * @return {CodeFormatter}
     */
    this.removeIndent=function(amount){
@@ -82,7 +85,7 @@ function CodeFormatter(indent, output){
    };
 
    /**
-    * @param {String} line
+    * @param {Object|string} line
     * @return {CodeFormatter}
     */
    this.addLine=function(line){
@@ -94,7 +97,7 @@ function CodeFormatter(indent, output){
    };
 
    /**
-    * @param {Object} obj
+    * @param {Object|string} obj
     * @return {CodeFormatter}
     */
    this.add=function(obj){

@@ -14,14 +14,26 @@
  * limitations under the License.
  *
  */
+/**
+ * Facillitates the Composite Pattern.
+ * @constructor
+ */
 function Output(){
    var nodes = [];
 
+   /**
+    * @param {Object|string} obj
+    * @return {Output}
+    */
    this.add=function(obj){
       nodes.push(obj);
       return this;
    };
 
+   /**
+    * @return {string}
+    * @override
+    */
    this.toString=function(){
       return nodes.join('');
    };

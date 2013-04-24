@@ -21,12 +21,18 @@
  * @constructor
  */
 function CallManager(){
+   /**
+    * @type {Object}
+    */
    var declaredTemplates = {};
+   /**
+    * @type {Object}
+    */
    var calledTemplates = {};
 
    /**
     * @param {string} declared
-    * @returns {CallManaber}
+    * @return {CallManager}
     */
    this.addDeclaredTemplate=function(declared){
       declaredTemplates[declared]=true;
@@ -36,7 +42,7 @@ function CallManager(){
    /**
     *
     * @param {string} called
-    * @returns {CallManager}
+    * @return {CallManager}
     */
    this.addCalledTemplate=function(called){
       calledTemplates[called]=true;

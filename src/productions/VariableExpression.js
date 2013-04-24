@@ -15,19 +15,20 @@
  *
  */
 /**
+ * @constructor
+ * @extends {AbstractExpression}
  * @param {Output} output
- * @returns {VariableExpression}
  */
 function VariableExpression(output){
    /**
     * @override
-    * @returns {Output}
+    * @return {Output}
     */
    this.getOutput=function(){
       return output;
    };
    /**
-    * @returns {VariableValue}
+    * @return {VariableValue}
     */
    this.getValue=function(){
       return new VariableValue(output, false);
@@ -36,12 +37,12 @@ function VariableExpression(output){
 extend(VariableExpression, AbstractExpression);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 VariableExpression.prototype.name="VariableExpression";
 /**
  * @param {Output} output
- * @returns {VariableExpressionParenthesized}
+ * @return {VariableParenthesizedExpression}
  */
 VariableExpression.prototype.getParenthesizedExpression=function(output){
    return new VariableParenthesizedExpression(output);

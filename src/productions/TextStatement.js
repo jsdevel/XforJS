@@ -16,8 +16,9 @@
  */
 
 /**
+ * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {TextStatement}
  */
 function TextStatement(output){
    /**
@@ -55,6 +56,6 @@ function TextStatement(output){
 extend(TextStatement, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 TextStatement.prototype.name="TextStatement";

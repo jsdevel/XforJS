@@ -17,8 +17,8 @@
 
 /**
  * @constructor
+ * @extends {AbstractConditionBlock}
  * @param {Output} output
- * @returns {IfStatement}
  */
 function IfStatement(output){
    var expressionOutput = new Output();
@@ -33,13 +33,13 @@ function IfStatement(output){
          add("}");
 
    /**
-    * @returns {VariableExpression}
+    * @return {VariableExpression}
     */
    this.getVariableExpression=function(){
       return new VariableExpression(expressionOutput);
    };
    /**
-    * @returns {TemplateBodyStatements}
+    * @return {TemplateBodyStatements}
     */
    this.getBodyStatements=function(){
       return new TemplateBodyStatements(bodyOutput);
@@ -78,11 +78,11 @@ function IfStatement(output){
 extend(IfStatement, AbstractConditionBlock);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 IfStatement.prototype.name="IfStatement";
 /**
- * @return RegExp
+ * @return {RegExp}
  */
 IfStatement.prototype.getClosingPattern=function(){
    return IF_CLOSING;

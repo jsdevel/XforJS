@@ -17,12 +17,10 @@
 
 /**
  * @constructor
- * @this {ProductionContext}
  * @param {Output} output
  * @param {Compiler} compiler Used for importing files, and gaining access to
  *    initial configuration settings.
  * @param {ProductionContext} previousContext
- * @returns {ProductionContext}
  */
 function ProductionContext(
    output,
@@ -98,7 +96,7 @@ function ProductionContext(
       return this;
    };
    /**
-    * @param {String} string used as a key in the current configuration.
+    * @param {string} string used as a key in the current configuration.
     * @return {Object} The object returned is the current configuration at the
     *    time the method is called.  It isn't gauranteed to always be the
     *    current configuration of the context.
@@ -151,7 +149,7 @@ function ProductionContext(
     * to set the namespace of the program will fail.
     *
     * @throws if an invalid namespace is given.
-    * @param {String} namespace
+    * @param {string} namespace
     */
    this.setNS=function(namespace){
       if(!namespace){
@@ -165,7 +163,7 @@ function ProductionContext(
 
    /**
     * @throws if setNS hasn't been called.
-    * @return {String}
+    * @return {string}
     */
    this.getNS=function(){
       if(!programNamespace){
@@ -174,7 +172,7 @@ function ProductionContext(
       return programNamespace||"";
    };
    /**
-    * @param {String} namespace
+    * @param {string} namespace
     * @return {boolean} Indicates if the namespace has been declared.
     */
    this.hasNS=function(namespace){
@@ -182,7 +180,7 @@ function ProductionContext(
    };
 
    /**
-    * @param {String} path
+    * @param {string} path
     * @throws @see getInputFilePath
     * @throws if an attempt to set path more than once is made.
     * @return {ProductionContext}
@@ -197,8 +195,8 @@ function ProductionContext(
    };
 
    /**
-    * @param {String} filePath
-    * @return {String}
+    * @param {string} filePath
+    * @return {string}
     */
    this.importFile=function(filePath) {
       if(!inputFilePath){
@@ -311,7 +309,7 @@ Have you supplied '"+filePath+"' to the compile method?";
 
    /**
     * @throws If the name hasn't been declared.
-    * @param {String} name
+    * @param {string} name
     */
    this.validateVariableReference=function(name){
       if(!currentVariableOutput.hasVariableBeenDeclared(name)){
@@ -328,7 +326,7 @@ Have you supplied '"+filePath+"' to the compile method?";
    };
    /**
     * @param {string} name
-    * @returns {ProductionContext}
+    * @return {ProductionContext}
     */
    this.addDeclaredTemplate=function(name){
       callManager.addDeclaredTemplate(name);
@@ -336,7 +334,7 @@ Have you supplied '"+filePath+"' to the compile method?";
    };
    /**
     * @param {string} name
-    * @returns {ProductionContext}
+    * @return {ProductionContext}
     */
    this.addCalledTemplate=function(name){
       callManager.addCalledTemplate(name);

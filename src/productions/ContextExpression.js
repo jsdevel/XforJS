@@ -17,13 +17,14 @@
 
 /**
  * @constructor
+ * @extends {AbstractExpression}
  * @param {Output} output
  * @param {boolean} isNested
  */
 function ContextExpression(output, isNested){
    /**
     * @override
-    * @returns {Output}
+    * @return {Output}
     */
    this.getOutput=function(){
       return output;

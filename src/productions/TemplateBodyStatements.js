@@ -17,8 +17,8 @@
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {TemplateBodyStatements}
  */
 function TemplateBodyStatements(output){
 
@@ -125,6 +125,6 @@ function TemplateBodyStatements(output){
 extend(TemplateBodyStatements, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 TemplateBodyStatements.prototype.name="TemplateBodyStatements";

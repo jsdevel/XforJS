@@ -17,7 +17,7 @@
 
 /**
  * @constructor
- *
+ * @extends {Production}
  * @param {Output} output
  */
 function Operator(output){

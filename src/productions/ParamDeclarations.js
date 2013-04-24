@@ -17,20 +17,21 @@
 
 /**
  * @constructor
+ * @extends {AbstractVariableDeclarations}
  * @param {AbstractVariableOutput} output
  */
 function ParamDeclarations(output){
    /**
-    * @returns {ParamDeclaration}
+    * @return {ParamDeclaration}
     */
    this.getDeclaration=function(){
       return new ParamDeclaration(output);
    };
 }
 extend(ParamDeclarations, AbstractVariableDeclarations);
-/** @type String */
+/** @type {string} */
 ParamDeclarations.prototype.name="ParamDeclarations";
-/** @type String */
+/** @type {string} */
 ParamDeclarations.prototype._characterAfterOpenCurly="p";
 /**
  * @return {RegExp}

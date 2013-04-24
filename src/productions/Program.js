@@ -21,6 +21,7 @@
  * <b>Note: Program must be added to ProductionContext before execution.</b>
  *
  * @constructor
+ * @extends {Production}
  * @param {Output} output
  * @param {ProductionContext} context
  * @param {boolean} isNested
@@ -31,16 +32,39 @@ function Program(
    context,
    isNested
 ){
+   /**
+    * @type {Output}
+    */
    var programNamespaceOutput=new Output();
+   /**
+    * @type {Output}
+    */
    var importOutput=new Output();
+   /**
+    * @type {Output}
+    */
    var globalStatementsOutput=new Output();
 
-   var globalParams = context.getParams();//JSParameters
-   var globalParamNames = context.getJSParametersWrapper();//JSParametersWrapper
-   var variableOutput=context.getCurrentVariableOutput();
+   /**
+    * @type {JSParameters}
+    */
+   var globalParams = context.getParams();
+   /**
+    * @type {JSParametersWrapper}
+    */
+   var globalParamNames = context.getJSParametersWrapper();
 
+   /**
+    * @type {boolean}
+    */
    var hasProgramNamespace=false;
+   /**
+    * @type {boolean}
+    */
    var hasVariables=false;
+   /**
+    * @type {boolean}
+    */
    var hasGlobals=false;
 
    output.
@@ -48,7 +72,7 @@ function Program(
          add(programNamespaceOutput).
          add(importOutput).
          add("(function(").add(globalParamNames).add("){").
-            add(variableOutput).
+            add(context.getCurrentVariableOutput()).
             add(globalStatementsOutput).
             add("})(").add(globalParamNames).add(");");
 
@@ -116,7 +140,7 @@ function Program(
                case 'v'://variables
                   if(!hasGlobals){
                      hasGlobals=true;
-                     context.addProduction(new GlobalVariableDeclarations(variableOutput));
+                     context.addProduction(new GlobalVariableDeclarations());
                      return;
                   } else {
                      throw "GlobalVariableDeclarations must appear before GlobalStatements.";

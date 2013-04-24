@@ -15,11 +15,13 @@
  *
  */
 
-
+/**
+ * @constructor
+ * @extends {Production}
+ */
 function AbstractAssignment(){}
 extend(AbstractAssignment, Production);
 /**
- * @const
  * @type {string}
  */
 AbstractAssignment.prototype.name="AbstractAssignment";

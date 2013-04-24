@@ -17,9 +17,9 @@
 
 /**
  * @constructor
+ * @extends {AbstractConditionBlock}
  * @param {Output} output
  * @param {ProductionContext} context
- * @returns {ForeachStatement}
  */
 function ForeachStatement(output, context){
    var expressionOutput = new Output();
@@ -56,13 +56,13 @@ function ForeachStatement(output, context){
       );
 
    /**
-    * @returns {ContextSelector}
+    * @return {ContextSelector}
     */
    this.getVariableExpression=function(){
       return new ContextSelector(expressionOutput, false);
    };
    /**
-    * @returns {ForeachBodyStatements}
+    * @return {ForeachBodyStatements}
     */
    this.getBodyStatements=function(){
       return new ForeachBodyStatements(bodyOutput, sortContextOutput, sortParamOutput);
@@ -71,11 +71,11 @@ function ForeachStatement(output, context){
 extend(ForeachStatement, AbstractConditionBlock);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 ForeachStatement.prototype.name="ForeachStatement";
 /**
- * @return RegExp
+ * @return {RegExp}
  */
 ForeachStatement.prototype.getClosingPattern=function(){
    return FOREACH_CLOSING;

@@ -17,6 +17,7 @@
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
  * @param {Output} sortContextOutput
  * @param {Output} sortFunctionOutput
@@ -83,6 +84,6 @@ function ForeachBodyStatements(output, sortContextOutput, sortFunctionOutput) {
 extend(ForeachBodyStatements, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 ForeachBodyStatements.prototype.name="ForeachBodyStatements";

@@ -16,8 +16,9 @@
  */
 
 /**
+ * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {TemplateDeclaration}
  */
 function TemplateDeclaration(output){
    var isOpened=false;

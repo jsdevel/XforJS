@@ -16,12 +16,12 @@
  */
 
 /**
- * @param {String} variableStatementPrefix
- * @param {String} variablePrefix
- * @param {String} variableAssignmentOperator
- * @param {String} variableStatementPostfix
- * @param {AbstractVariableOutput} parentScope
- * @return {AbstractVariableOutput}
+ * @constructor
+ * @param {string} variableStatementPrefix
+ * @param {string} variablePrefix
+ * @param {string} variableAssignmentOperator
+ * @param {string} variableStatementPostfix
+ * @param {AbstractVariableOutput=} parentScope
  */
 function AbstractVariableOutput(
    variableStatementPrefix,
@@ -30,9 +30,17 @@ function AbstractVariableOutput(
    variableStatementPostfix,
    parentScope
 ){
-   var instance=this;
+   /**
+    * @type {Object}
+    */
    var variables={};
+   /**
+    * @type {Array}
+    */
    var keys=[];
+   /**
+    * @type {Array}
+    */
    var wrappedOutput = [];
    /** @type string */
    var _variablePrefix = variablePrefix||"";
@@ -48,8 +56,8 @@ function AbstractVariableOutput(
    }
 
    /**
-    * @param {String} name
-    * @param {Object} value
+    * @param {string} name
+    * @param {Object|string} value
     * @return {AbstractVariableOutput}
     */
    this.add=function(name, value){
@@ -67,9 +75,13 @@ function AbstractVariableOutput(
       }
       variables[key]=value;
       keys.push(key);
-      return instance;
+      return this;
    };
 
+   /*
+    * @param {string} name
+    * @return {boolean}
+    */
    this.hasVariableBeenDeclared=function(name){
       var key = _variablePrefix+name;
       if(
@@ -83,12 +95,16 @@ function AbstractVariableOutput(
    };
 
    /**
-    * @return string
+    * @return {string}
     */
    this.getVariablePrefix=function(){
       return _variablePrefix;
    };
 
+   /**
+    * @return {string}
+    * @override
+    */
    this.toString=function(){
       var first;
       var firstValue;
@@ -120,10 +136,18 @@ function AbstractVariableOutput(
       return wrappedOutput.join('');
    };
 }
+/**
+ * @param {AbstractVariableOutput=} parentScope
+ * @return {AbstractVariableOutput}
+ */
 AbstractVariableOutput.getVariableOutput=function(parentScope){
    return new AbstractVariableOutput("var ", "__", "=", ";", parentScope);
 };
-AbstractVariableOutput.getParamOutput=function(parentScope){
+
+/**
+ * @return {AbstractVariableOutput}
+ */
+AbstractVariableOutput.getParamOutput=function(){
    return new AbstractVariableOutput(",{", "", ":", "}");
 };
 

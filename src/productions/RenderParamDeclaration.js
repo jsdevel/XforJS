@@ -17,8 +17,8 @@
 
 /**
  * @constructor
+ * @extends {AbstractVariableDeclaration}
  * @param {AbstractVariableOutput} variableOutput
- * @returns {RenderParamDeclaration}
  */
 function RenderParamDeclaration(variableOutput){
    /**
@@ -30,30 +30,30 @@ function RenderParamDeclaration(variableOutput){
 }
 extend(RenderParamDeclaration, AbstractVariableDeclaration);
 /**
- * @const
- * @type String
+ * @override
+ * @type {string}
  */
 RenderParamDeclaration.prototype.name="RenderParamDeclaration";
 /**
- * @type RegExp
+ * @return {RegExp}
  */
 RenderParamDeclaration.prototype.getPattern=function(){
    return PARAM;
 };
 /**
  * @param {Output} output
- * @returns {VariableAssignment}
+ * @return {VariableAssignment}
  */
 RenderParamDeclaration.prototype.getProduction=function(output){
    return new VariableAssignment(output);
 };
 /**
- * @param {String} name
+ * @param {string} name
  * @param {Output} output
  */
 RenderParamDeclaration.prototype.doAssignment=function(name, output){};
 /**
- * @param {String} name
+ * @param {string} name
  * @param {ProductionContext} context
  */
 RenderParamDeclaration.prototype.doNoAssignment=function(name, context){

@@ -39,8 +39,8 @@ var XforJS = {
    * 2) Something happened while attempting to write to the path.
    * 3) XforJS.server == false
    *
-   * @param {String} path
-   * @param {String} namespace
+   * @param {string} path
+   * @param {string} namespace
    * @return {JavascriptBuilder}
    */
    'buildOutputLibrary':function(path, namespace){
@@ -147,5 +147,9 @@ var XforJS = {
 
 
 /*INJECT TESTS HERE*/
-this['XforJS']=XforJS;
+(
+function(){
+   this['XforJS']=XforJS;
+}
+)();
 

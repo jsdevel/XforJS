@@ -17,8 +17,8 @@
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {PrintStatement}
  */
 function PrintStatement(output){
    var hasOpenCurly=false;
@@ -91,6 +91,6 @@ function PrintStatement(output){
 extend(PrintStatement, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 PrintStatement.prototype.name="PrintStatement";

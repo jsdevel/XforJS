@@ -18,9 +18,9 @@
 
 /**
  * @constructor
- * @param {Output} output
+ * @extends {Production}
  */
-function GlobalVariableDeclarations(output){
+function GlobalVariableDeclarations(){
    /**
     * @param {CharWrapper} characters
     * @param {ProductionContext} context

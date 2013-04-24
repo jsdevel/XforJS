@@ -16,14 +16,13 @@
  */
 /**
  * @constructor
- *
+ * @extends {AbstractExpression}
  * @param {Output} output
- * @returns {GlobalExpression}
  */
 function GlobalExpression(output){
    /**
     * @override
-    * @returns {Output}
+    * @return {Output}
     */
    this.getOutput=function(){
       return output;

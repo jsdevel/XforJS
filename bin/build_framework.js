@@ -1,3 +1,4 @@
+#!/bin/env node
 /*!
  * Copyright 2013 Joseph Spencer.
  *
@@ -17,7 +18,8 @@
 !function(){
    var common = require('./common');
    var fs = require('fs');
-   var exec=require('child_process').exec;
+   var spawn=require('child_process').spawn;
+   var closure;
    var framework = fs.readFileSync("../src/XforJS.js", "utf8");
    var VERSION = fs.readFileSync("VERSION", "utf8");
    var placeholders = {
@@ -34,11 +36,25 @@
    fs.writeFileSync("../build/javascript/XforJS."+VERSION+".js", frameworkBuilt, "utf8");
 
    console.log("writing compiled file to ../build/javascript/XforJS."+VERSION+".min.js");
-   exec('java -jar google-closure/compiler.jar \
-      --js ../build/javascript/XforJS.'+VERSION+'.js \
-      --js_output_file ../build/javascript/XforJS.'+VERSION+'.min.js \
-      --compilation_level ADVANCED_OPTIMIZATIONS \
-      --accept_const_keyword \
-      --output_wrapper "!function(){%output%}();"');
-   console.log("finished");
+   closure=spawn('java',
+      [
+         '-jar', 'google-closure/compiler.jar',
+         '--js', '../build/javascript/XforJS.'+VERSION+'.js',
+         '--js_output_file', '../build/javascript/XforJS.'+VERSION+'.min.js',
+         '--compilation_level', 'ADVANCED_OPTIMIZATIONS',
+         '--externs', 'google-closure/externs.js',
+         '--warning_level', 'VERBOSE',
+         '--accept_const_keyword',
+         '--output_wrapper', '!function(){%output%}();'
+      ]
+   );
+   closure.stdout.on('data', function(data){
+      console.log('stdout: '+data);
+   });
+   closure.stderr.on('data', function(data){
+      console.log('stderr: '+data);
+   });
+   closure.on('exit', function(code){
+      console.log("closure finished with code: "+code);
+   });
 }();

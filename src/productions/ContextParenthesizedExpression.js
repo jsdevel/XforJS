@@ -17,19 +17,20 @@
 
 /**
  * @constructor
+ * @extends {AbstractParenthesizedExpression}
  * @param {Output} output
  */
 function ContextParenthesizedExpression(output){
    /**
     * @param {Output} expressionOutput The output used for the return production.
-    * @returns {ContextExpression}
+    * @return {ContextExpression}
     */
    this.getExpression=function(expressionOutput){
       return new ContextExpression(expressionOutput, true);
    };
    /**
     *
-    * @returns {Output}
+    * @return {Output}
     */
    this.getOutput=function(){
       return output;
@@ -38,6 +39,6 @@ function ContextParenthesizedExpression(output){
 extend(ContextParenthesizedExpression, AbstractParenthesizedExpression);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 ContextParenthesizedExpression.prototype.name="ContextParenthesizedExpression";
