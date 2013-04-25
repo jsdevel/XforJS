@@ -196,7 +196,7 @@ function Foreach(o,c,so,n,p,i){
       }
       for(j=0;j<l;j++){
          m=o[j];
-         c(m.c, j+1, o.length, m.n)
+         c(m.c, j+1, o.length, m.n);
       }
    }
 
