@@ -33,7 +33,7 @@
  * time.
  */
 function Foreach(o,c,so,n,p,i){
-   var j,l,m,asc=so===0,shuffledArray;
+   var j,l,m,asc=so===0;
    if(o instanceof Array && typeof(c) === 'function' ){
       l=o.length;
       if(so!==void(0)){
