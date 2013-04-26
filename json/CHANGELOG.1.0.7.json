@@ -1,0 +1,8 @@
+{
+   "currentVersion":"1.0.7",
+   "previousVersion":"",
+   "commitHistory":[
+
+"closes #36:  undefined is returned in node module. bug."
+]
+}
