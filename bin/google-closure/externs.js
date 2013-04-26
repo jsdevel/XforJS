@@ -20,3 +20,5 @@
  * @return {Object}
  */
 function require(string){}
+
+var module;
