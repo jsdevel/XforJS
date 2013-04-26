@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Version: 1.0.5
+ * Version: 1.0.6
  *
  * For demos and docs visit http://jsdevel.github.com/XforJS/
  * For viewing source visit http://github.com/jsdevel/XforJS/
@@ -39,8 +39,8 @@ var XforJS = {
    * 2) Something happened while attempting to write to the path.
    * 3) XforJS.server == false
    *
-   * @param {String} path
-   * @param {String} namespace
+   * @param {string} path
+   * @param {string} namespace
    * @return {JavascriptBuilder}
    */
    'buildOutputLibrary':function(path, namespace){
@@ -79,112 +79,257 @@ function extend(Child, Parent){
 
 
 //Save this section for regex.
-/** @const @type {string} */
+/**
+ * @const
+ * @type {string}
+ */
 var __reg_COMMENT = "#(?:[^\\r\\n]+)?(?:\\r?\\n)";
-/** @const @type {string} */
+/**
+ * @const
+ * @type {string}
+ */
 var __reg_name = "[a-zA-Z$_](?:[\\w$]+)?";
-/** @const @type {string} */
+/**
+ * @const
+ * @type {string}
+ */
 var __reg_variable_reference = "@("+__reg_name+")";
 
 //SEQUENCES
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var IMPORT_PATH=                    /^((?:[^\}\\]|\\[\}\\])+\.xjs)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var INPUT_TOKENS=                   /^((?:\\[#\{]|(?![#\{])[\s\S])+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NAME =                          new RegExp("^("+__reg_name+")");
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NS =                            new RegExp("^("+__reg_name+"(?:(?:\\."+__reg_name+")+)?)");
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NS_FORCED =                     new RegExp("^("+__reg_name+"(?:\\."+__reg_name+")+)");
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var OPERATOR_NOT=/^([!~]+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var OPERATOR_TYPEOF=/^(typeof)(?=[\(\s])/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var MODIFIER=                        /^(\|)(?!\|)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var PRINT_MODIFIERS=                 /^(\|[eE]{1,2})(?=\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var SORT_DIRECTION=                 /^(\|(?:asc|desc|rand))(?![\w$])/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var SORT_MODIFIERS=                 /^(\|[cCin]{1,4})(?![\w$])/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var SPACE =                         new RegExp("^((?:\\s+|"+__reg_COMMENT+")+)");
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var SPACE_BETWEEN_ANGLE_BRACKETS =  /(>|<)\s+|\s+(>|<)/g;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var SPACE_PRECEDING_CURLY =         new RegExp("^((?:\\s+(?=\\{)|"+__reg_COMMENT+")+)");
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var TEXT_INPUT =                    /^((?:(?!\{\/text\})[\s\S])+)(?=\{\/text\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var VARIABLE_AS_CONTEXT_SELECTOR =  new RegExp("^"+__reg_variable_reference+"\\s*[\\.\\[\\(]");
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var VARIABLE_REFERENCE           =  new RegExp("^("+__reg_variable_reference+")");
 
 //STATEMENT PATTERNS
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var RENDER =                          /^(\{render\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var RENDER_CLOSING =                  /^(\{\/render\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var FOREACH =                       /^(\{foreach\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var FOREACH_CLOSING =               /^(\{\/foreach\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var IF =                            /^(\{if\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var IF_CLOSING =                    /^(\{\/if\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var IMPORT =                        /^(\{import\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var LOG =                           /^(\{log\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NAMESPACE =                     /^(\{namespace\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var PARAM =                         /^(\{param\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var SORT =                          /^(\{sort\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var TEMPLATE =                      /^(\{template\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var TEMPLATE_CLOSING =              /^(\{\/template\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var TEXT =                          /^(\{text\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var TEXT_CLOSING =                  /^(\{\/text\})/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var VAR =                           /^(\{var\s+)/;
 
 //CONTINUATIONS
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var ELIF =                          /^(\{:elif\s+)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var ELSE =                          /^(\{:else\})/;
 
 //FUNCTIONS
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var COUNT_FN =    /^(count\()/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var CURRENT_FN =  /^(current\(\))/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var LAST_FN =     /^(last\(\))/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NAME_FN =     /^(name\(\))/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var POSITION_FN = /^(position\(\))/;
 
 //PRIMITIVES
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var BOOLEAN =     /^(false|true)(?![\w$])/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NUMBER =      /^((?:0x(?=([0-9A-Fa-f]+))\2(?!\.)|(?=(0(?![0-9])|[1-9][0-9]*))\3(?!x)(?:\.[0-9]+)?)(?:[eE][-+][0-9]+)?)/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var NULL =        /^(null)(?![\w$])/;
-/** @const @type {regexp} */
+/**
+ * @const
+ * @type {RegExp}
+ */
 var STRING =      /^((['"])(?=((?:(?:(?!\2|\r?\n|\\)[\s\S]|\\(?:\\|\2|\r?\n))+)?))\3\2)/;
 
 
+/**
+ * @const
+ * @enum {boolean}
+ */
 var RESERVED_WORDS = {
    "break":true,
    "case":true,
@@ -234,7 +379,7 @@ var RESERVED_WORDS = {
 };
 
 /**
- * @param {String} namespace
+ * @param {string} namespace
  * @throws if the namespace contains a reserved word, or is invalid.
  */
 function validateNamespacesAgainstReservedWords(namespace) {
@@ -255,8 +400,9 @@ function validateNamespacesAgainstReservedWords(namespace) {
 }
 
 /**
+ * @param {string} inputFilePath
  * @see getInputFilePath
- * @return {String}  Absolute path. path.dirname is used on the result of
+ * @return {string}  Absolute path. path.dirname is used on the result of
  *    getInputFileDirectory.
  */
 function getInputFileDirectory(inputFilePath){
@@ -265,11 +411,11 @@ function getInputFileDirectory(inputFilePath){
 }
 
 /**
- * @param {String} inputFilePath
+ * @param {string} inputFilePath
  * @throws if inputFilePath isn't a string.
  * @throws if inputFilePath doesn't end with .xjs.
  * @throws if inputFilePath doesn't exist.
- * @return {String}  Absolute path.  It is normalized by the following:<br><br>
+ * @return {string}  Absolute path.  It is normalized by the following:<br><br>
  *    1) whitespace is trimmed from the ends<br>
  *    2) node.js' path.normalize<br>
  *    3) node.js' path.resolve<br>
@@ -299,7 +445,7 @@ Also be sure to supply an abslolute path.";
  * Escapes escaped output from within a template.  # needs to be escaped in xforjs
  * template files, so this converts \# to # for the output, etc.
  *
- * @param {String} input
+ * @param {string} input
  */
 function escapeOutput(input){
    return input.
@@ -308,25 +454,101 @@ function escapeOutput(input){
       replace(/\n|\r/g, "\\\n");
 }
 //Names of functions and variables etc. used by the output.
+/**
+ * @const
+ * @type {string}
+ */
 var js_bld="b";
+/**
+ * @const
+ * @type {string}
+ */
 var js_context="x";
+/**
+ * @const
+ * @type {string}
+ */
 var js_count="T";
+/**
+ * @const
+ * @type {string}
+ */
 var js_currentNS="N";
+/**
+ * @const
+ * @type {string}
+ */
 var js_data="D";
+/**
+ * @const
+ * @type {string}
+ */
 var js__data="A";
+/**
+ * @const
+ * @type {string}
+ */
 var js_last="L";
+/**
+ * @const
+ * @type {string}
+ */
 var js_name="n";
+/**
+ * @const
+ * @type {string}
+ */
 var js_params="P";
+/**
+ * @const
+ * @type {string}
+ */
 var js__params="M";
+/**
+ * @const
+ * @type {string}
+ */
 var js_position="O";
+/**
+ * @const
+ * @type {string}
+ */
 var js_templateBasket="B";
 
+/**
+ * @const
+ * @type {string}
+ */
 var js_CountElements="C";
+/**
+ * @const
+ * @type {string}
+ */
 var js_EscapeXSS="X";
+/**
+ * @const
+ * @type {string}
+ */
 var js_Foreach="F";
+/**
+ * @const
+ * @type {string}
+ */
 var js_GetSortArray="G";
+/**
+ * @const
+ * @type {string}
+ */
 var js_SafeValue="V";
+/**
+ * @const
+ * @type {string}
+ */
 var js_StringBuffer="S";
+/**
+ * @const
+ * @type {string}
+ */
 var js_LibNamespace = "XforJS.js";
 
 function CountElements(f){
@@ -688,14 +910,26 @@ function StringBuffer(){
    return f
 }
 
+/**
+ * Facillitates the Composite Pattern.
+ * @constructor
+ */
 function Output(){
    var nodes = [];
 
+   /**
+    * @param {Object|string} obj
+    * @return {Output}
+    */
    this.add=function(obj){
       nodes.push(obj);
       return this;
    };
 
+   /**
+    * @return {string}
+    * @override
+    */
    this.toString=function(){
       return nodes.join('');
    };
@@ -707,10 +941,13 @@ function Output(){
 
 /**
  * @constructor
- * @param {String} indent
+ * @param {string} indent
  * @param {Output} output
  */
 function CodeFormatter(indent, output){
+   /**
+    * @type {number}
+    */
    var indentCount=0;
 
    if(typeof indent !== 'string'){
@@ -722,7 +959,7 @@ function CodeFormatter(indent, output){
    }
 
    /**
-    * @param {int} amount
+    * @param {number} amount
     * @return {CodeFormatter}
     */
    this.addIndent=function(amount){
@@ -735,7 +972,7 @@ function CodeFormatter(indent, output){
    };
 
    /**
-    * @param {String} input optional
+    * @param {Object|string} input optional
     * @return {CodeFormatter}
     */
    this.doIndent=function(input){
@@ -752,7 +989,7 @@ function CodeFormatter(indent, output){
    };
 
    /**
-    * @param {int} amount
+    * @param {number} amount
     * @return {CodeFormatter}
     */
    this.removeIndent=function(amount){
@@ -771,7 +1008,7 @@ function CodeFormatter(indent, output){
    };
 
    /**
-    * @param {String} line
+    * @param {Object|string} line
     * @return {CodeFormatter}
     */
    this.addLine=function(line){
@@ -783,7 +1020,7 @@ function CodeFormatter(indent, output){
    };
 
    /**
-    * @param {Object} obj
+    * @param {Object|string} obj
     * @return {CodeFormatter}
     */
    this.add=function(obj){
@@ -796,12 +1033,12 @@ function CodeFormatter(indent, output){
 
 
 /**
- * @param {String} variableStatementPrefix
- * @param {String} variablePrefix
- * @param {String} variableAssignmentOperator
- * @param {String} variableStatementPostfix
- * @param {AbstractVariableOutput} parentScope
- * @return {AbstractVariableOutput}
+ * @constructor
+ * @param {string} variableStatementPrefix
+ * @param {string} variablePrefix
+ * @param {string} variableAssignmentOperator
+ * @param {string} variableStatementPostfix
+ * @param {AbstractVariableOutput=} parentScope
  */
 function AbstractVariableOutput(
    variableStatementPrefix,
@@ -810,9 +1047,17 @@ function AbstractVariableOutput(
    variableStatementPostfix,
    parentScope
 ){
-   var instance=this;
+   /**
+    * @type {Object}
+    */
    var variables={};
+   /**
+    * @type {Array}
+    */
    var keys=[];
+   /**
+    * @type {Array}
+    */
    var wrappedOutput = [];
    /** @type string */
    var _variablePrefix = variablePrefix||"";
@@ -828,8 +1073,8 @@ function AbstractVariableOutput(
    }
 
    /**
-    * @param {String} name
-    * @param {Object} value
+    * @param {string} name
+    * @param {Object|string} value
     * @return {AbstractVariableOutput}
     */
    this.add=function(name, value){
@@ -847,9 +1092,13 @@ function AbstractVariableOutput(
       }
       variables[key]=value;
       keys.push(key);
-      return instance;
+      return this;
    };
 
+   /*
+    * @param {string} name
+    * @return {boolean}
+    */
    this.hasVariableBeenDeclared=function(name){
       var key = _variablePrefix+name;
       if(
@@ -863,12 +1112,16 @@ function AbstractVariableOutput(
    };
 
    /**
-    * @return string
+    * @return {string}
     */
    this.getVariablePrefix=function(){
       return _variablePrefix;
    };
 
+   /**
+    * @return {string}
+    * @override
+    */
    this.toString=function(){
       var first;
       var firstValue;
@@ -900,10 +1153,18 @@ function AbstractVariableOutput(
       return wrappedOutput.join('');
    };
 }
+/**
+ * @param {AbstractVariableOutput=} parentScope
+ * @return {AbstractVariableOutput}
+ */
 AbstractVariableOutput.getVariableOutput=function(parentScope){
    return new AbstractVariableOutput("var ", "__", "=", ";", parentScope);
 };
-AbstractVariableOutput.getParamOutput=function(parentScope){
+
+/**
+ * @return {AbstractVariableOutput}
+ */
+AbstractVariableOutput.getParamOutput=function(){
    return new AbstractVariableOutput(",{", "", ":", "}");
 };
 
@@ -919,8 +1180,8 @@ function JSParameters(){
    var map = {};
 
    /**
-    * @param {String} key
-    * @param {Object} value
+    * @param {string} key
+    * @param {Object|string} value
     * @return {JSParameters}
     */
    this.put=function(key, value){
@@ -933,14 +1194,14 @@ function JSParameters(){
    };
 
    /**
-    * @return {String}
+    * @return {string}
     */
    this.getParameters=function(){
       return keys.join(',');
    };
 
    /**
-    * @return {String}
+    * @return {string}
     */
    this.getArguments=function(){
       return values.join(',');
@@ -1037,7 +1298,7 @@ function JavascriptBuilder(args){
 
 /**
  * @constructor
- * @param {String} characters
+ * @param {string} characters
  */
 function CharWrapper(characters){
    var _characters = typeof characters === 'string' && characters || "";
@@ -1136,7 +1397,7 @@ function CharWrapper(characters){
    };
 
    /**
-    * @param {String} string
+    * @param {string} string
     * @return boolean
     */
    this.startsWith=function(string){
@@ -1166,6 +1427,9 @@ function CharWrapper(characters){
    };
 }
 
+/**
+ * @constructor
+ */
 function Production(){}
 /**
  * @param {CharWrapper} characters
@@ -1193,12 +1457,10 @@ Production.prototype.name="Production";
 
 /**
  * @constructor
- * @this {ProductionContext}
  * @param {Output} output
  * @param {Compiler} compiler Used for importing files, and gaining access to
  *    initial configuration settings.
  * @param {ProductionContext} previousContext
- * @returns {ProductionContext}
  */
 function ProductionContext(
    output,
@@ -1274,7 +1536,7 @@ function ProductionContext(
       return this;
    };
    /**
-    * @param {String} string used as a key in the current configuration.
+    * @param {string} string used as a key in the current configuration.
     * @return {Object} The object returned is the current configuration at the
     *    time the method is called.  It isn't gauranteed to always be the
     *    current configuration of the context.
@@ -1327,7 +1589,7 @@ function ProductionContext(
     * to set the namespace of the program will fail.
     *
     * @throws if an invalid namespace is given.
-    * @param {String} namespace
+    * @param {string} namespace
     */
    this.setNS=function(namespace){
       if(!namespace){
@@ -1341,7 +1603,7 @@ function ProductionContext(
 
    /**
     * @throws if setNS hasn't been called.
-    * @return {String}
+    * @return {string}
     */
    this.getNS=function(){
       if(!programNamespace){
@@ -1350,7 +1612,7 @@ function ProductionContext(
       return programNamespace||"";
    };
    /**
-    * @param {String} namespace
+    * @param {string} namespace
     * @return {boolean} Indicates if the namespace has been declared.
     */
    this.hasNS=function(namespace){
@@ -1358,7 +1620,7 @@ function ProductionContext(
    };
 
    /**
-    * @param {String} path
+    * @param {string} path
     * @throws @see getInputFilePath
     * @throws if an attempt to set path more than once is made.
     * @return {ProductionContext}
@@ -1373,8 +1635,8 @@ function ProductionContext(
    };
 
    /**
-    * @param {String} filePath
-    * @return {String}
+    * @param {string} filePath
+    * @return {string}
     */
    this.importFile=function(filePath) {
       if(!inputFilePath){
@@ -1487,7 +1749,7 @@ Have you supplied '"+filePath+"' to the compile method?";
 
    /**
     * @throws If the name hasn't been declared.
-    * @param {String} name
+    * @param {string} name
     */
    this.validateVariableReference=function(name){
       if(!currentVariableOutput.hasVariableBeenDeclared(name)){
@@ -1504,7 +1766,7 @@ Have you supplied '"+filePath+"' to the compile method?";
    };
    /**
     * @param {string} name
-    * @returns {ProductionContext}
+    * @return {ProductionContext}
     */
    this.addDeclaredTemplate=function(name){
       callManager.addDeclaredTemplate(name);
@@ -1512,7 +1774,7 @@ Have you supplied '"+filePath+"' to the compile method?";
    };
    /**
     * @param {string} name
-    * @returns {ProductionContext}
+    * @return {ProductionContext}
     */
    this.addCalledTemplate=function(name){
       callManager.addCalledTemplate(name);
@@ -1562,11 +1824,13 @@ Have you supplied '"+filePath+"' to the compile method?";
 ProductionContext.prototype.isEscapeXSSOutput=false;
 
 
-
+/**
+ * @constructor
+ * @extends {Production}
+ */
 function AbstractAssignment(){}
 extend(AbstractAssignment, Production);
 /**
- * @const
  * @type {string}
  */
 AbstractAssignment.prototype.name="AbstractAssignment";
@@ -1587,28 +1851,28 @@ AbstractAssignment.prototype.getExpression=function(){};
 
 /**
  * @constructor
+ * @extends {Production}
  */
 function AbstractConditionBlock(){}
 extend(AbstractConditionBlock, Production);
 /**
- * @const
- * @type String
+ * @type {string}
  */
 AbstractConditionBlock.prototype.name="AbstractConditionBlock";
-/** @type Boolean */
+/** @type {boolean} */
 AbstractConditionBlock.prototype._canSelfClose=false;
-/** @type Boolean */
+/** @type {boolean} */
 AbstractConditionBlock.prototype._expectingVariableExpression=true;
-/** @type Boolean */
+/** @type {boolean} */
 AbstractConditionBlock.prototype._expectingBodyStatements=true;
 /**
- * @returns {Production}
+ * @return {Production}
  */
 AbstractConditionBlock.prototype.getBodyStatements=function(){};
-/** @return RegExp */
+/** @return {RegExp} */
 AbstractConditionBlock.prototype.getClosingPattern=function(){};
 /**
- * @returns {Production}
+ * @return {Production}
  */
 AbstractConditionBlock.prototype.getVariableExpression=function(){};
 /**
@@ -1662,11 +1926,11 @@ AbstractConditionBlock.prototype.execute=function(characters, context){
 
 /**
  * @constructor
+ * @extends {Production}
  */
 function AbstractExpression(){}
 extend(AbstractExpression, Production);
 /**
- * @const
  * @type {string}
  */
 AbstractExpression.prototype.name="AbstractExpression";
@@ -1765,11 +2029,11 @@ AbstractExpression.prototype.getOutput=function(){};
 
 /**
  * @constructor
+ * @extends {Production}
  */
 function AbstractVariableDeclaration(){}
 extend(AbstractVariableDeclaration, Production);
 /**
- * @const
  * @type {string}
  */
 AbstractVariableDeclaration.prototype.name="AbstractVariableDeclaration";
@@ -1834,12 +2098,12 @@ AbstractVariableDeclaration.prototype.getProduction=function(output){};
  * For instance, in the case of ParamDeclarations, we want the following to be
  * prepended to the assignment: 'params.d||'.
  *
- * @param {String} name
+ * @param {string} name
  * @param {Output} output  The Assignment Output.
  */
 AbstractVariableDeclaration.prototype.doAssignment=function(name, output){};
 /**
- * @param {String} name
+ * @param {string} name
  * @param {ProductionContext} context
  */
 AbstractVariableDeclaration.prototype.doNoAssignment=function(name, context){};
@@ -1847,6 +2111,7 @@ AbstractVariableDeclaration.prototype.doNoAssignment=function(name, context){};
 
 /**
  * @constructor
+ * @extends {Production}
  */
 function AbstractVariableDeclarations(){
    /**
@@ -1866,27 +2131,28 @@ function AbstractVariableDeclarations(){
    };
 }
 extend(AbstractVariableDeclarations, Production);
-/** @type String */
+/** @type {string} */
 AbstractVariableDeclarations.prototype.name="AbstractVariableDeclarations";
 
 /**
  * Example: 'p' for {param etc.
- * @type String
+ * @type {string}
  */
 AbstractVariableDeclarations.prototype._characterAfterOpenCurly="";
 /**
- * @returns {Production}
+ * @return {Production}
  */
 AbstractVariableDeclarations.prototype.getDeclaration=function(){};
 /**
  * Matches the start tag for declarations.
- * @returns {RegExp}
+ * @return {RegExp}
  */
 AbstractVariableDeclarations.prototype.getDeclarationRegex=function(){};
 
 
 /**
  * @constructor
+ * @extends {Production}
  */
 function AbstractParenthesizedExpression(){
    this.execute=function(characters, context){
@@ -1914,22 +2180,24 @@ function AbstractParenthesizedExpression(){
    };
 }
 extend(AbstractParenthesizedExpression, Production);
+/**
+ * @type {boolean}
+ */
 AbstractParenthesizedExpression.prototype._hasExpression=false;
 /**
- *
  * @param {Output} output
- * @returns {AbstractExpression}
+ * @return {AbstractExpression}
  */
 AbstractParenthesizedExpression.prototype.getExpression=function(output){};
 /**
- * @returns {Output}
+ * @return {Output}
  */
 AbstractParenthesizedExpression.prototype.getOutput=function(){};
 
 
 /**
  * @constructor
- *
+ * @extends {Production}
  * @param {Output} output
  */
 function Operator(output){
@@ -2019,6 +2287,7 @@ Operator.prototype.name="Operator";
  * <b>Note: Program must be added to ProductionContext before execution.</b>
  *
  * @constructor
+ * @extends {Production}
  * @param {Output} output
  * @param {ProductionContext} context
  * @param {boolean} isNested
@@ -2029,16 +2298,39 @@ function Program(
    context,
    isNested
 ){
+   /**
+    * @type {Output}
+    */
    var programNamespaceOutput=new Output();
+   /**
+    * @type {Output}
+    */
    var importOutput=new Output();
+   /**
+    * @type {Output}
+    */
    var globalStatementsOutput=new Output();
 
-   var globalParams = context.getParams();//JSParameters
-   var globalParamNames = context.getJSParametersWrapper();//JSParametersWrapper
-   var variableOutput=context.getCurrentVariableOutput();
+   /**
+    * @type {JSParameters}
+    */
+   var globalParams = context.getParams();
+   /**
+    * @type {JSParametersWrapper}
+    */
+   var globalParamNames = context.getJSParametersWrapper();
 
+   /**
+    * @type {boolean}
+    */
    var hasProgramNamespace=false;
+   /**
+    * @type {boolean}
+    */
    var hasVariables=false;
+   /**
+    * @type {boolean}
+    */
    var hasGlobals=false;
 
    output.
@@ -2046,7 +2338,7 @@ function Program(
          add(programNamespaceOutput).
          add(importOutput).
          add("(function(").add(globalParamNames).add("){").
-            add(variableOutput).
+            add(context.getCurrentVariableOutput()).
             add(globalStatementsOutput).
             add("})(").add(globalParamNames).add(");");
 
@@ -2114,7 +2406,7 @@ function Program(
                case 'v'://variables
                   if(!hasGlobals){
                      hasGlobals=true;
-                     context.addProduction(new GlobalVariableDeclarations(variableOutput));
+                     context.addProduction(new GlobalVariableDeclarations());
                      return;
                   } else {
                      throw "GlobalVariableDeclarations must appear before GlobalStatements.";
@@ -2153,6 +2445,7 @@ Program.prototype.name="Program";
  * Handles: {namespace ...}
  *
  * @constructor
+ * @extends {Production}
  * @param {Output} output
  */
 function ProgramNamespace(output){
@@ -2224,6 +2517,7 @@ ProgramNamespace.prototype.name="ProgramNamespace";
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
  */
 function ImportStatements(output){
@@ -2247,6 +2541,7 @@ ImportStatements.prototype.name="ImportStatements";
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
  */
 function ImportStatement(output){
@@ -2290,9 +2585,9 @@ ImportStatement.prototype.name="ImportStatement";
 
 /**
  * @constructor
- * @param {Output} output
+ * @extends {Production}
  */
-function GlobalVariableDeclarations(output){
+function GlobalVariableDeclarations(){
    /**
     * @param {CharWrapper} characters
     * @param {ProductionContext} context
@@ -2316,6 +2611,7 @@ GlobalVariableDeclarations.prototype.name="GlobalVariableDeclarations";
 
 /**
  * @constructor
+ * @extends {AbstractVariableDeclaration}
  * @param {AbstractVariableOutput} output
  */
 function GlobalVariableDeclaration(output){
@@ -2326,7 +2622,7 @@ function GlobalVariableDeclaration(output){
       return output;
    };
    /**
-    * @param {String} name
+    * @param {string} name
     * @param {ProductionContext} context
     */
    this.doNoAssignment=function(name, context){
@@ -2355,7 +2651,7 @@ GlobalVariableDeclaration.prototype.getProduction=function(output){
 };
 
 /**
- * @param {String} name
+ * @param {string} name
  * @param {Output} output
  */
 GlobalVariableDeclaration.prototype.doAssignment=function(name, output){};
@@ -2364,6 +2660,7 @@ GlobalVariableDeclaration.prototype.doAssignment=function(name, output){};
 
 /**
  * @constructor
+ * @extends {AbstractAssignment}
  * @param {Output} output
  */
 function GlobalVariableAssignment(output){
@@ -2385,9 +2682,9 @@ GlobalVariableAssignment.prototype.name="GlobalVariableAssignment";
 
 
 /**
- *
+ * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {GlobalVariableValue}
  */
 function GlobalVariableValue(output){
    /**
@@ -2456,14 +2753,13 @@ GlobalVariableValue.prototype.name="GlobalVariableValue";
 
 /**
  * @constructor
- *
+ * @extends {AbstractExpression}
  * @param {Output} output
- * @returns {GlobalExpression}
  */
 function GlobalExpression(output){
    /**
     * @override
-    * @returns {Output}
+    * @return {Output}
     */
    this.getOutput=function(){
       return output;
@@ -2495,19 +2791,20 @@ GlobalExpression.prototype.name="GlobalExpression";
 
 /**
  * @constructor
+ * @extends {AbstractParenthesizedExpression}
  * @param {Output} output
  */
 function GlobalParenthesizedExpression(output){
    /**
     * @param {Output} expressionOutput The output used for the return production.
-    * @returns {GlobalExpression}
+    * @return {GlobalExpression}
     */
    this.getExpression=function(expressionOutput){
       return new GlobalExpression(expressionOutput);
    };
    /**
     *
-    * @returns {Output}
+    * @return {Output}
     */
    this.getOutput=function(){
       return output;
@@ -2516,13 +2813,14 @@ function GlobalParenthesizedExpression(output){
 extend(GlobalParenthesizedExpression, AbstractParenthesizedExpression);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 GlobalParenthesizedExpression.prototype.name="GlobalParenthesizedExpression";
 
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
  */
 function GlobalStatements(output){
@@ -2569,8 +2867,9 @@ GlobalStatements.prototype.name="GlobalStatements";
 
 
 /**
+ * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {TemplateDeclaration}
  */
 function TemplateDeclaration(output){
    var isOpened=false;
@@ -2679,8 +2978,8 @@ TemplateDeclaration.prototype.name="TemplateDeclaration";
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {TemplateBody}
  */
 function TemplateBody(output){
    /**
@@ -2702,8 +3001,8 @@ TemplateBody.prototype.name="TemplateBody";
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {TemplateBodyStatements}
  */
 function TemplateBodyStatements(output){
 
@@ -2810,27 +3109,28 @@ function TemplateBodyStatements(output){
 extend(TemplateBodyStatements, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 TemplateBodyStatements.prototype.name="TemplateBodyStatements";
 
 
 /**
  * @constructor
+ * @extends {AbstractVariableDeclarations}
  * @param {AbstractVariableOutput} output
  */
 function ParamDeclarations(output){
    /**
-    * @returns {ParamDeclaration}
+    * @return {ParamDeclaration}
     */
    this.getDeclaration=function(){
       return new ParamDeclaration(output);
    };
 }
 extend(ParamDeclarations, AbstractVariableDeclarations);
-/** @type String */
+/** @type {string} */
 ParamDeclarations.prototype.name="ParamDeclarations";
-/** @type String */
+/** @type {string} */
 ParamDeclarations.prototype._characterAfterOpenCurly="p";
 /**
  * @return {RegExp}
@@ -2842,6 +3142,7 @@ ParamDeclarations.prototype.getDeclarationRegex=function(){
 
 /**
  * @constructor
+ * @extends {AbstractVariableDeclaration}
  * @param {AbstractVariableOutput} output
  */
 function ParamDeclaration(output){
@@ -2852,7 +3153,7 @@ function ParamDeclaration(output){
       return output;
    };
    /**
-    * @param {String} name
+    * @param {string} name
     * @param {ProductionContext} context
     */
    this.doNoAssignment=function(name, context){
@@ -2872,20 +3173,22 @@ ParamDeclaration.prototype.doAssignment=function(name, output){
 
 
 /**
+ * @constructor
+ * @extends {AbstractVariableDeclarations}
  * @param {AbstractVariableOutput} output
  */
 function VariableDeclarations(output){
    /**
-    * @returns {VariableDeclaration}
+    * @return {VariableDeclaration}
     */
    this.getDeclaration=function(){
       return new VariableDeclaration(output);
    };
 }
 extend(VariableDeclarations, AbstractVariableDeclarations);
-/** @type String */
+/** @type {string} */
 VariableDeclarations.prototype.name="VariableDeclarations";
-/** @type String */
+/** @type {string} */
 VariableDeclarations.prototype._characterAfterOpenCurly="v";
 /**
  * @return {RegExp}
@@ -2897,6 +3200,7 @@ VariableDeclarations.prototype.getDeclarationRegex=function(){
 
 /**
  * @constructor
+ * @extends {AbstractVariableDeclaration}
  * @param {AbstractVariableOutput} output
  */
 function VariableDeclaration(output){
@@ -2939,11 +3243,12 @@ VariableDeclaration.prototype.doAssignment=function(name, output){};
 
 /**
  * @constructor
+ * @extends {AbstractAssignment}
  * @param {Output} output
  */
 function VariableAssignment(output){
    /**
-    * @returns {VariableExpression}
+    * @return {VariableExpression}
     */
    this.getExpression=function() {
       return new VariableExpression(output);
@@ -2952,24 +3257,25 @@ function VariableAssignment(output){
 extend(VariableAssignment, AbstractAssignment);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 VariableAssignment.prototype.name="AbstractAssignment";
 
 /**
+ * @constructor
+ * @extends {AbstractExpression}
  * @param {Output} output
- * @returns {VariableExpression}
  */
 function VariableExpression(output){
    /**
     * @override
-    * @returns {Output}
+    * @return {Output}
     */
    this.getOutput=function(){
       return output;
    };
    /**
-    * @returns {VariableValue}
+    * @return {VariableValue}
     */
    this.getValue=function(){
       return new VariableValue(output, false);
@@ -2978,12 +3284,12 @@ function VariableExpression(output){
 extend(VariableExpression, AbstractExpression);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 VariableExpression.prototype.name="VariableExpression";
 /**
  * @param {Output} output
- * @returns {VariableExpressionParenthesized}
+ * @return {VariableParenthesizedExpression}
  */
 VariableExpression.prototype.getParenthesizedExpression=function(output){
    return new VariableParenthesizedExpression(output);
@@ -2992,20 +3298,21 @@ VariableExpression.prototype.getParenthesizedExpression=function(output){
 
 
 /**
+ * @constructor
+ * @extends {AbstractParenthesizedExpression}
  * @param {Output} output
- * @returns {VariableExpressionParenthesized}
  */
 function VariableParenthesizedExpression(output){
    /**
     * @param {Output} output
-    * @returns {VariableExpression}
+    * @return {VariableExpression}
     */
    this.getExpression=function(output){
       return new VariableExpression(output);
    };
    /**
     *
-    * @returns {Output}
+    * @return {Output}
     */
    this.getOutput=function(){
       return output;
@@ -3014,15 +3321,16 @@ function VariableParenthesizedExpression(output){
 extend(VariableParenthesizedExpression, AbstractParenthesizedExpression);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 VariableParenthesizedExpression.prototype.name="VariableParenthesizedExpression";
 
 
 /**
+ * @constructor
+ * @extends {Production}
  * @param {Output} output
  * @param {boolean} isNestedInContextSelector
- * @returns {VariableValue}
  */
 function VariableValue(output, isNestedInContextSelector){
    /** @type boolean */
@@ -3145,14 +3453,15 @@ function VariableValue(output, isNestedInContextSelector){
 extend(VariableValue, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 VariableValue.prototype.name="VariableValue";
 
 
 /**
+ * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {CallExpression}
  */
 function CallExpression(output){
    /** @type {boolean} */
@@ -3185,15 +3494,15 @@ function CallExpression(output){
 extend(CallExpression, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 CallExpression.prototype.name="CallExpression";
 
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @return {CallArguments}
  */
 function CallArguments(output){
    /** @type {boolean} */
@@ -3252,7 +3561,7 @@ CallArguments.prototype.name="CallArguments";
 
 /**
  * @constructor
- * @extends Production
+ * @extends {Production}
  * @param {Output} output
  * @param {boolean} isNested
  */
@@ -3280,7 +3589,6 @@ function ContextSelector(output, isNested){
 
 
    /**
-    * @overrides
     * @param {CharWrapper} characters
     * @param {ProductionContext} context
     */
@@ -3294,7 +3602,13 @@ function ContextSelector(output, isNested){
          firstChar=characters.charAt(0);
          switch(firstChar){
          case 'n':
-            break;
+            match = characters.match(NAME_FN);
+            if(match){
+               characters.shift(match[1].length);
+               output.add(js_name);
+               context.removeProduction();
+               return;
+            }
          default:
             if(!isNested){
                output.
@@ -3304,15 +3618,6 @@ function ContextSelector(output, isNested){
             }
          }
          switch(firstChar){
-         case 'n':
-            match = characters.match(NAME_FN);
-            if(match){
-               characters.shift(match[1].length);
-               output.add(js_name);
-               context.removeProduction();
-               return;
-            }
-            break;
          case '@':
             reference=characters.match(VARIABLE_REFERENCE);
             if(reference){
@@ -3438,8 +3743,8 @@ ContextSelector.prototype.name = "ContextSelector";
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {ContextDynamicRefinement}
  */
 function ContextDynamicRefinement(output){
    /** @type boolean */
@@ -3487,13 +3792,14 @@ ContextDynamicRefinement.prototype.name="ContextDynamicRefinement";
 
 /**
  * @constructor
+ * @extends {AbstractExpression}
  * @param {Output} output
  * @param {boolean} isNested
  */
 function ContextExpression(output, isNested){
    /**
     * @override
-    * @returns {Output}
+    * @return {Output}
     */
    this.getOutput=function(){
       return output;
@@ -3524,19 +3830,20 @@ ContextExpression.prototype.name="ContextExpression";
 
 /**
  * @constructor
+ * @extends {AbstractParenthesizedExpression}
  * @param {Output} output
  */
 function ContextParenthesizedExpression(output){
    /**
     * @param {Output} expressionOutput The output used for the return production.
-    * @returns {ContextExpression}
+    * @return {ContextExpression}
     */
    this.getExpression=function(expressionOutput){
       return new ContextExpression(expressionOutput, true);
    };
    /**
     *
-    * @returns {Output}
+    * @return {Output}
     */
    this.getOutput=function(){
       return output;
@@ -3545,15 +3852,15 @@ function ContextParenthesizedExpression(output){
 extend(ContextParenthesizedExpression, AbstractParenthesizedExpression);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 ContextParenthesizedExpression.prototype.name="ContextParenthesizedExpression";
 
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @return InputTokens
  */
 function InputTokens(output){
    /**
@@ -3575,6 +3882,7 @@ function InputTokens(output){
             tokens = tokens.replace(SPACE_BETWEEN_ANGLE_BRACKETS, "$1$2");
          }
          tokens = tokens.replace(/\\#/g, "#");
+         tokens = tokens.replace(/\\\{/g, "{");
          tokens = tokens.replace(/\\(?![n'])/g, "\\\\");
          tokens = tokens.replace(/^'|([^\\])'/g, "$1\\'");
          tokens = tokens.replace(/\r?\n/g, "\\n");
@@ -3589,15 +3897,15 @@ function InputTokens(output){
 extend(InputTokens, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 InputTokens.prototype.name="InputTokens";
 
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {PrintStatement}
  */
 function PrintStatement(output){
    var hasOpenCurly=false;
@@ -3670,15 +3978,15 @@ function PrintStatement(output){
 extend(PrintStatement, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 PrintStatement.prototype.name="PrintStatement";
 
 
 /**
  * @constructor
+ * @extends {AbstractConditionBlock}
  * @param {Output} output
- * @returns {IfStatement}
  */
 function IfStatement(output){
    var expressionOutput = new Output();
@@ -3693,13 +4001,13 @@ function IfStatement(output){
          add("}");
 
    /**
-    * @returns {VariableExpression}
+    * @return {VariableExpression}
     */
    this.getVariableExpression=function(){
       return new VariableExpression(expressionOutput);
    };
    /**
-    * @returns {TemplateBodyStatements}
+    * @return {TemplateBodyStatements}
     */
    this.getBodyStatements=function(){
       return new TemplateBodyStatements(bodyOutput);
@@ -3738,11 +4046,11 @@ function IfStatement(output){
 extend(IfStatement, AbstractConditionBlock);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 IfStatement.prototype.name="IfStatement";
 /**
- * @return RegExp
+ * @return {RegExp}
  */
 IfStatement.prototype.getClosingPattern=function(){
    return IF_CLOSING;
@@ -3750,9 +4058,10 @@ IfStatement.prototype.getClosingPattern=function(){
 
 
 /**
+ * @constructor
+ * @extends {Production}
  * @param {Output} output
  * @param {ProductionContext} context
- * @returns {LogStatement}
  */
 function LogStatement(output, context){
    /** @type Output */
@@ -3789,14 +4098,22 @@ function LogStatement(output, context){
 extend(LogStatement, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 LogStatement.prototype.name="LogStatement";
 
 
+/**
+ * @constructor
+ * @extends {AbstractConditionBlock}
+ * @param {Output} output
+ */
 function RenderStatement(output){
+   /** @type {Output} */
    var namespaceOutput = new Output();
+   /** @type {Output} */
    var contextOutput = new Output();
+   /** @type {Output} */
    var paramOutput = new Output();
 
    this._canSelfClose=true;
@@ -3812,41 +4129,41 @@ function RenderStatement(output){
       add(");");
 
    /**
-    * @overrides
-    * @param {Output} output
-    * @returns {RenderExpression}
+    * @return {RenderExpression}
+    * @override
     */
-   this.getVariableExpression=function(output){
+   this.getVariableExpression=function(){
       return new RenderExpression(namespaceOutput, contextOutput);
    };
    /**
-    * @overrides
-    * @param {Output} output
-    * @returns {RenderParams}
+    * @return {RenderParamDeclarations}
+    * @override
     */
-   this.getBodyStatements=function(output) {
+   this.getBodyStatements=function() {
       return new RenderParamDeclarations(paramOutput);
    };
 
 }
 extend(RenderStatement, AbstractConditionBlock);
+
 /**
- * @return RexExp
+ * @const
+ * @return {RegExp}
  */
 RenderStatement.prototype.getClosingPattern=function(){
    return RENDER_CLOSING;
 };
 /**
  * @const
- * @type String
+ * @type {string}
  */
 RenderStatement.prototype.name="RenderStatement";
 
 
 /**
  * @constructor
+ * @extends {AbstractVariableDeclarations}
  * @param {Output} output
- * @returns {RenderParamDeclarations}
  */
 function RenderParamDeclarations(output){
    var paramOutput = new AbstractVariableOutput(",{", "", ":", "}", null);
@@ -3859,7 +4176,7 @@ function RenderParamDeclarations(output){
       return paramOutput;
    };
    /**
-    * @returns {RenderParamDeclarations}
+    * @return {RenderParamDeclaration}
     */
    this.getDeclaration=function(){
       if(expectingParam){
@@ -3870,9 +4187,9 @@ function RenderParamDeclarations(output){
    };
 }
 extend(RenderParamDeclarations, AbstractVariableDeclarations);
-/** @type String */
+/** @type {string} */
 RenderParamDeclarations.prototype.name="RenderParams";
-/** @type String */
+/** @type {string} */
 RenderParamDeclarations.prototype._characterAfterOpenCurly="p";
 /**
  * @return {RegExp}
@@ -3884,8 +4201,8 @@ RenderParamDeclarations.prototype.getDeclarationRegex=function(){
 
 /**
  * @constructor
+ * @extends {AbstractVariableDeclaration}
  * @param {AbstractVariableOutput} variableOutput
- * @returns {RenderParamDeclaration}
  */
 function RenderParamDeclaration(variableOutput){
    /**
@@ -3897,30 +4214,30 @@ function RenderParamDeclaration(variableOutput){
 }
 extend(RenderParamDeclaration, AbstractVariableDeclaration);
 /**
- * @const
- * @type String
+ * @override
+ * @type {string}
  */
 RenderParamDeclaration.prototype.name="RenderParamDeclaration";
 /**
- * @type RegExp
+ * @return {RegExp}
  */
 RenderParamDeclaration.prototype.getPattern=function(){
    return PARAM;
 };
 /**
  * @param {Output} output
- * @returns {VariableAssignment}
+ * @return {VariableAssignment}
  */
 RenderParamDeclaration.prototype.getProduction=function(output){
    return new VariableAssignment(output);
 };
 /**
- * @param {String} name
+ * @param {string} name
  * @param {Output} output
  */
 RenderParamDeclaration.prototype.doAssignment=function(name, output){};
 /**
- * @param {String} name
+ * @param {string} name
  * @param {ProductionContext} context
  */
 RenderParamDeclaration.prototype.doNoAssignment=function(name, context){
@@ -3930,9 +4247,9 @@ RenderParamDeclaration.prototype.doNoAssignment=function(name, context){
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} namespaceOutput
  * @param {Output} contextOutput
- * @returns {RenderExpression}
  */
 function RenderExpression(namespaceOutput, contextOutput){
    /** @type boolean */
@@ -3981,14 +4298,15 @@ function RenderExpression(namespaceOutput, contextOutput){
 extend(RenderExpression, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 RenderExpression.prototype.name="RenderExpression";
 
 
 /**
+ * @constructor
+ * @extends {Production}
  * @param {Output} output
- * @returns {TextStatement}
  */
 function TextStatement(output){
    /**
@@ -4026,16 +4344,16 @@ function TextStatement(output){
 extend(TextStatement, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 TextStatement.prototype.name="TextStatement";
 
 
 /**
  * @constructor
+ * @extends {AbstractConditionBlock}
  * @param {Output} output
  * @param {ProductionContext} context
- * @returns {ForeachStatement}
  */
 function ForeachStatement(output, context){
    var expressionOutput = new Output();
@@ -4072,13 +4390,13 @@ function ForeachStatement(output, context){
       );
 
    /**
-    * @returns {ContextSelector}
+    * @return {ContextSelector}
     */
    this.getVariableExpression=function(){
       return new ContextSelector(expressionOutput, false);
    };
    /**
-    * @returns {ForeachBodyStatements}
+    * @return {ForeachBodyStatements}
     */
    this.getBodyStatements=function(){
       return new ForeachBodyStatements(bodyOutput, sortContextOutput, sortParamOutput);
@@ -4087,11 +4405,11 @@ function ForeachStatement(output, context){
 extend(ForeachStatement, AbstractConditionBlock);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 ForeachStatement.prototype.name="ForeachStatement";
 /**
- * @return RegExp
+ * @return {RegExp}
  */
 ForeachStatement.prototype.getClosingPattern=function(){
    return FOREACH_CLOSING;
@@ -4100,6 +4418,7 @@ ForeachStatement.prototype.getClosingPattern=function(){
 
 /**
  * @constructor
+ * @extends {Production}
  * @param {Output} output
  * @param {Output} sortContextOutput
  * @param {Output} sortFunctionOutput
@@ -4166,16 +4485,17 @@ function ForeachBodyStatements(output, sortContextOutput, sortFunctionOutput) {
 extend(ForeachBodyStatements, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 ForeachBodyStatements.prototype.name="ForeachBodyStatements";
 
 
 /**
+ * @constructor
+ * @extends {Production}
  * @param {Output} sortContextOutput
  * @param {Output} sortFunctionOutput
- * @param {Output} context
- * @returns {SortStatement}
+ * @param {ProductionContext} context
  */
 function SortStatement(
    sortContextOutput,
@@ -4187,7 +4507,13 @@ function SortStatement(
       context.javascript.getJSSortArray()
    );
 
+   /**
+    * @type {boolean}
+    */
    var hasContextSelector=false;
+   /**
+    * @type {boolean}
+    */
    var hasSortDirection=false;
 
    /**
@@ -4200,9 +4526,12 @@ function SortStatement(
 
       if(!hasContextSelector){
          hasContextSelector=true;
+         /**
+          * @type {Output}
+          */
          var contextSelectorOutput = new Output();
          sortContextOutput.
-            add(",function("+js_context+", "+js_name+"){return ").
+               add(",function("+js_context+", "+js_name+"){return ").
                add(contextSelectorOutput).
             add("}");
          context.addProduction(new ContextSelector(contextSelectorOutput, true));
@@ -4277,7 +4606,7 @@ function SortStatement(
 extend(SortStatement, Production);
 /**
  * @const
- * @type String
+ * @type {string}
  */
 SortStatement.prototype.name="SortStatement";
 
@@ -4288,12 +4617,18 @@ SortStatement.prototype.name="SortStatement";
  * @constructor
  */
 function CallManager(){
+   /**
+    * @type {Object}
+    */
    var declaredTemplates = {};
+   /**
+    * @type {Object}
+    */
    var calledTemplates = {};
 
    /**
     * @param {string} declared
-    * @returns {CallManaber}
+    * @return {CallManager}
     */
    this.addDeclaredTemplate=function(declared){
       declaredTemplates[declared]=true;
@@ -4303,7 +4638,7 @@ function CallManager(){
    /**
     *
     * @param {string} called
-    * @returns {CallManager}
+    * @return {CallManager}
     */
    this.addCalledTemplate=function(called){
       calledTemplates[called]=true;
@@ -4347,7 +4682,13 @@ function CallManager(){
  * command line.
  */
 function Compiler(config){
+   /**
+    * @type {Object}
+    */
    var _config = config || {};
+   /**
+    * @type {Object}
+    */
    var configuration = {//default values.
       //All of these are overridable.
       'debug':false,
@@ -4366,25 +4707,33 @@ function Compiler(config){
          configuration[name] = _config[name];
       }
    }
-   /** @type object */
+   /** @type {Object} */
    this.configuration=configuration;
-   /** @type JavascriptBuilder */
+   /** @type {JavascriptBuilder} */
    this.javascript = new JavascriptBuilder(configuration);
-   /** @type function */
 
    /**
-    * @param {String} input contents to compile.
-    * @param {String} inputFilePath The path to the current file, if the input
+    * @param {string} input contents to compile.
+    * @param {string} inputFilePath The path to the current file, if the input
     *    is from a file.  Passing this parameter, will enable import statements.
     * @param {ProductionContext} previousContext
-    * @return {String} compiled javascript string.
+    * @return {string} compiled javascript string.
     */
    this.compile=function(input, inputFilePath, previousContext){
       if(!input || typeof input !== 'string'){
          throw "No template string to parse.";
       }
+      /**
+       * @type {Output}
+       */
       var output = new Output();
+      /**
+       * @type {CharWrapper}
+       */
       var wrapper = new CharWrapper(input);
+      /**
+       * @type {ProductionContext}
+       */
       var context = new ProductionContext(output, this, previousContext);
 
       if(inputFilePath){
@@ -4414,5 +4763,9 @@ function Compiler(config){
 
 
 /*INJECT TESTS HERE*/
-this['XforJS']=XforJS;
+(
+function(){
+   this['XforJS']=XforJS;
+}
+)();
 
