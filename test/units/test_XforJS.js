@@ -17,6 +17,7 @@
 test("XforJS", function(){
    var fs = require('fs');
    var testFileName = +new Date()+"XforJS";
+   XforJS.server = true;
 
    assert.doesNotThrow(function(){
       eval(XforJS.getLib("dog"));
@@ -36,7 +37,7 @@ test("XforJS", function(){
    }, "can't build outptut lib in non server env.");
 
    var oldRequire = require;
-   require=void 0
+   require=void 0;
    XforJS.server = true;
    assert['throws'](function(){
       XforJS.buildOutputLibrary(testFileName, "boo.doo.foo");

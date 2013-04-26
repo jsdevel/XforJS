@@ -20,11 +20,12 @@
  * For viewing source visit http://github.com/jsdevel/XforJS/
  */
 //This file is wrapped in closure during compilation.
+var root = this;
 var XforJS = {
    //configurable
    //set to false to disable filesystem calls etc.  Hopefully you precompile
    //and will never need to do this.
-   'server':true,
+   'server':false,
 
    'getCompiler':function(args){
       return new Compiler(args);
@@ -147,9 +148,11 @@ var XforJS = {
 
 
 /*INJECT TESTS HERE*/
-(
-function(){
-   this['XforJS']=XforJS;
+if (typeof module !== 'undefined' && module['exports']) {
+      module['exports'] = XforJS;
+      root['XforJS'] = XforJS;
+      XforJS['server'] = true;
+} else {
+      root['XforJS'] = XforJS;
 }
-)();
 
