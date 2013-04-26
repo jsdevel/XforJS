@@ -14,17 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Version: 1.0.6
+ * Version: 1.0.7
  *
  * For demos and docs visit http://jsdevel.github.com/XforJS/
  * For viewing source visit http://github.com/jsdevel/XforJS/
  */
 //This file is wrapped in closure during compilation.
+var root = this;
 var XforJS = {
    //configurable
    //set to false to disable filesystem calls etc.  Hopefully you precompile
    //and will never need to do this.
-   'server':true,
+   'server':false,
 
    'getCompiler':function(args){
       return new Compiler(args);
@@ -600,7 +601,7 @@ function EscapeXSS(s){
  * time.
  */
 function Foreach(o,c,so,n,p,i){
-   var j,l,m,asc=so===0,shuffledArray;
+   var j,l,m,asc=so===0;
    if(o instanceof Array && typeof(c) === 'function' ){
       l=o.length;
       if(so!==void(0)){
@@ -763,7 +764,7 @@ function Foreach(o,c,so,n,p,i){
       }
       for(j=0;j<l;j++){
          m=o[j];
-         c(m.c, j+1, o.length, m.n)
+         c(m.c, j+1, o.length, m.n);
       }
    }
 
@@ -4763,9 +4764,11 @@ function Compiler(config){
 
 
 /*INJECT TESTS HERE*/
-(
-function(){
-   this['XforJS']=XforJS;
+if (typeof module !== 'undefined' && module['exports']) {
+      module['exports'] = XforJS;
+      root['XforJS'] = XforJS;
+      XforJS['server'] = true;
+} else {
+      root['XforJS'] = XforJS;
 }
-)();
 

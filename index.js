@@ -1,1 +1,1 @@
-module.exports=require('./XforJS').XforJS;
+module.exports=require('./XforJS.min').XforJS;
