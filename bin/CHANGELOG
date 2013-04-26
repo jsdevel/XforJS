@@ -1,6 +1,24 @@
-Incrementing version.
+Merge branch 'develop' for 1.0.7
 
-Updating JSDocs for the closure compiler.
-Adding more compile time checking to the compiler options.
-closes #35:  '\{' outputs '\{' when it should output '{'. This is happening in InputTokens. bug.
-closes #34:  Context Selectors starting with 'n' are ignored. bug.
+Incrementing version to 1.0.7
+
+closes #36:  undefined is returned in node module. bug.
+Adding a semi-colon
+Removing an unused variable.
+Merge branch 'develop' for 1.0.6.
+
+Merge branch 'develop' for 1.0.5.
+
+Merge branch 'develop' for 1.0.4.
+
+Merge branch 'develop'
+
+Updating the doc site sample.
+Merge branch 'develop' for 1.0.3.
+
+Merge branch 'develop'.  For 1.0.2.
+
+Merge branch 'develop' with version 1.0.1
+
+Merge branch 'develop' in preparation of 1.0.1
+
