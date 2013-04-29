@@ -5,3 +5,10 @@
 {template name}
 {name}
 {/template}
+
+{template validCharacters}
+   \
+   '
+   \#asdf
+   \{
+{/template}
