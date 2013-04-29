@@ -1,23 +1,19 @@
 {namespace documentation.books}
 
-#comment
-#You can edit the panels on this side to watch it all work.
-#Make sure to view the stats to see how perf. is doing.
+#comments are shell comments
 
 {template buildBookSection}
-   #params, then variables
-   #they always appear at the top of a context.
    {param showRatings}
    {param fn}
-   {var test}#undefined value
-   {var test1 5}#test1 is always 5 within this scope
+   {var test}
+   {var test1 5}
 
-   {@fn.date.getStandardDate()}
    <h3>Must Have Books</h3>
-   {foreach books}#new context now. '.' === books object
-      #you can try: |asc or |desc.
-      #try |asc|i as well. |i is a sort modifier (more on this later :)
-      {sort rating|rand}
+   <p>Printed at: {@fn.date.getStandardDate()}</p>
+   <p>Unix Timestamp {^Date.now()}</p>
+
+   {foreach books}
+      {sort rating|rand}#try one of |asc, |desc to turn off randing sorting
 
       {var ratingIsNumber typeof rating === 'number'}
 
