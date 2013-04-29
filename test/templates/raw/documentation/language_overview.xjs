@@ -126,29 +126,38 @@
 #tables['table-inventory'].first[0+4].   Any valid expression is allowable
 #inside dynamic refinement.
 #
-#Current Context.  You can directly access the current context using one of the
-#following selectors:
+#Current Context
+#The context at the template level is always the first argument do the template.
+#You can directly access the current context using one of the following
+#selectors:
 #. current()
 #
-#The context at the template level is always the first argument do the template.
+#Global Context
+#Use the caret symbol to access global variables and functions.  This makes
+#templates extremely flexible, and permits helpers to be accessed from any
+#template without a registration mechanism.  Please give feedback on this
+#approach.  Referencing globals is generally a bad practive, but to avoid
+#verbosity it is allowed.
+#Example:
+#{^Date.now()} would print the current timestamp.
 #
 #Functions.  The following functions are built-ins and are reserved.  Some of
 #them really only take on meaning inside foreach statements.
 #
-#count: Returns the number of items in an array or properties in an object.
 #count(contextSelector)
+#Returns the number of items in an array or properties in an object.
 #
-#name:  Outputs the name of the current item in a foreach loop.  This may be a
-#number if iterating over an array, or a string if iterating over and object.
 #name()
+#Outputs the name of the current item in a foreach loop.  This may be a
+#number if iterating over an array, or a string if iterating over an object.
 #
-#position: Outputs the current index in the foreach loop.  This may be random
-#when looping over properties in an object.
 #position()
+#Outputs the current index in the foreach loop.  This may be random
+#when looping over properties in an object.
 #
-#last: Returns the highest possible index in the current iteration in a foreach
-#statement.
 #last()
+#Returns the highest possible index in the current iteration in a foreach
+#statement.
 
 ##Params
 #
@@ -189,21 +198,28 @@
 #E: Enables  XSS escaping.
 {template print}
    {var greeting 'Top of the morning to ya!'}
+   {@greeting}#output the value of greeting.
    {hello}#output the value of hello in the current context.
    {hello || hola}#If hello is falsey, output the value of hola.
-   {hello |e}
-   {hello |E}
+
+   {^Date.now()}#Print the current timestamp.  See ContextSelector
+
+   #Example of PrintModifiers
+   {hello |e}#disable XSS escaping
+   {hello |E}#enable  XSS escaping
 {/template}
 
 ##InputTokens
 #
 #Any value between } and { in a template will be output.  Certain values must
 #be escaped with the '\' character.  The following characters need to be escaped
-#as input tokens: ' \ # and {.  An unescaped '#' results in a comment that is
-#considered to be space.
+#as input tokens: # and {.  An unescaped '#' results in a comment that is
+#considered to be space.  An unescaped '{' that does not appear as a valid
+#opening tag results in a compile time error.
 {template inputTokens}
    <h1>A header</h1>
    \#Escaped comment.
+   \{
 {/template}
 
 ##If

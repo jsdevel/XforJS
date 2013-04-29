@@ -3,3 +3,11 @@
 {template boo}
    {var foo coo.goo.qoo[asdf||asdfsdf]}
 {/template}
+
+{template referenceGlobalVar}
+   {^wowie.prop}
+{/template}
+
+{template callGlobalVar}
+   {^wowie.call['it']()}
+{/template}
