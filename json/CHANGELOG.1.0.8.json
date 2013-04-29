@@ -3,6 +3,6 @@
    "previousVersion":"1.0.7",
    "commitHistory":[
 
-"closes #36:  undefined is returned in node module. bug."
+"closes #25:  Allow globals to be referenced using the caret symbol I.E. \"^call.fn()\". enhancement."
 ]
 }

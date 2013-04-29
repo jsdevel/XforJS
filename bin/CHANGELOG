@@ -1,5 +1,27 @@
-Incrementing version to 1.0.7
+Merge branch 'develop' for 1.0.8
 
-closes #36:  undefined is returned in node module. bug.
-Adding a semi-colon
-Removing an unused variable.
+Updating books sample.
+Updating version to 1.0.8
+closes #25:  Allow globals to be referenced using the caret symbol I.E. "^call.fn()". enhancement.
+Updating the language overview to fix some errors and update an integration test.
+Performing a sanity check on the minified version.
+
+Merge branch 'develop' for 1.0.7
+
+Merge branch 'develop' for 1.0.6.
+
+Merge branch 'develop' for 1.0.5.
+
+Merge branch 'develop' for 1.0.4.
+
+Merge branch 'develop'
+
+Updating the doc site sample.
+Merge branch 'develop' for 1.0.3.
+
+Merge branch 'develop'.  For 1.0.2.
+
+Merge branch 'develop' with version 1.0.1
+
+Merge branch 'develop' in preparation of 1.0.1
+
