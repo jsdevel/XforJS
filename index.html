@@ -262,20 +262,20 @@
 <span class='comment'>#Functions.  The following functions are built-ins and are reserved.  Some of</span>
 <span class='comment'>#them really only take on meaning inside foreach statements.</span>
 <span class='comment'>#</span>
-<span class='comment'>#count: Returns the number of items in an array or properties in an object.</span>
 <span class='comment'>#count(contextSelector)</span>
+<span class='comment'>#Returns the number of items in an array or properties in an object.</span>
 <span class='comment'>#</span>
-<span class='comment'>#name:  Outputs the name of the current item in a foreach loop.  This may be a</span>
-<span class='comment'>#number if iterating over an array, or a string if iterating over and object.</span>
 <span class='comment'>#name()</span>
+<span class='comment'>#Outputs the name of the current item in a foreach loop.  This may be a</span>
+<span class='comment'>#number if iterating over an array, or a string if iterating over an object.</span>
 <span class='comment'>#</span>
-<span class='comment'>#position: Outputs the current index in the foreach loop.  This may be random</span>
-<span class='comment'>#when looping over properties in an object.</span>
 <span class='comment'>#position()</span>
+<span class='comment'>#Outputs the current index in the foreach loop.  This may be random</span>
+<span class='comment'>#when looping over properties in an object.</span>
 <span class='comment'>#</span>
-<span class='comment'>#last: Returns the highest possible index in the current iteration in a foreach</span>
-<span class='comment'>#statement.</span>
 <span class='comment'>#last()</span>
+<span class='comment'>#Returns the highest possible index in the current iteration in a foreach</span>
+<span class='comment'>#statement.</span>
 
 <span class='comment'>&#35;</span><span class='comment-header'>Params</span>
 <span class='comment'>#</span>
@@ -316,21 +316,26 @@
 <span class='comment'>#E: Enables  XSS escaping.</span>
 <span class='start-brace'>{</span><span class='keyword'>template</span> print<span class='end-brace'>}</span>
    <span class='start-brace'>{</span><span class='keyword'>var</span> greeting 'Top of the morning to ya!'<span class='end-brace'>}</span>
+   <span class='start-brace'>{</span><span class='variable-reference'>@greeting</span><span class='end-brace'>}</span><span class='comment'>#output the value of greeting.</span>
    <span class='start-brace'>{</span>hello<span class='end-brace'>}</span><span class='comment'>#output the value of hello in the current context.</span>
    <span class='start-brace'>{</span>hello || hola<span class='end-brace'>}</span><span class='comment'>#If hello is falsey, output the value of hola.</span>
-   <span class='start-brace'>{</span>hello |e<span class='end-brace'>}</span>
-   <span class='start-brace'>{</span>hello |E<span class='end-brace'>}</span>
+
+   <span class='comment'>#Example of PrintModifiers</span>
+   <span class='start-brace'>{</span>hello |e<span class='end-brace'>}</span><span class='comment'>#disable XSS escaping</span>
+   <span class='start-brace'>{</span>hello |E<span class='end-brace'>}</span><span class='comment'>#enable  XSS escaping</span>
 <span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
 
 <span class='comment'>&#35;</span><span class='comment-header'>InputTokens</span>
 <span class='comment'>#</span>
 <span class='comment'>#Any value between <span class='end-brace'>}</span> and <span class='start-brace'>{</span> in a template will be output.  Certain values must</span>
 <span class='comment'>#be escaped with the '\' character.  The following characters need to be escaped</span>
-<span class='comment'>#as input tokens: ' \ # and <span class='start-brace'>{</span>.  An unescaped '#' results in a comment that is</span>
-<span class='comment'>#considered to be space.</span>
+<span class='comment'>#as input tokens: # and <span class='start-brace'>{</span>.  An unescaped '#' results in a comment that is</span>
+<span class='comment'>#considered to be space.  An unescaped '<span class='start-brace'>{</span>' that does not appear as a valid</span>
+<span class='comment'>#opening tag results in a compile time error.</span>
 <span class='start-brace'>{</span><span class='keyword'>template</span> inputTokens<span class='end-brace'>}</span>
    &lt;h1&gt;A header&lt;/h1&gt;
    &#35;Escaped comment.
+   &#123;
 <span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
 
 <span class='comment'>&#35;</span><span class='comment-header'>If</span>
