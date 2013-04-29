@@ -302,7 +302,7 @@
 #the value of context when rendered.
 {template partial}
    {param foo}
-   I\'m a partial{@foo}.#Prints: I'm a partial5 when redered from renderPartial.
+   I'm a partial{@foo}.#Prints: I'm a partial5 when redered from renderPartial.
 {/template}
 {template renderPartial}
    {render partial/}
