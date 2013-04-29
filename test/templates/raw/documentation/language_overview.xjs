@@ -126,11 +126,20 @@
 #tables['table-inventory'].first[0+4].   Any valid expression is allowable
 #inside dynamic refinement.
 #
-#Current Context.  You can directly access the current context using one of the
-#following selectors:
+#Current Context
+#The context at the template level is always the first argument do the template.
+#You can directly access the current context using one of the following
+#selectors:
 #. current()
 #
-#The context at the template level is always the first argument do the template.
+#Global Context
+#Use the caret symbol to access global variables and functions.  This makes
+#templates extremely flexible, and permits helpers to be accessed from any
+#template without a registration mechanism.  Please give feedback on this
+#approach.  Referencing globals is generally a bad practive, but to avoid
+#verbosity it is allowed.
+#Example:
+#{^Date.now()} would print the current timestamp.
 #
 #Functions.  The following functions are built-ins and are reserved.  Some of
 #them really only take on meaning inside foreach statements.
@@ -192,6 +201,8 @@
    {@greeting}#output the value of greeting.
    {hello}#output the value of hello in the current context.
    {hello || hola}#If hello is falsey, output the value of hola.
+
+   {^Date.now()}#Print the current timestamp.  See ContextSelector
 
    #Example of PrintModifiers
    {hello |e}#disable XSS escaping

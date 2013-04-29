@@ -170,7 +170,11 @@ test("ContextSelector", function(){
 
    test("leading invalid character.", function(){
       setEnv("||");
-      assert['throws'](function(){context.executeCurrent(characters) });
+      assert['throws'](function(){context.executeCurrent(characters);});
+   });
+   test("^reference.globals", function(){
+      setEnv("^boo.sdf['asdf'].asdf");
+      context.executeCurrent(characters);
    });
 
 //CLOSING

@@ -94,6 +94,10 @@ function ContextSelector(output, isNested){
             }
             hasContextSelector=true;
             break;
+         case '^':
+            hasContextSelector=true;
+            allowDotPrepending=false;
+            break;
          case 'c':
             match = characters.match(CURRENT_FN);
             if(match){
@@ -108,7 +112,9 @@ function ContextSelector(output, isNested){
             hasContextSelector=true;
             break;
          }
-         if(firstChar !== "@"){
+         if(firstChar === "^"){
+            characters.shift(1);
+         } else if(firstChar !== "@"){
             contextSelectorOutput.add(js_context);
          }
          contextHasBeenPrependedToOutput=true;
@@ -149,7 +155,7 @@ function ContextSelector(output, isNested){
          return;
       }
 
-      hasNamespace=addNamespace(characters, context);
+      hasNamespace=addNamespace(characters);
       allowDotPrepending=true;
       if(hasNamespace){
          if(!allowNamespace){
@@ -169,10 +175,9 @@ function ContextSelector(output, isNested){
 
    /**
     * @param {CharWrapper} characters
-    * @param {ProductionContext} context
     * @return boolean
     */
-   function addNamespace(characters, context){
+   function addNamespace(characters){
       var ns;
       var match;
 
