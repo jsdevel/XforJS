@@ -1,24 +1,5 @@
-Merge branch 'develop' for 1.0.7
-
 Incrementing version to 1.0.7
 
 closes #36:  undefined is returned in node module. bug.
 Adding a semi-colon
 Removing an unused variable.
-Merge branch 'develop' for 1.0.6.
-
-Merge branch 'develop' for 1.0.5.
-
-Merge branch 'develop' for 1.0.4.
-
-Merge branch 'develop'
-
-Updating the doc site sample.
-Merge branch 'develop' for 1.0.3.
-
-Merge branch 'develop'.  For 1.0.2.
-
-Merge branch 'develop' with version 1.0.1
-
-Merge branch 'develop' in preparation of 1.0.1
-
