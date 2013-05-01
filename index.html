@@ -235,7 +235,7 @@
    Hello!
 <span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
 
-<span class='comment'>&#35;</span><span class='comment-header'>Context</span>
+<span class='comment'>&#35;</span><span class='comment-header'>ContextSelector</span>
 <span class='comment'>#</span>
 <span class='comment'>#When calling templates, the first parameter is the data, or context with which</span>
 <span class='comment'>#the template uses for processing.  Here are some valid context selectors:</span>
@@ -304,11 +304,10 @@
 
 <span class='comment'>&#35;</span><span class='comment-header'>Helpers</span>
 <span class='comment'>#</span>
-<span class='comment'>#You can directly call any variable reference, or context selector in the same</span>
+<span class='comment'>#You can directly call any VariableReference, or ContextSelector in the same</span>
 <span class='comment'>#way you would normal javascript methods / functions. I.E. <span class='variable-reference'>@boo</span>(5,4) &amp;&amp;</span>
-<span class='comment'>#property.name[0]().  Currently the way to pass helpers to a template is to do</span>
-<span class='comment'>#so through params, or the context.  A way to globally register helpers is in</span>
-<span class='comment'>#the works and suggestions are welcomed.</span>
+<span class='comment'>#property.name[0]().  See ContextSelector for an example of calling global</span>
+<span class='comment'>#references I.E. <span class='start-brace'>{</span>^call.my.helper()<span class='end-brace'>}</span></span>
 
 <span class='comment'>&#35;</span><span class='comment-header'>PrintStatement</span>
 <span class='comment'>#</span>
@@ -373,7 +372,8 @@
 <span class='comment'>#</span>
 <span class='comment'>#The first statement within a foreach.  Sorting items does NOT affect the</span>
 <span class='comment'>#original object.  You can sort on any context selector to control the ordering</span>
-<span class='comment'>#of items.</span>
+<span class='comment'>#of items.  The sort algorithm used (for ascending and descending sorts), is</span>
+<span class='comment'>#guaranteed to preserve an item's index while sorting.</span>
 <span class='comment'>#</span>
 <span class='comment'>#The following types of sort are allowed:</span>
 <span class='comment'>#asc desc rand</span>
@@ -425,7 +425,7 @@
 <span class='comment'>#the value of context when rendered.</span>
 <span class='start-brace'>{</span><span class='keyword'>template</span> partial<span class='end-brace'>}</span>
    <span class='start-brace'>{</span><span class='keyword'>param</span> foo<span class='end-brace'>}</span>
-   I'm a partial<span class='start-brace'>{</span><span class='variable-reference'>@foo</span><span class='end-brace'>}</span>.<span class='comment'>#Prints: I'm a partial5 when redered from renderPartial.</span>
+   I'm a partial<span class='start-brace'>{</span><span class='variable-reference'>@foo</span><span class='end-brace'>}</span>.<span class='comment'>#Prints: I'm a partial5 when rendered from renderPartial.</span>
 <span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
 <span class='start-brace'>{</span><span class='keyword'>template</span> renderPartial<span class='end-brace'>}</span>
    <span class='start-brace'>{</span><span class='keyword'>render</span> partial/<span class='end-brace'>}</span>
