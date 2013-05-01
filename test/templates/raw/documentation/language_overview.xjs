@@ -112,7 +112,7 @@
    Hello!
 {/template}
 
-##Context
+##ContextSelector
 #
 #When calling templates, the first parameter is the data, or context with which
 #the template uses for processing.  Here are some valid context selectors:
@@ -181,11 +181,10 @@
 
 ##Helpers
 #
-#You can directly call any variable reference, or context selector in the same
+#You can directly call any VariableReference, or ContextSelector in the same
 #way you would normal javascript methods / functions. I.E. @boo(5,4) &&
-#property.name[0]().  Currently the way to pass helpers to a template is to do
-#so through params, or the context.  A way to globally register helpers is in
-#the works and suggestions are welcomed.
+#property.name[0]().  See ContextSelector for an example of calling global
+#references I.E. {^call.my.helper()}
 
 ##PrintStatement
 #
@@ -250,7 +249,8 @@
 #
 #The first statement within a foreach.  Sorting items does NOT affect the
 #original object.  You can sort on any context selector to control the ordering
-#of items.
+#of items.  The sort algorithm used (for ascending and descending sorts), is
+#guaranteed to preserve an item's index while sorting.
 #
 #The following types of sort are allowed:
 #asc desc rand
