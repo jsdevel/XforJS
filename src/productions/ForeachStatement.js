@@ -65,7 +65,11 @@ function ForeachStatement(output, context){
     * @return {ForeachBodyStatements}
     */
    this.getBodyStatements=function(){
-      return new ForeachBodyStatements(bodyOutput, sortContextOutput, sortParamOutput);
+      return new ForeachBodyStatements(
+               bodyOutput,
+               sortContextOutput,
+               sortParamOutput
+            );
    };
 }
 extend(ForeachStatement, AbstractConditionBlock);
