@@ -27,7 +27,7 @@ function ImportStatements(output){
       } else {
          context.removeProduction();
       }
-   }
+   };
 }
 extend(ImportStatements, Production);
 /**
