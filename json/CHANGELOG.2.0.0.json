@@ -1,0 +1,10 @@
+{
+   "currentVersion":"2.0.0",
+   "previousVersion":"1.0.8",
+   "commitHistory":[
+
+
+
+"closes #33:  Allow multiple sort statements at the top of foreach. enhancement."
+]
+}

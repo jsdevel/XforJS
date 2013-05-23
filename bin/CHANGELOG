@@ -1,27 +1,20 @@
-Merge branch 'develop' for 1.0.8
+Merge branch 'develop'.  Pulling in a patch for some undefined references.
 
-Updating books sample.
-Updating version to 1.0.8
-closes #25:  Allow globals to be referenced using the caret symbol I.E. "^call.fn()". enhancement.
-Updating the language overview to fix some errors and update an integration test.
-Performing a sanity check on the minified version.
-
-Merge branch 'develop' for 1.0.7
-
-Merge branch 'develop' for 1.0.6.
-
-Merge branch 'develop' for 1.0.5.
-
-Merge branch 'develop' for 1.0.4.
+fixing bad variable references
 
 Merge branch 'develop'
 
-Updating the doc site sample.
-Merge branch 'develop' for 1.0.3.
+bumping version for 2.0.0
 
-Merge branch 'develop'.  For 1.0.2.
+Merge branch 'develop' for 2.0.0
 
-Merge branch 'develop' with version 1.0.1
+Conflicts:
+	src/productions/ForeachStatement.js
 
-Merge branch 'develop' in preparation of 1.0.1
-
+adding closure compiler annotation fixes.
+closes #33:  Allow multiple sort statements at the top of foreach. enhancement.
+Adding a semi-colon.
+splitting up a line to make it shorter
+updating the documentation for Helpers
+spelling error
+Fixing inconsistency in documentation.
