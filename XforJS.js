@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Version: 1.0.8
+ * Version: 2.0.0
  *
  * For demos and docs visit http://jsdevel.github.com/XforJS/
  * For viewing source visit http://github.com/jsdevel/XforJS/
@@ -530,12 +530,17 @@ var js_EscapeXSS="X";
  * @const
  * @type {string}
  */
-var js_Foreach="F";
+var js_each="e";
 /**
  * @const
  * @type {string}
  */
-var js_GetSortArray="G";
+var js_getSafeArray="g";
+/**
+ * @const
+ * @type {string}
+ */
+var js_sortSafeArray="s";
 /**
  * @const
  * @type {string}
@@ -582,191 +587,302 @@ function EscapeXSS(s){
       return s;
 }
 
-/*
- * Foreach assumes that context is the output of GetSortArray.
- * The Function itself accepts the following params:
- *    obj,
- *    callback,
- *    sortOrder,
- *    promoteNumbers,
- *    promoteCase(0=random,1=lower first,2=upper first),
- *    caseSensitivity.
- *
- * The callback is called with the following params:
- * function(context, position, last, name){
- * }
- *
- * It's worth noting that the sort method isn't stable across envirnoments.
- * Case insensitive sorts are not gauranteed to return the same results every
- * time.
+
+
+/**
+ * @param {Array} safeArray
+ * @param {function(Object, number, number, (string|number))} fn
  */
-function Foreach(o,c,so,n,p,i){
-   var j,l,m,asc=so===0;
-   if(o instanceof Array && typeof(c) === 'function' ){
-      l=o.length;
-      if(so!==void(0)){
-         if(so>1){
-            o=getShuffled(o);
-         } else {
-            sort(o, function(c,d){
-               var av=c.v,
-                  bv=d.v,
-                  al=c.l,
-                  bl=d.l,
-                  aisu=al[0]!==av[0],//a is upper
-                  bisu=bl[0]!==bv[0],//b is upper
-                  at=c.t,
-                  bt=d.t,
-                  an=at==='number',
-                  bn=bt==='number';
-
-               if(av===bv){//both values same
-                  return 0;
-               }
-
-               //only one is number
-               if(an!==bn){
-                  if(n){//promote numbers
-                     return at>bt?1:0;
-                  }
-                  return at>bt?0:1;//promote string by default
-               }
-
-               //both are numbers
-               if(an&&bn){
-                  if(asc){
-                     return av>bv?1:0;
-                  }else {//desc
-                     return av>bv?0:1;
-                  }
-               }
-
-               //strings now
-               //lowercase will return emtpy, so we push the value down.
-               if(!al && !bl)return 0;
-               if(!al && bl)return 1;
-               if(al && !bl)return 0;
-
-
-
-               switch(p){
-               case 0://no case preference
-                  if(asc){
-                     if(i){//case insenstive
-                        return al>bl?1:0;
-                     } else {//normal
-                        return av > bv ?1:0;
-                     }
-                  } else {//desc
-                     if(i){//case insensitive
-                        if(al===bl){
-                           return 0;
-                        }
-                        return al>bl?0:1;
-                     } else {
-                        if(aisu&&!bisu){
-                           return 0;
-                        } else if(!aisu&&bisu){
-                           return 1;
-                        }
-                        return av>bv?0:1;
-                     }
-                  }
-                  break;
-               case 1://lower case first
-                  if(asc){
-                     if(i){//insensitive
-                        if(al===bl){//same character
-                           if(aisu && !bisu){//a is upper case
-                              return 1;
-                           }
-                           return 0;
-                        } else {//not same character
-                           return al>bl?1:-1;
-                        }
-                     } else {//sensitive
-                        if(aisu && !bisu){//a is upper case
-                           return 1;
-                        } else if(!aisu && bisu){//b is upper case
-                           return 0;
-                        } else {//both lower or upper case
-                           return av>bv?1:-1;
-                        }
-                     }
-                  } else {//desc
-                     if(i){//insensitive
-                        if(al===bl){//same character
-                           if(aisu && !bisu){//a is upper case
-                              return 1;
-                           } else if(!aisu && bisu){//b is upper case
-                              return -1;
-                           } else {//both lower or upper case
-                              return -1;
-                           }
-                        } else {//not same character
-                           return al>bl?-1:1;
-                        }
-                     } else {//sensitive
-                        if((aisu && bisu) ||(!aisu && !bisu)){//both same case
-                           return av>bv?-1:1;
-                        } else {//one is lower
-                           return aisu?1:-1;
-                        }
-                     }
-                  }
-                  break;
-               case 2:
-                  if(asc){
-                     if(i){//insensitive
-                        if(al===bl){//same character
-                           if(aisu && !bisu){//a is upper case
-                              return -1;
-                           } else if(!aisu && bisu){//b is upper case
-                              return 1;
-                           } else {//both lower or upper case
-                              return 0;
-                           }
-                        } else {//not same character
-                           return al>bl?1:-1;
-                        }
-                     } else {//not sensitive
-                        if((aisu && bisu) ||(!aisu && !bisu)){//both same case
-                           return av>bv?1:-1;
-                        } else {//one is lower
-                           return aisu?-1:1;
-                        }
-                     }
-                  } else {//desc
-                     if(i){//insensitive
-                        if(al===bl){//same character
-                           if(aisu && !bisu){//a is upper case
-                              return -1;
-                           } else if(!aisu && bisu){//b is upper case
-                              return 1;
-                           } else {//both lower or upper case
-                              return 0;
-                           }
-                        } else {//not same character
-                           return al>bl?-1:1;
-                        }
-                     } else {//sensitive
-                        if((aisu && bisu) ||(!aisu && !bisu)){//both same case
-                           return av>bv?-1:1;
-                        } else {//one is lower
-                           return aisu?-1:1;
-                        }
-                     }
-                  }
-                  break;
-               }
-            });
-         }
-      }
-      for(j=0;j<l;j++){
-         m=o[j];
-         c(m.c, j+1, o.length, m.n);
+function each(safeArray, fn){
+   var i,len,item;
+   if(
+      safeArray instanceof Array &&
+      typeof fn === 'function'
+   ){
+      len = safeArray.length;
+      for(i=0;i<len;i++){
+         item=safeArray[i];
+         fn(
+            item.c,//context
+            i+1,//index
+            len,//last
+            item.n//name
+         );
       }
    }
+}
+
+function GetLibrary(namespace){
+   var ns = js_LibNamespace;
+   if(namespace!==void(0)){
+      ns=namespace;
+      validateNamespacesAgainstReservedWords(ns);
+   }
+   var lib = "/**\n"+
+   " * @preserve\n"+
+   " * Copyright 2012 Joseph Spencer.\n"+
+   " *\n"+
+   " * Licensed under the Apache License, Version 2.0 (the \"License\");\n"+
+   " * you may not use this file except in compliance with the License.\n"+
+   " * You may obtain a copy of the License at\n"+
+   " *\n"+
+   " *      http://www.apache.org/licenses/LICENSE-2.0\n"+
+   " *\n"+
+   " * Unless required by applicable law or agreed to in writing, software\n"+
+   " * distributed under the License is distributed on an \"AS IS\" BASIS,\n"+
+   " * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n"+
+   " * See the License for the specific language governing permissions and\n"+
+   " * limitations under the License.\n"+
+   " *\n"+
+   " * Version: __VERSION__\n"+
+   " *\n"+
+   " * For demos and docs visit http://jsdevel.github.com/XforJS/\n"+
+   " * For viewing source visit http://github.com/jsdevel/XforJS/\n"+
+   " */\n"+
+
+   ns+"={\n"+
+      js_CountElements+":"+CountElements.toString()+",\n"+
+      js_EscapeXSS+":"+EscapeXSS.toString()+",\n"+
+      js_each+":"+each.toString()+",\n"+
+      js_SafeValue+":"+SafeValue.toString()+",\n"+
+      js_getSafeArray+":"+getSafeArray.toString()+",\n"+
+      js_sortSafeArray+":"+sortSafeArray.toString()+",\n"+
+      js_StringBuffer+":"+StringBuffer.toString()+"\n"+
+   "};";
+
+   return lib;
+}
+
+
+
+
+/**
+ * This function returns a new array that may safely be sorted without
+ * corrupting the natural sorting of the input data objects.  It also allows
+ * for case-insensitive sorting by providing lowering the case of the key when
+ * requested.  Only numbers and strings are considered, all other types are
+ * assigned a value of ''.
+ *
+ * @param {Object|function(Object, Object)} fnOrObj
+ */
+function getSafeArray(fnOrObj){
+   var returnArray=[];
+   var name;
+   var obj;
+   //assign the proper value to obj based on the value of fnOrObj
+   try{
+      obj= /** @type {function()}*/(fnOrObj)();
+   }catch(e){
+      obj=fnOrObj;
+   }
+   if(!!obj&&typeof(obj)==='object'){
+      for(name in obj){
+         returnArray.push({
+            n:name,//name
+            c:obj[name]//context
+         });
+      }
+   }
+   return returnArray;
+}
+
+
+
+ /*
+  *
+  * @param {Array} safeArray
+  * @param {function(Object, Object)} fnGetValueToSort
+  * @param {number} sortOrder
+  * @param {number} isPromoteNumbers
+  * @param {number} casePromotionLevel (0=random,1=lower first,2=upper first)
+  * @param {number} isCaseInsensitive
+  * @returns {Array}
+  */
+function sortSafeArray(
+   safeArray,
+   fnGetValueToSort,
+   sortOrder,
+   isPromoteNumbers,
+   casePromotionLevel,
+   isCaseInsensitive
+){
+   var i;
+   var length;
+   var asc=sortOrder===0;
+   var item;
+   var valueToSort;
+   var typeofValueToSort;
+
+   length=safeArray.length;
+   if(sortOrder>1){
+      return getShuffled(safeArray);
+   } else {
+      for(i=0;i<length;i++){
+         item = safeArray[i];
+         try{
+            valueToSort=fnGetValueToSort(item.c, item.n);
+         } catch(e){
+            valueToSort=item.c;
+         }
+         typeofValueToSort=typeof valueToSort;
+         item.l = typeofValueToSort ==='string'?valueToSort.toLowerCase():'';
+         item.t = typeofValueToSort;
+         item.v=(
+               typeofValueToSort==='string'||typeofValueToSort==='number'
+            )?valueToSort:'';
+      }
+      sort(safeArray, function(c,d){
+         var av=c.v,
+            bv=d.v,
+            al=c.l,
+            bl=d.l,
+            aisu=al[0]!==av[0],//a is upper
+            bisu=bl[0]!==bv[0],//b is upper
+            at=c.t,
+            bt=d.t,
+            an=at==='number',
+            bn=bt==='number';
+
+         if(av===bv){//both values same
+            return 0;
+         }
+
+         //only one is number
+         if(an!==bn){
+            if(isPromoteNumbers){//promote numbers
+               return at>bt?1:0;
+            }
+            return at>bt?0:1;//promote string by default
+         }
+
+         //both are numbers
+         if(an&&bn){
+            if(asc){
+               return av>bv?1:0;
+            }else {//desc
+               return av>bv?0:1;
+            }
+         }
+
+         //strings now
+         //lowercase will return emtpy, so we push the value down.
+         if(!al && !bl)return 0;
+         if(!al && bl)return 1;
+         if(al && !bl)return 0;
+
+         switch(casePromotionLevel){
+         case 0://no case preference
+            if(asc){
+               if(isCaseInsensitive){//case insenstive
+                  return al>bl?1:0;
+               } else {//normal
+                  return av > bv ?1:0;
+               }
+            } else {//desc
+               if(isCaseInsensitive){//case insensitive
+                  if(al===bl){
+                     return 0;
+                  }
+                  return al>bl?0:1;
+               } else {
+                  if(aisu&&!bisu){
+                     return 0;
+                  } else if(!aisu&&bisu){
+                     return 1;
+                  }
+                  return av>bv?0:1;
+               }
+            }
+            break;
+         case 1://lower case first
+            if(asc){
+               if(isCaseInsensitive){//insensitive
+                  if(al===bl){//same character
+                     if(aisu && !bisu){//a is upper case
+                        return 1;
+                     }
+                     return 0;
+                  } else {//not same character
+                     return al>bl?1:-1;
+                  }
+               } else {//sensitive
+                  if(aisu && !bisu){//a is upper case
+                     return 1;
+                  } else if(!aisu && bisu){//b is upper case
+                     return 0;
+                  } else {//both lower or upper case
+                     return av>bv?1:-1;
+                  }
+               }
+            } else {//desc
+               if(isCaseInsensitive){//insensitive
+                  if(al===bl){//same character
+                     if(aisu && !bisu){//a is upper case
+                        return 1;
+                     } else if(!aisu && bisu){//b is upper case
+                        return -1;
+                     } else {//both lower or upper case
+                        return -1;
+                     }
+                  } else {//not same character
+                     return al>bl?-1:1;
+                  }
+               } else {//sensitive
+                  if((aisu && bisu) ||(!aisu && !bisu)){//both same case
+                     return av>bv?-1:1;
+                  } else {//one is lower
+                     return aisu?1:-1;
+                  }
+               }
+            }
+            break;
+         case 2:
+            if(asc){
+               if(isCaseInsensitive){//insensitive
+                  if(al===bl){//same character
+                     if(aisu && !bisu){//a is upper case
+                        return -1;
+                     } else if(!aisu && bisu){//b is upper case
+                        return 1;
+                     } else {//both lower or upper case
+                        return 0;
+                     }
+                  } else {//not same character
+                     return al>bl?1:-1;
+                  }
+               } else {//not sensitive
+                  if((aisu && bisu) ||(!aisu && !bisu)){//both same case
+                     return av>bv?1:-1;
+                  } else {//one is lower
+                     return aisu?-1:1;
+                  }
+               }
+            } else {//desc
+               if(isCaseInsensitive){//insensitive
+                  if(al===bl){//same character
+                     if(aisu && !bisu){//a is upper case
+                        return -1;
+                     } else if(!aisu && bisu){//b is upper case
+                        return 1;
+                     } else {//both lower or upper case
+                        return 0;
+                     }
+                  } else {//not same character
+                     return al>bl?-1:1;
+                  }
+               } else {//sensitive
+                  if((aisu && bisu) ||(!aisu && !bisu)){//both same case
+                     return av>bv?-1:1;
+                  } else {//one is lower
+                     return aisu?-1:1;
+                  }
+               }
+            }
+            break;
+         }
+      });
+   }
+   return safeArray;
 
    function getShuffled(array){
       var shuffledArray=[];
@@ -809,78 +925,6 @@ function Foreach(o,c,so,n,p,i){
    }
 }
 
-function GetLibrary(namespace){
-   var ns = js_LibNamespace;
-   if(namespace!==void(0)){
-      ns=namespace;
-      validateNamespacesAgainstReservedWords(ns);
-   }
-   var lib = "/**\n"+
-   " * @preserve\n"+
-   " * Copyright 2012 Joseph Spencer.\n"+
-   " *\n"+
-   " * Licensed under the Apache License, Version 2.0 (the \"License\");\n"+
-   " * you may not use this file except in compliance with the License.\n"+
-   " * You may obtain a copy of the License at\n"+
-   " *\n"+
-   " *      http://www.apache.org/licenses/LICENSE-2.0\n"+
-   " *\n"+
-   " * Unless required by applicable law or agreed to in writing, software\n"+
-   " * distributed under the License is distributed on an \"AS IS\" BASIS,\n"+
-   " * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n"+
-   " * See the License for the specific language governing permissions and\n"+
-   " * limitations under the License.\n"+
-   " *\n"+
-   " * Version: __VERSION__\n"+
-   " *\n"+
-   " * For demos and docs visit http://jsdevel.github.com/XforJS/\n"+
-   " * For viewing source visit http://github.com/jsdevel/XforJS/\n"+
-   " */\n"+
-
-   ns+"={\n"+
-      js_CountElements+":"+CountElements.toString()+",\n"+
-      js_EscapeXSS+":"+EscapeXSS.toString()+",\n"+
-      js_Foreach+":"+Foreach.toString()+",\n"+
-      js_SafeValue+":"+SafeValue.toString()+",\n"+
-      js_GetSortArray+":"+GetSortArray.toString()+",\n"+
-      js_StringBuffer+":"+StringBuffer.toString()+"\n"+
-   "};";
-
-   return lib;
-}
-
-
-
-/**
- * This function returns a new array that may safely be sorted without
- * corrupting the natural sorting of the input data objects.  It also allows
- * for case-insensitive sorting by providing lowering the case of the key when
- * requested.  Only numbers and strings are considered, all other types are
- * assigned a value of ''.
- */
-function GetSortArray(l,s){
-   var r=[],a,v,o,t;
-   try{o=l()}catch(e){o=l}
-   if(!!o&&typeof(o)==='object'){
-      for(a in o){
-         try{
-            v=s(o[a], a);
-         } catch(e){
-            v=o[a];
-         }
-         t=typeof(v);
-         r.push({
-            n:a,//name
-            c:o[a],//context
-            l:t==='string'?v.toLowerCase():'',//used to determine case
-            t:t,//type
-            v:(t==='string'||t==='number')?v:''//only sort on these
-         });
-      }
-   }
-   return r
-}
-
 function SafeValue(v){
    try{
       return v()
@@ -917,8 +961,12 @@ function StringBuffer(){
  */
 function Output(){
    var nodes = [];
+   var prependedNodes = [];
+   var appendedNodes = [];
 
    /**
+    * Adds a node before appended nodes and after prepended nodes.
+    *
     * @param {Object|string} obj
     * @return {Output}
     */
@@ -928,11 +976,33 @@ function Output(){
    };
 
    /**
+    * Appends a node after the last appended node.
+    *
+    * @param {Object|string} obj
+    * @returns {Output}
+    */
+   this.append=function(obj){
+      appendedNodes.push(obj);
+      return this;
+   };
+
+   /**
+    * Prepends a node before the last prepended node.
+    *
+    * @param {Object|string} obj
+    * @returns {Output}
+    */
+   this.prepend=function(obj){
+      prependedNodes.unshift(obj);
+      return this;
+   };
+
+   /**
     * @return {string}
     * @override
     */
    this.toString=function(){
-      return nodes.join('');
+      return prependedNodes.join('') + nodes.join('') + appendedNodes.join('');
    };
 }
 
@@ -1245,9 +1315,10 @@ function JSArgumentsWrapper(args){
 function JavascriptBuilder(args){
    var js_count;
    var js_escapexss;
-   var js_foreach;
+   var _js_each;
    var js_safeValue;
-   var js_sortArray;
+   var _js_getSafeArray;
+   var _js_sortSafeArray;
    var js_stringBuffer;
    var lib_namespace = args['libnamespace'];
 
@@ -1263,16 +1334,18 @@ function JavascriptBuilder(args){
       }
       js_count=lib_namespace+"."+js_CountElements;
       js_escapexss=lib_namespace+"."+js_EscapeXSS;
-      js_foreach=lib_namespace+"."+js_Foreach;
+      _js_each=lib_namespace+"."+js_each;
       js_safeValue=lib_namespace+"."+js_SafeValue;
-      js_sortArray=lib_namespace+"."+js_GetSortArray;
+      _js_getSafeArray=lib_namespace+"."+js_getSafeArray;
+      _js_sortSafeArray=lib_namespace+"."+js_sortSafeArray;
       js_stringBuffer=lib_namespace+"."+js_StringBuffer;
    } else {
       js_count=CountElements.toString();
       js_escapexss=EscapeXSS.toString();
-      js_foreach=Foreach.toString();
+      _js_each=each.toString();
       js_safeValue = SafeValue.toString();
-      js_sortArray = GetSortArray.toString();
+      _js_getSafeArray = getSafeArray.toString();
+      _js_sortSafeArray = sortSafeArray.toString();
       js_stringBuffer=StringBuffer.toString();
    }
 
@@ -1282,14 +1355,17 @@ function JavascriptBuilder(args){
    this.getJSEscapeXSS=function(){
       return js_escapexss;
    };
-   this.getJSForeach=function(){
-      return js_foreach;
+   this.getJSEach=function(){
+      return _js_each;
    };
    this.getJSSafeValue=function(){
       return js_safeValue;
    };
-   this.getJSSortArray=function(){
-      return js_sortArray;
+   this.getJSGetSafeArray=function(){
+      return _js_getSafeArray;
+   };
+   this.getJSSortSafeArray=function(){
+      return _js_sortSafeArray;
    };
    this.getJSStringBuffer=function(){
       return js_stringBuffer;
@@ -2529,7 +2605,7 @@ function ImportStatements(output){
       } else {
          context.removeProduction();
       }
-   }
+   };
 }
 extend(ImportStatements, Production);
 /**
@@ -4362,17 +4438,18 @@ TextStatement.prototype.name="TextStatement";
  * @param {ProductionContext} context
  */
 function ForeachStatement(output, context){
+   var safeArrayOutput=new Output();
    var expressionOutput = new Output();
    var bodyOutput = new Output();
-   var sortParamOutput=new Output();
-   var sortContextOutput=new Output();
+
+   safeArrayOutput.
+      add(js_getSafeArray+"(").
+         add(expressionOutput).
+      add(")");
 
    output.
-      add(js_Foreach+"(").
-            add(js_GetSortArray+"(").
-               add(expressionOutput).
-               add(sortContextOutput).
-               add(")").
+      add(js_each+"(").
+         add(safeArrayOutput).
          add(",").
             add(//callback
                "function("+
@@ -4383,16 +4460,14 @@ function ForeachStatement(output, context){
                "){"
             ).
             add(bodyOutput).
-         add("}").//sortFunction if any
-            add(sortParamOutput).
-         add(");");
+         add("});");
 
    context.getParams().
-      put(js_Foreach, //Foreach
-         context.javascript.getJSForeach()
+      put(js_each,
+         context.javascript.getJSEach()
       ).
-      put(js_GetSortArray,
-         context.javascript.getJSSortArray()
+      put(js_getSafeArray,
+         context.javascript.getJSGetSafeArray()
       );
 
    /**
@@ -4405,7 +4480,7 @@ function ForeachStatement(output, context){
     * @return {ForeachBodyStatements}
     */
    this.getBodyStatements=function(){
-      return new ForeachBodyStatements(bodyOutput, sortContextOutput, sortParamOutput);
+      return new ForeachBodyStatements(bodyOutput, safeArrayOutput);
    };
 }
 extend(ForeachStatement, AbstractConditionBlock);
@@ -4422,16 +4497,14 @@ ForeachStatement.prototype.getClosingPattern=function(){
 };
 
 
+
 /**
  * @constructor
  * @extends {Production}
  * @param {Output} output
- * @param {Output} sortContextOutput
- * @param {Output} sortFunctionOutput
+ * @param {Output} safeArrayOutput
  */
-function ForeachBodyStatements(output, sortContextOutput, sortFunctionOutput) {
-   /** @type boolean */
-   var hasSort=false;
+function ForeachBodyStatements(output, safeArrayOutput) {
    /** @type boolean */
    var hasVar=false;
    /** @type boolean */
@@ -4456,12 +4529,13 @@ function ForeachBodyStatements(output, sortContextOutput, sortFunctionOutput) {
       case '{':
          switch(characters.charAt(1)){
          case 's':
-            if(!hasSort && !hasVar && !hasTemplateBody){
-               hasSort=true;
+            if(!hasVar && !hasTemplateBody){
                match = characters.match(SORT);
                if(match){
                   characters.shift(match[1].length);
-                  context.addProduction(new SortStatement(sortContextOutput, sortFunctionOutput, context));
+                  context.addProduction(
+                     new SortStatement(safeArrayOutput, context)
+                  );
                   return;
                }
             }
@@ -4499,18 +4573,17 @@ ForeachBodyStatements.prototype.name="ForeachBodyStatements";
 /**
  * @constructor
  * @extends {Production}
- * @param {Output} sortContextOutput
- * @param {Output} sortFunctionOutput
+ * @param {Output} safeArrayOutput
  * @param {ProductionContext} context
  */
 function SortStatement(
-   sortContextOutput,
-   sortFunctionOutput,
+   safeArrayOutput,
    context
 ){
+   var sortParameters = new Output();
    context.getParams().
-   put(js_GetSortArray,
-      context.javascript.getJSSortArray()
+   put(js_sortSafeArray,
+      context.javascript.getJSSortSafeArray()
    );
 
    /**
@@ -4536,9 +4609,14 @@ function SortStatement(
           * @type {Output}
           */
          var contextSelectorOutput = new Output();
-         sortContextOutput.
-               add(",function("+js_context+", "+js_name+"){return ").
-               add(contextSelectorOutput).
+
+         safeArrayOutput.
+            prepend(js_sortSafeArray+"(").
+            append(sortParameters).
+            append(")");
+         sortParameters.
+            add(",function("+js_context+", "+js_name+"){return ").
+            add(contextSelectorOutput).
             add("}");
          context.addProduction(new ContextSelector(contextSelectorOutput, true));
          return;
@@ -4590,7 +4668,18 @@ function SortStatement(
                      }
                   }
                }
-               sortFunctionOutput.add(","+directionCode+","+(promoteNum?1:0)+","+casePreference+","+caseSensitivity);
+
+               sortParameters.
+                  add(
+                     ","+
+                     directionCode+
+                     ","+
+                     (promoteNum?1:0)+
+                     ","+
+                     casePreference+
+                     ","+
+                     caseSensitivity
+                  );
             } else {
                throw "Sort direction must be one of '|asc', '|desc' or '|rand'.";
             }
