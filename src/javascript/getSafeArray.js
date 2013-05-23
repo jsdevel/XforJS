@@ -22,14 +22,18 @@
  * requested.  Only numbers and strings are considered, all other types are
  * assigned a value of ''.
  *
- * @param {object|function} fnOrObj
+ * @param {Object|function(Object, Object)} fnOrObj
  */
 function getSafeArray(fnOrObj){
    var returnArray=[];
    var name;
    var obj;
    //assign the proper value to obj based on the value of fnOrObj
-   try{obj=fnOrObj();}catch(e){obj=fnOrObj;}
+   try{
+      obj= /** @type {function()}*/(fnOrObj)();
+   }catch(e){
+      obj=fnOrObj;
+   }
    if(!!obj&&typeof(obj)==='object'){
       for(name in obj){
          returnArray.push({

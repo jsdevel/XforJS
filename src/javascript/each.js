@@ -16,9 +16,8 @@
 
 
 /**
- * @param {type} safeArray
- * @param {type} fn
- * @returns {undefined}
+ * @param {Array} safeArray
+ * @param {function(Object, number, number, (string|number))} fn
  */
 function each(safeArray, fn){
    var i,len,item;

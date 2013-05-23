@@ -17,13 +17,13 @@
 
  /*
   *
-  * @param {type} safeArray
-  * @param {type} fnGetValueToSort
-  * @param {type} sortOrder
-  * @param {type} isPromoteNumbers
-  * @param {type} casePromotionLevel (0=random,1=lower first,2=upper first)
-  * @param {type} isCaseInsensitive
-  * @returns {sortSafeArray.safeArray}
+  * @param {Array} safeArray
+  * @param {function(Object, Object)} fnGetValueToSort
+  * @param {number} sortOrder
+  * @param {number} isPromoteNumbers
+  * @param {number} casePromotionLevel (0=random,1=lower first,2=upper first)
+  * @param {number} isCaseInsensitive
+  * @returns {Array}
   */
 function sortSafeArray(
    safeArray,
