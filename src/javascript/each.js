@@ -1,5 +1,5 @@
 /*!
- * Copyright 2012 Joseph Spencer.
+ * Copyright 2013 Joseph Spencer.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,26 +12,28 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
+
+
 /**
- * @constructor
- * @extends {Production}
- * @param {Output} output
+ * @param {Array} safeArray
+ * @param {function(Object, number, number, (string|number))} fn
  */
-function ImportStatements(output){
-   this.execute=function(characters, context){
-      characters.removeSpace();
-      if(characters.charAt(0) === '{' && characters.charAt(1) === 'i'){
-         context.addProduction(new ImportStatement(output));
-      } else {
-         context.removeProduction();
+function each(safeArray, fn){
+   var i,len,item;
+   if(
+      safeArray instanceof Array &&
+      typeof fn === 'function'
+   ){
+      len = safeArray.length;
+      for(i=0;i<len;i++){
+         item=safeArray[i];
+         fn(
+            item.c,//context
+            i+1,//index
+            len,//last
+            item.n//name
+         );
       }
-   };
+   }
 }
-extend(ImportStatements, Production);
-/**
- * @const
- * @type {string}
- */
-ImportStatements.prototype.name="ImportStatements";

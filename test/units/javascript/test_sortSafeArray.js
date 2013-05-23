@@ -19,7 +19,7 @@
  * Sorting can sometimes produce random results.  The expected values herein in
  * some cases were simply taken from what the actual result was.
  */
-test("Foreach", function(){
+test("sortSafeArray", function(){
    var equal = require('assert').equal;
    var array = [1,"a","C","d","e","a","D",2,6,"A","c","E"];
    var sortArray;
@@ -27,7 +27,6 @@ test("Foreach", function(){
    var direction;
    var promoteNumber;
    var caseLevel;
-   var start = Date.now();
 
    direction="asc";
    reset();
@@ -139,12 +138,19 @@ test("Foreach", function(){
       caseInsensitive=0;
       promoteNumber = 0;
       caseLevel = 0;
-      sortArray = GetSortArray(array, function(value){return value;});
+      sortArray = getSafeArray(array);
    }
    function test(msg, expected){
       var finalResult="";
       var directionCode=direction==="asc"?0:(direction==="desc"?1:2);
-      Foreach(sortArray, function(){}, directionCode, promoteNumber, caseLevel, caseInsensitive);
+      sortSafeArray(
+         sortArray,
+         function(value, name){return value},
+         directionCode,
+         promoteNumber,
+         caseLevel,
+         caseInsensitive
+      );
       sortArray.forEach(function(obj){
          finalResult+=obj.v;
       });

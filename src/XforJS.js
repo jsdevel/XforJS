@@ -71,9 +71,10 @@ var XforJS = {
 
 //INCLUDE javascript/CountElements
 //INCLUDE javascript/EscapeXSS
-//INCLUDE javascript/Foreach
+//INCLUDE javascript/each
 //INCLUDE javascript/GetLibrary
-//INCLUDE javascript/GetSortArray
+//INCLUDE javascript/getSafeArray
+//INCLUDE javascript/sortSafeArray
 //INCLUDE javascript/SafeValue
 //INCLUDE javascript/StringBuffer
 

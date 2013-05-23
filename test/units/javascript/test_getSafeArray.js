@@ -1,5 +1,5 @@
 /*!
- * Copyright 2012 Joseph Spencer.
+ * Copyright 2013 Joseph Spencer.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,18 @@
  * limitations under the License.
  *
  */
+
 /**
- * @constructor
- * @extends {Production}
- * @param {Output} output
+ * Sorting can sometimes produce random results.  The expected values herein in
+ * some cases were simply taken from what the actual result was.
  */
-function ImportStatements(output){
-   this.execute=function(characters, context){
-      characters.removeSpace();
-      if(characters.charAt(0) === '{' && characters.charAt(1) === 'i'){
-         context.addProduction(new ImportStatement(output));
-      } else {
-         context.removeProduction();
-      }
-   };
-}
-extend(ImportStatements, Production);
-/**
- * @const
- * @type {string}
- */
-ImportStatements.prototype.name="ImportStatements";
+test("getSafeArray", function(){
+   var array;
+   var assert = require('assert');
+   var testArray = [1,"a","C","d","e","a","D",2,6,"A","c","E"];
+
+   array = getSafeArray(testArray);
+
+   assert.equal(1, array[0].c);
+   assert.equal("E", array[testArray.length - 1].c);
+});

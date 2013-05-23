@@ -31,8 +31,9 @@ test("GetLibrary", function(){
    function hasMethods(obj){
       return obj[js_EscapeXSS] &&
       obj[js_CountElements] &&
-      obj[js_GetSortArray] &&
-      obj[js_Foreach] &&
+      obj[js_getSafeArray] &&
+      obj[js_sortSafeArray] &&
+      obj[js_each] &&
       obj[js_SafeValue] &&
       obj[js_StringBuffer];
    }

@@ -19,7 +19,7 @@
  * @extends {Production}
  * @param {Output} output
  */
-function ImportStatements(output){
+function SortStatements(output){
    this.execute=function(characters, context){
       characters.removeSpace();
       if(characters.charAt(0) === '{' && characters.charAt(1) === 'i'){

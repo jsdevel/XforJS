@@ -466,12 +466,17 @@ var js_EscapeXSS="X";
  * @const
  * @type {string}
  */
-var js_Foreach="F";
+var js_each="e";
 /**
  * @const
  * @type {string}
  */
-var js_GetSortArray="G";
+var js_getSafeArray="g";
+/**
+ * @const
+ * @type {string}
+ */
+var js_sortSafeArray="s";
 /**
  * @const
  * @type {string}

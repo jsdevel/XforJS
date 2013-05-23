@@ -157,3 +157,11 @@
       {name()}
    {/foreach}
 {/template}
+
+{template sort_asc_by_name_then_sort_desc_by_type}
+   {foreach .}
+      {sort name() |asc}
+      {sort type   |desc}
+      {value}
+   {/foreach}
+{/template}

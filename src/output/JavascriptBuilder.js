@@ -26,9 +26,10 @@
 function JavascriptBuilder(args){
    var js_count;
    var js_escapexss;
-   var js_foreach;
+   var _js_each;
    var js_safeValue;
-   var js_sortArray;
+   var _js_getSafeArray;
+   var _js_sortSafeArray;
    var js_stringBuffer;
    var lib_namespace = args['libnamespace'];
 
@@ -44,16 +45,18 @@ function JavascriptBuilder(args){
       }
       js_count=lib_namespace+"."+js_CountElements;
       js_escapexss=lib_namespace+"."+js_EscapeXSS;
-      js_foreach=lib_namespace+"."+js_Foreach;
+      _js_each=lib_namespace+"."+js_each;
       js_safeValue=lib_namespace+"."+js_SafeValue;
-      js_sortArray=lib_namespace+"."+js_GetSortArray;
+      _js_getSafeArray=lib_namespace+"."+_js_getSafeArray;
+      _js_sortSafeArray=lib_namespace+"."+_js_sortSafeArray;
       js_stringBuffer=lib_namespace+"."+js_StringBuffer;
    } else {
       js_count=CountElements.toString();
       js_escapexss=EscapeXSS.toString();
-      js_foreach=Foreach.toString();
+      _js_each=each.toString();
       js_safeValue = SafeValue.toString();
-      js_sortArray = GetSortArray.toString();
+      _js_getSafeArray = getSafeArray.toString();
+      _js_sortSafeArray = sortSafeArray.toString();
       js_stringBuffer=StringBuffer.toString();
    }
 
@@ -63,14 +66,17 @@ function JavascriptBuilder(args){
    this.getJSEscapeXSS=function(){
       return js_escapexss;
    };
-   this.getJSForeach=function(){
-      return js_foreach;
+   this.getJSEach=function(){
+      return _js_each;
    };
    this.getJSSafeValue=function(){
       return js_safeValue;
    };
-   this.getJSSortArray=function(){
-      return js_sortArray;
+   this.getJSGetSafeArray=function(){
+      return _js_getSafeArray;
+   };
+   this.getJSSortSafeArray=function(){
+      return _js_sortSafeArray;
    };
    this.getJSStringBuffer=function(){
       return js_stringBuffer;

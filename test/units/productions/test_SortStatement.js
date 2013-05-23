@@ -17,14 +17,12 @@
 test("SortStatement", function(){
    var compiler=new Compiler();
    var output;
-   var output1;
-   var output2;
    var context;
    var production;
    var characters;
 
    setEnv(". |asc}");
-      assert(context.getParams().getParameters().indexOf(js_GetSortArray) > -1,
+      assert(context.getParams().getParameters().indexOf(js_sortSafeArray) > -1,
          "GetSortArray is appended in the constructor.");
       execute();
 
@@ -35,7 +33,7 @@ test("SortStatement", function(){
       assert(outputHas(",function("+js_context+", "+js_name+"){"),
          "sort param output correctly.");
       execute();
-      output1Has(",0,0,0,0", "default values.");
+      outputHas(",0,0,0,0", "default values.");
       assert(!prodIs(SortStatement),
          "closes with defaults.");
 
@@ -51,7 +49,7 @@ test("SortStatement", function(){
       remove();
       characters.shift(2);
       execute();
-      output1Has(",1,0,0,0", "desc as first param.");
+      outputHas(",1,0,0,0", "desc as first param.");
       assert(characters.length() === 0,
          "direction is removed.");
 
@@ -60,7 +58,7 @@ test("SortStatement", function(){
       remove();
       characters.shift(2);
       execute();
-      output1Has(",0,1,0,1", "numbers first.");
+      outputHas(",0,1,0,1", "numbers first.");
       assert(!characters.length(),
          "properly closes.");
 
@@ -69,7 +67,7 @@ test("SortStatement", function(){
       remove();
       characters.shift(2);
       execute();
-      output1Has(",0,1,2,1", "numbers first.");
+      outputHas(",0,1,2,1", "numbers first.");
       assert(!characters.length(),
          "properly closes.");
    setEnv(". |asc|inc}");
@@ -77,7 +75,7 @@ test("SortStatement", function(){
       remove();
       characters.shift(2);
       execute();
-      output1Has(",0,1,1,1", "numbers first.");
+      outputHas(",0,1,1,1", "numbers first.");
       assert(!characters.length(),
          "properly closes.");
 
@@ -87,7 +85,7 @@ test("SortStatement", function(){
          remove();
          characters.shift(2);
          execute();
-         output1Has(",2,0,0,0", "default values.");
+         outputHas(",2,0,0,0", "default values.");
    });
    test("|rand|i throws an error.", function(){
       setEnv(". |rand|i}");
@@ -127,9 +125,6 @@ test("SortStatement", function(){
    function outputHas(string){
       return output.toString().indexOf(string) > -1;
    }
-   function output1Has(string, msg){
-      assert.equal(output1.toString(), string, msg);
-   }
    function execute(){
       context.executeCurrent(characters);
    }
@@ -144,12 +139,9 @@ test("SortStatement", function(){
    }
    function setEnv(string){
       output=new Output();
-      output1=new Output();
-      output2=new Output();
       context = new ProductionContext(output, compiler);
       production = new SortStatement(
             output,
-            output1,
             context
          );
       characters=new CharWrapper(string);

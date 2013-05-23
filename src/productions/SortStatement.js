@@ -18,18 +18,17 @@
 /**
  * @constructor
  * @extends {Production}
- * @param {Output} sortContextOutput
- * @param {Output} sortFunctionOutput
+ * @param {Output} safeArrayOutput
  * @param {ProductionContext} context
  */
 function SortStatement(
-   sortContextOutput,
-   sortFunctionOutput,
+   safeArrayOutput,
    context
 ){
+   var sortParameters = new Output();
    context.getParams().
-   put(js_GetSortArray,
-      context.javascript.getJSSortArray()
+   put(js_sortSafeArray,
+      context.javascript.getJSSortSafeArray()
    );
 
    /**
@@ -55,9 +54,14 @@ function SortStatement(
           * @type {Output}
           */
          var contextSelectorOutput = new Output();
-         sortContextOutput.
-               add(",function("+js_context+", "+js_name+"){return ").
-               add(contextSelectorOutput).
+
+         safeArrayOutput.
+            prepend(js_sortSafeArray+"(").
+            append(sortParameters).
+            append(")");
+         sortParameters.
+            add(",function("+js_context+", "+js_name+"){return ").
+            add(contextSelectorOutput).
             add("}");
          context.addProduction(new ContextSelector(contextSelectorOutput, true));
          return;
@@ -109,7 +113,18 @@ function SortStatement(
                      }
                   }
                }
-               sortFunctionOutput.add(","+directionCode+","+(promoteNum?1:0)+","+casePreference+","+caseSensitivity);
+
+               sortParameters.
+                  add(
+                     ","+
+                     directionCode+
+                     ","+
+                     (promoteNum?1:0)+
+                     ","+
+                     casePreference+
+                     ","+
+                     caseSensitivity
+                  );
             } else {
                throw "Sort direction must be one of '|asc', '|desc' or '|rand'.";
             }

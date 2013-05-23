@@ -19,12 +19,9 @@
  * @constructor
  * @extends {Production}
  * @param {Output} output
- * @param {Output} sortContextOutput
- * @param {Output} sortFunctionOutput
+ * @param {Output} safeArrayOutput
  */
-function ForeachBodyStatements(output, sortContextOutput, sortFunctionOutput) {
-   /** @type boolean */
-   var hasSort=false;
+function ForeachBodyStatements(output, safeArrayOutput) {
    /** @type boolean */
    var hasVar=false;
    /** @type boolean */
@@ -49,12 +46,13 @@ function ForeachBodyStatements(output, sortContextOutput, sortFunctionOutput) {
       case '{':
          switch(characters.charAt(1)){
          case 's':
-            if(!hasSort && !hasVar && !hasTemplateBody){
-               hasSort=true;
+            if(!hasVar && !hasTemplateBody){
                match = characters.match(SORT);
                if(match){
                   characters.shift(match[1].length);
-                  context.addProduction(new SortStatement(sortContextOutput, sortFunctionOutput, context));
+                  context.addProduction(
+                     new SortStatement(safeArrayOutput, context)
+                  );
                   return;
                }
             }
