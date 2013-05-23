@@ -14,32 +14,29 @@
  * limitations under the License.
  *
  */
+
 /**
  * This function returns a new array that may safely be sorted without
  * corrupting the natural sorting of the input data objects.  It also allows
  * for case-insensitive sorting by providing lowering the case of the key when
  * requested.  Only numbers and strings are considered, all other types are
  * assigned a value of ''.
+ *
+ * @param {object|function} fnOrObj
  */
-function GetSortArray(l,s){
-   var r=[],a,v,o,t;
-   try{o=l()}catch(e){o=l}
-   if(!!o&&typeof(o)==='object'){
-      for(a in o){
-         try{
-            v=s(o[a], a);
-         } catch(e){
-            v=o[a];
-         }
-         t=typeof(v);
-         r.push({
-            n:a,//name
-            c:o[a],//context
-            l:t==='string'?v.toLowerCase():'',//used to determine case
-            t:t,//type
-            v:(t==='string'||t==='number')?v:''//only sort on these
+function getSafeArray(fnOrObj){
+   var returnArray=[];
+   var name;
+   var obj;
+   //assign the proper value to obj based on the value of fnOrObj
+   try{obj=fnOrObj();}catch(e){obj=fnOrObj;}
+   if(!!obj&&typeof(obj)==='object'){
+      for(name in obj){
+         returnArray.push({
+            n:name,//name
+            c:obj[name]//context
          });
       }
    }
-   return r
+   return returnArray;
 }

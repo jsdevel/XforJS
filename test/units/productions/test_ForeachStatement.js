@@ -22,9 +22,9 @@ test("ForeachStatement", function(){
 
    assert.equal(
       output.toString(),
-      js_Foreach+
+      js_each+
          "("+
-            js_GetSortArray+"(),"+
+            js_getSafeArray+"(),"+
             "function("+
                js_context+","+
                js_position+","+
@@ -32,7 +32,7 @@ test("ForeachStatement", function(){
                js_name+
             "){});",
       "foreach block output.");
-   assert(parameters.indexOf(js_Foreach+","+js_GetSortArray) > -1,
+   assert(parameters.indexOf(js_each+","+js_getSafeArray) > -1,
       "functions are output accordingly to support Foreach.");
    assert(production.getBodyStatements() instanceof ForeachBodyStatements,
       "getBodyStatements is working.");

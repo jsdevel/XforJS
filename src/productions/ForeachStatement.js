@@ -22,17 +22,18 @@
  * @param {ProductionContext} context
  */
 function ForeachStatement(output, context){
+   var safeArrayOutput=new Output();
    var expressionOutput = new Output();
    var bodyOutput = new Output();
-   var sortParamOutput=new Output();
-   var sortContextOutput=new Output();
+
+   safeArrayOutput.
+      add(js_getSafeArray+"(").
+         add(expressionOutput).
+      add(")");
 
    output.
-      add(js_Foreach+"(").
-            add(js_GetSortArray+"(").
-               add(expressionOutput).
-               add(sortContextOutput).
-               add(")").
+      add(js_each+"(").
+         add(safeArrayOutput).
          add(",").
             add(//callback
                "function("+
@@ -43,16 +44,14 @@ function ForeachStatement(output, context){
                "){"
             ).
             add(bodyOutput).
-         add("}").//sortFunction if any
-            add(sortParamOutput).
-         add(");");
+         add("});");
 
    context.getParams().
-      put(js_Foreach, //Foreach
-         context.javascript.getJSForeach()
+      put(js_each,
+         context.javascript.getJSEach()
       ).
-      put(js_GetSortArray,
-         context.javascript.getJSSortArray()
+      put(js_getSafeArray,
+         context.javascript.getJSGetSafeArray()
       );
 
    /**
@@ -65,7 +64,7 @@ function ForeachStatement(output, context){
     * @return {ForeachBodyStatements}
     */
    this.getBodyStatements=function(){
-      return new ForeachBodyStatements(bodyOutput, sortContextOutput, sortParamOutput);
+      return new ForeachBodyStatements(bodyOutput, safeArrayOutput);
    };
 }
 extend(ForeachStatement, AbstractConditionBlock);

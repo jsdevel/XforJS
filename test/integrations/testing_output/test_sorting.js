@@ -63,6 +63,18 @@ test("sorting", function(){
    };
    assert.equal("bcef", sort.sort_by_name_fn(objects), "Sorting by name().");
 
+   //Multiple sort statements
+   assert.equal(
+      sort.sort_asc_by_name_then_sort_desc_by_type({
+         "coo":{type:"dir",  value:5},
+         "zoo":{type:"file", value:5},
+         "aoo":{type:"dir",  value:1},
+         "foo":{type:"file", value:3},
+         "doo":{type:"file", value:8},
+         "eoo":{type:"dir",  value:3}
+      }),
+      "835153"
+   );
 
    function doSort(fn){
       return fn([

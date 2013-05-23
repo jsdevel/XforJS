@@ -1,5 +1,5 @@
 /*!
- * Copyright 2012 Joseph Spencer.
+ * Copyright 2013 Joseph Spencer.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,18 @@
  * limitations under the License.
  *
  */
-test("Output", function(){
-var output1 = new Output;
-var output2 = new Output;
 
-output1.add(1).add(2);
-output2.add(output1);
-output2.add(3).add(5);
-output1.add("hello there");
+/**
+ * Sorting can sometimes produce random results.  The expected values herein in
+ * some cases were simply taken from what the actual result was.
+ */
+test("getSafeArray", function(){
+   var array;
+   var assert = require('assert');
+   var testArray = [1,"a","C","d","e","a","D",2,6,"A","c","E"];
 
-assert.equal(output2.toString(), "12hello there35", "toString and add are both working.");
+   array = getSafeArray(testArray);
 
-output1 = new Output();
-output1.add("5");
-output1.prepend("6");
-output1.prepend("4");
-output1.append("8");
-output1.add("7");
-output1.append("3");
-assert.equal("465783", output1.toString());
-}, true);
+   assert.equal(1, array[0].c);
+   assert.equal("E", array[testArray.length - 1].c);
+});

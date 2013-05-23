@@ -267,6 +267,10 @@
    {foreach person}#with modifiers.  Case insensitive and uppercase first.
       {sort hobbies.favorite |asc|iC}
    {/foreach}
+   {foreach person}#multiple sorts allowed!
+      {sort hobbies.favorite |asc}
+      {sort hobbies.name     |desc}
+   {/foreach}
 {/template}
 
 ##Text

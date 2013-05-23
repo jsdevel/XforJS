@@ -45,9 +45,10 @@ function GetLibrary(namespace){
    ns+"={\n"+
       js_CountElements+":"+CountElements.toString()+",\n"+
       js_EscapeXSS+":"+EscapeXSS.toString()+",\n"+
-      js_Foreach+":"+Foreach.toString()+",\n"+
+      js_each+":"+each.toString()+",\n"+
       js_SafeValue+":"+SafeValue.toString()+",\n"+
-      js_GetSortArray+":"+GetSortArray.toString()+",\n"+
+      js_getSafeArray+":"+getSafeArray.toString()+",\n"+
+      js_sortSafeArray+":"+sortSafeArray.toString()+",\n"+
       js_StringBuffer+":"+StringBuffer.toString()+"\n"+
    "};";
 

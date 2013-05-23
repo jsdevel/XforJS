@@ -1,5 +1,5 @@
 /*!
- * Copyright 2012 Joseph Spencer.
+ * Copyright 2013 Joseph Spencer.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,25 +12,29 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
-test("Output", function(){
-var output1 = new Output;
-var output2 = new Output;
 
-output1.add(1).add(2);
-output2.add(output1);
-output2.add(3).add(5);
-output1.add("hello there");
 
-assert.equal(output2.toString(), "12hello there35", "toString and add are both working.");
-
-output1 = new Output();
-output1.add("5");
-output1.prepend("6");
-output1.prepend("4");
-output1.append("8");
-output1.add("7");
-output1.append("3");
-assert.equal("465783", output1.toString());
-}, true);
+/**
+ * @param {type} safeArray
+ * @param {type} fn
+ * @returns {undefined}
+ */
+function each(safeArray, fn){
+   var i,len,item;
+   if(
+      safeArray instanceof Array &&
+      typeof fn === 'function'
+   ){
+      len = safeArray.length;
+      for(i=0;i<len;i++){
+         item=safeArray[i];
+         fn(
+            item.c,//context
+            i+1,//index
+            len,//last
+            item.n//name
+         );
+      }
+   }
+}
