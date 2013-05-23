@@ -47,8 +47,8 @@ function JavascriptBuilder(args){
       js_escapexss=lib_namespace+"."+js_EscapeXSS;
       _js_each=lib_namespace+"."+js_each;
       js_safeValue=lib_namespace+"."+js_SafeValue;
-      _js_getSafeArray=lib_namespace+"."+_js_getSafeArray;
-      _js_sortSafeArray=lib_namespace+"."+_js_sortSafeArray;
+      _js_getSafeArray=lib_namespace+"."+js_getSafeArray;
+      _js_sortSafeArray=lib_namespace+"."+js_sortSafeArray;
       js_stringBuffer=lib_namespace+"."+js_StringBuffer;
    } else {
       js_count=CountElements.toString();
