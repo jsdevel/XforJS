@@ -1,20 +1,5 @@
-Merge branch 'develop'.  Pulling in a patch for some undefined references.
-
-fixing bad variable references
-
-Merge branch 'develop'
-
-bumping version for 2.0.0
-
-Merge branch 'develop' for 2.0.0
-
-Conflicts:
-	src/productions/ForeachStatement.js
-
-adding closure compiler annotation fixes.
-closes #33:  Allow multiple sort statements at the top of foreach. enhancement.
-Adding a semi-colon.
-splitting up a line to make it shorter
-updating the documentation for Helpers
-spelling error
-Fixing inconsistency in documentation.
+updating a unit test.
+closes #41:  libnamespace is ignored as a compiler option. bug.
+closes #40:  outputlibrary should be removed as an option for Compiler. maintenance.
+closes #42:  the build process isn't changing all occurrences of "__VERSION__" accordingly. bug.
+removing an unused file
