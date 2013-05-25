@@ -35,16 +35,13 @@ function Compiler(config){
       'global':true,
       'minifyhtml':true,
       'normalizespace':true,
-      'outputlibrary':'',//file location
       'removelogs':true,
       'useexternal':false,
       'warn':false
    };
    var name;
    for(name in _config){
-      if(name in configuration){
-         configuration[name] = _config[name];
-      }
+      configuration[name] = _config[name];
    }
    /** @type {Object} */
    this.configuration=configuration;

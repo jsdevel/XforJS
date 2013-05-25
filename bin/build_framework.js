@@ -18,22 +18,19 @@
 !function(){
    var common = require('./common');
    var fs = require('fs');
-   var assert = require('assert');
    var spawn=require('child_process').spawn;
    var closure;
    var framework = fs.readFileSync("../src/XforJS.js", "utf8");
    var VERSION = fs.readFileSync("VERSION", "utf8");
    var minified = '../build/javascript/XforJS.'+VERSION+'.min.js';
-   var placeholders = {
-      '__VERSION__':VERSION
-   };
 
-   var placeholder;
-   for(placeholder in placeholders){
-      framework = framework.replace(placeholder,placeholders[placeholder]);
-   }
    console.log("building the src file...");
-   var frameworkBuilt = common.buildFile(framework).withPath('../src/').now();
+   var frameworkBuilt = common.
+           buildFile(framework).
+           withPath('../src/').
+           now().
+           replace(/__VERSION__/gm,VERSION);
+
    console.log("writing the src file to ../build/javascript/XforJS."+VERSION+".js");
    fs.writeFileSync("../build/javascript/XforJS."+VERSION+".js", frameworkBuilt, "utf8");
 

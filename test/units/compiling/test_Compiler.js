@@ -27,5 +27,4 @@ assert['throws'](function(){
 assert(compiler.compile("{namespace misc}{template wow}{/template}").indexOf(js_StringBuffer) > -1, "compile works.");
 
 assert.equal(compiler.configuration['debug'], true, "setting configuration works.");
-assert.equal(compiler.configuration['invalidConfigItem'], void 0, "Invalid config items are ignored in the constructor.");
 });
