@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Version: 2.0.0
+ * Version: 2.0.1
  *
  * For demos and docs visit http://jsdevel.github.com/XforJS/
  * For viewing source visit http://github.com/jsdevel/XforJS/
@@ -634,7 +634,7 @@ function GetLibrary(namespace){
    " * See the License for the specific language governing permissions and\n"+
    " * limitations under the License.\n"+
    " *\n"+
-   " * Version: __VERSION__\n"+
+   " * Version: 2.0.1\n"+
    " *\n"+
    " * For demos and docs visit http://jsdevel.github.com/XforJS/\n"+
    " * For viewing source visit http://github.com/jsdevel/XforJS/\n"+
@@ -4497,7 +4497,6 @@ ForeachStatement.prototype.getClosingPattern=function(){
 };
 
 
-
 /**
  * @constructor
  * @extends {Production}
@@ -4791,16 +4790,13 @@ function Compiler(config){
       'global':true,
       'minifyhtml':true,
       'normalizespace':true,
-      'outputlibrary':'',//file location
       'removelogs':true,
       'useexternal':false,
       'warn':false
    };
    var name;
    for(name in _config){
-      if(name in configuration){
-         configuration[name] = _config[name];
-      }
+      configuration[name] = _config[name];
    }
    /** @type {Object} */
    this.configuration=configuration;
