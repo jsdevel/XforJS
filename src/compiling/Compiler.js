@@ -41,9 +41,7 @@ function Compiler(config){
    };
    var name;
    for(name in _config){
-      if(name in configuration){
-         configuration[name] = _config[name];
-      }
+      configuration[name] = _config[name];
    }
    /** @type {Object} */
    this.configuration=configuration;
