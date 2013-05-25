@@ -35,7 +35,6 @@ function Compiler(config){
       'global':true,
       'minifyhtml':true,
       'normalizespace':true,
-      'outputlibrary':'',//file location
       'removelogs':true,
       'useexternal':false,
       'warn':false
