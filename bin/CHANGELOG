@@ -1,5 +1,2 @@
-updating a unit test.
-closes #41:  libnamespace is ignored as a compiler option. bug.
-closes #40:  outputlibrary should be removed as an option for Compiler. maintenance.
-closes #42:  the build process isn't changing all occurrences of "__VERSION__" accordingly. bug.
-removing an unused file
+preparing for 2.0.2
+
