@@ -10,6 +10,9 @@
       "template", 
       "compiler"
    ],
+   "bin":{
+      "xforjs":"./bin/xforjs"
+   },
    "analyze": false,
    "license": "apache 2.0",
    "repository": {
