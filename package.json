@@ -13,6 +13,10 @@
    "bin":{
       "xforjs":"./bin/xforjs"
    },
+   "dependencies":[
+      "config-tools",
+      "walk"
+   ],
    "analyze": false,
    "license": "apache 2.0",
    "repository": {
