@@ -11,7 +11,7 @@
       "compiler"
    ],
    "bin":{
-      "xforjs":"./bin/xforjs"
+      "xforjs":"./bin/xforjs.js"
    },
    "dependencies":[
       "config-tools",
