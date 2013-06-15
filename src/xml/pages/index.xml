@@ -17,10 +17,7 @@
          <url>main</url>
          <url>code-highlighting</url>
       </a:group>
-      <!--<a:script src="ga/ga-hack-pre"/>-->
-      <!--<a:script src="ga/ga" compress="false"/>-->
-      <!--<a:script src="ga/ga-hack-post"/>-->
-      <a:include asset="frags/ga.html"/>
+      <a:script src="ga/ga"/>
       <a:transfer src="json/CHANGELOG.${version}.json"/>
       <a:transfer src="downloads"/>
       <a:transfer src="CNAME"/>
