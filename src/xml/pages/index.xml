@@ -17,6 +17,8 @@
          <url>code-highlighting</url>
       </a:group>
       <a:transfer src="json/CHANGELOG.${version}.json"/>
+      <a:transfer src="downloads"/>
+      <a:transfer src="CNAME"/>
    </head>
    <body>
       <div class="header">
