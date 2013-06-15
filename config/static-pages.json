@@ -1,0 +1,20 @@
+{
+   "clean":false,
+   "asset-prefix-in-browser":"/websites/xforjs/build",
+   "dev-asset-prefix-in-browser":"",
+   "enable-asset-fingerprinting":false,
+   "enable-compression":false,
+   "enable-dev-mode":false,
+   "max-data-uri-size-in-bytes":32768,
+   "max-wait-time-to-validate-external-link":5000,
+   "prefix-to-ignore-files":"_",
+   "enable-logging-info":true,
+   "enable-logging-warn":true,
+   "enable-logging-error":true,
+   "enable-logging-fatal":true,
+   "enable-logging-debug":true,
+   "logging-level":0,
+   "new-project":"../",
+   "variables":"static-pages-vars.properties",
+   "project-dir":"../"
+}

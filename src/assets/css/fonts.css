@@ -1,0 +1,8 @@
+@font-face{
+	font-family: 'ActionIcons';
+	src: url('/fonts/ActionIcons.eot');
+	src: url('/fonts/ActionIcons.eot?#iefix') format('embedded-opentype'),
+	     url('/fonts/ActionIcons.woff') format('woff'),
+	     url('/fonts/ActionIcons.ttf') format('truetype'),
+	     url('/fonts/ActionIcons.svg#webfont') format('svg');
+}

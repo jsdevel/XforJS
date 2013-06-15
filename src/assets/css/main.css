@@ -1,0 +1,208 @@
+body {
+   padding-bottom: 100px;
+}
+/*
+This made for a cool effect, but really hurt page perf. on my laptop :(
+.bumped-dark {
+   box-shadow: 0px 0px 6px rgba(0, 0, 0, 1),
+      inset 0px 0px 4px rgba(0, 0, 0, 1),
+      inset 0px 0px 12px rgba(0, 0, 0, 0.8),
+      inset 0px 0px 20px rgba(0, 0, 0, 0.6);
+}
+*/
+.header {
+   background-color: #545454;
+   border-bottom: 1px solid #474747;
+   color: white;
+   font-size: 200%;
+   line-height: normal;
+   margin-bottom: 30px;
+   padding-bottom: 20px;
+   text-align: center;
+   text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.5);
+}
+.header span {
+   font-size: 300%;
+   text-shadow: 0 -2px 2px rgba(0, 0, 0, 0.5);
+   vertical-align: middle;
+}
+.header .logo {
+   font-size: 640%;
+   margin-right: 40px;
+   text-shadow: 0px 20px 8px rgba(0, 0, 0, 0.4);
+}
+.header .downloads {
+   margin-top: 50px;
+}
+.header .downloads a {
+   font-size: 80%;
+   margin-right: 5%;
+   margin-left: 5%;
+   padding: 5px 10px;
+}
+.header .downloads a i {
+   font-size: 220%;
+   padding-right: 10px;
+   vertical-align: middle;
+}
+.header .downloads a strong {
+   padding-right: 10px;
+}
+.header .downloads a strong.main {
+   font-size: 120%;
+   vertical-align: middle;
+}
+.header .downloads code {
+   background-color:#0A091A;
+   display: inline-block;
+   margin-top: 30px;
+   padding: 10px;
+}
+.changelog {
+   margin: 20px auto;
+   margin-top: 40px;
+   width: 50%;
+}
+.changelog span {
+   background-color:#0A091A;
+   cursor: pointer;
+   font-size: 80%;
+   padding: 10px 20px 10px 20px;
+   text-shadow: 0;
+}
+.changelog span:hover {
+   background-color: #151436;
+}
+.changelog span:active {
+   background-color: #3B3987;
+
+}
+.changelog div {
+   font-size: 60%;
+   text-align: left;
+}
+#forkme {
+   background: url("/images/forkme.png") no-repeat;
+   height: 149px;
+   right: 0;
+   position: absolute;
+   top: 0;
+   width: 149px;
+}
+
+.copy {
+   margin: auto;
+   padding: 10px;
+   width: 80%;
+}
+
+/*Try It*/
+.try-it {
+   font-size: 25px;
+   text-align: center;
+}
+
+/*CODE EDITOR*/
+.code-editor {
+   background-color: white;
+   color: black;
+}
+.code-editor .panel {
+   display: inline-block;
+   height: 100%;
+   position: relative;
+   vertical-align: top;
+   width: 50%;
+}
+.code-editor > .panel > .tabs {
+   height: 40px;
+   background-color: #eee;
+   border-bottom: 1px solid #ddd;
+}
+.code-editor > .panel > .tabs .active {
+   border-color: #ddd;
+}
+.code-editor ul a[href=".compiled"] {
+   text-align: center;
+   width: 90px;
+}
+
+.code-editor .error {
+   background-color: red !important;
+   color: white !important;
+   font-weight: bold;
+   text-shadow: 0px 0.5px 1px gray;
+}
+.code-editor .tab-content {
+   bottom: 0px;
+   position: absolute;
+   top: 40px;
+}
+.code-editor .tab-content.left {
+   border-right: 1px solid #ddd;
+   left: 0;
+   right: 0px;
+}
+.code-editor .tab-content.right {
+   right: 0;
+   left: 0px;
+}
+.code-editor .tab-pane {
+   height: 100%;
+}
+.code-editor textarea {
+   border: none;
+   font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+   height: 100%;
+   width: 100%;
+}
+.code-editor .rendered {
+   padding-left: 30px;
+}
+.code-editor .statistics th {
+   padding-top: 10px;
+   text-align: left;
+   text-decoration: underline;
+}
+
+/*Sample*/
+.sample-output {
+   overflow: auto;
+}
+.sample-output img {
+   float: left;
+   margin-right: 20px;
+}
+.sample-output div.rating {
+   font-weight: bold;
+   margin-left: 70px;
+}
+.sample-output span[class*=rating] {
+   display: inline-block;
+   height: 10px;
+   margin-left: 20px;
+   width: 100px;
+}
+.sample-output span.rating-5 {
+   background-color: #20BF0B;
+}
+.sample-output span[class="rating-4.5"] {
+   background: -webkit-linear-gradient(left, #20BF0B, #20BF0B 90%, #ED3B05 90%, #ED3B05);
+}
+.sample-output span.rating-4 {
+   background: -webkit-linear-gradient(left, #20BF0B, #20BF0B 80%, #ED3B05 80%, #ED3B05);
+}
+.sample-output span.rating-3 {
+   background: -webkit-linear-gradient(left, #20BF0B, #20BF0B 60%, #ED3B05 60%, #ED3B05);
+}
+.sample-output span.rating-2 {
+   background: -webkit-linear-gradient(left, #20BF0B, #20BF0B 40%, #ED3B05 40%, #ED3B05);
+}
+.sample-output span.rating-1 {
+   background: -webkit-linear-gradient(left, #20BF0B, #20BF0B 20%, #ED3B05 20%, #ED3B05);
+}
+.sample-output span.rating-0 {
+   background-color: #ED3B05;
+}
+
+.icon {}

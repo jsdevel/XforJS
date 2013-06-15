@@ -1,0 +1,25 @@
+{
+  "name": "xforjs-documention",
+  "version": "0.0.0",
+  "description": "The documentation source for xforjs.",
+  "main": "index.js",
+  "bin": {
+    "xforjs-documention": "build.js"
+  },
+  "dependencies":[
+    "xforjs"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jsdevel/XforJS.git"
+  },
+  "author": "Joseph Spencer",
+  "license": "Apache 2.0",
+  "gitHead": "82e8ab5be6db767adb6cdbc025f671b21085cbf4",
+  "bugs": {
+    "url": "https://github.com/jsdevel/XforJS/issues"
+  }
+}
