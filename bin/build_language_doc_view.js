@@ -15,8 +15,17 @@
  *
  * For more info, visit XforJS.com
  */
-exports.highlightXforjsFile= function(filePath){
-   var fileContents = require('fs').readFileSync(filePath, 'utf8');
+var fs = require('fs');
+var path = require('path');
+var project = path.resolve(__dirname, "../");
+var langSrc = path.resolve(project, "src/assets/xjs/language_overview.xjs");
+var langHtml = path.resolve(project, "src/assets/frags/language_overview.html");
+var highlightedSrc = highlightXforjsFile(langSrc);
+
+fs.writeFileSync(langHtml, highlightedSrc, "UTF8");
+
+function highlightXforjsFile(filePath){
+   var fileContents = fs.readFileSync(filePath, 'utf8');
 
    return fileContents.
       replace(/&/g, "&amp;").
@@ -36,4 +45,4 @@ exports.highlightXforjsFile= function(filePath){
       replace(/\{/g, "<span class='start-brace'>{</span>").
       replace(/\}/g, "<span class='end-brace'>}</span>").
       replace(/(@[a-z0-9_$]+)/ig, "<span class='variable-reference'>$1</span>");
-};
+}

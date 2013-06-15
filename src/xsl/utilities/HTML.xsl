@@ -61,6 +61,7 @@
    <xsl:template match="d:link"><link><xsl:apply-templates select="@*"/></link></xsl:template>
    <xsl:template match="d:ol"><ol><xsl:apply-templates select="@*"/><xsl:apply-templates/></ol></xsl:template>
    <xsl:template match="d:p"><p><xsl:apply-templates select="@*"/><xsl:apply-templates/></p></xsl:template>
+   <xsl:template match="d:pre"><pre><xsl:apply-templates select="@*"/><xsl:apply-templates/></pre></xsl:template>
    <xsl:template match="d:script">
       <script>
          <xsl:apply-templates select="@*"/>
@@ -85,14 +86,6 @@
    <xsl:template match="d:ul"><ul><xsl:apply-templates select="@*"/><xsl:apply-templates/></ul></xsl:template>
    <xsl:template match="d:video"><video><xsl:apply-templates select="@*"/><xsl:apply-templates/></video></xsl:template>
 
-   <!-- pre element -->
-   <xsl:template match="d:pre"><pre><xsl:apply-templates select="@*"/><xsl:apply-templates mode="pre"/></pre></xsl:template>
-   <xsl:template match="d:pre[@preserve]"><xsl:copy-of select="."/></xsl:template>
-   <xsl:template match="*" mode="pre">&lt;<xsl:value-of select="local-name()"/>&gt;<xsl:apply-templates mode="pre"/>&lt;<xsl:value-of select="local-name()"/>&gt;</xsl:template>
-   <xsl:template match="text()" mode="pre">
-      <xsl:value-of select="AM:expandVariables($AM, .)"/>
-   </xsl:template>
-
    <!--ATTRIBUTES-->
    <xsl:template match="@*">
       <xsl:attribute name="{name(.)}">
@@ -102,7 +95,14 @@
 
    <!-- text -->
    <xsl:template match="text()">
-      <xsl:value-of select="AM:expandVariables($AM,U:normalizeSpace(.))"/>
+      <xsl:choose>
+         <xsl:when test="ancestor::pre">
+            <xsl:value-of select="AM:expandVariables($AM,.)"/>
+         </xsl:when>
+         <xsl:otherwise>
+            <xsl:value-of select="AM:expandVariables($AM,U:normalizeSpace(.))"/>
+         </xsl:otherwise>
+      </xsl:choose>
    </xsl:template>
 
    <!-- head -->
