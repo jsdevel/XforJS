@@ -1,0 +1,8 @@
+@font-face{
+	font-family: 'ActionIcons';
+	src: url('/websites/xforjs/build/fonts/ActionIcons.eot');
+	src: url('/websites/xforjs/build/websites/xforjs/build/fonts/ActionIcons.eot?#iefixfonts/ActionIcons.eot?#iefix') format('embedded-opentype'),
+	     url('/websites/xforjs/build/fonts/ActionIcons.woff') format('woff'),
+	     url('/websites/xforjs/build/fonts/ActionIcons.ttf') format('truetype'),
+	     url('/websites/xforjs/build/fonts/ActionIcons.svg#webfontfonts/ActionIcons.svg#webfont') format('svg');
+}
