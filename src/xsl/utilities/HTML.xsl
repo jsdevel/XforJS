@@ -59,6 +59,7 @@
    <xsl:template match="d:label"><label><xsl:apply-templates select="@*"/><xsl:apply-templates/></label></xsl:template>
    <xsl:template match="d:li"><li><xsl:apply-templates select="@*"/><xsl:apply-templates/></li></xsl:template>
    <xsl:template match="d:link"><link><xsl:apply-templates select="@*"/></link></xsl:template>
+   <xsl:template match="d:meta"><link><xsl:apply-templates select="@*"/></link></xsl:template>
    <xsl:template match="d:ol"><ol><xsl:apply-templates select="@*"/><xsl:apply-templates/></ol></xsl:template>
    <xsl:template match="d:p"><p><xsl:apply-templates select="@*"/><xsl:apply-templates/></p></xsl:template>
    <xsl:template match="d:pre"><pre><xsl:apply-templates select="@*"/><xsl:apply-templates/></pre></xsl:template>

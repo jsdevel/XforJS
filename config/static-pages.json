@@ -1,7 +1,7 @@
 {
    "clean":true,
    "asset-prefix-in-browser":"",
-   "dev-asset-prefix-in-browser":"",
+   "dev-asset-prefix-in-browser":"/websites/xforjs/build",
    "enable-asset-fingerprinting":true,
    "enable-compression":true,
    "enable-dev-mode":false,
