@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Version: 2.0.1
+ * Version: 2.0.3
  *
  * For demos and docs visit http://jsdevel.github.com/XforJS/
  * For viewing source visit http://github.com/jsdevel/XforJS/
@@ -634,7 +634,7 @@ function GetLibrary(namespace){
    " * See the License for the specific language governing permissions and\n"+
    " * limitations under the License.\n"+
    " *\n"+
-   " * Version: 2.0.1\n"+
+   " * Version: 2.0.3\n"+
    " *\n"+
    " * For demos and docs visit http://jsdevel.github.com/XforJS/\n"+
    " * For viewing source visit http://github.com/jsdevel/XforJS/\n"+
@@ -1007,100 +1007,6 @@ function Output(){
 }
 
 
-
-
-
-/**
- * @constructor
- * @param {string} indent
- * @param {Output} output
- */
-function CodeFormatter(indent, output){
-   /**
-    * @type {number}
-    */
-   var indentCount=0;
-
-   if(typeof indent !== 'string'){
-      throw "indent must be a string.";
-   }
-
-   if(!(output instanceof Output)){
-      throw "output must be Output.";
-   }
-
-   /**
-    * @param {number} amount
-    * @return {CodeFormatter}
-    */
-   this.addIndent=function(amount){
-      if(amount){
-         indentCount+=amount;
-      } else {
-         indentCount++;
-      }
-      return this;
-   };
-
-   /**
-    * @param {Object|string} input optional
-    * @return {CodeFormatter}
-    */
-   this.doIndent=function(input){
-      var i;
-      if(input){
-         for(i=0;i<indentCount;i++){
-            this.add(indent);
-         }
-         this.add(input);
-      } else {
-         this.add(indent);
-      }
-      return this;
-   };
-
-   /**
-    * @param {number} amount
-    * @return {CodeFormatter}
-    */
-   this.removeIndent=function(amount){
-      if(amount){
-         if(indentCount - amount < 0){
-            indentCount = 0;
-         } else {
-            indentCount-=amount;
-         }
-      } else {
-         if(indentCount > 0){
-            indentCount--;
-         }
-      }
-      return this;
-   };
-
-   /**
-    * @param {Object|string} line
-    * @return {CodeFormatter}
-    */
-   this.addLine=function(line){
-      if(line){
-         this.doIndent(line);
-      }
-      this.add("\n");
-      return this;
-   };
-
-   /**
-    * @param {Object|string} obj
-    * @return {CodeFormatter}
-    */
-   this.add=function(obj){
-      output.add(obj);
-      return this;
-   };
-
-   this.toString=output.toString;
-}
 
 
 /**
@@ -3783,6 +3689,7 @@ function ContextSelector(output, isNested){
             throw "unexpected name.";
          }
          allowNamespace=false;
+         allowDynamicRefinement=true;
          hasContextSelector=true;
          return;
       }

@@ -1,6 +1,6 @@
 {
    "name": "xforjs",
-   "version": "2.0.2",
+   "version": "2.0.3",
    "description": "A Javscript Template Compiler that would make Mama proud.",
    "preferGlobal": false,
    "main": "./index.js",
