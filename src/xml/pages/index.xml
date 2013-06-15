@@ -16,9 +16,9 @@
          <url>main</url>
          <url>code-highlighting</url>
       </a:group>
-      <script>
-         <a:include asset="js/GoogleAnalytics.js"/>
-      </script>
+      <!--<a:script src="ga/ga-hack-pre"/>-->
+      <a:script src="ga/ga" compress="false"/>
+      <!--<a:script src="ga/ga-hack-post"/>-->
       <a:transfer src="json/CHANGELOG.${version}.json"/>
       <a:transfer src="downloads"/>
       <a:transfer src="CNAME"/>
