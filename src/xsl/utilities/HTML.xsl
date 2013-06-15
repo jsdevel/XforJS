@@ -70,6 +70,7 @@
          <xsl:apply-templates select="a:include"/>
       </script>
    </xsl:template>
+   <xsl:template match="d:small"><small><xsl:apply-templates select="@*"/><xsl:apply-templates/></small></xsl:template>
    <xsl:template match="d:style">
       <style>
          <xsl:apply-templates select="@*"/>

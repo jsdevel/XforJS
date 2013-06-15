@@ -1,9 +1,9 @@
 {
-   "clean":false,
+   "clean":true,
    "asset-prefix-in-browser":"/websites/xforjs/build",
    "dev-asset-prefix-in-browser":"",
-   "enable-asset-fingerprinting":false,
-   "enable-compression":false,
+   "enable-asset-fingerprinting":true,
+   "enable-compression":true,
    "enable-dev-mode":false,
    "max-data-uri-size-in-bytes":32768,
    "max-wait-time-to-validate-external-link":5000,

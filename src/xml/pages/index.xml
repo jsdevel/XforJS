@@ -16,6 +16,7 @@
          <url>main</url>
          <url>code-highlighting</url>
       </a:group>
+      <a:script src="GoogleAnalytics"/>
       <a:transfer src="json/CHANGELOG.${version}.json"/>
       <a:transfer src="downloads"/>
       <a:transfer src="CNAME"/>
