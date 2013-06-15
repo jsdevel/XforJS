@@ -20,8 +20,8 @@
 
 THIS=$(readlink -f $0);
 DIR_PROJECT=$(dirname $(dirname $THIS));
-DIR_XFORJS=$(dirname $DIR_PROJECT)/XforJS;
 DIR_BIN=$DIR_PROJECT/bin;
+DIR_XFORJS=$(dirname $(dirname $(dirname $DIR_PROJECT)))/XforJS;
 
 case $1 in
    developing.sh)

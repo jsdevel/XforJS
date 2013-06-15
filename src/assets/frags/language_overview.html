@@ -117,20 +117,37 @@
 <span class='comment'>#When calling templates, the first parameter is the data, or context with which</span>
 <span class='comment'>#the template uses for processing.  Here are some valid context selectors:</span>
 <span class='comment'>#</span>
-<span class='comment'>#Property Names. Property names follow the same naming conventions that exist in</span>
+<span class='start-brace'>{</span><span class='keyword'>template</span> contextSelectorTest<span class='end-brace'>}</span>
+<span class='comment'>#</span>
+<span class='comment'>#Property Selectors</span>
+<span class='comment'>#Property Selectors follow the same naming conventions that exist in</span>
 <span class='comment'>#ECMAScript E.G. /[a-zA-Z_$][a-zA-Z_$0-9]*/. You may select any property by name</span>
-<span class='comment'>#like this: tables.  And to drill down: tables.first.name.  If a property name</span>
-<span class='comment'>#is a reserved word or contains invalid characters, you may use dynamic</span>
-<span class='comment'>#refinement like this: ['table-inventory'].  And to driill down:</span>
-<span class='comment'>#['table-inventory']['count'].  Mixing static and dynamic refinement:</span>
-<span class='comment'>#tables['table-inventory'].first[0+4].   Any valid expression is allowable</span>
-<span class='comment'>#inside dynamic refinement.</span>
+<span class='comment'>#like this:</span>
+<span class='start-brace'>{</span>Tables<span class='end-brace'>}</span>
+<span class='comment'>#</span>
+<span class='comment'>#To drill down:</span>
+<span class='start-brace'>{</span>tables.first.name<span class='end-brace'>}</span>
+<span class='comment'>#</span>
+<span class='comment'>#If a property name is a reserved word or contains invalid characters, you may</span>
+<span class='comment'>#use dynamic refinement like this:</span>
+<span class='start-brace'>{</span>['table-inventory']<span class='end-brace'>}</span>
+<span class='comment'>#</span>
+<span class='comment'>#To driill down:</span>
+<span class='start-brace'>{</span>['table-inventory']['count']<span class='end-brace'>}</span>
+<span class='comment'>#</span>
+<span class='comment'>#Mixing static and dynamic refinement:</span>
+<span class='start-brace'>{</span>tables['table-inventory'].first[0+4]<span class='end-brace'>}</span>
+<span class='comment'>#</span>
+<span class='comment'>#Any valid expression is allowable inside dynamic refinement.  The following is</span>
+<span class='comment'>#perfectly valid:</span>
+<span class='start-brace'>{</span>tables[^encodeURIComponent('/////').replace('%2F', '')][<span class='variable-reference'>@woo</span>||2&amp;&amp;3===(3-5)]<span class='end-brace'>}</span>
 <span class='comment'>#</span>
 <span class='comment'>#Current Context</span>
 <span class='comment'>#The context at the template level is always the first argument do the template.</span>
 <span class='comment'>#You can directly access the current context using one of the following</span>
 <span class='comment'>#selectors:</span>
-<span class='comment'>#. current()</span>
+<span class='start-brace'>{</span>.<span class='end-brace'>}</span>
+<span class='start-brace'>{</span>current()<span class='end-brace'>}</span>
 <span class='comment'>#</span>
 <span class='comment'>#Global Context</span>
 <span class='comment'>#Use the caret symbol to access global variables and functions.  This makes</span>
@@ -139,25 +156,30 @@
 <span class='comment'>#approach.  Referencing globals is generally a bad practive, but to avoid</span>
 <span class='comment'>#verbosity it is allowed.</span>
 <span class='comment'>#Example:</span>
-<span class='comment'>#<span class='start-brace'>{</span>^Date.now()<span class='end-brace'>}</span> would print the current timestamp.</span>
+<span class='start-brace'>{</span>^Date.now()<span class='end-brace'>}</span><span class='comment'>#print the current timestamp.</span>
 <span class='comment'>#</span>
 <span class='comment'>#Functions.  The following functions are built-ins and are reserved.  Some of</span>
 <span class='comment'>#them really only take on meaning inside foreach statements.</span>
 <span class='comment'>#</span>
 <span class='comment'>#count(contextSelector)</span>
 <span class='comment'>#Returns the number of items in an array or properties in an object.</span>
+<span class='start-brace'>{</span>count(.)<span class='end-brace'>}</span>
 <span class='comment'>#</span>
 <span class='comment'>#name()</span>
 <span class='comment'>#Outputs the name of the current item in a foreach loop.  This may be a</span>
 <span class='comment'>#number if iterating over an array, or a string if iterating over an object.</span>
+<span class='start-brace'>{</span>name()<span class='end-brace'>}</span>
 <span class='comment'>#</span>
 <span class='comment'>#position()</span>
 <span class='comment'>#Outputs the current index in the foreach loop.  This may be random</span>
 <span class='comment'>#when looping over properties in an object.</span>
+<span class='start-brace'>{</span>position()<span class='end-brace'>}</span>
 <span class='comment'>#</span>
 <span class='comment'>#last()</span>
 <span class='comment'>#Returns the highest possible index in the current iteration in a foreach</span>
 <span class='comment'>#statement.</span>
+<span class='start-brace'>{</span>last()<span class='end-brace'>}</span><span class='comment'>#:P</span>
+<span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
 
 <span class='comment'>&#35;</span><span class='comment-header'>Params</span>
 <span class='comment'>#</span>

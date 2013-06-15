@@ -19,7 +19,7 @@
    var fs = require('fs');
    var p = require('./build_project_info.js');
    var file = 'CHANGELOG';
-   var template = fs.readFileSync("../json/"+file+".template.json", "utf8");
+   var template = fs.readFileSync("../src/assets/json/"+file+".template.json", "utf8");
    var CHANGELOG = fs.readFileSync(file, 'utf8').
          replace(/^(?!closes)[^\r\n]+\r?\n/img, "").
          replace(/\n\n/mg, "\n").
@@ -32,6 +32,6 @@
       replace(/""/, '"'+p.VERSION_PREVIOUS+'"').
       replace(/\[\]/, "[\n"+CHANGELOG+"\n]").
       replace(/,[\s\r\n]+(\]|\})/g, "$1");
-   fs.writeFileSync("../json/"+file+"."+p.VERSION+".json", template, "utf8");
+   fs.writeFileSync("../src/assets/json/"+file+"."+p.VERSION+".json", template, "utf8");
 }();
 

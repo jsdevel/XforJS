@@ -26,7 +26,7 @@ function dev()
    cat << HERE
 Development is underway...
 HERE
-   node build.js
+   static-pages
 }
 
 dev

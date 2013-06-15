@@ -1,2 +1,7 @@
-preparing for 2.0.2
+Merge branch 'develop' for 2.0.3
 
+preparing for 2.0.3
+
+closes #48:  CodeFormatter can be removed. It isn't in use. maintenance.
+closes #50:  update the language integration test to contain more context selector examples. documentation.
+closes #49:  dynamic refinement isn't allowed after the following sequence: prop selector,dynamic refinement, static refinement. bug.

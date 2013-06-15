@@ -117,20 +117,37 @@
 #When calling templates, the first parameter is the data, or context with which
 #the template uses for processing.  Here are some valid context selectors:
 #
-#Property Names. Property names follow the same naming conventions that exist in
+{template contextSelectorTest}
+#
+#Property Selectors
+#Property Selectors follow the same naming conventions that exist in
 #ECMAScript E.G. /[a-zA-Z_$][a-zA-Z_$0-9]*/. You may select any property by name
-#like this: tables.  And to drill down: tables.first.name.  If a property name
-#is a reserved word or contains invalid characters, you may use dynamic
-#refinement like this: ['table-inventory'].  And to driill down:
-#['table-inventory']['count'].  Mixing static and dynamic refinement:
-#tables['table-inventory'].first[0+4].   Any valid expression is allowable
-#inside dynamic refinement.
+#like this:
+{Tables}
+#
+#To drill down:
+{tables.first.name}
+#
+#If a property name is a reserved word or contains invalid characters, you may
+#use dynamic refinement like this:
+{['table-inventory']}
+#
+#To driill down:
+{['table-inventory']['count']}
+#
+#Mixing static and dynamic refinement:
+{tables['table-inventory'].first[0+4]}
+#
+#Any valid expression is allowable inside dynamic refinement.  The following is
+#perfectly valid:
+{tables[^encodeURIComponent('/////').replace('%2F', '')][@woo||2&&3===(3-5)]}
 #
 #Current Context
 #The context at the template level is always the first argument do the template.
 #You can directly access the current context using one of the following
 #selectors:
-#. current()
+{.}
+{current()}
 #
 #Global Context
 #Use the caret symbol to access global variables and functions.  This makes
@@ -139,25 +156,30 @@
 #approach.  Referencing globals is generally a bad practive, but to avoid
 #verbosity it is allowed.
 #Example:
-#{^Date.now()} would print the current timestamp.
+{^Date.now()}#print the current timestamp.
 #
 #Functions.  The following functions are built-ins and are reserved.  Some of
 #them really only take on meaning inside foreach statements.
 #
 #count(contextSelector)
 #Returns the number of items in an array or properties in an object.
+{count(.)}
 #
 #name()
 #Outputs the name of the current item in a foreach loop.  This may be a
 #number if iterating over an array, or a string if iterating over an object.
+{name()}
 #
 #position()
 #Outputs the current index in the foreach loop.  This may be random
 #when looping over properties in an object.
+{position()}
 #
 #last()
 #Returns the highest possible index in the current iteration in a foreach
 #statement.
+{last()}#:P
+{/template}
 
 ##Params
 #
