@@ -83,7 +83,7 @@
                   <a:include asset="json/books_input.json"/>
                </textarea>
                <textarea class="tab-pane input-params" data-tab=".input-params">
-                  <a:transfer src="js/books_params.js"/>
+                  <a:include asset="js/books_params.js"/>
                </textarea>
             </div>
          </div>
