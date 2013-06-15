@@ -12,7 +12,7 @@
    "enable-logging-warn":true,
    "enable-logging-error":true,
    "enable-logging-fatal":true,
-   "enable-logging-debug":true,
+   "enable-logging-debug":false,
    "logging-level":0,
    "new-project":"../",
    "variables":"static-pages-vars.properties",
