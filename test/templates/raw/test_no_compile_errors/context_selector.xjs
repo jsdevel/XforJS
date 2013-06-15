@@ -1,7 +1,7 @@
 {namespace boo}
 
 {template boo}
-   {var foo coo.goo.qoo[asdf||asdfsdf]}
+   {var foo coo.goo.qoo[asdf||asdfsdf].foo.doo}
 {/template}
 
 {template referenceGlobalVar}
