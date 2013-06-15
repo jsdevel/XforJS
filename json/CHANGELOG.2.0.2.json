@@ -2,7 +2,7 @@
    "currentVersion":"2.0.2",
    "previousVersion":"2.0.1",
    "commitHistory":[
-
+"closes #29: Create a build package that automates more build related tasks. Also including the AMD builder with this, making the xforjs-amd-builder package obsolete. enhancement."
 
 ]
 }

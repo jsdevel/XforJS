@@ -1,8 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>XforJS Documentation</title><!--CONCAT css/docs.min.css--><link href="css/general.css" rel="stylesheet" type="text/css"/><link href="css/buttons.css" rel="stylesheet" type="text/css"/><link href="css/tabs.css" rel="stylesheet" type="text/css"/><link href="css/effects.css" rel="stylesheet" type="text/css"/><link href="css/snapping.css" rel="stylesheet" type="text/css"/><link href="css/giver.css" rel="stylesheet" type="text/css"/><link href="css/main.css" rel="stylesheet" type="text/css"/><link href="css/code-highlighting.css" rel="stylesheet" type="text/css"/><!--END CONCAT--></head><body><div class="header"><span class="logo">X</span><span>for JS</span><p>A Template Lang that would make Mama proud.</p><a href="https://github.com/jsdevel/XforJS" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"/></a><div class="downloads"><a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.2.0.2.js"><i class="icon">D</i><strong class="main">Download</strong><strong>2.0.2</strong><small>(src)</small></a><a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.2.0.2.min.js"><i class="icon">D</i><strong class="main">Download</strong><strong>2.0.2</strong><small>(min)</small></a><div><code class="border-radius-5px">npm install xforjs</code></div></div><div class="changelog" data-version="2.0.2"><span class="border-radius-5px ease-bg-color">View Changelog</span><div></div></div></div><div class="copy lead">
-         X is a Template Language for Javascript.  You can serve up compiled or
-         raw templates <span class="muted">(compiled is preferred ;)</span>.
-      </div><div class="try-it giver" data-gift="body &gt; .code-editor"><strong class="button border-radius-5px"><i class="icon">e</i>Live Demo</strong></div><div class="code-editor open snap-to-window border box-shadow-25px"><div class="close-button" data-closes="body > .code-editor"><i class="icon">x</i></div><div class="panel"><div class="tabs"><span class="active" data-tab=".raw">Template</span><span data-tab=".input-data">Input Data</span><span data-tab=".input-params">Input Params</span></div><div class="tab-content left"><textarea class="tab-pane active raw" data-tab=".compiled">
-{namespace documentation.books}
+<!DOCTYPE html><html class="no-js"><head><meta charset="utf-8"><title>XforJS Documentation</title><meta name="description" content="This is the documentation site of XforJS."><meta name="keywords" content="javascript,template,compiler"><link href="/websites/xforjs/build/css/0c4b380e7558296187e76a15313a4cae.css" rel="stylesheet" type="text/css"></head><body><div class="header"><span class="logo">X</span><span>for JS</span><p>A Template Lang that would make Mama proud.</p><a href="https://github.com/jsdevel/XforJS" id="forkme" target="_blank"></a><div class="downloads"><a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.2.0.2.js"><i class="icon">D</i><strong class="main">Download</strong><strong>2.0.2</strong></a><a class="border-radius-5px ease-bg-color button" href="downloads/XforJS.2.0.2.min.js"><i class="icon">D</i><strong class="main">Download</strong><strong>2.0.2</strong></a><div><code class="border-radius-5px">npm install xforjs</code></div></div><div class="changelog" data-version="2.0.2"><span class="border-radius-5px ease-bg-color">View Changelog</span><div></div></div></div><div class="copy lead"> X is a Template Language for Javascript. You can serve up compiled or raw templates <span class="muted">(compiled is preferred ;)</span>. </div><div class="try-it giver" data-gift="body &gt; .code-editor"><strong class="button border-radius-5px"><i class="icon">e</i>Live Demo</strong></div><div class="code-editor open snap-to-window border box-shadow-25px"><div class="close-button" data-closes="body &gt; .code-editor"><i class="icon">x</i></div><div class="panel"><div class="tabs"><span class="active" data-tab=".raw">Template</span><span data-tab=".input-data">Input Data</span><span data-tab=".input-params">Input Params</span></div><div class="tab-content left"><textarea class="tab-pane active raw" data-tab=".compiled">{namespace documentation.books}
 
 #comments are shell comments
 
@@ -41,8 +37,7 @@
 {template bookImage}#partial
    <img title="{name}" alt="{img.alt}" src="{img.src}" width="50">
 {/template}
-               </textarea><textarea class="tab-pane input-data" data-tab=".input-data">
-{"books":[
+</textarea><textarea class="tab-pane input-data" data-tab=".input-data">{"books":[
       {
          "name":"The Pragmatic Programmer:  From journeyman to master",
          "rating":5,
@@ -94,34 +89,7 @@
       }
    ]
 }
-
-               </textarea><textarea class="tab-pane input-params" data-tab=".input-params">
-({
-   //helper functions are possible
-   "fn":{
-      "date":{
-         "getStandardDate":function(){
-            var d=new Date();
-            return d.getMonth()+1+"/"+d.getDate()+"/"+d.getFullYear();
-         }
-      },
-      "rand":function(prefix){
-         return (prefix||"")+Math.random();
-      }
-   },
-   "showRatings":true
-})
-
-               </textarea></div></div><div class="panel"><div class="tabs"><span data-tab=".compiled">Compiled</span><span class="active" data-tab=".rendered">Rendered</span><span data-tab=".output-text">Output</span><span data-tab=".statistics">Statistics</span></div><div class="tab-content right"><textarea class="tab-pane compiled"></textarea><div class="tab-pane active rendered sample-output"></div><textarea class="tab-pane output-text"></textarea><div class="statistics"></div></div></div></div><div class="copy"><h2>Documentation</h2>
-         What follows is the documentation for X.  This
-         document will try to include the actual integration tests and source
-         files that are used during development of the compiler.  Following this
-         practice allows the source code of the compiler to remain in sync with
-         the documentation and vice versa.
-      </div><!--<div class="copy"><h3>Compiling Templates</h3><code>TODO:  Author this content.</code></div>--><div class="copy"><h3>Language</h3>
-         This integration test describes the full capabilities of the language in detail.
-         <pre class="code-highlighter border-radius-5px">
-<span class='start-brace'>{</span><span class='keyword'>namespace</span> my.app.namespace<span class='end-brace'>}</span>
+</textarea><textarea class="tab-pane input-params" data-tab=".input-params"></textarea></div></div><div class="panel"><div class="tabs"><span data-tab=".compiled">Compiled</span><span class="active" data-tab=".rendered">Rendered</span><span data-tab=".output-text">Output</span><span data-tab=".statistics">Statistics</span></div><div class="tab-content right"><textarea class="tab-pane compiled"></textarea><div class="tab-pane active rendered sample-output"></div><textarea class="tab-pane output-text"></textarea><div class="statistics"></div></div></div></div><div class="copy"><h2>Documentation</h2> What follows is the documentation for X. This document will try to include the actual integration tests and source files that are used during development of the compiler. Following this practice allows the source code of the compiler to remain in sync with the documentation and vice versa. </div><div class="copy"><h3>Language</h3> This integration test describes the full capabilities of the language in detail. <pre class="code-highlighter border-radius-5px"><span class='start-brace'>{</span><span class='keyword'>namespace</span> my.app.namespace<span class='end-brace'>}</span>
 <span class='comment'>&#35;</span><span class='comment-header'>Namespace</span>
 <span class='comment'>#</span>
 <span class='comment'>#Template files begin with a namespace and end with a .xjs extension.</span>
@@ -437,8 +405,9 @@
       <span class='start-brace'>{</span><span class='keyword'>param</span> foo 5<span class='end-brace'>}</span>
    <span class='start-brace'>{</span>/<span class='keyword'>render</span><span class='end-brace'>}</span>
 <span class='start-brace'>{</span>/<span class='keyword'>template</span><span class='end-brace'>}</span>
-         </pre></div><script id="XJS_SAMPLE_STATS" type="text/xjs">
-{namespace documentation.sample_stats}
+</pre></div><script id="XJS_SAMPLE_STATS" type="text/xjs">
+         
+      {namespace documentation.sample_stats}
 
 {template getStats}
    <table>
@@ -465,8 +434,9 @@
       {/foreach}
    </table>
 {/template}
-      </script><script id="XJS_CHANGELOG" type="text/xjs">
-{namespace documentation}
+</script><script id="XJS_CHANGELOG" type="text/xjs">
+         
+      {namespace documentation}
 
 {template changelog}
    <h2>Version: {currentVersion}</h2>
@@ -477,4 +447,4 @@
       {/foreach}
    </ul>
 {/template}
-      </script><!--CONCAT js/docs.min.js--><script src="js/jquery-1.8.3.min.js"></script><script src="js/XforJS.2.0.2.min.js"></script><script src="js/plugins.js"></script><script src="js/main.js"></script><!--END CONCAT--></body></html>
+</script><script src="/websites/xforjs/build/js/2f62a016bd368d9d3bd1840e993cd9f3.js" type="text/javascript"></script></body></html>
