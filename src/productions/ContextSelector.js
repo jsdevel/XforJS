@@ -162,6 +162,7 @@ function ContextSelector(output, isNested){
             throw "unexpected name.";
          }
          allowNamespace=false;
+         allowDynamicRefinement=true;
          hasContextSelector=true;
          return;
       }
