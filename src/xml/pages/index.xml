@@ -5,7 +5,7 @@
       <keywords>javascript,template,compiler</keywords>
    </seo>
    <head>
-      <a:group type="css" compress="true">
+      <a:group type="css">
          <url>fonts</url>
          <url>general</url>
          <url>buttons</url>
@@ -16,7 +16,9 @@
          <url>main</url>
          <url>code-highlighting</url>
       </a:group>
-      <a:script src="GoogleAnalytics"/>
+      <script>
+         <a:include asset="js/GoogleAnalytics.js"/>
+      </script>
       <a:transfer src="json/CHANGELOG.${version}.json"/>
       <a:transfer src="downloads"/>
       <a:transfer src="CNAME"/>
