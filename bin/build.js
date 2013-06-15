@@ -18,19 +18,6 @@
 var fs = require('fs');
 var p = require('./build_project_info.js');
 
-!function(){//build index.html
-   var unpacked = fs.readFileSync('../index.unpacked.html', 'utf8');
-   var placeholders = {
-      "__VERSION__":p.VERSION
-   };
-   var placeholder;
-   for(placeholder in placeholders){
-      unpacked = unpacked.replace(new RegExp(placeholder, "g"), placeholders[placeholder]);
-   }
-   unpacked = buildFile(unpacked.replace(/(>)\s+(<)/g, "$1$2")).withPath("../").now();
-   fs.writeFileSync('../index.html', unpacked, 'utf8');
-}();
-
 function buildFile(file, addExt){
    var _path="";
 
