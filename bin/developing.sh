@@ -26,7 +26,13 @@ function dev()
    cat << HERE
 Development is underway...
 HERE
+   #copy templates from xforjs project
+   cp \
+      $DIR_XFORJS/test/templates/raw/documentation/*.xjs \
+      $DIR_PROJECT/src/assets/xjs
+   node $DIR_BIN/build_language_doc_view.js
    static-pages
+
 }
 
 dev

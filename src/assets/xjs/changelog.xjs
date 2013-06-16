@@ -5,6 +5,7 @@
    <p>Showing results from version: {previousVersion}</p>
    <ul>
       {foreach commitHistory}
+         {sort .|desc}
          <li>{.}</li>
       {/foreach}
    </ul>
