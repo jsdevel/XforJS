@@ -269,29 +269,38 @@
 
 ##Sort
 #
-#The first statement within a foreach.  Sorting items does NOT affect the
-#original object.  You can sort on any context selector to control the ordering
-#of items.  The sort algorithm used (for ascending and descending sorts), is
-#guaranteed to preserve an item's index while sorting.
+#Must appear as the first statement within a foreach.  Sorting items does NOT
+#affect the original object.  You can sort on any context selector to control
+#the ordering of items.  The sort algorithm used (for ascending and descending
+#sorts), is guaranteed to preserve an item's index while sorting.
 #
 #The following types of sort are allowed:
 #asc desc rand
 #
-#You may use any of the following sort modifiers after specifying the sort type:
+#The following sort modifiers may be applied to "asc" and "desc":
+#
 #i Makes the sort case-insensitive.
 #c Shifts lowercase items leftward where possible.
 #C Shifts uppercase items leftward where possible.
 #n Shifts numbers leftward.
+#
 {template sort}
    {foreach person}
       {sort hobbies.favorite |asc}
    {/foreach}
-   {foreach person}#with modifiers.  Case insensitive and uppercase first.
+   {foreach person}
+      #This sort statement does the following:
+      #
+      #1. Sort persons by their favorite hobby
+      #2. Hobbies are sorted case insensitively ascendingly.
+      #3. Uppercase hobbies are then promoted upward.
       {sort hobbies.favorite |asc|iC}
+      My name is: {name()}
    {/foreach}
    {foreach person}#multiple sorts allowed!
       {sort hobbies.favorite |asc}
       {sort hobbies.name     |desc}
+      Show all of me: {.}
    {/foreach}
 {/template}
 
@@ -315,24 +324,40 @@
 
 ##Render
 #
-#To call a template within another template (partials), use the render
-#statement.  You can render any template defined in an imported file, or the
+#To render a template within the current namespace, do this:
+{template renderTemplateFromSameNamespace}
+   #partial is declared below
+   {render partial/}
+{/template}
+#
+#You can render any template defined in an imported file, or the
 #current file.  If the imported file defines a namespace different than the
 #importing file, then you must use the full path to the namespace I.E.
-#{render name.space.of.imported.file.template/}, otherwise you can supply the
-#short form for any template defined in the current namespace.  Compile time
-#checking will insure that the desired template has been declared.
+{template renderTemplateFromAnImportedFileWithADifferentNamespace}
+   {render sample.buildProfile/}
+{/template}
+#
+#otherwise you can supply the short form for any template defined in the current
+#namespace.  Compile time checking will insure that the desired template has
+#been declared.
 #
 #To set the context, declare a second argument in the render statement I.E.
-#{render some.template context/}.  This changes the context of some.template to
-#the value of context when rendered.
+{template setContextOnRenderExample}
+   #This changes the context of partial to "fred"
+   {render partial fred/}.
+{/template}
+#
+#Prints: I'm a partial5 when rendered from renderPartial.
 {template partial}
    {param foo}
-   I'm a partial{@foo}.#Prints: I'm a partial5 when rendered from renderPartial.
+   I'm a partial{@foo}.
 {/template}
+#
+#You can also pass params to other templates, in addition to changing the
+#context with the render statement.
 {template renderPartial}
    {render partial/}
-   {render partial}#with params
+   {render partial}
       {param foo 5}
    {/render}
 {/template}
