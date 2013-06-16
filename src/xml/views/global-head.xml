@@ -1,0 +1,14 @@
+<view xmlns="default" xmlns:a="assets">
+   <a:group type="css">
+      <url>fonts</url>
+      <url>general</url>
+      <url>buttons</url>
+      <url>tabs</url>
+      <url>effects</url>
+      <url>snapping</url>
+      <url>giver</url>
+      <url>main</url>
+      <url>code-highlighting</url>
+   </a:group>
+   <a:script src="ga/ga"/>
+</view>

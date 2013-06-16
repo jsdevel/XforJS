@@ -1,0 +1,47 @@
+<view xmlns="default" xmlns:a="assets">
+   <div class="try-it giver" data-gift="body &gt; .code-editor">
+      <strong class="button border-radius-5px"><i class="icon">e</i>Live Demo</strong>
+   </div>
+
+   <div class="code-editor open snap-to-window border box-shadow-25px">
+      <div class="close-button" data-closes="body > .code-editor">
+         <i class="icon">x</i>
+      </div>
+      <div class="panel">
+         <div class="tabs">
+            <span class="active" data-tab=".raw">Template</span>
+            <span data-tab=".input-data">Input Data</span>
+            <span data-tab=".input-params">Input Params</span>
+         </div>
+         <div class="tab-content left">
+            <textarea class="tab-pane active raw" data-tab=".compiled">
+               <a:include asset="xjs/books_sample.xjs"/>
+            </textarea>
+            <textarea class="tab-pane input-data" data-tab=".input-data">
+               <a:include asset="json/books_input.json"/>
+            </textarea>
+            <textarea class="tab-pane input-params" data-tab=".input-params">
+               <a:include asset="js/books_params.js"/>
+            </textarea>
+         </div>
+      </div>
+      <div class="panel">
+         <div class="tabs">
+            <span data-tab=".compiled">Compiled</span>
+            <span class="active" data-tab=".rendered">Rendered</span>
+            <span data-tab=".output-text">Output</span>
+            <span data-tab=".statistics">Statistics</span>
+         </div>
+         <div class="tab-content right">
+            <textarea class="tab-pane compiled"></textarea>
+            <div class="tab-pane active rendered sample-output"></div>
+            <textarea class="tab-pane output-text"></textarea>
+            <div class="statistics"></div>
+         </div>
+      </div>
+   </div>
+
+   <script id="XJS_SAMPLE_STATS" type="text/xjs">
+      <a:include asset="xjs/sample_stats.xjs"/>
+   </script>
+</view>

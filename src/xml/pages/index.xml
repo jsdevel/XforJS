@@ -6,31 +6,21 @@
    </seo>
    <head>
       <meta name="google-site-verification" content="dDH2DsSVvYmHCMaikoWcC16mXIw0kvBNAtBJvm2bbcY" />
-      <a:group type="css">
-         <url>fonts</url>
-         <url>general</url>
-         <url>buttons</url>
-         <url>tabs</url>
-         <url>effects</url>
-         <url>snapping</url>
-         <url>giver</url>
-         <url>main</url>
-         <url>code-highlighting</url>
-      </a:group>
-      <a:script src="ga/ga"/>
+      <a:view>global-head</a:view>
       <a:transfer src="json/CHANGELOG.${version}.json"/>
       <a:transfer src="downloads"/>
       <a:transfer src="CNAME"/>
    </head>
    <body>
-      <div class="header">
+      <a:view>Header</a:view>
+      <div class="banner bumped dark">
          <span class="logo">X</span>
          <span>for JS</span>
          <p>A Template Lang that would make Mama proud.</p>
             <a:externalLink
                id="forkme"
                name=""
-               src="https://github.com/jsdevel/XforJS"
+               src="${githuburl}"
                target="_blank"
                />
          <div class="downloads">
@@ -54,88 +44,57 @@
             <span class="border-radius-5px ease-bg-color">View Changelog</span>
             <div></div>
          </div>
+         <script id="XJS_CHANGELOG" type="text/xjs">
+            <a:include asset="xjs/changelog.xjs"/>
+         </script>
       </div>
+
+      <a:view>LiveDemo</a:view>
 
       <div class="copy lead">
+         <h1>Why use X?</h1>
          X is a Template Language for Javascript.  You can serve up compiled or
          raw templates <span class="muted">(compiled is preferred ;)</span>.
-      </div>
-
-      <div class="try-it giver" data-gift="body &gt; .code-editor">
-         <strong class="button border-radius-5px"><i class="icon">e</i>Live Demo</strong>
-      </div>
-
-      <div class="code-editor open snap-to-window border box-shadow-25px">
-         <div class="close-button" data-closes="body > .code-editor">
-            <i class="icon">x</i>
-         </div>
-         <div class="panel">
-            <div class="tabs">
-               <span class="active" data-tab=".raw">Template</span>
-               <span data-tab=".input-data">Input Data</span>
-               <span data-tab=".input-params">Input Params</span>
-            </div>
-            <div class="tab-content left">
-               <textarea class="tab-pane active raw" data-tab=".compiled">
-                  <a:include asset="xjs/books_sample.xjs"/>
-               </textarea>
-               <textarea class="tab-pane input-data" data-tab=".input-data">
-                  <a:include asset="json/books_input.json"/>
-               </textarea>
-               <textarea class="tab-pane input-params" data-tab=".input-params">
-                  <a:include asset="js/books_params.js"/>
-               </textarea>
-            </div>
-         </div>
-         <div class="panel">
-            <div class="tabs">
-               <span data-tab=".compiled">Compiled</span>
-               <span class="active" data-tab=".rendered">Rendered</span>
-               <span data-tab=".output-text">Output</span>
-               <span data-tab=".statistics">Statistics</span>
-            </div>
-            <div class="tab-content right">
-               <textarea class="tab-pane compiled"></textarea>
-               <div class="tab-pane active rendered sample-output"></div>
-               <textarea class="tab-pane output-text"></textarea>
-               <div class="statistics"></div>
-            </div>
-         </div>
+         Using javascript templates allows you to create dynamic views on the
+         client without serving them up from the server.
+         <br/>
+         X is fully compatible with any js environment, so you can also serve up
+         rendered views from any server built on a javascript engine
+         <span class="muted">I.E. Node!!!</span>
       </div>
 
       <div class="copy">
-         <h2>Documentation</h2>
-         What follows is the documentation for X.  This
-         document will try to include the actual integration tests and source
-         files that are used during development of the compiler.  Following this
-         practice allows the source code of the compiler to remain in sync with
-         the documentation and vice versa.
+         <h2>How is X different than the rest?</h2>
+         Listed alphabetically:
+         <ul>
+            <li>AMD support</li>
+            <li>Documented</li>
+            <li>Familiar expression syntax</li>
+            <li>Helpers that make sense</li>
+            <li>Performant</li>
+            <li>Powerful Sorting</li>
+            <li>Seamless Partials</li>
+         </ul>
       </div>
-
-      <!--<div class="copy">
-         <h3>Compiling Templates</h3>
-         <code>TODO:  Author this content.</code>
-      </div>-->
 
       <div class="copy">
-         <h3>Language</h3>
-         This integration test describes the full capabilities of the language in detail.
-         <pre class="code-highlighter border-radius-5px">
-            <a:include asset="frags/language_overview.html"/>
-         </pre>
+         <h2>What should I do now?</h2>
+         If you're a top level learner read the
+         <a:pageLink src="documentation/index" name="Documentation"/>.
+         <br/>
+         If you're a hands on learner dowload it.  XforJS is available as
+         an npm package.  You can run the command at the <a href="#">top</a>
+         locally, or save the above linked source files on disk.
+         <br/>
+         If you want to view the source see the links at the
+         <a href="#">top</a> or browse the project on
+         <a:externalLink src="${githuburl}" target="_blank" >github</a:externalLink>
+
       </div>
 
-
-      <script id="XJS_SAMPLE_STATS" type="text/xjs">
-         <a:include asset="xjs/sample_stats.xjs"/>
-      </script>
-      <script id="XJS_CHANGELOG" type="text/xjs">
-         <a:include asset="xjs/changelog.xjs"/>
-      </script>
-
+      <a:js src="jquery-1.8.3.min"/>
+      <a:js src="XforJS.${version}.min" compress="false"/>
       <a:group type="js">
-         <url>jquery-1.8.3.min</url>
-         <url>XforJS.${version}.min</url>
          <url>plugins</url>
          <url>main</url>
       </a:group>

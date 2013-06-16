@@ -1,0 +1,32 @@
+<page xmlns="default" xmlns:a="assets">
+   <seo>
+      <title>Documentation</title>
+      <description>This is the documentation for the X javascript template
+      compiler.</description>
+      <keywords>javascript template compiler documentation</keywords>
+   </seo>
+   <head>
+      <a:view>global-head</a:view>
+   </head>
+   <body>
+      <a:view>Header</a:view>
+      <div class="copy">
+         <h2>Documentation</h2>
+         What follows is the documentation for X.  The documention herein uses
+         integration tests and source files that are used during the development
+         of the compiler.  Following this practice allows the source code
+         to remain in sync with the documentation and vice versa.
+      </div>
+
+      <div class="copy">
+         <ul>
+            <li>
+               <a:pageLink src="documentation/Compiling">Compiling</a:pageLink>
+            </li>
+            <li>
+               <a:pageLink src="documentation/Language">Language</a:pageLink>
+            </li>
+         </ul>
+      </div>
+   </body>
+</page>

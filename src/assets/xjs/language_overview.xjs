@@ -37,9 +37,10 @@
 
 ##VariableAssignment
 #
-#Variables don't need to have an assigned value.  Variables my only be
-#initialized.  Compile errors will occur if a reference is found to a variable
-#that hasn't been declared.  Variables without a value are undefined.
+#Variables don't need to have an assigned value.  Variables may only be
+#initialized.  Compile time errors will occur if a reference is found to a
+#variable that hasn't been declared, or if an attempt is made to declare a
+#variable more than once.  Variables without a value are undefined.
 {var zamboni}#undefined value FOREVER!
 
 ##Referencing Variables

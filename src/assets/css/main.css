@@ -1,16 +1,29 @@
 body {
+   overflow-y: scroll;
    padding-bottom: 100px;
 }
-/*
-This made for a cool effect, but really hurt page perf. on my laptop :(
-.bumped-dark {
+.bumped.dark {
    box-shadow: 0px 0px 6px rgba(0, 0, 0, 1),
       inset 0px 0px 4px rgba(0, 0, 0, 1),
       inset 0px 0px 12px rgba(0, 0, 0, 0.8),
       inset 0px 0px 20px rgba(0, 0, 0, 0.6);
 }
-*/
 .header {
+   background: #2e2e2e;
+   box-shadow: 0 0 6px black;
+   color: white;
+   font-size: 18px;
+   height: 40px;
+   line-height: 40px;
+   text-align: center;
+}
+.header a {
+   color: white;
+   margin-left: 10px;
+   margin-right: 10px;
+   text-decoration: none;
+}
+.banner {
    background-color: #545454;
    border-bottom: 1px solid #474747;
    color: white;
@@ -21,38 +34,38 @@ This made for a cool effect, but really hurt page perf. on my laptop :(
    text-align: center;
    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.5);
 }
-.header span {
+.banner span {
    font-size: 300%;
    text-shadow: 0 -2px 2px rgba(0, 0, 0, 0.5);
    vertical-align: middle;
 }
-.header .logo {
+.banner .logo {
    font-size: 640%;
    margin-right: 40px;
    text-shadow: 0px 20px 8px rgba(0, 0, 0, 0.4);
 }
-.header .downloads {
+.banner .downloads {
    margin-top: 50px;
 }
-.header .downloads a {
+.banner .downloads a {
    font-size: 80%;
    margin-right: 5%;
    margin-left: 5%;
    padding: 5px 10px;
 }
-.header .downloads a i {
+.banner .downloads a i {
    font-size: 220%;
    padding-right: 10px;
    vertical-align: middle;
 }
-.header .downloads a strong {
+.banner .downloads a strong {
    padding-right: 10px;
 }
-.header .downloads a strong.main {
+.banner .downloads a strong.main {
    font-size: 120%;
    vertical-align: middle;
 }
-.header .downloads code {
+.banner .downloads code {
    background-color:#0A091A;
    display: inline-block;
    margin-top: 30px;

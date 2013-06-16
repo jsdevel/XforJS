@@ -1,0 +1,25 @@
+<page xmlns="default" xmlns:a="assets">
+   <seo>
+      <title>Language</title>
+      <description>This is the language overview of the X javascript template
+      language.</description>
+      <keywords>language overview, javascript template language</keywords>
+   </seo>
+   <head>
+      <a:view>global-head</a:view>
+      <style>body{padding-bottom:0;}</style>
+   </head>
+   <body>
+      <a:view>Header</a:view>
+
+      <div class="copy">
+         <h1>Language</h1>
+         This integration test describes the full capabilities of the language
+         in detail.
+      </div>
+
+      <pre class="code-highlighter">
+         <a:include asset="frags/language_overview.html"/>
+      </pre>
+   </body>
+</page>

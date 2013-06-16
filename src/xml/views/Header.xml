@@ -1,0 +1,6 @@
+<view xmlns="default" xmlns:a="assets">
+   <div class="header">
+      <a:pageLink src="index">Home</a:pageLink>
+      <a:pageLink src="documentation/index">Documentation</a:pageLink>
+   </div>
+</view>

@@ -1,0 +1,48 @@
+<page xmlns="default" xmlns:a="assets">
+   <seo>
+      <title>Compiling</title>
+      <description>This document shows how to use the X compiler.</description>
+      <keywords>javascript template compiler</keywords>
+   </seo>
+   <head>
+      <a:view>global-head</a:view>
+   </head>
+   <body>
+      <a:view>Header</a:view>
+
+      <div class="copy">
+         <h1>Compiling Templates to Javascript</h1>
+         <p>The X compiler compiles your templates to vanilla javascript.  There
+         are several ways to compile your javascript templates.  They can be
+         compiled dynamically on the client in a browser, or on the server as a
+         build process.  We'll begin by looking at the compiler as an object,
+         gradually looking to higher sophistication using node in order to
+         precompile out templates optionally as AMD modules.
+         </p>
+         <!-- TODO, make these pageLinks to fragments. -->
+         <ul>
+            <li>
+               Compiler
+            </li>
+            <li>
+               Compiling templates in a browser
+            </li>
+            <li>
+               Compiling templates in a node script
+            </li>
+            <li>
+               node.js build process to precompile javascript templates
+            </li>
+            <li>
+               node.js build process to precompile javascript templates as AMD
+               modules
+            </li>
+         </ul>
+      </div>
+      <div class="copy">
+         <h2 id="compiler">Compiler</h2>
+      </div>
+
+   </body>
+
+</page>
