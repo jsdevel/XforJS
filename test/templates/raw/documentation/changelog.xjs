@@ -1,0 +1,12 @@
+{namespace documentation}
+
+{template changelog}
+   <h2>Version: {currentVersion}</h2>
+   <p>Showing results from version: {previousVersion}</p>
+   <ul>
+      {foreach commitHistory}
+         {sort .|desc}
+         <li>{.}</li>
+      {/foreach}
+   </ul>
+{/template}
