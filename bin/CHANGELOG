@@ -1,7 +1,9 @@
-Merge branch 'develop' for 2.0.3
+Merge branch 'develop' for 2.0.4
 
-preparing for 2.0.3
+preparing for 2.0.4
 
-closes #48:  CodeFormatter can be removed. It isn't in use. maintenance.
-closes #50:  update the language integration test to contain more context selector examples. documentation.
-closes #49:  dynamic refinement isn't allowed after the following sequence: prop selector,dynamic refinement, static refinement. bug.
+closes #53:  prevent the "configuration" property of the Compiler from being obfuscated. maintenance.
+closes #52:  Remove "debug" and "warn" from the configuration. They aren't in use. maintenance.
+fixing spelling errors
+updating the docs more.
+moving integrations tests around for the documentation site.

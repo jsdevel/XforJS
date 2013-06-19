@@ -1,0 +1,9 @@
+{
+   "currentVersion":"2.0.4",
+   "previousVersion":"2.0.3",
+   "commitHistory":[
+
+"closes #53:  prevent the \"configuration\" property of the Compiler from being obfuscated. maintenance.",
+"closes #52:  Remove \"debug\" and \"warn\" from the configuration. They aren't in use. maintenance."
+]
+}

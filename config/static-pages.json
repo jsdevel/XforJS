@@ -3,7 +3,7 @@
    "asset-prefix-in-browser":"",
    "dev-asset-prefix-in-browser":"/websites/dev/xforjs/build",
    "enable-asset-fingerprinting":true,
-   "enable-external-link-validation":false,
+   "enable-external-link-validation":true,
    "enable-compression":true,
    "enable-dev-mode":true,
    "max-data-uri-size-in-bytes":32768,
