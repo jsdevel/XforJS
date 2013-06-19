@@ -3,6 +3,9 @@
       <title>XforJS Documentation</title>
       <description>This is the documentation site of XforJS.</description>
       <keywords>javascript,template,compiler</keywords>
+      <rewrites>
+         <url>/XforJS</url>
+      </rewrites>
    </seo>
    <head>
       <meta name="google-site-verification" content="dDH2DsSVvYmHCMaikoWcC16mXIw0kvBNAtBJvm2bbcY" />
