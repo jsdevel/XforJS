@@ -5,7 +5,7 @@
    "enable-asset-fingerprinting":true,
    "enable-external-link-validation":true,
    "enable-compression":true,
-   "enable-dev-mode":true,
+   "enable-dev-mode":false,
    "max-data-uri-size-in-bytes":32768,
    "max-wait-time-to-validate-external-link":5000,
    "prefix-to-ignore-files":"_",
