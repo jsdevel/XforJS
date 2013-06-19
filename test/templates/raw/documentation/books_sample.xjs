@@ -13,7 +13,7 @@
    <p>Unix Timestamp {^Date.now()}</p>
 
    {foreach books}
-      {sort rating|rand}#try one of |asc, |desc to turn off randing sorting
+      {sort rating|rand}#try one of |asc, |desc to turn off random sorting
 
       {var ratingIsNumber typeof rating === 'number'}
 

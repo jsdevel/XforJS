@@ -60,7 +60,7 @@ function ProductionContext(
       this._JSParametersWrapper=new JSParametersWrapper(this._JSParameters);
       this._JSArgumentsWrapper=new JSArgumentsWrapper(this._JSParameters);
       this._importedFiles={};
-      this._configuration = compiler.configuration;
+      this._configuration = compiler['configuration'];
       this.javascript=compiler.javascript;
       callManager=new CallManager();
    }

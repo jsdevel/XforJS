@@ -30,21 +30,22 @@ function Compiler(config){
     */
    var configuration = {//default values.
       //All of these are overridable.
-      'debug':false,
       'escapexss':true,
       'global':true,
       'minifyhtml':true,
       'normalizespace':true,
       'removelogs':true,
-      'useexternal':false,
-      'warn':false
+      'useexternal':false
    };
    var name;
-   for(name in _config){
-      configuration[name] = _config[name];
+   //ignore any config item we're not interested in.
+   for(name in configuration){
+      if(name in _config){
+         configuration[name] = _config[name];
+      }
    }
    /** @type {Object} */
-   this.configuration=configuration;
+   this['configuration']=configuration;
    /** @type {JavascriptBuilder} */
    this.javascript = new JavascriptBuilder(configuration);
 
