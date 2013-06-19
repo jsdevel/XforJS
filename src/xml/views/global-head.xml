@@ -1,4 +1,9 @@
 <view xmlns="default" xmlns:a="assets">
+   <script>
+      if(location.host.indexOf('github') > -1){
+         location.href="${origin}";
+      }
+   </script>
    <a:group type="css">
       <url>fonts</url>
       <url>general</url>
