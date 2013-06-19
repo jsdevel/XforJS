@@ -10,12 +10,13 @@
    </head>
    <body>
       <a:view>Header</a:view>
+
       <div class="copy">
-         <h2>Documentation</h2>
+         <h1>Documentation</h1>
          What follows is the documentation for X.  The documention herein uses
-         integration tests and source files that are used during the development
-         of the compiler.  Following this practice allows the source code
-         to remain in sync with the documentation and vice versa.
+         integration tests and source files that are used during development.
+         Following this practice allows the source code to remain in sync with
+         the documentation and vice versa.
       </div>
 
       <div class="copy">
