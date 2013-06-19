@@ -45,7 +45,7 @@ function Compiler(config){
       }
    }
    /** @type {Object} */
-   this.configuration=configuration;
+   this['configuration']=configuration;
    /** @type {JavascriptBuilder} */
    this.javascript = new JavascriptBuilder(configuration);
 
