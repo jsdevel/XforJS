@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Version: 2.0.3
+ * Version: 2.0.4
  *
  * For demos and docs visit http://jsdevel.github.com/XforJS/
  * For viewing source visit http://github.com/jsdevel/XforJS/
@@ -634,7 +634,7 @@ function GetLibrary(namespace){
    " * See the License for the specific language governing permissions and\n"+
    " * limitations under the License.\n"+
    " *\n"+
-   " * Version: 2.0.3\n"+
+   " * Version: 2.0.4\n"+
    " *\n"+
    " * For demos and docs visit http://jsdevel.github.com/XforJS/\n"+
    " * For viewing source visit http://github.com/jsdevel/XforJS/\n"+
@@ -1483,7 +1483,7 @@ function ProductionContext(
       this._JSParametersWrapper=new JSParametersWrapper(this._JSParameters);
       this._JSArgumentsWrapper=new JSArgumentsWrapper(this._JSParameters);
       this._importedFiles={};
-      this._configuration = compiler.configuration;
+      this._configuration = compiler['configuration'];
       this.javascript=compiler.javascript;
       callManager=new CallManager();
    }
@@ -4692,21 +4692,22 @@ function Compiler(config){
     */
    var configuration = {//default values.
       //All of these are overridable.
-      'debug':false,
       'escapexss':true,
       'global':true,
       'minifyhtml':true,
       'normalizespace':true,
       'removelogs':true,
-      'useexternal':false,
-      'warn':false
+      'useexternal':false
    };
    var name;
-   for(name in _config){
-      configuration[name] = _config[name];
+   //ignore any config item we're not interested in.
+   for(name in configuration){
+      if(name in _config){
+         configuration[name] = _config[name];
+      }
    }
    /** @type {Object} */
-   this.configuration=configuration;
+   this['configuration']=configuration;
    /** @type {JavascriptBuilder} */
    this.javascript = new JavascriptBuilder(configuration);
 
