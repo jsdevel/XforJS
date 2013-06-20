@@ -19,12 +19,12 @@
    var pathToFramework = "../src/XforJS.js";
    var fs = require('fs');
    var common = require('./common.js');
-   var loaded = 0;
    var filesToLoad = [pathToFramework];
    var filesToTest = [];
    var fileLoader = new common.FileLoader({filesToLoad:filesToLoad});
    var testDirs = [
       'integrations/compiling/',
+      'integrations/documentation/',
       'integrations/framework/',
       'integrations/testing_output/'
    ];
