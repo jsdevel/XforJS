@@ -18,9 +18,9 @@
  * than what is in sessionStorage.
  */
 !function(){
-   //leave the whitespace space alone.  'stamp=1371331118348' get's replace with I.E.
+   //leave the whitespace space alone.  'stamp=1371820003834' get's replace with I.E.
    //'stamp=23452345'
-   var stamp=1371331118348;
+   var stamp=1371820003834;
    var lastRefresh=parseInt(sessionStorage['lastRefresh']);
    if(lastRefresh && lastRefresh < stamp){
       window.location=location.href.indexOf('?') > -1?
