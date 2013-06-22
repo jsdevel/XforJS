@@ -6,6 +6,8 @@ var walk        = require("walk");
 var xforjs      = require("../XforJS.min.js");
 var walker;
 configTools.getConfig('xforjs',function(xforjsConfig){
+   var logger = xforjsConfig.logger;
+   var log = logger.log;
    //CONFIGURATION
    //xforjs
    var baseDir=xforjsConfig.config.src||"";
@@ -179,13 +181,9 @@ configTools.getConfig('xforjs',function(xforjsConfig){
       log("COMPLETE");
    });
 
-},function(name){
-
+},function(name, logger){
+   logger.log("Couldn't find the config file: "+name);
 });
-
-function log(msg){
-   console.log("xforjs: "+msg);
-}
 
 function mkdirPSync(absolutePath, mode){
    if(!fs.existsSync(absolutePath)){
