@@ -1,4 +1,4 @@
 XforJS
 ======
 
-Javascript Template Compiler written in javascript
+Javascript Template Compiler.  Please visit http://xforjs.com for Documentation and a Live Demo.
