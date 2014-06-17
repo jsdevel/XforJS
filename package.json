@@ -1,26 +1,25 @@
 {
-   "name": "xforjs",
-   "version": "2.0.4",
-   "description": "A Javscript Template Compiler that would make Mama proud.",
-   "preferGlobal": false,
-   "main": "./index.js",
-   "author": "Joseph Spencer <js.developer.undefined@gmail.com>",
-   "keywords": [
-      "javascript", 
-      "template", 
-      "compiler"
-   ],
-   "bin":{
-      "xforjs":"./bin/xforjs.js"
-   },
-   "dependencies":[
-      "config-tools",
-      "walk"
-   ],
-   "analyze": false,
-   "license": "apache 2.0",
-   "repository": {
-      "type": "git",
-      "url": "https://github.com/jsdevel/XforJS.git"
-   }
+  "name": "xforjs",
+  "version": "2.0.4",
+  "description": "A Javscript Template Compiler that would make Mama proud.",
+  "preferGlobal": false,
+  "main": "./index.js",
+  "author": "Joseph Spencer <js.developer.undefined@gmail.com>",
+  "keywords": [
+    "javascript",
+    "template",
+    "compiler"
+  ],
+  "bin": {
+    "xforjs": "./bin/xforjs.js"
+  },
+  "license": "apache 2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jsdevel/XforJS.git"
+  },
+  "dependencies": {
+    "config-tools": "~1.2.3",
+    "walk": "~2.3.3"
+  }
 }
